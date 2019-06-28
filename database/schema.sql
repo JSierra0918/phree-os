@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS pointOfSales;
+CREATE DATABASE pointOfSales;
