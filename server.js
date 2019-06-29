@@ -6,6 +6,7 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 let PORT = process.env.PORT || 3001;
+console.log(PORT)
 const path = require("path");
 const models = require("./models");
 var flash = require('connect-flash');
