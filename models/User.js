@@ -18,12 +18,9 @@ module.exports = function(sequelize, Sequelize) {
             notEmpty: true
         },
  
-        username: {
-            type: Sequelize.TEXT
-        },
- 
-        about: {
-            type: Sequelize.TEXT
+        storename: {
+            type: Sequelize.STRING,
+            notEmpty: true
         },
  
         email: {
@@ -37,11 +34,6 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.STRING,
             allowNull: false
         },
- 
-        last_login: {
-            type: Sequelize.DATE
-        },
- 
         status: {
             type: Sequelize.ENUM('active', 'inactive'),
             defaultValue: 'active'

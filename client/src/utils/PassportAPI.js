@@ -4,11 +4,13 @@ import axios from "axios";
 export default {
 //Send the argument to the api location
   sendLogin: function(loginInfo) {
-        const loginInformation = {
-            loginInfo
-        }
+  // console.log('loginInfo:', loginInfo)
+  
+        // const loginInformation 
+        
         //Este is just a temp api for now
-    return axios.post("/api/este", loginInformation, (response) => {
+    return axios.post("/signup", loginInfo, (response) => {
+      console.log('loginInfo:', loginInfo)
       console.log(response);
         
     });
