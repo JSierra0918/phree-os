@@ -12,7 +12,12 @@ class LoginFormContainer extends Component {
       }
    }
 
+   componentDidMount() {
+      API.sendLogin(this.state.loginForm)
+   }
+
    render() {
+      
       return (
          //trying to get react to play nice with the response.
          // <h3>{API.sendLogin(this.state.loginForm)} </h3>
