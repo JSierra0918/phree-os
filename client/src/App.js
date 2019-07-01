@@ -6,21 +6,22 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import NavTabs from './components/Bootstrap/NavTabs';
 import LoginPage from './pages/LoginPage';
 import StorePage from './pages/StorePage';
+import ManagePage from './pages/ManagePage';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
     <div className="App">
-
-      <img src={logo} className="App-logo" alt="logo" />
-      <LoginFormContainer />
       <Router>
-      <div>
-        <NavTabs />
-        
-        <Route exact path="/signin" component={LoginPage} />
-        <Route exact path="/signup" component={StorePage} />
-      </div>
-    </Router>
+        <Switch>
+          <Route exact path="/" component={LoginPage} />
+          <Route exact path="/SignIn" component={SignIn} />
+          <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/store" component={StorePage} />
+          <Route exact path="/manage" component={ManagePage} />
+        </Switch>
+      </Router>
 
     </div>
   );
