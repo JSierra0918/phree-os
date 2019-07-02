@@ -1,26 +1,81 @@
 import React, { Component } from 'react';
 import API from '../utils/PassportAPI';
+import { Input, FormBtn } from './Bootstrap/Form';
+import { Link } from "react-router-dom";
+import { NavTab, NavItem } from './Bootstrap/NavTab';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import Container from './Bootstrap/Container';
+import Row from './Bootstrap/Row';
+import Col from './Bootstrap/Col';
+import Card from './Bootstrap/Card';
 
 class LoginFormContainer extends Component {
 
-   constructor(){
-      super();
+   state = {
+      loginName: "Are you there?",
+      email: "",
+      currentPage: undefined
 
-      this.state = {
-         loginForm: "Are you there?",
-         confirmation: ""
-      }
    }
 
    componentDidMount() {
-      API.sendLogin(this.state.loginForm)
+      // API.sendLogin(this.state.loginForm);
+   }
+
+   changePage(page) {
+
+      this.setState({
+         currentPage: page
+      })
+   }
+
+   sendLoginInput(event) {
+      event.preventDefault();
+      console.log("SEND LOGIN!!");
+
+      // API.sendLogin(loginInfo);
    }
 
    render() {
+
+      function displayForm(page) {
+         if (page === "signIn") {
+            console.log("In Sign in!");
+            return <SignIn />
+         }
+         else if (page === "signUp") {
+            console.log("In Sign up");
+            return <SignUp />
+         }
+      }
+
       return (
+
          <>
-            {/* //trying to get react to play nice with the response. */}
-            <h3>Test</h3>
+            <Container>
+               <Row>
+                  <Col size="md-8 md-7 g-5" className="mx-auto" >
+                     <Card>
+                        <form className="p-loginForm">
+                           <NavTab className="nav nav-tabs">
+                              <NavItem className="nav-item p-nav-item">
+
+                                 <p onClick={() => { this.changePage("signIn") }} className="p-Link" > local- Login!</p>
+                              </NavItem>
+                              <NavItem className="nav-item">
+                                 <p onClick={() => { this.changePage("signIn") }} className="p-Link" > local- Login!</p>
+
+                              </NavItem>
+                           </NavTab>
+                           
+                           {displayForm(this.state.currentPage)}
+                     </form>
+                     </Card>
+
+                  </Col>
+               </Row>
+            </Container>
          </>
       )
    }
