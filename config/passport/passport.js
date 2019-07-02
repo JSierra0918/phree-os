@@ -11,6 +11,7 @@ module.exports = function(passport, user) {
     
         //serialize
         passport.serializeUser(function(user, done) {
+            console.log("serialize user")
             done(null, user.id);        
         });
         // deserialize user 
@@ -35,7 +36,9 @@ module.exports = function(passport, user) {
         },
  
         function(req, email, password, done) {
-
+            // console.log('email:', email)
+            // console.log('password:', password)
+            console.log("-----in function for local-signup-----")
              var generateHash = function(password) {
                  return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
@@ -45,30 +48,37 @@ module.exports = function(passport, user) {
                     email: email
                 }
             }).then(function(user) {
+            console.log('user:', user)
  
                 if (user) {
+                    console.log("this email is already taken ")
                     return done(null, false, {
                         message: 'That email is already taken'
                     }); 
                 } else {
- 
+                    console.log("no user was found")
                     var userPassword = generateHash(password);
                     var data = {
                             email: email,
                             password: userPassword,
+                            storename: req.body.storename,
                             firstname: req.body.firstname,
-                            lastname: req.body.lastname
- 
+                            lastname: req.body.lastname,
                         };
  
                     User.create(data).then(function(newUser, created) {
- 
+                        // console.log('data:', data)
                         if (!newUser) {
+                            console.log("new user was not created")
                             return done(null, false);
                         }
                         if (newUser) { 
-                            return done(null, newUser);
+                            console.log("new user was created")
+                            
+                            console.log('newUser.dataValues:', newUser.dataValues)
+                            return done(null, newUser.dataValues);
                         }
+                        
                     });
                 }
             });
@@ -117,6 +127,7 @@ module.exports = function(passport, user) {
             }
  
             var userinfo = user.get();
+            console.log('userinfo:', userinfo)
             return done(null, userinfo);
 
         }).catch(function(err) {

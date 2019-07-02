@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from '../utils/PassportAPI';
+// import { userInfo } from 'os';
 import { Input, FormBtn } from './Bootstrap/Form';
 import { Link } from "react-router-dom";
 import { NavTab, NavItem } from './Bootstrap/NavTab';
@@ -16,8 +17,27 @@ class LoginFormContainer extends Component {
       loginName: "Are you there?",
       email: "",
       currentPage: undefined
-
    }
+   //    this.state = {
+   //       loginForm: {
+   //          firstname: "James",
+   //          lastname: "Jarvis, Jr.",
+   //          storename: "Jimmy's Fish Shop 2",
+   //          email: "qwerty@gmail.com",
+   //          password: "abc123"
+   //       }
+   //    }
+   // }
+
+   // componentDidMount() {
+   //    API.sendLogin(this.state.loginForm)
+   //    .then(res => {
+   //       console.log(res)
+   //       })
+   //    }
+
+   
+
 
    componentDidMount() {
       // API.sendLogin(this.state.loginForm);

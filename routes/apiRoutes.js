@@ -12,7 +12,10 @@ module.exports = function (app) {
 
   // Create a new user
   app.post("/api/user", function (req, res) {
+    console.log(`${cyan}about to call db.User.create...${reset}`)
     db.User.create(req.body).then(function (dbUsers) {
+      console.log('dbUsers:', dbUsers)
+
       console.log(`${cyan}==> Created A New User - ${req.body.Username}${reset}`)
       res.json(dbUsers);
     });
