@@ -9,7 +9,7 @@ export default {
         // const loginInformation 
         
         //Este is just a temp api for now
-    return axios.post("/signup", loginInfo, (response) => {
+    return axios.post("/signin", loginInfo, (response) => {
       console.log('loginInfo:', loginInfo)
       console.log(response);
         

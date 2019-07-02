@@ -12,22 +12,25 @@ class LoginFormContainer extends Component {
             firstname: "James",
             lastname: "Jarvis, Jr.",
             storename: "Jimmy's Fish Shop 2",
-            email: "qwer@gmail.com",
+            email: "qwerty@gmail.com",
             password: "abc123"
          }
-         // confirmation: ""
       }
    }
 
    componentDidMount() {
       API.sendLogin(this.state.loginForm)
-      .then(userInfo => console.log(userInfo))
-   }
+      .then(res => {
+         console.log(res)
+         })
+      }
+
+   
+
 
    render() {
-      return (
-         <>
-            {/* //trying to get react to play nice with the response. */}
+         return (
+            <>
             <h3>Test</h3>
          </>
       )
