@@ -19,18 +19,22 @@
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.1",
+    "connect-flash": "^0.1.1",
     "dot-env": "0.0.1",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
-    "sequelize": "^5.9.0"
+    "sequelize": "^5.9.0",
+    "validator": "^11.0.0"
   }
 }
