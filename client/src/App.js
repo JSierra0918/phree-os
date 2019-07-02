@@ -1,9 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LoginFormContainer from './components/LoginFormContainer';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import NavTabs from './components/Bootstrap/NavTabs';
 import LoginPage from './pages/LoginPage';
 import StorePage from './pages/StorePage';
 import ManagePage from './pages/ManagePage';
@@ -18,7 +16,7 @@ function App() {
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/SignIn" component={SignIn} />
           <Route exact path="/SignUp" component={SignUp} />
-          <Route exact path="/store" component={StorePage} />
+          <Route exact path="/storepage" component={StorePage} />
           <Route exact path="/manage" component={ManagePage} />
         </Switch>
       </Router>
