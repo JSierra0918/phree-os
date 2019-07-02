@@ -33,12 +33,36 @@
   width: 30vw;
 }
 
-.p-nav-item {
-  background-color: blueviolet;
+
+.row.login-row {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
-.p-Link:hover {
-  background: red;
+.p-tabbed-ul {
+  position: absolute;
+  top: -30px;
+  left: 0px;
+}
+
+.p-tabbed-item {
+  border: solid rgb(49, 49, 49) 1px;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 5px 5px 0px 0px;
+  padding: 5px;
+  width: 13vw;
+  background: #f3f3f3;
+}
+.p-tabbed-item:hover {
+  background: #c4ddee;
+  cursor: pointer;
+}
+
+.p-active-tab {
+  background-color: #fff;
+  border-bottom: none;
+  z-index: 10;
 }
 
 @keyframes App-logo-spin {

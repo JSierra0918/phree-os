@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function NavTabs() {
     return (
-        <ul className="nav nav-tabs">
+        <ul className="nav">
             <li className="nav-item">
                 <Link to="/signin" className={window.location.pathname === "/signin" ? "nav-link active" : "nav-link"}>
                     Login
