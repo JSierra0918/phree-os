@@ -16,7 +16,7 @@ class LoginFormContainer extends Component {
    state = {
       loginName: "Are you there?",
       email: "",
-      currentPage: undefined
+      currentPage: "Sign In"
    }
    //    this.state = {
    //       loginForm: {
@@ -36,7 +36,6 @@ class LoginFormContainer extends Component {
    //       })
    //    }
 
-   
 
 
    componentDidMount() {
@@ -60,12 +59,10 @@ class LoginFormContainer extends Component {
    render() {
 
       function displayForm(page) {
-         if (page === "signIn") {
-            console.log("In Sign in!");
+         if (page === "Sign In") {
             return <SignIn />
          }
-         else if (page === "signUp") {
-            console.log("In Sign up");
+         else if (page === "Sign Up") {
             return <SignUp />
          }
       }
@@ -76,23 +73,20 @@ class LoginFormContainer extends Component {
             <Container>
                <Row>
                   <Col size="md-8 md-7 g-5" className="mx-auto" >
-                     <Card>
-                        <form className="p-loginForm">
+                     <Card className="card-signin my-5" heading={this.state.currentPage}>
+                        <form className="p-loginForm form-signin">
                            <NavTab className="nav nav-tabs">
                               <NavItem className="nav-item p-nav-item">
-
-                                 <p onClick={() => { this.changePage("signIn") }} className="p-Link" > local- Login!</p>
+                                 <p onClick={() => { this.changePage("Sign In") }} className="p-Link" >Login</p>
                               </NavItem>
                               <NavItem className="nav-item">
-                                 <p onClick={() => { this.changePage("signIn") }} className="p-Link" > local- Login!</p>
-
+                                 <p onClick={() => { this.changePage("Sign Up") }} className="p-Link" >Sign Up</p>
                               </NavItem>
                            </NavTab>
-                           
-                           {displayForm(this.state.currentPage)}
-                     </form>
-                     </Card>
 
+                              {displayForm(this.state.currentPage)}
+                        </form>
+                     </Card>
                   </Col>
                </Row>
             </Container>

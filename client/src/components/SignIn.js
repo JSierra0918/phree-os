@@ -2,12 +2,13 @@ import React from 'react';
 import { Input, FormBtn } from './Bootstrap/Form';
 
 
-function SignIn() {
+function SignIn(props) {
     return (
         <>
-            <Input name="userName" placeholder="First Name (required)" />
-            <Input name="password" placeholder="Password (required)" />
+                <Input name="userName" placeholder="First Name (required)" className="form-control" />
+                <Input name="password" placeholder="Password (required)" className="form-control" />
             <FormBtn name="submitBtn" >Sign In</FormBtn>
+
         </>
     );
 }
