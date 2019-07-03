@@ -74,13 +74,13 @@ class LoginFormContainer extends Component {
                <FlexRow className="row login-row">
                   <Col size="md-8 md-7 g-5" className="mx-auto" >
                      <Card className="card-signin my-5" heading={this.state.currentPage}>
-                        <NavTab className="nav" class="p-tabbed-ul">
-                           <NavItem className="nav-item">
+                        <NavTab class="p-tabbed-ul">
+                           <NavItem>
                               <div 
                               onClick={() => { this.changePage("Sign In") }}
                               className={this.state.currentPage === "Sign In"?"p-tabbed-item p-active-tab": "p-tabbed-item"} >Login</div>
                            </NavItem>
-                           <NavItem className="nav-item">
+                           <NavItem>
                               <div 
                               onClick={() => { this.changePage("Sign Up") }} 
                               className={this.state.currentPage === "Sign Up"?"p-tabbed-item p-active-tab": "p-tabbed-item"} >Sign Up</div>

@@ -1,0 +1,27 @@
+.container{
+    height: 100vh;
+}
+
+.main-row{
+    height: 40rem;
+}
+.p-main-col{
+    height: 100%;
+}
+
+.summary, .category, .items {
+    height: 100%;
+}
+.summary {
+    width: 100%;
+    background-color: blue;
+}
+.category {
+    width: 100%;
+    background-color: pink;
+}
+
+.items {
+    width: 100%;
+    background-color: yellow;
+}

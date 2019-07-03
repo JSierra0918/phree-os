@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import './styles/storepage.css';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
-import { Container, Row, Col } from '../components/Bootstrap/Grid';
+import { Container,Row, Col } from '../components/Bootstrap/Grid';
+import API from '../utils/API';
 
 
 class StorePage extends Component {
@@ -10,36 +12,51 @@ class StorePage extends Component {
         super(props);
 
         this.state = {
-
+            calc: undefined,
+            user: undefined
         }
     }
 
+    componentDidMount() {
+        //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
+
+    }
+
+    getUserData(){
+        API.getUserData().then((userResponse) => {
+            console.log(userResponse);
+        })
+    }
 
     render() {
         return (
-
             <div>
-                <Container>
-                    <Row>
+                <Container class="h-100">
+                    <div className="row">
                         <Col size="lg-12">
                             <h1>Phree-OS</h1>
                         </Col>
-                    </Row>
-
-                    <Row>
+                    </div>
+                    <div className="row">
                         <NavTab>
                             <NavItem>
                                 <Link to="/store">Store</Link>
                                 <Link to="/manage">Manage</Link>
                             </NavItem>
                         </NavTab>
-                    </Row>
-                    <Row>
-                        
-                    </Row>
-
+                    </div>
+                    <div className="row main-row">
+                        <Col size="sm-6">
+                            <div className="summary text-center mb20">Summary</div>
+                        </Col>
+                        <Col size="sm-3">
+                            
+                        </Col>
+                        <Col size="sm-3">
+                            <div className="items text-center p-main-col mb20">ITEMS</div>
+                        </Col>
+                    </div>
                 </Container>
-
             </div>
         );
     }
