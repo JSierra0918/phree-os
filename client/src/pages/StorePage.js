@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './styles/storepage.css';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
-import { Container,Row, Col } from '../components/Bootstrap/Grid';
+import { Container, Row, Col } from '../components/Bootstrap/Grid';
 import API from '../utils/API';
 import CategoryContainer from '../components/CategoryContainer';
 
@@ -18,6 +18,8 @@ class StorePage extends Component {
                 category: ["produce", "taco", "chicken"]
             }
         }
+        // This binding is necessary to make `this` work in the callback
+        // this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
@@ -25,10 +27,18 @@ class StorePage extends Component {
 
     }
 
-    getUserData(){
+    getUserData() {
         API.getUserData().then((userResponse) => {
             console.log(userResponse);
         })
+    }
+
+    selectCategory = (id)=>{
+        return  console.log(id);
+    }
+
+    displayItem = (cat) => {
+        //when category is returned, then create a call based off 
     }
 
     render() {
@@ -53,7 +63,7 @@ class StorePage extends Component {
                             <div className="summary text-center mb20">Summary</div>
                         </Col>
                         <Col size="sm-3">
-                            <CategoryContainer category={this.state.user.category}/>
+                            <CategoryContainer category={this.state.user.category} id={"thisisID"} onClick={this.selectCategory} />
                         </Col>
                         <Col size="sm-3">
                             <div className="items text-center p-main-col mb20">ITEMS</div>
