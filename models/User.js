@@ -22,6 +22,9 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.STRING,
             notEmpty: true
         },
+        stripeKey: {
+            type: Sequelize.STRING,
+        },
  
         email: {
             type: Sequelize.STRING,
@@ -39,6 +42,19 @@ module.exports = function(sequelize, Sequelize) {
             defaultValue: 'active'
         } 
     });
+
+    User.associate = function(models) {
+  
+        User.hasMany(models.Category, {
+          onDelete: "cascade"
+        });
+        // User.hasMany(models.URLresult, {
+        //     onDelete: "cascade"
+        // });
+        // User.hasMany(models.IMGresult, {
+        //     onDelete: "cascade"
+        // });
+      };
  
     return User;
  

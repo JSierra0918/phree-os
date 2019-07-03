@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import LoginFormContainer from './components/LoginFormContainer';
+// import LoginFormContainer from './components/LoginFormContainer';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import NavTabs from './components/Bootstrap/NavTabs';
-import LoginPage from './pages/LoginPage';
-import StorePage from './pages/StorePage';
-import ManagePage from './pages/ManagePage';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+// import NavTabs from './components/Bootstrap/NavTabs';
+// import LoginPage from './pages/LoginPage';
+// import StorePage from './pages/StorePage';
+// import ManagePage from './pages/ManagePage';
+// import SignIn from './components/SignIn';
+// import SignUp from './components/SignUp';
 import NavBar from "./components/Navbar";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
@@ -16,8 +16,8 @@ import PrivateRoute from "./components/PrivateRoute";
 
 
 
-function App() {
-  return (
+// function App() {
+//   return (
     // <div className="App">
     //   <Router>
     //     <Switch>
@@ -29,20 +29,14 @@ function App() {
     //     </Switch>
     //   </Router>
 
-    // </div>
-    <div className="App">
-      {/* New - use BrowserRouter to provide access to /profile */}
-      <Router>
-        <header>
-          <NavBar />
-        </header>
-        <Switch>
-          <Route path="/" exact />
-          <PrivateRoute path="/profile" component={Profile} />
-        </Switch>
-      </Router>
-    </div>
-  );
-}
-
-export default App;
+    function App() {
+      return (
+        <div className="App">
+          <header>
+            <NavBar />
+          </header>
+        </div>
+      );
+    }
+    
+    export default App;

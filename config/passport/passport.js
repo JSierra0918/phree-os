@@ -64,6 +64,7 @@ module.exports = function(passport, user) {
                             storename: req.body.storename,
                             firstname: req.body.firstname,
                             lastname: req.body.lastname,
+                            stripekey: req.body.stripekey
                         };
  
                     User.create(data).then(function(newUser, created) {
