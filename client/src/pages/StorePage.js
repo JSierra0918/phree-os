@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
 import { Container,Row, Col } from '../components/Bootstrap/Grid';
 import API from '../utils/API';
+import CategoryContainer from '../components/CategoryContainer';
 
 
 class StorePage extends Component {
@@ -13,7 +14,9 @@ class StorePage extends Component {
 
         this.state = {
             calc: undefined,
-            user: undefined
+            user: {
+                category: ["produce", "taco", "chicken"]
+            }
         }
     }
 
@@ -50,7 +53,7 @@ class StorePage extends Component {
                             <div className="summary text-center mb20">Summary</div>
                         </Col>
                         <Col size="sm-3">
-                            
+                            <CategoryContainer category={this.state.user.category}/>
                         </Col>
                         <Col size="sm-3">
                             <div className="items text-center p-main-col mb20">ITEMS</div>
