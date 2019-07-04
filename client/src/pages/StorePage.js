@@ -5,6 +5,7 @@ import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
 import { Container, Row, Col } from '../components/Bootstrap/Grid';
 import API from '../utils/API';
 import CategoryContainer from '../components/CategoryContainer';
+import Axios from 'axios';
 
 
 class StorePage extends Component {
@@ -15,7 +16,7 @@ class StorePage extends Component {
         this.state = {
             calc: undefined,
             user: {
-                category: ["produce", "taco", "chicken"]
+                category: [""]
             }
         }
         // This binding is necessary to make `this` work in the callback
@@ -34,11 +35,19 @@ class StorePage extends Component {
     }
 
     selectCategory = (id)=>{
+        //set the state of the category based off of the name
+        Axios.get("/api/users/"+ id).then((userInfo) => {
+            //find items and return the array possibly pass it as an argument for displayItem.
+            console.log(userInfo);
+        });
         return  console.log(id);
     }
 
     displayItem = (cat) => {
         //when category is returned, then create a call based off 
+        //returnedCategoryDBItem.map((items)=> <Items title={items.title} price={items.price} quantity{items.quantity}/>)
+        //don't know how to do that.
+        //when the state category is changed, then make an api call based off of the item passed in?
     }
 
     render() {

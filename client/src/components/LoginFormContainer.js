@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import API from '../utils/PassportAPI';
 // import { userInfo } from 'os';
-import { Input, FormBtn } from './Bootstrap/Form';
-import { Link } from "react-router-dom";
 import { NavTab, NavItem } from './Bootstrap/NavTab';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Container from './Bootstrap/Container';
-import Row from './Bootstrap/Row';
 import Col from './Bootstrap/Col';
 import Card from './Bootstrap/Card';
 import FlexRow from './Bootstrap/FlexRow';
