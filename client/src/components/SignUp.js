@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, FormBtn } from './Bootstrap/Form';
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 class SignUp extends Component {
 
@@ -25,12 +26,30 @@ class SignUp extends Component {
         });
     };
 
+    routeToStore = () => {
+        let path = `store`;
+        this.props.history.push(path);
+    }
+
     submitSignUp = (event) => {
         event.preventDefault();
+        console.log(event)
+        const userForm = {
+            userName: this.state.userName,
+            password: this.state.password,
+            storeName: this.state.storeName
+        }
+       
+        
         //send information to the user API
-        Axios.post("/api/users")
-        //when you get the response, redirect the user to the store page
-        console.log(this.state.userName + this.state.password + this.state.storeName);
+        // Axios.post("/api/users", userForm, (userInfo) => {
+        //     //possibly save user id in session so you can read it when you land on Store Page
+
+        // }).then(() => {
+        //     //======REROUTE USER
+        // this.routeToStore();    
+
+        // });
     }
 
     render() {
@@ -46,4 +65,4 @@ class SignUp extends Component {
 
 }
 
-export default SignUp;
+export default withRouter(SignUp);
