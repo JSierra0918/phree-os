@@ -11,7 +11,6 @@ const path = require("path");
 const models = require("./models");
 var flash = require('connect-flash');
 
-
 //stupid colors
 const reset = "\x1b[0m";
 const cyan = "\x1b[36m";
@@ -37,9 +36,10 @@ app.use(express.json());
 
 // API ROUTES =============================
 // require("./Routes/API")(app);
-var authRoute = require('./routes/auth.js')(app, passport);
+require('./routes/auth.js')(app, passport);
 require("./routes/apiRoutes.js")(app);
 require("./routes/htmlRoutes")(app);
+require("./routes/payment")(app)
 
 //load passport strategies
 require('./config/passport/passport.js')(passport, models.user);

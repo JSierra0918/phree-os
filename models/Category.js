@@ -8,10 +8,9 @@ module.exports = function(sequelize, Sequelize) {
             notEmpty: true
         }
     });
-
     Category.associate = function(models) {
   
-        Category.belongsTo(models.Category, {
+        Category.belongsTo(models.User, {
           onDelete: "cascade"
         });
         Category.hasMany(models.Item, {
@@ -19,6 +18,7 @@ module.exports = function(sequelize, Sequelize) {
         });
 
       };
+
  
     return Category;
  
