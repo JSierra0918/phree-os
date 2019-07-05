@@ -4,11 +4,64 @@ const cyan = "\x1b[36m";
 
 module.exports = function (app) {
   // Get all examples
-  app.get("/api/user", function (req, res) {
-    db.User.findAll({}).then(function (dbUsers) {
-      res.json(dbUsers);
+  app.get("/api/user/:id", function (req, res) {
+    const idInput = req.params.id;
+    db.User.findOne({
+      where: {
+        id: idInput
+      }
+    }).then(function (user) {
+      res.json(user);
     });
   });
+
+  app.get("/api/category/:id", function (req, res) {
+    const idInput = req.params.id;
+    db.Category.findAll({
+      where: {
+        UserId: idInput
+      }
+    }).then(function (categories) {
+      res.json(categories);
+    });
+  });
+
+  //display category selected
+  app.get("/api/category/one/:id", function (req, res) {
+    const idInput = req.params.id;
+    db.Category.findOne({
+      where: {
+        id: idInput
+      }
+    }).then(function (categories) {
+      res.json(categories);
+    });
+  });
+
+  //get item based off of category ID
+  app.get("/api/items/:id", function (req, res) {
+    const idInput = req.params.id;
+    db.Category.findAll({
+      where: {
+        CategoryID: idInput
+      }
+    }).then(function (items) {
+      res.json(items);
+    });
+  });
+
+  //Update Items
+  app.get("/api/items/one/:id", function (req, res) {
+    const idInput = req.params.id;
+    db.Category.findOne({
+      where: {
+        id: idInput
+      }
+    }).then(function (categories) {
+      res.json(categories);
+    });
+  });
+
 
   // Create a new user
   app.post("/api/user", function (req, res) {
@@ -21,10 +74,5 @@ module.exports = function (app) {
     });
   });
 
-  //test api
-  app.post("/api/este", (req, res) => {
-    console.log(req.body);
-    res.send("I see you, buu!");
-  })
 
 };

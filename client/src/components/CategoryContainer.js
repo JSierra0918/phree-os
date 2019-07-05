@@ -16,14 +16,14 @@ class CategoryContainer extends Component {
     }
 
     componentDidMount(){
-        //don't know if I should make an axaj call here 
-        console.log(this.props.category.length);
         //takes in array and checks to see if it has any items
-       return this.props.category.length === 0 ? this.setState({categoryList: "Please add a category to your store!"}) : this.setState({categoryList: this.props.category})
+        console.log(this.props.category);
+       return  this.setState({categoryList: this.props.category})
     }
 
     renderCategory(){
-        return  this.state.categoryList.map(itemName=> <Category  dataId={itemName} key={itemName} item={itemName} style={this.state.style}  onClick={this.props.onClick} />)
+
+        return  this.props.category.map(item => <Category  dataId={item.id} key={item.id} item={item.categoryName} style={this.state.style}  onClick={this.props.onClick} />)
     }
 
     addClass = () =>{
@@ -38,8 +38,7 @@ class CategoryContainer extends Component {
            <div className="category text-center p-main-col mb20">
                     <h5>Category</h5>
                     {/* //render a category button */}
-                    {this.renderCategory()}
-                    
+                    {this.renderCategory()}      
             </div>
         );
     }

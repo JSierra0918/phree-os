@@ -5,8 +5,6 @@ import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
 import { Container, Row, Col } from '../components/Bootstrap/Grid';
 import API from '../utils/API';
 import CategoryContainer from '../components/CategoryContainer';
-import Axios from 'axios';
-
 
 class StorePage extends Component {
 
@@ -15,33 +13,65 @@ class StorePage extends Component {
 
         this.state = {
             calc: undefined,
-            user: {
-                category: [""]
-            }
-        }
+            catID: undefined,
+            category: []
+                }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
-
+        this.getUserData();
     }
 
     getUserData() {
-        API.getUserData().then((userResponse) => {
-            console.log(userResponse);
+        const userId = 1;
+        
+        API.getUserData(userId).then((userResponse) => {
+            console.log(userResponse.data.storename)
+            if (!userResponse.data.storename) {
+                // go to create store
+            }
+            else {
+                API.getCategoryData(userId).then((categories) => {
+                    // update the state with the categories, remember is an array
+                    // it is going to render
+                    this.setState({
+                        category: categories.data
+                    })
+                })
+            }
         })
     }
 
-    selectCategory = (id)=>{
+
+    selectCategory = (id) => {
         //set the state of the category based off of the name
-        Axios.get("/api/users/"+ id).then((userInfo) => {
+        API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
-            console.log(userInfo);
+            console.log(category);
         });
-        return  console.log(id);
+        return console.log(id);
     }
+
+    updateCategory = () => {
+        API.getCategoryData(1).then((categories) => {
+            console.log(categories.data);
+            let updated = Object.assign([], this.state.category);
+
+            const categoryNames = categories.data.map(item => item.categoryName);
+            
+            updated.push(categoryNames);
+            console.log(updated);
+            // update the state with the categories, remember is an array
+            // it is going to render
+            this.setState({
+                category: categories.data
+            })
+        })
+    }
+
 
     displayItem = (cat) => {
         //when category is returned, then create a call based off 
@@ -51,6 +81,7 @@ class StorePage extends Component {
     }
 
     render() {
+        
         return (
             <div>
                 <Container class="h-100">
@@ -72,7 +103,7 @@ class StorePage extends Component {
                             <div className="summary text-center mb20">Summary</div>
                         </Col>
                         <Col size="sm-3">
-                            <CategoryContainer category={this.state.user.category} id={"thisisID"} onClick={this.selectCategory} />
+                            <CategoryContainer category={this.state.category} id={this.state.catID} onClick={this.selectCategory} />
                         </Col>
                         <Col size="sm-3">
                             <div className="items text-center p-main-col mb20">ITEMS</div>

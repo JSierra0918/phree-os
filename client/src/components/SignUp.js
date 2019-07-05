@@ -9,12 +9,11 @@ class SignUp extends Component {
         super(props);
 
         this.state = {
-            userName: "",
-            password: "",
-            storeName: "",
             firstName: "",
             lastName: "",
-            name: ""
+            storeName: "",
+            email:"",
+            password: ""
         }
     }
 
@@ -33,11 +32,12 @@ class SignUp extends Component {
 
     submitSignUp = (event) => {
         event.preventDefault();
-        console.log(event)
         const userForm = {
-            userName: this.state.userName,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            storeName: this.state.storeName,
+            email: this.state.email,
             password: this.state.password,
-            storeName: this.state.storeName
         }
        
         
@@ -55,8 +55,10 @@ class SignUp extends Component {
     render() {
         return (
             <>
-                <Input name="storeName" placeholder="store Name (required)" value={this.state.storeName} onChange={this.handleInputChange} />
-                <Input name="userName" placeholder="First Name (required)" className="form-control" value={this.state.userName} onChange={this.handleInputChange} />
+                <Input name="firstName" placeholder="First Name (required)" className="form-control" value={this.state.firstName} onChange={this.handleInputChange} />
+                <Input name="lastName" placeholder="Last Name (required)" className="form-control" value={this.state.lastName} onChange={this.handleInputChange} />
+                <Input name="email" placeholder="Email (required)" value={this.state.email} onChange={this.handleInputChange} />
+                <Input name="storeName" placeholder="Store Name (required)" value={this.state.storeName} onChange={this.handleInputChange} />
                 <Input name="password" placeholder="Password (required)" className="form-control" value={this.state.password} onChange={this.handleInputChange} />
                 <FormBtn name="submitBtn" onClick={this.submitSignUp} >Sign Up</FormBtn>
             </>

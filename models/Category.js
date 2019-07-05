@@ -11,7 +11,7 @@ module.exports = function(sequelize, Sequelize) {
 
     Category.associate = function(models) {
   
-        Category.belongsTo(models.Category, {
+        Category.belongsTo(models.User, {
           onDelete: "cascade"
         });
         Category.hasMany(models.Item, {

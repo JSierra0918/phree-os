@@ -4,6 +4,15 @@ export default {
     
     getUserData: function(userID) {
 
-        return axios.get("/api/user/:id");
+        return axios.get("/api/user/"+ userID);
+    },
+
+    getCategoryData: function(userID) {
+
+        return axios.get("/api/category/"+ userID);
+    },
+    getOneCategory: function(categoryID) {
+
+        return axios.get("/api/category/one/"+ categoryID);
     }
 }
