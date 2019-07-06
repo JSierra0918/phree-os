@@ -127,7 +127,8 @@ module.exports = function(passport, user) {
             }
  
             var userinfo = user.get();
-            console.log('userinfo:', userinfo)
+            console.log('userinfo:', userinfo); 
+            console.log('its a match');
             return done(null, userinfo);
 
         }).catch(function(err) {

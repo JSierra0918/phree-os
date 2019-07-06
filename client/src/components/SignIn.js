@@ -8,7 +8,7 @@ class SignIn extends Component {
         super(props);
 
         this.state = {
-            userName: "",
+            email: "",
             password: ""
         }
     }
@@ -29,7 +29,7 @@ class SignIn extends Component {
     submitSignIn = (event) => {
         event.preventDefault();
         const userForm = {
-            userName: this.state.userName,
+            email: this.state.email,
             password: this.state.password
         }
 
@@ -37,15 +37,17 @@ class SignIn extends Component {
         Axios.post("/signin", userForm, (userInfo) => {
             //possibly save user id in session so you can read it when you land on Store Page
 
-        }).then(() => {
-            //======REROUTE USER
+        }).then((res) => {
+            console.log('in promise after /signin')
+            console.log(res.data)
+            sessionStorage.setItem('userId', res.data.id)
         this.routeToStore();    
 
         });
 
         // this.routeToStore();    
         this.setState({
-            userName: "",
+            email: "",
             password: ""
         })
     }
@@ -53,7 +55,7 @@ class SignIn extends Component {
     render() {
         return (
             <div>
-                <Input name="userName" placeholder="First Name (required)" className="form-control" value={this.state.userName} onChange={this.handleInputChange} />
+                <Input name="email" placeholder="Email (required)" className="form-control" value={this.state.email} onChange={this.handleInputChange} />
                 <Input name="password" placeholder="Password (required)" className="form-control" value={this.state.password} onChange={this.handleInputChange} />
                 <FormBtn name="submitBtn" onClick={this.submitSignIn} >Sign In</FormBtn>
             </div>
