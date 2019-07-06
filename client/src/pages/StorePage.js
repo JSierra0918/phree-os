@@ -77,7 +77,7 @@ class StorePage extends Component {
         console.log(itemList)
         
         // return  <ItemsContainer items={itemList}/>
-        // return  itemList.map(item => <Items className="item" data-id={item.id} data-price={item.price} data-name={item.itemname} data-quantity={item.quantity} />);
+        return  itemList.map(item => <Items className="item" data-id={item.id} data-price={item.price} data-name={item.itemname} data-quantity={item.quantity} />);
             
     }
 
