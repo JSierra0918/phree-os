@@ -44,10 +44,6 @@ require("./routes/payment")(app)
 //load passport strategies
 require('./config/passport/passport.js')(passport, models.user);
 
-// **************** NOT TOO SURE **********************
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "./client/build/index.html"));
-//   });
 
   if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
