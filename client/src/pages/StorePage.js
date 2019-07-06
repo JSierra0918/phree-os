@@ -77,10 +77,13 @@ class StorePage extends Component {
 
     displayItems = (itemList) => {
         console.log(itemList)
-        
+            
         // return  <ItemsContainer items={itemList}/>
         return  itemList.map(item => <Items className="item" data-id={item.id} data-price={item.price} data-name={item.itemname} data-quantity={item.quantity} />);
-            
+    }
+
+    addItem = () =>{
+
     }
 
     render() {
@@ -114,7 +117,7 @@ class StorePage extends Component {
                         </Col>
                         <Col size="sm-3">
                             {/* {this.displayItems()} */}
-                            <ItemsContainer items={this.state.items}/>
+                            <ItemsContainer items={this.state.items} onClick={this.addItem}/>
                            
                         </Col>
                     </div>
