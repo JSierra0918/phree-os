@@ -38,7 +38,7 @@ app.use(express.json());
 // require("./Routes/API")(app);
 require('./routes/auth.js')(app, passport);
 require("./routes/apiRoutes.js")(app);
-require("./routes/htmlRoutes")(app);
+// require("./routes/htmlRoutes")(app);
 require("./routes/payment")(app)
 
 //load passport strategies
