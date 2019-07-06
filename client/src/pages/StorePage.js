@@ -29,7 +29,8 @@ class StorePage extends Component {
     }
 
     getUserData() {
-        const userId = 1;
+        let userId = sessionStorage.getItem('userId')
+        console.log('userId:', userId)
         
         API.getUserData(userId).then((userResponse) => {
             console.log(userResponse.data.storename)
@@ -41,6 +42,7 @@ class StorePage extends Component {
                 API.getCategoryData(userId).then((categories) => {
                     // update the state with the categories, remember is an array
                     // it is going to render
+                    // console.log(categories)
                     this.setState({
                         category: categories.data
                     })
