@@ -3,7 +3,7 @@ module.exports = function(sequelize, Sequelize) {
  
     var Item = sequelize.define('Item', {
  
-        name: {
+        itemname: {
             type: Sequelize.STRING,
             notEmpty: true
         },

@@ -40,6 +40,17 @@ module.exports = function(sequelize, Sequelize) {
         } 
     });
  
+    User.associate = function(models) {
+
+        User.hasMany(models.Category, {
+          onDelete: "cascade"
+        });
+        // User.hasMany(models.Item, {
+        //     onDelete: "cascade"
+        // });
+
+      };
+
     return User;
  
 }

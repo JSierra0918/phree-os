@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import API from '../utils/PassportAPI';
 // import { userInfo } from 'os';
-import { Input, FormBtn } from './Bootstrap/Form';
-import { Link } from "react-router-dom";
 import { NavTab, NavItem } from './Bootstrap/NavTab';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Container from './Bootstrap/Container';
-import Row from './Bootstrap/Row';
 import Col from './Bootstrap/Col';
 import Card from './Bootstrap/Card';
+import FlexRow from './Bootstrap/FlexRow';
 
 class LoginFormContainer extends Component {
 
    state = {
       loginName: "Are you there?",
       email: "",
-      currentPage: undefined
+      currentPage: "Sign In"
    }
    //    this.state = {
    //       loginForm: {
@@ -36,7 +34,6 @@ class LoginFormContainer extends Component {
    //       })
    //    }
 
-   
 
 
    componentDidMount() {
@@ -60,41 +57,39 @@ class LoginFormContainer extends Component {
    render() {
 
       function displayForm(page) {
-         if (page === "signIn") {
-            console.log("In Sign in!");
+         if (page === "Sign In") {
             return <SignIn />
          }
-         else if (page === "signUp") {
-            console.log("In Sign up");
+         else if (page === "Sign Up") {
             return <SignUp />
          }
       }
 
       return (
-
          <>
-            <Container>
-               <Row>
+            <Container className="h-100">
+               <FlexRow className="row login-row">
                   <Col size="md-8 md-7 g-5" className="mx-auto" >
-                     <Card>
-                        <form className="p-loginForm">
-                           <NavTab className="nav nav-tabs">
-                              <NavItem className="nav-item p-nav-item">
+                     <Card className="card-signin my-5" heading={this.state.currentPage}>
+                        <NavTab class="p-tabbed-ul">
+                           <NavItem>
+                              <div 
+                              onClick={() => { this.changePage("Sign In") }}
+                              className={this.state.currentPage === "Sign In"?"p-tabbed-item p-active-tab": "p-tabbed-item"} >Login</div>
+                           </NavItem>
+                           <NavItem>
+                              <div 
+                              onClick={() => { this.changePage("Sign Up") }} 
+                              className={this.state.currentPage === "Sign Up"?"p-tabbed-item p-active-tab": "p-tabbed-item"} >Sign Up</div>
+                           </NavItem>
+                        </NavTab>
+                        <form className="p-loginForm form-signin">
 
-                                 <p onClick={() => { this.changePage("signIn") }} className="p-Link" > local- Login!</p>
-                              </NavItem>
-                              <NavItem className="nav-item">
-                                 <p onClick={() => { this.changePage("signIn") }} className="p-Link" > local- Login!</p>
-
-                              </NavItem>
-                           </NavTab>
-                           
                            {displayForm(this.state.currentPage)}
-                     </form>
+                        </form>
                      </Card>
-
                   </Col>
-               </Row>
+               </FlexRow>
             </Container>
          </>
       )
