@@ -6,7 +6,7 @@ function ItemsContainer(props) {
     return (
         <div className="items text-center p-main-col mb20">
             <h5>Items</h5>
-            {props.items.map(item => <button  dataid={item.id} key={item.id} item={item.itemname} className="btn btn-light"  >{item.itemname}</button>)}
+            {props.items.map(item  => <button  dataid={item.id} key={item.id} item={item.itemname} onClick={()=> props.addItem(item)} className="btn btn-light"  >{item.itemname}  </button>)}
             {/* <button className="btn btn-light" > {(props.items[0] && props.items[0].itemname) || "There are no categories selected"}</button> */}
         </div>
     )

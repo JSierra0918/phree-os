@@ -17,7 +17,8 @@ class StorePage extends Component {
             calc: undefined,
             catID: undefined,
             category: [],
-            items: []
+            items: [],
+            summaryList: []
             }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -51,7 +52,6 @@ class StorePage extends Component {
         })
     }
 
-
     selectCategory = (id) => {
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
@@ -82,8 +82,8 @@ class StorePage extends Component {
         return  itemList.map(item => <Items className="item" data-id={item.id} data-price={item.price} data-name={item.itemname} data-quantity={item.quantity} />);
     }
 
-    addItem = () =>{
-
+    addItem = (selectedItem) =>{
+        console.log(selectedItem);
     }
 
     render() {
@@ -117,7 +117,7 @@ class StorePage extends Component {
                         </Col>
                         <Col size="sm-3">
                             {/* {this.displayItems()} */}
-                            <ItemsContainer items={this.state.items} onClick={this.addItem}/>
+                            <ItemsContainer items={this.state.items} addItem={this.addItem}/>
                            
                         </Col>
                     </div>
