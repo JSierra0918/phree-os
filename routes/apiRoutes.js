@@ -41,7 +41,7 @@ module.exports = function (app) {
   //get item based off of category ID
   app.get("/api/items/:id", function (req, res) {
     const idInput = req.params.id;
-    db.Category.findAll({
+    db.Item.findAll({
       where: {
         CategoryID: idInput
       }
@@ -53,7 +53,7 @@ module.exports = function (app) {
   //Update Items
   app.get("/api/items/one/:id", function (req, res) {
     const idInput = req.params.id;
-    db.Category.findOne({
+    db.Item.findOne({
       where: {
         id: idInput
       }

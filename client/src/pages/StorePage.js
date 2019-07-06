@@ -5,6 +5,8 @@ import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
 import { Container, Row, Col } from '../components/Bootstrap/Grid';
 import API from '../utils/API';
 import CategoryContainer from '../components/CategoryContainer';
+import ItemsContainer from '../components/ItemsContainer';
+import Items from '../components/Items';
 
 class StorePage extends Component {
 
@@ -14,8 +16,9 @@ class StorePage extends Component {
         this.state = {
             calc: undefined,
             catID: undefined,
-            category: []
-                }
+            category: [],
+            items: []
+            }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
     }
@@ -32,6 +35,7 @@ class StorePage extends Component {
             console.log(userResponse.data.storename)
             if (!userResponse.data.storename) {
                 // go to create store
+                
             }
             else {
                 API.getCategoryData(userId).then((categories) => {
@@ -50,34 +54,31 @@ class StorePage extends Component {
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
-            console.log(category);
+            this.grabItems(category.data.id);
         });
         return console.log(id);
     }
 
-    updateCategory = () => {
-        API.getCategoryData(1).then((categories) => {
-            console.log(categories.data);
-            let updated = Object.assign([], this.state.category);
+    grabItems = (catID) => {
+        //when category is returned, then create a call based off 
+        API.getItems(catID).then((returnedItems) => {
+            console.log(returnedItems);
 
-            const categoryNames = categories.data.map(item => item.categoryName);
-            
-            updated.push(categoryNames);
-            console.log(updated);
-            // update the state with the categories, remember is an array
-            // it is going to render
             this.setState({
-                category: categories.data
+                items: returnedItems.data
             })
+
+            this.displayItems(returnedItems.data);
+            // return itemList;
         })
     }
 
-
-    displayItem = (cat) => {
-        //when category is returned, then create a call based off 
-        //returnedCategoryDBItem.map((items)=> <Items title={items.title} price={items.price} quantity{items.quantity}/>)
-        //don't know how to do that.
-        //when the state category is changed, then make an api call based off of the item passed in?
+    displayItems = (itemList) => {
+        console.log(itemList)
+        
+        // return  <ItemsContainer items={itemList}/>
+        // return  itemList.map(item => <Items className="item" data-id={item.id} data-price={item.price} data-name={item.itemname} data-quantity={item.quantity} />);
+            
     }
 
     render() {
@@ -103,10 +104,16 @@ class StorePage extends Component {
                             <div className="summary text-center mb20">Summary</div>
                         </Col>
                         <Col size="sm-3">
-                            <CategoryContainer category={this.state.category} id={this.state.catID} onClick={this.selectCategory} />
+                            <CategoryContainer 
+                                category={this.state.category} 
+                                id={this.state.catID} 
+                                onClick={this.selectCategory} 
+                            />
                         </Col>
                         <Col size="sm-3">
-                            <div className="items text-center p-main-col mb20">ITEMS</div>
+                            {/* {this.displayItems()} */}
+                            <ItemsContainer items={this.state.items}/>
+                           
                         </Col>
                     </div>
                 </Container>

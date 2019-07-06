@@ -14,5 +14,9 @@ export default {
     getOneCategory: function(categoryID) {
 
         return axios.get("/api/category/one/"+ categoryID);
-    }
+    },
+    getItems: function(userID) {
+
+        return axios.get("/api/items/"+ userID);
+    },
 }

@@ -34,14 +34,14 @@ class SignIn extends Component {
         }
 
         //send information to the user API
-        // Axios.post("/api/users", userForm, (userInfo) => {
-        //     //possibly save user id in session so you can read it when you land on Store Page
+        Axios.post("/signin", userForm, (userInfo) => {
+            //possibly save user id in session so you can read it when you land on Store Page
 
-        // }).then(() => {
-        //     //======REROUTE USER
-        // this.routeToStore();    
+        }).then(() => {
+            //======REROUTE USER
+        this.routeToStore();    
 
-        // });
+        });
 
         // this.routeToStore();    
         this.setState({
