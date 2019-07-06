@@ -35,6 +35,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
     "sequelize": "^5.9.0",
+    "stripe": "^7.4.0",
     "validator": "^11.0.0"
   }
 }

@@ -14,15 +14,16 @@ module.exports = function(app, passport) {
       function(req, res) {
         // console.log('req:', req.user)
         var id = encodeURIComponent(req.user.id);
-        var first = encodeURIComponent(req.user.firstname)
-        var last = encodeURIComponent(req.user.lastname)
-        var storeName = encodeURIComponent(req.user.storename)
+        var firstname = encodeURIComponent(req.user.firstname)
+        var lastname = encodeURIComponent(req.user.lastname)
+        var storename = encodeURIComponent(req.user.storename)
+  
 
         let userInfo = {
-          id: id,
-          firstNme: first,
-          lastName: last,
-          storeName: storeName
+          id,
+          firstname,
+          lastname,
+          storename,
         }
         res.json(userInfo)    
      
@@ -37,17 +38,18 @@ module.exports = function(app, passport) {
     function(req, res) {
       // console.log('req:', req.user)
       var id = encodeURIComponent(req.user.id);
-      var first = encodeURIComponent(req.user.firstname)
-      var last = encodeURIComponent(req.user.lastname)
-      var storeName = encodeURIComponent(req.user.storename)
+      var firstname = encodeURIComponent(req.user.firstname)
+      var lastname = encodeURIComponent(req.user.lastname)
+      var storename = encodeURIComponent(req.user.storename)
+
 
       let userInfo = {
-        id: id,
-        firstNme: first,
-        lastName: last,
-        storeName: storeName
+        id,
+        firstname,
+        lastname,
+        storename,
       }
-      res.json(userInfo)    
+      res.json(userInfo)   
    
   })
 
