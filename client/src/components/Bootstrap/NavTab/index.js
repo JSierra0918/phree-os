@@ -3,17 +3,17 @@ import React from "react";
 
 // This file exports both the List and ListItem components
 
-export function NavTab({ children }) {
+export function NavTab(props) {
     return (
         <React.Fragment>
-            <ul className="nav nav-tabs">{children}</ul>
+            <ul className={`nav ${props.class}`} >{props.children}</ul>
         </React.Fragment>
     );
 }
 
-export function NavItem({ children }) {
+export function NavItem(props) {
     return (
         <React.Fragment>
-            <li className="nav-item">{children}</li>
+            <li className={`nav-item ${props.class}`}>{props.children}</li>
         </React.Fragment>);
 }

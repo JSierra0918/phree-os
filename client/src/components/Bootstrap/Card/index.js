@@ -2,9 +2,9 @@ import React from "react";
 
 function Card(props) {
   return (
-    <div className="card text-center">
-      <div className="card-header">
-        <h2>{props.heading}</h2>
+    <div className="card card-signin my-5">
+      <div>
+        <h5 className="card-title text-center">{props.heading}</h5>
       </div>
       <div className="card-body">{props.children}</div>
     </div>

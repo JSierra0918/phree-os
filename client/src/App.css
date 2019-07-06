@@ -23,25 +23,6 @@
   color: #61dafb;
 }
 
-.p-loginForm {
-  background: pink;
-  width: 30vw;
-  margin: 0 auto;
-}
-
-.p-signInForm {
-  background: yellow;
-  width: 30vw;
-}
-
-.p-nav-item {
-  background-color: blueviolet;
-}
-
-.p-Link:hover {
-  background: red;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
