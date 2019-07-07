@@ -19,8 +19,9 @@ class StorePage extends Component {
             catID: undefined,
             category: [],
             items: [],
-            paymentList: []
-            }
+            paymentList: [],
+            count: 0
+        }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
     }
@@ -33,12 +34,12 @@ class StorePage extends Component {
     getUserData() {
         let userId = sessionStorage.getItem('userId')
         console.log('userId:', userId)
-        
+
         API.getUserData(userId).then((userResponse) => {
             console.log(userResponse.data.storename)
             if (!userResponse.data.storename) {
                 // go to create store
-                
+
             }
             else {
                 API.getCategoryData(userId).then((categories) => {
@@ -65,47 +66,85 @@ class StorePage extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
-            console.log(returnedItems);
-
             this.setState({
                 items: returnedItems.data
             })
-
-            //NOT USED
-            this.displayItems(returnedItems.data);
-            // return itemList;
         })
     }
 
-    //NO USED
-    displayItems = (itemList) => {
-        console.log(itemList)
-            
-        // return  <ItemsContainer items={itemList}/>
-        return  itemList.map(item => <Items className="item" data-id={item.id} data-price={item.price} data-name={item.itemname} data-quantity={item.quantity} />);
-    }
+    addItem = (selectedItem) => {
+        console.log(selectedItem["id"]);
 
-    addItem = (selectedItem) =>{
-        console.log(selectedItem);
-        let count = + 1;
-        
+        let countIncrement = this.state.count;
+        countIncrement++;
+
+        const obj = this.state.paymentList;
+        console.log(obj);
+
+        for (const key in obj) {
+
+            if (obj["id"] === selectedItem.id) {
+                console.log(obj["id"])
+            }
+
+        }
+
+        // this.findKey("id");
+        // if (this.state.paymentList.includes(selectedItem.id)){
+        //     console.log(selectedItem.id +" is already in there!");
+        // }else {
+        //     let addedItem = this.state.paymentList.concat(selectedItem);
+        //     this.setState({
+        //         paymentList: addedItem,
+        //         count: countIncrement
+        //     })
+        // }
         let addedItem = this.state.paymentList.concat(selectedItem);
         this.setState({
-            paymentList: addedItem
+            paymentList: addedItem,
+            count: countIncrement
         })
+    }
+
+    findKey = (str) => {
+
+        var obj = this.state.paymentList[0]
+
+        for (var i = 0; i < str.length; i++) {
+            if (obj[str[i]]) {
+                // obj[str[i]]++;
+                console.log("increase one")
+                console.log(obj[str[i]])
+            } else {
+                // obj[str[i]] = 1;
+
+                console.log("make one")
+                console.log(obj[str[i]])
+            }
+        }
     }
 
     incrementItem = () => {
-        let count = + 1;
+        let count = this.state.count;
+        count++;
+        this.setState({
+            count: count
+        })
+    }
 
-        return  count
+    deleteRow = (id) => {
+        const index = this.state.paymentList.findIndex(paymentItem => {
+            return paymentItem.id === id;
+        })
+
+        console.log(index);
     }
 
     render() {
-        
+
         return (
             <div>
-                <Container class="h-100">
+                <Container extraClass="h-100">
                     <div className="row">
                         <Col size="lg-12">
                             <h1>Phree-OS</h1>
@@ -121,17 +160,20 @@ class StorePage extends Component {
                     </div>
                     <div className="row main-row">
                         <Col size="sm-6">
-                            <PaymentSummary paymentList={this.state.paymentList} incrementItem={this.incrementItem}/>
+                            <PaymentSummary
+                                paymentList={this.state.paymentList}
+                                count={this.state.count}
+                                deleteRow={this.deleteRow} />
                         </Col>
                         <Col size="sm-3">
-                            <CategoryContainer 
-                                category={this.state.category} 
-                                id={this.state.catID} 
-                                onClick={this.selectCategory} 
+                            <CategoryContainer
+                                category={this.state.category}
+                                id={this.state.catID}
+                                onClick={this.selectCategory}
                             />
                         </Col>
                         <Col size="sm-3">
-                            <ItemsContainer items={this.state.items} addItem={this.addItem}/>
+                            <ItemsContainer items={this.state.items} addItem={this.addItem} />
                         </Col>
                     </div>
                 </Container>

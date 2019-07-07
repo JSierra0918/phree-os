@@ -1,4 +1,5 @@
 import React from 'react';
+// import ReactTable fom 'react-table';
 
 function PaymentSummary(props) {
     console.log(props.paymentList)
@@ -12,20 +13,25 @@ function PaymentSummary(props) {
                         <th scope="col">Item</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Price</th>
+                        <th scope="col"> </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {props.paymentList.map(item =>
-                        <tr onChange={props.incrementItem()} >
-                            <td>{item.itemname}</td>
-                            <td>{item.quantity}</td>
-                            <td>{item.price}</td>
-                            {item.id} {props.incrementItem()}
+                        <tr key={props.id}>
+                            <td key={props.id}>{item.itemname}</td>
+                            <td key={props.id}>{props.count}</td>
+                            <td key={props.id}>{item.price}</td>
+                            <td onClick={() => props.deleteRow(item.id)} key={props.id}>
+                                <i className="fa fa-trash delete-icon" aria-hidden="true">trash</i>
+                            </td>
+                            {item.id} {props.count}
                         </tr>)}
                 </tbody>
-                <button className="btn" >Pay</button>
             </table>
 
+            {/* if items exist show button */}
+            <button className="btn" >Pay</button>
         </div>
 
     )
