@@ -7,6 +7,7 @@ import API from '../utils/API';
 import CategoryContainer from '../components/CategoryContainer';
 import ItemsContainer from '../components/ItemsContainer';
 import Items from '../components/Items';
+import PaymentSummary from '../components/PaymentSummary';
 
 class StorePage extends Component {
 
@@ -18,7 +19,7 @@ class StorePage extends Component {
             catID: undefined,
             category: [],
             items: [],
-            summaryList: []
+            paymentList: []
             }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -70,11 +71,13 @@ class StorePage extends Component {
                 items: returnedItems.data
             })
 
+            //NOT USED
             this.displayItems(returnedItems.data);
             // return itemList;
         })
     }
 
+    //NO USED
     displayItems = (itemList) => {
         console.log(itemList)
             
@@ -84,6 +87,18 @@ class StorePage extends Component {
 
     addItem = (selectedItem) =>{
         console.log(selectedItem);
+        let count = + 1;
+        
+        let addedItem = this.state.paymentList.concat(selectedItem);
+        this.setState({
+            paymentList: addedItem
+        })
+    }
+
+    incrementItem = () => {
+        let count = + 1;
+
+        return  count
     }
 
     render() {
@@ -106,7 +121,7 @@ class StorePage extends Component {
                     </div>
                     <div className="row main-row">
                         <Col size="sm-6">
-                            <div className="summary text-center mb20">Summary</div>
+                            <PaymentSummary paymentList={this.state.paymentList} incrementItem={this.incrementItem}/>
                         </Col>
                         <Col size="sm-3">
                             <CategoryContainer 
@@ -116,9 +131,7 @@ class StorePage extends Component {
                             />
                         </Col>
                         <Col size="sm-3">
-                            {/* {this.displayItems()} */}
                             <ItemsContainer items={this.state.items} addItem={this.addItem}/>
-                           
                         </Col>
                     </div>
                 </Container>

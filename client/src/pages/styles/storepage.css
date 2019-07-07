@@ -25,3 +25,22 @@
     width: 100%;
     border: 3px solid yellow;
 }
+
+.items ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.items-li {
+    padding: 5px;
+    margin: 5px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    transition: all .2s;
+}
+
+.items-li:hover {
+    cursor: pointer;
+    background-color: tomato;
+}
