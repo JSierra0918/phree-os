@@ -2,43 +2,36 @@ import React, { Component } from 'react';
 import '../pages/styles/storepage.css';
 import Items from './Items';
 
-class ItemsContainer extends Component {
-    constructor(props){
-        super(props);
+function ItemsContainer(props) {
 
-        this.state ={
-            itemsList: this.props.items
-        }
-    }
+    // add decimals to the number
+    const formatter = new Intl.NumberFormat('en-IN', {
+        minimumFractionDigits: 2
+      })
 
-    componentDidMount(){
-        console.log(this.props.items);
-        this.setState({itemsList: this.props.items});
-    }
-
-    renderItems(){
-
-        console.log("i think so ", this.props.items);
-
-        return  this.state.itemsList.map(item => <Items  dataid={item.id} key={item.id} item={item.categoryName} className="btn btn-light" style={this.state.style} />)
-    }
-    render() {
-        return (
-            
-                <div className="items text-center p-main-col mb20">
-                    <h5>Items</h5>
-                    {/* //render a category button */}
-                    {this.renderItems()}
-                    {this.props.items.map(item => {
-                        return <div> {item.id}</div>
-                    })}
-                    
-                </div>
-           
-        )
-    }
-
+    return (
+        <div className="items text-center p-main-col mb20">
+            <h5>Items</h5>
+            <ul>
+                {props.items.map(item =>
+                    <li dataid={item.id} key={item.id}
+                        onClick={() => props.addItem(item)}
+                        className="items-li"  >
+                        <h6>
+                            {item.itemname}
+                        </h6>
+                        <div className="d-flex justify-content-between">
+                            <div className="d-flex item-highlight">
+                                <span>Q:</span><p>{item.quantity}</p>
+                            </div>
+                            <div className="d-flex item-highligh">
+                                <span>$</span><p>{ formatter.format(item.price)}</p>
+                            </div>
+                        </div>
+                    </li>)}
+            </ul>
+        </div>
+    )
 }
-
 
 export default ItemsContainer;

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import API from "../utils/API";
+import Category from "../components/Category";
 // import './styles/addCategory.css';
 
 
 export class AddCategory extends React.Component {
 
 
-  
+
 
 ////// ATTEMPT 3 : :( /////
   //   addCategory(newCategory) {
@@ -50,7 +52,7 @@ export class AddCategory extends React.Component {
 //     var inp = document.getElementById("todoInput");
 //     var val = inp.value;
 //     inp.value = '';
-//     this.props.addCat(val);
+//     this.addCat(val);
 //   };
 //   render() {
 //     return (
@@ -110,60 +112,65 @@ export class AddCategory extends React.Component {
 // }
 
 /////ATTEMPT 1 : SAVE EDIT VERSION /////////
-// class AddCategory extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {text: '', inputText: '', mode:'view'};
+  constructor(props) {
+    super(props);
+    this.state = {text: '', inputText: '', mode:'view'};
 
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSave = this.handleSave.bind(this);
-//     this.handleEdit = this.handleEdit.bind(this);
-//   }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+  }
 
-//   handleChange(e) {
-//     this.setState({ inputText: e.target.value });
-//   }
+  handleChange(e) {
+    this.setState({ inputText: e.target.value });
+  }
 
-//   handleSave() {
-//     this.setState({text: this.state.inputText, mode: 'view'});
-//   }
+  handleSave() {
+    const userID = sessionStorage.getItem("UserId");
+    this.setState({text: this.state.inputText, mode: 'view'});
+    API.postCategory(userID, this.state.inputText)
+    .then((resp)=> {
+      console.log("resp:" + resp);
+    });
 
-//   handleEdit() {
-//     this.setState({mode: 'edit'});
-//   }
+  }
 
-//   render () {
-//     const view = this.state.mode === 'view';
+  handleEdit() {
+    this.setState({mode: 'edit'});
+  }
 
-//     return (
-//       <div>
-//         <p>Text: {this.state.text}</p>
+  render () {
+    const view = this.state.mode === 'view';
 
-//         {
-//           view
-//           ? null
-//           : (
-//             <p>
-//               <input
-//                 onChange={this.handleChange}
-//                 value={this.state.inputText} />
-//             </p>
-//           )
-//         }
+    return (
+      <div>
+        <p>Text: {this.state.text}</p>
 
-//         <button
-//           onClick={
-//             view 
-//               ? this.handleEdit 
-//               : this.handleSave
-//           }
-//         >
-//           {view ? 'Edit' : 'Save'}
-//         </button>
-//       </div>
-//     );
-//   }
-// }
+        {
+          view
+          ? null
+          : (
+            <p>
+              <input
+                onChange={this.handleChange}
+                value={this.state.inputText} />
+            </p>
+          )
+        }
+
+        <button
+          onClick={
+            view 
+              ? this.handleEdit 
+              : this.handleSave
+          }
+        >
+          {view ? 'Edit' : 'Save'}
+        </button>
+      </div>
+    );
+  }
+}
 
 export default AddCategory;
 

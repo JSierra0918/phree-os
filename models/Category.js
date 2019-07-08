@@ -8,7 +8,6 @@ module.exports = function(sequelize, Sequelize) {
             notEmpty: true
         }
     });
-
     Category.associate = function(models) {
   
         Category.belongsTo(models.User, {
@@ -19,6 +18,7 @@ module.exports = function(sequelize, Sequelize) {
         });
 
       };
+
  
     return Category;
  

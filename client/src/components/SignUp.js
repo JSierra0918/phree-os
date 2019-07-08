@@ -33,23 +33,27 @@ class SignUp extends Component {
     submitSignUp = (event) => {
         event.preventDefault();
         const userForm = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            storeName: this.state.storeName,
+            firstname: this.state.firstName,
+            lastname: this.state.lastName,
+            storename: this.state.storeName,
             email: this.state.email,
             password: this.state.password,
         }
        
         
         //send information to the user API
-        // Axios.post("/api/users", userForm, (userInfo) => {
-        //     //possibly save user id in session so you can read it when you land on Store Page
+        Axios.post("/signup", userForm, (userInfo) => {
+            
+            //possibly save user id in session so you can read it when you land on Store Page
+            
+        }).then((res) => {
+            // console.log('in promise after /signup')
+            // console.log(res.data)
+            sessionStorage.setItem('userId', res.data.id)
+            
+        this.routeToStore();    
 
-        // }).then(() => {
-        //     //======REROUTE USER
-        // this.routeToStore();    
-
-        // });
+        });
     }
 
     render() {

@@ -50,15 +50,15 @@ module.exports = function (app) {
     });
   });
 
-  //Update Items
+  //grab specific Items
   app.get("/api/items/one/:id", function (req, res) {
     const idInput = req.params.id;
     db.Item.findOne({
       where: {
         id: idInput
       }
-    }).then(function (categories) {
-      res.json(categories);
+    }).then(function (items) {
+      res.json(items);
     });
   });
 
@@ -74,5 +74,39 @@ module.exports = function (app) {
     });
   });
 
+  // Create a a summary
+  app.post("/api/summary/:id", (req, res) => {
+    const idInput = req.params.id;
+    console.log(req.body)
+    res.json(req.body)
+  });
 
-};
+
+// Update items after the client has sold.
+  app.put("/api/items/one/:id", function (req, res) {
+    const idInput = req.params.id;
+    console.log('req.body:', req.body)
+    //subtract the items quantity by the req.body
+
+    db.Item.update(
+      {
+        quantity: req.body.Quantity
+      },{
+      where: {  
+        id: idInput
+      }
+    }).then(function (updatedItem) {
+      res.json(updatedItem);
+    });
+  });
+
+  // Create a 
+  app.post("/api/category/:id", (req, res) => {
+    const idInput = req.params.id;
+    // db.Category.create(req.body);
+    console.log(req.body)
+    // res.json(req.body)
+  });
+
+
+}
