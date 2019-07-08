@@ -16,7 +16,14 @@ module.exports = function(sequelize, Sequelize) {
         quantity: {
             type: Sequelize.INTEGER,
             notEmpty: true
-        }
+        },
+        counter: {
+            type: Sequelize.INTEGER,
+            notEmpty: true,
+            defaultValue: 1
+            
+        },
+
 
     });
 

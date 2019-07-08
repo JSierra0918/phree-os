@@ -70,6 +70,9 @@ class StorePage extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
+            console.log("----items")
+            console.log(returnedItems)
+
             this.setState({
                 items: returnedItems.data
             })
@@ -83,9 +86,10 @@ class StorePage extends Component {
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
             //Log object to Console.
-            console.log("Before update: ", statePaymentList[objIndex].price);
+            console.log("Before update price: ", statePaymentList[objIndex].price);
+            console.log("Before update quantity: ", statePaymentList[objIndex].counter);
             // make new object of updated object.   
-            let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price };
+            let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price, counter: statePaymentList[objIndex].counter + 1};
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
 
@@ -123,16 +127,21 @@ class StorePage extends Component {
     }
 
     deleteRow = (id) => {
-        const index = this.state.paymentList.findIndex(paymentItem => {
-            return paymentItem.id === id;
-        });
-        console.log('index:', index)
+        console.log("delete: ", id)
+     
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
         //create obj based off of what the state paymentList is
+
+        const index = statePaymentList.findIndex(paymentItem => {
+            return paymentItem.id === id;
+        });
+        console.log('index:', index)
+        console.log(statePaymentList)
      
         let updatedItem = statePaymentList.splice(index, 1);
-        updatedItem.splice(index, 1);
+        
+        //updatedItem.splice(index, 1);
         console.log('updatedItem:', updatedItem)
 
         // let updatedItems = [
