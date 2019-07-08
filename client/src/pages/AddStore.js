@@ -3,7 +3,7 @@ import Button from "../components/Bootstrap/Button";
 
 function AddStore () {
     return (
-        <Button>Add Store</Button>
+        <Button><i class="fas fa-plus"></i> Add Store</Button>
     )
 }
 
