@@ -9,23 +9,23 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <Router>
-//         <Switch>
-//           <Route exact path="/" component={LoginPage} />
-//           <Route exact path="/SignIn" component={SignIn} />
-//           <Route exact path="/SignUp" component={SignUp} />
-//           <Route exact path="/store" component={StorePage} />
-//           <Route exact path="/manage" component={ManagePage} />
-//         </Switch>
-//       </Router>
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route exact path="/" component={LoginPage} />
+          <Route exact path="/SignIn" component={SignIn} />
+          <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/store" component={StorePage} />
+          <Route exact path="/manage" component={ManagePage} />
+        </Switch>
+      </Router>
 
-//     </div>
-//   );
-// }
+    </div>
+  );
+}
 
-// export default App;
+export default App;
 
 

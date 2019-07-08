@@ -34,13 +34,13 @@
     border: 3px solid yellow;
 }
 
-.items ul {
+.items ul, .category ul {
     padding: 0;
     margin: 0;
     list-style: none;
 }
 
-.items-li {
+.items-li, .category-li {
     padding: 5px;
     margin: 5px;
     box-sizing: border-box;
@@ -51,4 +51,9 @@
 .items-li:hover {
     cursor: pointer;
     background-color: rgb(66, 140, 209);
+}
+
+.category-li:hover {
+    cursor: pointer;
+    background-color: rgb(66, 209, 126);
 }
