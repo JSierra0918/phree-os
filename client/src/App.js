@@ -7,25 +7,28 @@ import StorePage from './pages/StorePage';
 import ManagePage from './pages/ManagePage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import StripeInfoPage from './pages/StripeInfoPage'
 import {Elements, StripeProvider} from 'react-stripe-elements';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <Router>
-//         <Switch>
-//           <Route exact path="/" component={LoginPage} />
-//           <Route exact path="/SignIn" component={SignIn} />
-//           <Route exact path="/SignUp" component={SignUp} />
-//           <Route exact path="/store" component={StorePage} />
-//           <Route exact path="/manage" component={ManagePage} />
-//         </Switch>
-//       </Router>
+function App() {
+  return (
+    <div className="App">
+      <Router>
 
-//     </div>
-//   );
-// }
+        <Switch>
+          <Route exact path="/" component={LoginPage} />
+          <Route exact path="/SignIn" component={SignIn} />
+          <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/store" component={StorePage} />
+          <Route exact path="/manage" component={ManagePage} />
+          <Route exact path="/StripeInfo" component={StripeInfoPage} />
+        </Switch>
+      </Router>
 
-// export default App;
+    </div>
+  );
+}
+
+export default App;
 
 
