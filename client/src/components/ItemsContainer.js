@@ -25,7 +25,7 @@ function ItemsContainer(props) {
                                 <span>Q:</span><p>{item.quantity}</p>
                             </div>
                             <div className="d-flex item-highligh">
-                                <span>$:</span><p>{ formatter.format(item.price)}</p>
+                                <span>$</span><p>{ formatter.format(item.price)}</p>
                             </div>
                         </div>
                     </li>)}

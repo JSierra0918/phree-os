@@ -2,16 +2,38 @@ import React from 'react';
 // import ReactTable fom 'react-table';
 
 function PaymentSummary(props) {
-    console.log(props.paymentList);
 
-    function GetCellValues() {
-        var table = document.getElementById('summary-table');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-                alert(table.rows[r].cells[c].innerHTML);
-            }
+    function tableToObj() {
+        const table = document.getElementById('summary-table');
+
+        const rows = table.rows;
+        const propCells = rows[0].cells;
+        let propNames = [];
+        let paymentSummary = [];
+        let obj, row, cells;
+      
+        // Use the first row for the property names
+        // Could use a header section but result is the same if
+        // there is only one header row
+        for (var i=0, iLen=propCells.length; i<iLen; i++) {
+          propNames.push(propCells[i].textContent || propCells[i].innerText);
         }
-    }
+      
+        // Use the rows for data
+        // Could use tbody rows here to exclude header & footer
+        // but starting from 1 gives required result
+        for (var j=1, jLen=rows.length; j<jLen; j++) {
+          cells = rows[j].cells;
+          obj = {};
+      
+          for (var k=0; k<iLen; k++) {
+            obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
+          }
+          paymentSummary.push(obj)
+        }
+        console.log('paymentSummary:', paymentSummary);
+        return paymentSummary;
+      }
 
     return (
         <div className="summary text-center mb20">
@@ -40,7 +62,7 @@ function PaymentSummary(props) {
             </table>
 
             {/* if items exist show button */}
-            <button className="btn" onClick={GetCellValues}>Pay</button>
+            <button className="btn" onClick={tableToObj}>Pay</button>
         </div>
 
     )
