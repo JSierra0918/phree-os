@@ -84,7 +84,6 @@ class LoginFormContainer extends Component {
                            </NavItem>
                         </NavTab>
                         <form className="p-loginForm form-signin">
-
                            {displayForm(this.state.currentPage)}
                         </form>
                      </Card>

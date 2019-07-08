@@ -60,7 +60,6 @@ class StorePage extends Component {
             //find items and return the array possibly pass it as an argument for displayItem.
             this.grabItems(category.data.id);
         });
-        return console.log(id);
     }
 
     grabItems = (catID) => {
@@ -131,6 +130,14 @@ class StorePage extends Component {
         console.log(index);
     }
 
+    clearSummary = (summaryArr) => {
+    console.log('summaryArr:', summaryArr);
+        //get an empty parameter that clears paymentList
+        this.setState((state, props) => {
+           return {paymentList: state.paymentList = summaryArr}
+        })
+    }
+
     render() {
 
         return (
@@ -154,7 +161,8 @@ class StorePage extends Component {
                             <PaymentSummary
                                 paymentList={this.state.paymentList}
                                 count={this.state.count}
-                                deleteRow={this.deleteRow} />
+                                deleteRow={this.deleteRow} 
+                                clearSummary={this.clearSummary}/>
                         </Col>
                         <Col size="sm-3">
                             <CategoryContainer

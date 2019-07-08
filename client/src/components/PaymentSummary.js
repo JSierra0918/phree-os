@@ -7,47 +7,65 @@ function PaymentSummary(props) {
     function tableToObj(event, urTable) {
         console.log('event:', event.target);
         event.preventDefault();
-        const table = document.getElementById('summary-table');
+        const table = document.querySelector('#summary-table');
+        const id = table.getAttribute("dataid")
+        console.log('id:', id)
 
         const rows = table.rows;
         const propCells = rows[0].cells;
         let propNames = [];
         let paymentSummary = [];
         let obj, row, cells;
-      
+
+
         // Use the first row for the property names
         // Could use a header section but result is the same if
         // there is only one header row
-        for (var i=0, iLen=propCells.length; i<iLen; i++) {
-          propNames.push(propCells[i].textContent || propCells[i].innerText);
+        for (var i = 0, iLen = propCells.length; i < iLen; i++) {
+            propNames.push(propCells[i].textContent || propCells[i].innerText);
         }
-      
+
         // Use the rows for data
         // Could use tbody rows here to exclude header & footer
         // but starting from 1 gives required result
-        for (var j=1, jLen=rows.length; j<jLen; j++) {
-          cells = rows[j].cells;
-          obj = {};
-          
-      
-          for (var k=0; k<iLen; k++) {
-            obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
-          }
-         
-          paymentSummary.push(obj)
+        for (var j = 1, jLen = rows.length; j < jLen; j++) {
+            cells = rows[j].cells;
+            obj = {};
+            const id = rows[j].getAttribute("dataid");
+            //add id to the obj so we can use it for the Items API
+            obj.id = id;
+
+            for (var k = 0; k < iLen; k++) {
+                obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
+            }
+
+            paymentSummary.push(obj)
         }
         console.log('paymentSummary:', paymentSummary);
+        //get User id for summary API
         const userId = sessionStorage.getItem('userId');
 
         API.postSummary(userId, paymentSummary).then((response) => {
             console.log(response.data);
-
-            // Clear Summary table
-            // Send the response to update the Items from the data table       
+            
+            // TODO:Send the response to update the Items from the data table  
+            
+              //clears the payment list for the client
+            //   props.clearSummary([]);
         });
-          
-        return paymentSummary;
-      }
+
+        // return paymentSummary;
+    }
+
+    let paymentListArray = props.paymentList.map(item =>
+        <tr key={item.id} dataid={item.id}>
+            <td >{item.itemname}</td>
+            <td >{props.count}</td>
+            <td >{item.price}</td>
+            <td onClick={() => props.deleteRow(item.id)} >
+                <i className="fa fa-trash delete-icon" aria-hidden="true">trash</i>
+            </td>
+        </tr>)
 
     return (
         <div className="summary text-center mb20">
@@ -63,15 +81,7 @@ function PaymentSummary(props) {
                     </tr>
                 </thead>
                 <tbody >
-                    {props.paymentList.map(item =>
-                        <tr key={item.id} dataid={item.id}>
-                            <td >{item.itemname}</td>
-                            <td >{props.count}</td>
-                            <td >{item.price}</td>
-                            <td onClick={() => props.deleteRow(item.id)} >
-                                <i className="fa fa-trash delete-icon" aria-hidden="true">trash</i>
-                            </td>
-                        </tr>)}
+                    {paymentListArray}
                 </tbody>
             </table>
 
