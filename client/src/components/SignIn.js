@@ -56,7 +56,7 @@ class SignIn extends Component {
         return (
             <div>
                 <Input name="email" placeholder="Email (required)" className="form-control" value={this.state.email} onChange={this.handleInputChange} />
-                <Input name="password" placeholder="Password (required)" className="form-control" value={this.state.password} onChange={this.handleInputChange} />
+                <Input name="password" type="password" placeholder="Password (required)" className="form-control" value={this.state.password} onChange={this.handleInputChange} />
                 <FormBtn name="submitBtn" onClick={this.submitSignIn} >Sign In</FormBtn>
             </div>
         );

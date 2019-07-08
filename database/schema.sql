@@ -3,7 +3,6 @@ CREATE DATABASE pointOfSales;
 
 USE pointOfSales;
 INSERT INTO Users ( firstname, lastname, storename, email, password, CreatedAt, UpdatedAt)
-
 VALUES ("Jim", "Jones", "JJ's Farmers Market", "JJsMarket@example.com", "abc123", now(), now());
 
 USE pointOfSales;

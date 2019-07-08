@@ -6,7 +6,7 @@ import React from "react";
 export function NavTab(props) {
     return (
         <React.Fragment>
-            <ul className={`nav ${props.class}`} >{props.children}</ul>
+            <ul className={`nav ${props.extraClass}`} >{props.children}</ul>
         </React.Fragment>
     );
 }
@@ -14,6 +14,6 @@ export function NavTab(props) {
 export function NavItem(props) {
     return (
         <React.Fragment>
-            <li className={`nav-item ${props.class}`}>{props.children}</li>
+            <li className={`nav-item ${props.extraClass}`}>{props.children}</li>
         </React.Fragment>);
 }

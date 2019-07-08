@@ -71,7 +71,7 @@ class LoginFormContainer extends Component {
                <FlexRow className="row login-row">
                   <Col size="md-8 md-7 g-5" className="mx-auto" >
                      <Card className="card-signin my-5" heading={this.state.currentPage}>
-                        <NavTab class="p-tabbed-ul">
+                        <NavTab extraClass="p-tabbed-ul">
                            <NavItem>
                               <div 
                               onClick={() => { this.changePage("Sign In") }}
@@ -84,7 +84,6 @@ class LoginFormContainer extends Component {
                            </NavItem>
                         </NavTab>
                         <form className="p-loginForm form-signin">
-
                            {displayForm(this.state.currentPage)}
                         </form>
                      </Card>
