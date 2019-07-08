@@ -87,7 +87,8 @@ module.exports = function (app) {
     const idInput = req.params.id;
     console.log('req.body:', req.body)
     //subtract the items quantity by the req.body
-
+    // subtract
+    let updatedQuantity = - req.body.Quantity
     db.Item.update(
       {
         quantity: req.body.Quantity

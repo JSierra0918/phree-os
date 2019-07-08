@@ -57,3 +57,8 @@
     cursor: pointer;
     background-color: rgb(66, 209, 126);
 }
+
+.pay {
+    background-color: red;
+    width: 80%;
+}

@@ -47,12 +47,12 @@ function PaymentSummary(props) {
 
         API.postSummary(userId, paymentSummary).then((response) => {
             console.log(response.data);
-            
+
             // TODO:Send the response to update the Items from the data table  
             //Items only needs ID and quantity...I think.
-            
-              //clears the payment list for the client
-              props.clearSummary([]);
+
+            //clears the payment list for the client
+            props.clearSummary([]);
         });
 
         // return paymentSummary;
@@ -71,24 +71,23 @@ function PaymentSummary(props) {
 
     return (
         <div className="summary text-center mb20">
-            <h5>Payment Summary</h5>
-            {/* Get summary list array and map through it.  First, just have it populate. 2nd, maybe popluate if it has an item. Somehow try and update the same item on each click */}
-            <table className="table" id="summary-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                        <th scope="col"> </th>
-                    </tr>
-                </thead>
-                <tbody >
-                    {paymentListArray}
-                </tbody>
-            </table>
+            <div className="table-container"><h5>Payment Summary</h5>
+                <table className="table" id="summary-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        {paymentListArray}
+                    </tbody>
+                </table></div>
 
             {/* if items exist show button */}
-            <button className="btn" onClick={tableToObj}>Pay</button>
+            <button className="btn pay" onClick={tableToObj}>Pay</button>
         </div>
 
     )

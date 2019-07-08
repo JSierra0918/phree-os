@@ -132,24 +132,11 @@ class StorePage extends Component {
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
         //create obj based off of what the state paymentList is
-
-        const index = statePaymentList.findIndex(paymentItem => {
-            return paymentItem.id === id;
-        });
-        console.log('index:', index)
-        console.log(statePaymentList)
      
-        let updatedItem = statePaymentList.splice(index, 1);
+        let updatedItem = statePaymentList.filter((item) => {
+            return item.id !== id
+        });
         
-        //updatedItem.splice(index, 1);
-        console.log('updatedItem:', updatedItem)
-
-        // let updatedItems = [
-        //     ...statePaymentList.slice(0, index),
-        //     updatedItem,
-        //     ...statePaymentList.slice(index + 1),
-        // ];
-
         //Update object's name property.
         this.setState((state) => {
             return { paymentList: state.paymentList = updatedItem }
