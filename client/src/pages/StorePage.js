@@ -73,55 +73,102 @@ class StorePage extends Component {
     }
 
     addItem = (selectedItem) => {
-        console.log(selectedItem["id"]);
+        const statePaymentList = this.state.paymentList;
 
-        let countIncrement = this.state.count;
-        countIncrement++;
+        //Find index of specific object using findIndex method.    
+        let objIndex = statePaymentList.findIndex((obj => { console.log(obj); return obj.id === selectedItem.id }));
+        if (objIndex > -1) {
+            console.log(objIndex);
+            //Log object to Console.
+            console.log("Before update: ", statePaymentList[objIndex].price);
 
-        const obj = this.state.paymentList;
-        console.log(obj);
+            // make new object of updated object.   
+            let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price };
 
-        for (const key in obj) {
+            // //Add a count to the array
+            updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
 
-            if (obj["id"] === selectedItem.id) {
-                console.log(obj["id"])
-            }
+            let updatedItems = [
+                ...statePaymentList.slice(0, objIndex),
+                updatedItem,
+                ...statePaymentList.slice(objIndex + 1),
+            ];
 
+            console.log(updatedItem);
+            console.log(updatedItems);
+
+            //Update object's name property.
+            this.setState((state) => {
+                return { paymentList: state.paymentList = updatedItems }
+            })
+
+            //Log object to console again.
+            console.log("After update: ", this.state.paymentList[objIndex]);
+            // reset objIndex
+            objIndex = -1;
+        } else {
+            // //UPDATE STATE HERE 
+            let addedItem = this.state.paymentList.concat(selectedItem);
+
+            this.setState({
+                paymentList: addedItem,
+            })
         }
 
-        // this.findKey("id");
-        // if (this.state.paymentList.includes(selectedItem.id)){
-        //     console.log(selectedItem.id +" is already in there!");
-        // }else {
+
+
+
+
+        // for (let i = 0; i < statePaymentList.length; i++) {
+        //     const obj = statePaymentList[i];
+
+
+        //     if(obj["itemname"] === selectedItem.itemname){
+        //         console.log("Found Item!");
+        //         const stateListItemIndex = statePaymentList.indexOf["itemname"];
+        //         console.log(obj)
+        //         //modify the obj of the array
+
+        //     }
+
+
+
+        //     // for (const key in obj) {
+
+        //     //     if (obj["itemname"] === selectedItem.itemname) {
+        //     //         console.log(obj[i])
+        //     //     }else {
+        //     //         console.log("NOT FOUND!!");
+        //     //     }
+        //     // }
+
         //     let addedItem = this.state.paymentList.concat(selectedItem);
         //     this.setState({
         //         paymentList: addedItem,
-        //         count: countIncrement
         //     })
         // }
-        let addedItem = this.state.paymentList.concat(selectedItem);
-        this.setState({
-            paymentList: addedItem,
-            count: countIncrement
-        })
+
+        // this.findKey(arrPayments, selectedItem);
+
+
     }
 
-    findKey = (str) => {
 
-        var obj = this.state.paymentList[0]
+    findKey = (str, selectedItem) => {
+        console.log(str)
+        var obj = {};
 
         for (var i = 0; i < str.length; i++) {
             if (obj[str[i]]) {
-                // obj[str[i]]++;
-                console.log("increase one")
-                console.log(obj[str[i]])
-            } else {
-                // obj[str[i]] = 1;
+                obj[str[i]]++;
 
-                console.log("make one")
-                console.log(obj[str[i]])
+            } else {
+
+                obj[str[i]] = 1
             }
         }
+
+        console.log()
     }
 
     incrementItem = () => {
