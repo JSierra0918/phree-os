@@ -21,6 +21,14 @@
     border: 3px solid pink;
 }
 
+.category-list {
+    padding: 5px;
+    margin: 5px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    transition: all .2s;
+}
+
 .items {
     width: 100%;
     border: 3px solid yellow;
@@ -42,5 +50,5 @@
 
 .items-li:hover {
     cursor: pointer;
-    background-color: tomato;
+    background-color: rgb(66, 140, 209);
 }

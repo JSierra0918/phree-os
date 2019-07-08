@@ -22,7 +22,7 @@ class CategoryContainer extends Component {
     }
 
     renderCategory(){
-        return  this.props.category.map(item => <Category  dataid={item.id} key={item.id} item={item.categoryName} className="btn btn-light" style={this.state.style}  onClick={this.props.onClick} />)
+        return  this.props.category.map(item => <Category  dataid={item.id} key={item.id} item={item.categoryName} className="btn btn-primary category-list" style={this.state.style}  onClick={this.props.onClick} />)
     }
 
     addClass = () =>{

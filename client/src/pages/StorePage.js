@@ -31,6 +31,11 @@ class StorePage extends Component {
         this.getUserData();
     }
 
+    componentDidUpdate(){
+        //once the item table has been updated, then update the site with the new info.
+        //most likely do another this.getUserData()
+    }
+
     getUserData() {
         const userId = sessionStorage.getItem('userId');
         console.log('userId:', userId)
@@ -79,10 +84,8 @@ class StorePage extends Component {
         if (objIndex > -1) {
             //Log object to Console.
             console.log("Before update: ", statePaymentList[objIndex].price);
-
             // make new object of updated object.   
             let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price };
-
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
 
@@ -91,9 +94,6 @@ class StorePage extends Component {
                 updatedItem,
                 ...statePaymentList.slice(objIndex + 1),
             ];
-
-            console.log(updatedItem);
-            console.log(updatedItems);
 
             //Update object's name property.
             this.setState((state) => {
@@ -125,9 +125,26 @@ class StorePage extends Component {
     deleteRow = (id) => {
         const index = this.state.paymentList.findIndex(paymentItem => {
             return paymentItem.id === id;
-        })
+        });
+        console.log('index:', index)
+        // create a variable based off of statePaymentList, possibly not to grab the exact state
+        const statePaymentList = this.state.paymentList;
+        //create obj based off of what the state paymentList is
+     
+        let updatedItem = statePaymentList.splice(index, 1);
+        updatedItem.splice(index, 1);
+        console.log('updatedItem:', updatedItem)
 
-        console.log(index);
+        // let updatedItems = [
+        //     ...statePaymentList.slice(0, index),
+        //     updatedItem,
+        //     ...statePaymentList.slice(index + 1),
+        // ];
+
+        //Update object's name property.
+        this.setState((state) => {
+            return { paymentList: state.paymentList = updatedItem }
+        })
     }
 
     clearSummary = (summaryArr) => {

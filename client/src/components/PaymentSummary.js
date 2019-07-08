@@ -52,12 +52,13 @@ function PaymentSummary(props) {
             //Items only needs ID and quantity...I think.
             
               //clears the payment list for the client
-            //   props.clearSummary([]);
+              props.clearSummary([]);
         });
 
         // return paymentSummary;
     }
 
+    console.log(props.paymentList)
     let paymentListArray = props.paymentList.map(item =>
         <tr key={item.id} dataid={item.id}>
             <td >{item.itemname}</td>
