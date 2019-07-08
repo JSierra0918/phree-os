@@ -38,16 +38,12 @@ app.use(express.json());
 // require("./Routes/API")(app);
 require('./routes/auth.js')(app, passport);
 require("./routes/apiRoutes.js")(app);
-require("./routes/htmlRoutes")(app);
+// require("./routes/htmlRoutes")(app);
 require("./routes/payment")(app)
 
 //load passport strategies
 require('./config/passport/passport.js')(passport, models.user);
 
-// **************** NOT TOO SURE **********************
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  });
 
   if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
