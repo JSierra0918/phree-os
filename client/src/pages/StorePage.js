@@ -32,7 +32,7 @@ class StorePage extends Component {
     }
 
     getUserData() {
-        let userId = sessionStorage.getItem('userId')
+        const userId = sessionStorage.getItem('userId');
         console.log('userId:', userId)
 
         API.getUserData(userId).then((userResponse) => {

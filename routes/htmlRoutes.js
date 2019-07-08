@@ -6,7 +6,6 @@ module.exports = function(app) {
   app.get("/", function(req, res) {
     db.User.findAll({}).then(function(dbUsers) {
         console.log(res.json(dbUsers));
-    //   res.render("index");
         res.json(dbUsers);
     });
   });

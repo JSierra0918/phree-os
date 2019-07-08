@@ -19,4 +19,10 @@ export default {
 
         return axios.get("/api/items/"+ userID);
     },
+    postSummary: function(userID, summary) {
+
+        return axios.post("/api/summary/"+ userID, summary, (response) => {
+            console.log(response);
+        });
+    }
 }
