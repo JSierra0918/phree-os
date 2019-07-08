@@ -57,12 +57,12 @@ function PaymentSummary(props) {
 
         // return paymentSummary;
     }
-
+    console.log("--props.paymentList")
     console.log(props.paymentList)
     let paymentListArray = props.paymentList.map(item =>
         <tr key={item.id} dataid={item.id}>
             <td >{item.itemname}</td>
-            <td >{props.count}</td>
+            <td >{item.counter}</td>
             <td >{item.price}</td>
             <td onClick={() => props.deleteRow(item.id)} >
                 <i className="fa fa-trash delete-icon" aria-hidden="true">trash</i>
