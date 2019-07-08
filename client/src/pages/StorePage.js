@@ -76,9 +76,8 @@ class StorePage extends Component {
         const statePaymentList = this.state.paymentList;
 
         //Find index of specific object using findIndex method.    
-        let objIndex = statePaymentList.findIndex((obj => { console.log(obj); return obj.id === selectedItem.id }));
+        let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
-            console.log(objIndex);
             //Log object to Console.
             console.log("Before update: ", statePaymentList[objIndex].price);
 
@@ -114,61 +113,6 @@ class StorePage extends Component {
                 paymentList: addedItem,
             })
         }
-
-
-
-
-
-        // for (let i = 0; i < statePaymentList.length; i++) {
-        //     const obj = statePaymentList[i];
-
-
-        //     if(obj["itemname"] === selectedItem.itemname){
-        //         console.log("Found Item!");
-        //         const stateListItemIndex = statePaymentList.indexOf["itemname"];
-        //         console.log(obj)
-        //         //modify the obj of the array
-
-        //     }
-
-
-
-        //     // for (const key in obj) {
-
-        //     //     if (obj["itemname"] === selectedItem.itemname) {
-        //     //         console.log(obj[i])
-        //     //     }else {
-        //     //         console.log("NOT FOUND!!");
-        //     //     }
-        //     // }
-
-        //     let addedItem = this.state.paymentList.concat(selectedItem);
-        //     this.setState({
-        //         paymentList: addedItem,
-        //     })
-        // }
-
-        // this.findKey(arrPayments, selectedItem);
-
-
-    }
-
-
-    findKey = (str, selectedItem) => {
-        console.log(str)
-        var obj = {};
-
-        for (var i = 0; i < str.length; i++) {
-            if (obj[str[i]]) {
-                obj[str[i]]++;
-
-            } else {
-
-                obj[str[i]] = 1
-            }
-        }
-
-        console.log()
     }
 
     incrementItem = () => {
