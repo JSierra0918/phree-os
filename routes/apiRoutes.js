@@ -102,10 +102,15 @@ module.exports = function (app) {
 
   // Create a 
   app.post("/api/category/:id", (req, res) => {
-    const idInput = req.params.id;
-    // db.Category.create(req.body);
-    console.log(req.body)
-    // res.json(req.body)
+    const cat = {
+      UserId: req.body.UserId,
+      categoryName: req.body.categoryName     
+    }
+
+    console.log(req.body);
+    db.Category.create(cat).then((catResponse)=>{
+      res.json(catResponse)
+    });
   });
 
 

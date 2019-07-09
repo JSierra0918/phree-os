@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
@@ -11,16 +11,19 @@ import AddStore from './pages/AddStore';
 import AddCategory from './pages/AddCategory';
 
 
-import {Elements, StripeProvider} from 'react-stripe-elements';
+
+
+
+import { Elements, StripeProvider } from 'react-stripe-elements';
 import CheckoutForm from './components/CheckoutForm';
 import Stripe from './components/Stripe/Stripe'
 function App() {
   return (
     <div className="App">
-      
+
       <Router>
-      <Link to="/addStore">Add Store</Link>
-      <Link to="/addCategory">Add Category</Link>
+        <Link to="/addStore">Add Store</Link>
+        <Link to="/addCategory">Add Category</Link>
         <Switch>
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/SignIn" component={SignIn} />
@@ -33,29 +36,9 @@ function App() {
 
         </Switch>
       </Router>
-
     </div>
-  );
+  )
 }
-
 export default App;
 
-// class App extends Component {
-//   render() {
-//     return (
-    //   <StripeProvider apiKey="pk_test_CPmIKoox7WD3HAdqil1J9oEf00GKDwnkqp">
-    //     <div className="example">
-    //       <h1>React Stripe Elements Example</h1>
-    //       <Elements>
-    //         <CheckoutForm />
-    //       </Elements>
-    //     </div>
-    //   </StripeProvider>
-    // <>
-    // {/* <Stripe></Stripe> */}
-    // </>
-//     );
-//   }
-// }
 
-// export default App;
