@@ -10,7 +10,7 @@ console.log(PORT)
 const path = require("path");
 const models = require("./models");
 var flash = require('connect-flash');
-
+console.log(process.env.MY_SQL_PW);
 //stupid colors
 const reset = "\x1b[0m";
 const cyan = "\x1b[36m";

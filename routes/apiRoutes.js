@@ -101,6 +101,20 @@ module.exports = function (app) {
     });
   });
 
+  // Create a 
+  app.post("/api/category/:id", (req, res) => {
+    const cat = {
+      UserId: req.body.UserId,
+      categoryName: req.body.categoryName     
+    }
+
+    console.log(req.body);
+    db.Category.create(cat).then((catResponse)=>{
+      res.json(catResponse)
+    });
+  });
+
+
   app.get("/stripe", (req, res) => {
     console.log(req.body)
     // res.json(response);

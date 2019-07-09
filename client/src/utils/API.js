@@ -30,5 +30,12 @@ export default {
         return axios.put("/api/items/"+ itemID, itemsUpdate, (response) => {
             console.log(response);
         });
+    },
+    postCategory: function(userID, category) {
+
+        console.log(category)
+        return axios.post("/api/category/"+ userID, category, (response) => {
+            console.log(response);
+        });
     }
 }
