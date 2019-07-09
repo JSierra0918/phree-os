@@ -18,7 +18,6 @@ function App() {
           <Route exact path="/SignIn" component={SignIn} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/store" component={StorePage} />
-          <Route path ={`/store/?scope=read_write&code=ac_FOvpyprDwmBole6wiaZfYLo0clmAcO15`} component={StorePage} />
           <Route exact path="/manage" component={ManagePage} />
         </Switch>
       </Router>
