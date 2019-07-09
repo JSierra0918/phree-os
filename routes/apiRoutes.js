@@ -102,10 +102,8 @@ module.exports = function (app) {
   });
 
   app.get("/stripe", (req, res) => {
-    console.log(res)
-   let response = {
-     res
-   }
-    res.json(response);
+    console.log(req.body)
+    // res.json(response);
+    res.send(req.body)
   })
 }
