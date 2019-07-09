@@ -166,6 +166,10 @@ class StorePage extends Component {
                             <NavItem>
                                 <Link to="/store">Store</Link>
                                 <Link to="/manage">Manage</Link>
+                                
+                <h1>Hello Stripe</h1>
+                <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
+
                             </NavItem>
                         </NavTab>
                     </div>
