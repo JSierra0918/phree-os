@@ -132,24 +132,11 @@ class StorePage extends Component {
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
         //create obj based off of what the state paymentList is
-
-        const index = statePaymentList.findIndex(paymentItem => {
-            return paymentItem.id === id;
-        });
-        console.log('index:', index)
-        console.log(statePaymentList)
      
-        let updatedItem = statePaymentList.splice(index, 1);
+        let updatedItem = statePaymentList.filter((item) => {
+            return item.id !== id
+        });
         
-        //updatedItem.splice(index, 1);
-        console.log('updatedItem:', updatedItem)
-
-        // let updatedItems = [
-        //     ...statePaymentList.slice(0, index),
-        //     updatedItem,
-        //     ...statePaymentList.slice(index + 1),
-        // ];
-
         //Update object's name property.
         this.setState((state) => {
             return { paymentList: state.paymentList = updatedItem }
@@ -179,6 +166,10 @@ class StorePage extends Component {
                             <NavItem>
                                 <Link to="/store">Store</Link>
                                 <Link to="/manage">Manage</Link>
+                                
+                <h1>Hello Stripe</h1>
+                <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
+
                             </NavItem>
                         </NavTab>
                     </div>

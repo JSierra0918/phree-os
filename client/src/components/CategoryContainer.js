@@ -22,7 +22,7 @@ class CategoryContainer extends Component {
     }
 
     renderCategory(){
-        return  this.props.category.map(item => <Category  dataid={item.id} key={item.id} item={item.categoryName} className="btn btn-primary category-list" style={this.state.style}  onClick={this.props.onClick} />)
+        return  this.props.category.map(item => <Category  dataid={item.id} key={item.id} item={item.categoryName} className="category-li" style={this.state.style}  onClick={this.props.onClick}/>)
     }
 
     addClass = () =>{
@@ -36,8 +36,11 @@ class CategoryContainer extends Component {
         return (
            <div className="category text-center p-main-col mb20">
                     <h5>Category</h5>
+                    <ul>
+                        {this.renderCategory()}
+                    </ul>
                     {/* //render a category button */}
-                    {this.renderCategory()}      
+                    {/* {this.renderCategory()}       */}
             </div>
         );
     }
