@@ -103,7 +103,7 @@ module.exports = function (app) {
 
   app.get("/stripe", (req, res) => {
     console.log(res)
-    res.json("WE here");
+    res.json(res);
   })
 
 }
