@@ -8,6 +8,7 @@ import CategoryContainer from '../components/CategoryContainer';
 import ItemsContainer from '../components/ItemsContainer';
 import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
+import ManagePage from './ManagePage';
 
 class StorePage extends Component {
 
@@ -31,7 +32,7 @@ class StorePage extends Component {
         this.getUserData();
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         //once the item table has been updated, then update the site with the new info.
         //most likely do another this.getUserData()
     }
@@ -89,7 +90,7 @@ class StorePage extends Component {
             console.log("Before update price: ", statePaymentList[objIndex].price);
             console.log("Before update quantity: ", statePaymentList[objIndex].counter);
             // make new object of updated object.   
-            let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price, counter: statePaymentList[objIndex].counter + 1};
+            let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price, counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
 
@@ -128,15 +129,15 @@ class StorePage extends Component {
 
     deleteRow = (id) => {
         console.log("delete: ", id)
-     
+
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
         //create obj based off of what the state paymentList is
-     
+
         let updatedItem = statePaymentList.filter((item) => {
             return item.id !== id
         });
-        
+
         //Update object's name property.
         this.setState((state) => {
             return { paymentList: state.paymentList = updatedItem }
@@ -144,10 +145,10 @@ class StorePage extends Component {
     }
 
     clearSummary = (summaryArr) => {
-    console.log('summaryArr:', summaryArr);
+        console.log('summaryArr:', summaryArr);
         //get an empty parameter that clears paymentList
         this.setState((state, props) => {
-           return {paymentList: state.paymentList = summaryArr}
+            return { paymentList: state.paymentList = summaryArr }
         })
     }
 
@@ -161,25 +162,28 @@ class StorePage extends Component {
                             <h1>Phree-OS</h1>
                         </Col>
                     </div>
-                    <div className="row">
+                    {/* THIS IS WHERE THE NAV GOES */}
+                    {/* <div className="row">
                         <NavTab>
                             <NavItem>
-                                <Link to="/store">Store</Link>
-                                <Link to="/manage">Manage</Link>
-                                
-                <h1>Hello Stripe</h1>
-                <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
+                               <div className="nav-link-container">
+                        <Link to="/store" className="store-link">Store</Link>
+                        <Link to="/manage" className="manage-link">Manage</Link>
+                    </div>
+
+                                <h1>Hello Stripe</h1>
+                                <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
 
                             </NavItem>
                         </NavTab>
-                    </div>
+                    </div> */}
                     <div className="row main-row">
                         <Col size="sm-6">
                             <PaymentSummary
                                 paymentList={this.state.paymentList}
                                 count={this.state.count}
-                                deleteRow={this.deleteRow} 
-                                clearSummary={this.clearSummary}/>
+                                deleteRow={this.deleteRow}
+                                clearSummary={this.clearSummary} />
                         </Col>
                         <Col size="sm-3">
                             <CategoryContainer
