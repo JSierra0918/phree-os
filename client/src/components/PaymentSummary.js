@@ -5,11 +5,9 @@ import API from '../utils/API';
 function PaymentSummary(props) {
 
     function tableToObj(event, urTable) {
-        console.log('event:', event.target);
         event.preventDefault();
         const table = document.querySelector('#summary-table');
-        const id = table.getAttribute("dataid")
-        console.log('id:', id)
+        const id = table.getAttribute("dataid");
 
         const rows = table.rows;
         const propCells = rows[0].cells;
@@ -41,7 +39,6 @@ function PaymentSummary(props) {
 
             paymentSummary.push(obj)
         }
-        console.log('paymentSummary:', paymentSummary);
         //get User id for summary API
         const userId = sessionStorage.getItem('userId');
 
@@ -57,8 +54,7 @@ function PaymentSummary(props) {
 
         // return paymentSummary;
     }
-    console.log("--props.paymentList")
-    console.log(props.paymentList)
+ 
     let paymentListArray = props.paymentList.map(item =>
         <tr key={item.id} dataid={item.id}>
             <td >{item.itemname}</td>
@@ -71,7 +67,8 @@ function PaymentSummary(props) {
 
     return (
         <div className="summary text-center mb20">
-            <div className="table-container"><h5>Payment Summary</h5>
+            <div className="table-container">
+                <h5>Payment Summary</h5>
                 <table className="table" id="summary-table">
                     <thead>
                         <tr>
@@ -84,7 +81,8 @@ function PaymentSummary(props) {
                     <tbody >
                         {paymentListArray}
                     </tbody>
-                </table></div>
+                </table>
+            </div>
 
             {/* if items exist show button */}
             <button className="btn pay" onClick={tableToObj}>Pay</button>

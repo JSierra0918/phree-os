@@ -2,27 +2,36 @@
     display: block;
 }
 
-.container{
+.container {
     height: 100vh;
 }
 
-.main-row{
+.main-row {
     height: 40rem;
 }
-.p-main-col{
+
+.p-main-col {
     height: 100%;
 }
 
-.summary, .category, .items {
-    height: 100%;
+.summary,
+.category,
+.items {
+    height: 560px;
 }
+
 .summary {
     width: 100%;
     border: 3px solid blue;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }
+
 .category {
     width: 100%;
     border: 3px solid pink;
+    overflow-y: scroll;
 }
 
 .category-list {
@@ -33,18 +42,27 @@
     transition: all .2s;
 }
 
+.table-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .items {
     width: 100%;
     border: 3px solid yellow;
+    overflow-y: scroll;
+
 }
 
-.items ul, .category ul {
+.items ul,
+.category ul {
     padding: 0;
     margin: 0;
     list-style: none;
 }
 
-.items-li, .category-li {
+.items-li,
+.category-li {
     padding: 5px;
     margin: 5px;
     box-sizing: border-box;
@@ -63,8 +81,16 @@
 }
 
 .pay {
-    background-color: red;
+    background-color: #48a288;
     width: 80%;
+    color: white;
+    transition: all .2s;
+    align-self: center;
+}
+
+.pay:hover {
+    color: white;
+    background-color: #475059;
 }
 
 .mid-section {
@@ -73,11 +99,13 @@
 
 
 /* ----------------------- PHREE */
-.phree-container{
-   
+.phree-container {
+    max-width: 95vw;
+    width: 100%;
 }
 
-.main-phree{
+.main-phree {
     position: relative;
-    margin-top: 10vh;
+    margin-top: 5vh;
+    border: 1px solid;
 }

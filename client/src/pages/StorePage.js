@@ -155,7 +155,7 @@ class StorePage extends Component {
     render() {
 
         return (
-            <div className="col-sm-12 main-row">
+            <div className="col-md-12 main-row">
 
                 <div className="row">
                     <Col size="lg-12">
@@ -178,25 +178,27 @@ class StorePage extends Component {
                         </NavTab>
                     </div> */}
                 <div className="row mid-section" >
-                    <Col size="sm-6">
+                    <Col size="md-6">
                         <PaymentSummary
                             paymentList={this.state.paymentList}
                             count={this.state.count}
                             deleteRow={this.deleteRow}
                             clearSummary={this.clearSummary} />
                     </Col>
-                    <Col size="sm-3">
+                    <Col size="md-3">
                         <CategoryContainer
                             category={this.state.category}
                             id={this.state.catID}
                             onClick={this.selectCategory}
                         />
                     </Col>
-                    <Col size="sm-3">
+                    <Col size="md-3">
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
                 </div>
-
+                {/* <div className="row last-section">
+                    <button className="btn btn-danger" onClick={()=> this.clearSummary([])}> Final Button</button>
+                </div> */}
             </div>
         );
     }
