@@ -9,22 +9,22 @@ const ManagePage = () => {
     return (
         <div>
             <Container extraClass="h-100">
-                <div className="row">
+                <div className="row main-manage-section">
                     <Col size="lg-12">
                         <h1>Manage Page</h1>
                     </Col>
                 </div>
                 <div className="row">
-                    <Col size="sm-4">
+                    <Col size="md-4">
                         <h4>Results</h4>
                     </Col>
-                    <Col size="sm-4">
-                        <Card heading="Add Category">
+                    <Col size="md-4">
+                        <div className="add-category-container">
                             <AddCategory/>
-                        </Card>
+                        </div>
 
                     </Col>
-                    <Col size="sm-4">
+                    <Col size="md-4">
                         <h4>Add Items</h4>
                     </Col>
                 </div>

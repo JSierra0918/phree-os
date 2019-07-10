@@ -158,7 +158,7 @@ class StorePage extends Component {
             <div className="col-md-12 main-row">
 
                 <div className="row">
-                    <Col size="lg-12">
+                    <Col size="md-12">
                         <h1>Phree-OS</h1>
                     </Col>
                 </div>
