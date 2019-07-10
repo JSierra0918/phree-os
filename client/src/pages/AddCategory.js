@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Category from "../components/Category";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export class AddCategory extends React.Component {
 
   constructor() {
     super();
     this.addCat = this.addCat.bind(this);
-    this.state = { categories: ["jorge"] }
+    this.state = { categories: [] }
 
   }
 
@@ -35,11 +36,9 @@ export class AddCategory extends React.Component {
   addCat(e) {
     const userId = sessionStorage.getItem("userId");
     e.preventDefault();
-    var inp = document.getElementById("todoInput");
+    //grab value
+    var inp = document.getElementById("catInput");
     var val = inp.value;
-
-    // console.log(this);
-    // this.addCat(val);
 
     let cat = {
       UserId: userId,
@@ -49,6 +48,7 @@ export class AddCategory extends React.Component {
       console.log(response.data);
     })
 
+    //empty value
     inp.value = '';
 
   }
@@ -56,14 +56,14 @@ export class AddCategory extends React.Component {
   render() {
     return (
       <div>
-        <div className="todo type1">
+        <div className="add-category type1">
           <form className="input-wrapper">
-            <input id="todoInput" type="text" className="add-todo" name="add-todo" placeholder="Category name" />
+            <input id="catInput" type="text" name="addCategory" placeholder="Create Category" />
           </form>
         </div>
         {/* <CatList>{this.state.categories}</CatList> */}
         {this.state.categories.map(item => item.categoryName)}
-        <button onClick={this.addCat} >Add Category</button>
+        <button onClick={this.addCat} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn"/> Add Category</button>
       </div>
     )
   }

@@ -137,6 +137,10 @@
 
 }
 
+.p-tabbed-item-manage::after {
+    top:-1px;
+}
+
 .p-tabbed-item-manage {
     left: 110px;
     position: relative;
@@ -150,6 +154,6 @@
 
 .main-phree {
     position: relative;
-    margin-top: 5vh;
+    margin-top: 5rem;
     border: 1px solid;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import API from '../utils/API';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 // import ReactTable fom 'react-table';

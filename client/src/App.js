@@ -36,7 +36,7 @@ function App() {
                     <Route exact path="/SignIn" component={SignIn} />
                     <Route exact path="/SignUp" component={SignUp} />
                     <Route exact path="/store" component={PhreeContainer} />
-                    <Route path="/store/:id" component={StorePage} />
+                    <Route exact path="/store/:id" component={StorePage} />
                     <Route exact path="/manage" component={ManagePage} />
                     <Route exact path="/addStore" component={AddStore} />
                     <Route exact path="/addCategory" component={AddCategory} />
