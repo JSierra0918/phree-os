@@ -21,7 +21,8 @@ class StorePage extends Component {
             category: [],
             items: [],
             paymentList: [],
-            count: 0
+            count: 0,
+            editable: true
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -71,8 +72,6 @@ class StorePage extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
-            console.log("----items")
-            console.log(returnedItems)
 
             this.setState({
                 items: returnedItems.data
@@ -155,11 +154,48 @@ class StorePage extends Component {
     deleteCategory = (id) => {
 
         console.log("delete: ", id);
+
+        // create a variable based off of statePaymentList, possibly not to grab the exact state
+        const stateCategory = this.state.category;
+        //create obj based off of what the state paymentList is
+
+        let updatedItem = stateCategory.filter((item) => {
+            return item.id !== id
+        });
+
+        // //Update the category DB
+        // API.deleteCategory(id, updatedItem).then((response) => {
+
+        //     this.setState((state) => {
+        //         return { category: state.category = response.data }
+        //     })
+        // })
+
+        //Update object's name property.
+        this.setState((state) => {
+            return { category: state.category = updatedItem }
+        })
+
+
     }
 
     editCategory = (id) => {
 
         console.log("edit: ", id);
+        //make content edidtable
+        const stateEdit = this.state.editable;
+        console.log('stateEdit:', stateEdit)
+        let catEdit = document.querySelector(".categoryName");
+
+        this.setState((state) => {
+            return { editable: state.editable = !stateEdit }
+        })
+
+        // if (stateEdit){
+        //     catEdit.classList.add("editable-item");
+        // }else {
+        //     catEdit.classList.remove("editable-item");
+        // }
     }
     render() {
 
@@ -199,12 +235,12 @@ class StorePage extends Component {
                             category={this.state.category}
                             id={this.state.catID}
                             onClick={this.selectCategory}
-                            role = {this.props.role}
-                            delete = {this.deleteCategory}
-                            edit = {this.editCategory}
-
+                            role={this.props.role}
+                            delete={this.deleteCategory}
+                            edit={this.editCategory}
+                            editable={this.state.editable}
                         />
-[]                    </Col>
+                    </Col>
                     <Col size="md-3">
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>

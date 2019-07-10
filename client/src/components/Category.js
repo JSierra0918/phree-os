@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import EditableComponent from "./EditableComponent";
 
 
 
@@ -20,12 +21,11 @@ class Category extends Component {
     componentDidMount() {
         const userId = sessionStorage.getItem("userId");
         API.getCategoryData(userId).then((response) => {
-            console.log(response);
+            console.log("MOUNTED: ", response);
             this.setState({
                 categories: response.data
             })
         })
-
     }
 
     componentDidUpdate() {
@@ -81,31 +81,29 @@ class Category extends Component {
         })
     }
 
-
     renderCategory() {
         return this.state.categories.map(item => <Category role={this.props.role} dataid={item.id} key={item.id} item={item.categoryName} className="category-li" onClick={this.selectCategory} />)
     }
-
 
     render() {
         return (
             <div>
                 <li {...this.props} onClick={() => this.props.onClick(this.props.dataid)}>
-                    <div className="col" >
-                        {this.props.item}
+                    <div className="col manage-category" >
+                        <span className="categoryName">{this.props.item}</span>
+
+                        {/* <EditableComponent item={this.props.item} editable={true}/> */}
+                        {/* If it's the manage page show this */}
+                        {this.props.role === "1" ? (
+                            <div>
+                                <EditableComponent item={this.props.item} editable={this.props.editable} />
+
+                                <span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> delete</span>
+                                <span id="edit" onClick={() => this.props.edit(this.props.dataid)}>edit</span>
+                            </div>
+                        ) :
+                            (<p></p>)}
                     </div>
-                    {this.props.role === "1" ? (
-                        <div>
-                            <div className="col">
-                                <button id="trash" onClick={() => this.props.delete(this.props.dataid)}>trash</button>
-                            </div>
-                            <div className="col">
-                                <button id="edit" onClick={() => this.props.edit(this.props.dataid)}>edit</button>
-                            </div>
-                        </div>
-                    ) :
-                        (<p></p>)}
-                    
                 </li>
 
 

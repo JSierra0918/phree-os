@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../pages/styles/storepage.css';
 import Category from './Category';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import EditableComponent from '../components/EditableComponent';
 
 class CategoryContainer extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class CategoryContainer extends Component {
     }
 
     renderCategory() {
-        return this.props.category.map(item => <Category role={this.props.role} dataid={item.id} key={item.id} item={item.categoryName} className="category-li" style={this.state.style} onClick={this.props.onClick} delete={this.props.delete}  edit={this.props.edit}/>)
+        return this.props.category.map(item => <Category role={this.props.role} dataid={item.id} key={item.id} item={item.categoryName} className="category-li" style={this.state.style} onClick={this.props.onClick} delete={this.props.delete}  edit={this.props.edit} editable={this.props.editable}/>)
     }
 
     addClass = () => {

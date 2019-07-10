@@ -43,4 +43,13 @@ export default {
         return axios.put("/api/category/"+ catID, catUpdate, (response) => {
             console.log(response);
         });
-    },}
+    },
+    deleteCategory: function(catID, catUpdate) {
+
+        return axios.put("/api/category/"+ catID, catUpdate, (response) => {
+            console.log(response);
+        });
+    },
+
+
+}

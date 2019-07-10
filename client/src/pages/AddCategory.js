@@ -9,7 +9,7 @@ export class AddCategory extends React.Component {
     super(props);
 
     this.addCat = this.addCat.bind(this);
-    
+
     this.state = {
       categories: [],
       newCatName: ""
@@ -110,7 +110,6 @@ export class AddCategory extends React.Component {
 
       </div>
     )
-
   }
 }
 

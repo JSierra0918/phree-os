@@ -159,6 +159,12 @@
     border: 1px solid;
 }
 
+#trash,
+#edit {
+    padding: 5px;
+    margin: 5px;
+}
+
 /* ----------------------------- MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {
@@ -168,7 +174,7 @@
         flex-flow: column-reverse;
     }
 
-    .mid-section :nth-child(2){
+    .mid-section :nth-child(2) {
         order: 1;
     }
 
@@ -179,7 +185,20 @@
         margin: 5px;
     }
 
-    .category{
-        order:1;
+    .category {
+        order: 1;
+    }
+
+    .categoryName {
+        transition: all .3s;
+    }
+
+    .editable-item {
+        color: #d86868;
+        font-weight: bolder;
+        padding: 10px;
+        background: #ddf3ff;
+        margin: 10px;
+        display: block;
     }
 }
