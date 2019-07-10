@@ -7,6 +7,7 @@ import StorePage from './pages/StorePage';
 import ManagePage from './pages/ManagePage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import SetupComplete from './pages/SetupComplete';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
           <Route exact path="/SignIn" component={SignIn} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/store" component={StorePage} />
-          <Route path ={`/store/?scope=read_write&code=ac_FOvpyprDwmBole6wiaZfYLo0clmAcO15`} component={StorePage} />
+          <Route exact path="/SetupComplete" component={SetupComplete} />
           <Route exact path="/manage" component={ManagePage} />
         </Switch>
       </Router>

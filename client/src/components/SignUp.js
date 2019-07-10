@@ -49,9 +49,16 @@ class SignUp extends Component {
         }).then((res) => {
             // console.log('in promise after /signup')
             // console.log(res.data)
-            sessionStorage.setItem('userId', res.data.id)
+            let data = sessionStorage.getItem('userId')
             
-        this.routeToStore();    
+            if (data) {
+            sessionStorage.clear()
+            sessionStorage.setItem('userId', res.data.id)
+            } else {
+            sessionStorage.setItem('userId', res.data.id)
+            }
+            
+            this.routeToStore();    
 
         });
     }

@@ -30,5 +30,11 @@ export default {
         return axios.put("/api/items/"+ itemID, itemsUpdate, (response) => {
             console.log(response);
         });
-    }
+    },
+    postStripe: function(code) {
+
+        return axios.post("/api/stripe", code, (response) => {
+            console.log(response);
+        });
+    },
 }
