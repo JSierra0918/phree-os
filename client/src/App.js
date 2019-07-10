@@ -12,6 +12,8 @@ import PhreeContainer from './components/PhreeContainer'
 import AddStore from './pages/AddStore'
 import AddCategory from './pages/AddCategory'
 import {Elements, StripeProvider} from 'react-stripe-elements';
+import { faTrashAlt, faPlusSquare, faTimes} from '@fortawesome/free-solid-svg-icons';
+```library.add( faTrashAlt, faPlusSquare, faTimes);```
 
 function App() {
   return (
