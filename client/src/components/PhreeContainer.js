@@ -39,6 +39,10 @@ class PhreeContainer extends Component {
             }
         }
 
+        function changeAfertCss() {
+            document.querySelector(".p-tabbed-item-store").style.backgroundColor ="red";
+        }
+
         return (
             <>
                 <Container extraClass=" phree-container">
@@ -47,16 +51,16 @@ class PhreeContainer extends Component {
                             
                                 <Row>
                                     <Col size="sm-12" >
-                                        <NavTab extraClass="p-tabbed-ul">
+                                        <NavTab extraClass="p-tabbed-ul p-tabbed-ul-store">
                                             <NavItem>
                                                 <div
                                                     onClick={() => { this.changePage("Store") }}
-                                                    className={this.state.currentPage === "Store" ? "p-tabbed-item p-active-tab" : "p-tabbed-item"} >Store</div>
+                                                    className={this.state.currentPage === "Store" ? "p-tabbed-item p-tabbed-item-store p-active-tab" : "p-tabbed-item p-tabbed-item-store"} >Store</div>
                                             </NavItem>
                                             <NavItem>
                                                 <div
                                                     onClick={() => { this.changePage("Manage") }}
-                                                    className={this.state.currentPage === "Manage" ? "p-tabbed-item p-active-tab" : "p-tabbed-item"} >Manage</div>
+                                                    className={this.state.currentPage === "Manage" ? "p-tabbed-item p-tabbed-item-manage p-active-tab" : "p-tabbed-item p-tabbed-item-manage"} >Manage</div>
                                             </NavItem>
                                         </NavTab>
 

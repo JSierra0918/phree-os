@@ -80,7 +80,7 @@
 }
 
 .delete-icon {
-    
+
 }
 
 .delete-icon:hover {
@@ -89,7 +89,7 @@
 }
 
 .pay {
-    background-color: #48a288;
+    background-color: #3fc29d;
     width: 80%;
     color: white;
     transition: all .2s;
@@ -101,11 +101,46 @@
     background-color: #475059;
 }
 
+.cancel {
+    background-color: rgb(253, 118, 100);
+    color: white;
+}
+
+.cancel:hover{
+    background-color: rgb(252, 90, 69);
+}
+
 .mid-section {
     height: 90%;
 }
 
+.p-tabbed-ul-store{
+    left: 15px;
+}
+.p-tabbed-item-store, .p-tabbed-item-manage {
+    border-radius: 3px 0px 0px 0px;
+    height: 30px;   
+}
 
+.p-tabbed-item-store::after, .p-tabbed-item-manage::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    background-color: white;
+    height: 30px;
+    width: 100px;
+    transform: skew(20deg);
+    top: 0px;
+    left: 140px;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+
+}
+
+.p-tabbed-item-manage {
+    left: 110px;
+    position: relative;
+}
 
 /* ----------------------- PHREE */
 .phree-container {
