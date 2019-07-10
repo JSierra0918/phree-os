@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './styles/storepage.css';
+import '../pages/styles/storepage.css';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
 import { Container, Row, Col } from '../components/Bootstrap/Grid';
@@ -8,9 +8,8 @@ import CategoryContainer from '../components/CategoryContainer';
 import ItemsContainer from '../components/ItemsContainer';
 import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
-import ManagePage from './ManagePage';
 
-class StorePage extends Component {
+class StoreContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -105,8 +104,6 @@ class StorePage extends Component {
                 return { paymentList: state.paymentList = updatedItems }
             })
 
-            //Log object to console again.
-            console.log("After update: ", this.state.paymentList[objIndex]);
             // reset objIndex
             objIndex = -1;
         } else {
@@ -153,17 +150,16 @@ class StorePage extends Component {
     }
 
     render() {
-
         return (
-            <div className="col-md-12 main-row">
-
-                <div className="row">
-                    <Col size="md-12">
-                        <h1>Phree-OS</h1>
-                    </Col>
-                </div>
-                {/* THIS IS WHERE THE NAV GOES */}
-                {/* <div className="row">
+            <div>
+                <Container extraClass="h-100">
+                    <div className="row">
+                        <Col size="lg-12">
+                            <h1>Phree-OS store container</h1>
+                        </Col>
+                    </div>
+                    {/* THIS IS WHERE THE NAV GOES */}
+                    {/* <div className="row">
                         <NavTab>
                             <NavItem>
                                <div className="nav-link-container">
@@ -177,31 +173,42 @@ class StorePage extends Component {
                             </NavItem>
                         </NavTab>
                     </div> */}
-                <div className="row mid-section" >
-                    <Col size="md-6">
-                        <PaymentSummary
-                            paymentList={this.state.paymentList}
-                            count={this.state.count}
-                            deleteRow={this.deleteRow}
-                            clearSummary={this.clearSummary} />
-                    </Col>
-                    <Col size="md-3">
-                        <CategoryContainer
-                            category={this.state.category}
-                            id={this.state.catID}
-                            onClick={this.selectCategory}
-                        />
-                    </Col>
-                    <Col size="md-3">
-                        <ItemsContainer items={this.state.items} addItem={this.addItem} />
-                    </Col>
-                </div>
-                {/* <div className="row last-section">
-                    <button className="btn btn-danger" onClick={()=> this.clearSummary([])}> Final Button</button>
-                </div> */}
+                 
+                    <div className="row main-row">
+                    {/* <NavTab extraClass="p-tabbed-ul">
+                           <NavItem>
+                              <div 
+                              onClick={() => { this.changePage("store") }}
+                              className={this.state.currentPage === "Sign In"?"p-tabbed-item p-active-tab": "p-tabbed-item"} >Store</div>
+                           </NavItem>
+                           <NavItem>
+                              <div 
+                              onClick={() => { this.changePage("manage") }} 
+                              className={this.state.currentPage === "Sign Up"?"p-tabbed-item p-active-tab": "p-tabbed-item"} >Manage</div>
+                           </NavItem>
+                        </NavTab> */}
+                        <Col size="sm-6">
+                            <PaymentSummary
+                                paymentList={this.state.paymentList}
+                                count={this.state.count}
+                                deleteRow={this.deleteRow}
+                                clearSummary={this.clearSummary} />
+                        </Col>
+                        <Col size="sm-3">
+                            <CategoryContainer
+                                category={this.state.category}
+                                id={this.state.catID}
+                                onClick={this.selectCategory}
+                            />
+                        </Col>
+                        <Col size="sm-3">
+                            <ItemsContainer items={this.state.items} addItem={this.addItem} />
+                        </Col>`
+                    </div>
+                </Container>
             </div>
         );
     }
 }
 
-export default StorePage;
+export default StoreContainer;

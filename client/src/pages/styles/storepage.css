@@ -1,24 +1,37 @@
-.container{
+.store-nav {
+    display: block;
+}
+
+.container {
     height: 100vh;
 }
 
-.main-row{
+.main-row {
     height: 40rem;
 }
-.p-main-col{
+
+.p-main-col {
     height: 100%;
 }
 
-.summary, .category, .items {
-    height: 100%;
+.summary,
+.category,
+.items {
+    height: 560px;
 }
+
 .summary {
     width: 100%;
     border: 3px solid blue;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }
+
 .category {
     width: 100%;
     border: 3px solid pink;
+    overflow-y: auto;
 }
 
 .category-list {
@@ -29,18 +42,26 @@
     transition: all .2s;
 }
 
+.table-container {
+    overflow-y: auto;
+}
+
 .items {
     width: 100%;
     border: 3px solid yellow;
+
+
 }
 
-.items ul, .category ul {
+.items ul,
+.category ul {
     padding: 0;
     margin: 0;
     list-style: none;
 }
 
-.items-li, .category-li {
+.items-li,
+.category-li {
     padding: 5px;
     margin: 5px;
     box-sizing: border-box;
@@ -58,7 +79,107 @@
     background-color: rgb(66, 209, 126);
 }
 
+.delete-icon {}
+
+.delete-icon:hover {
+    cursor: pointer;
+    color: #f47264;
+}
+
 .pay {
-    background-color: red;
+    background-color: #3fc29d;
     width: 80%;
+    color: white;
+    transition: all .2s;
+    align-self: center;
+}
+
+.pay:hover {
+    color: white;
+    background-color: #475059;
+}
+
+.cancel {
+    background-color: rgb(253, 118, 100);
+    color: white;
+}
+
+.cancel:hover {
+    background-color: rgb(252, 90, 69);
+}
+
+.mid-section {
+    height: 90%;
+}
+
+.p-tabbed-ul-store {
+    left: 15px;
+}
+
+.p-tabbed-item-store,
+.p-tabbed-item-manage {
+    border-radius: 3px 0px 0px 0px;
+    height: 30px;
+}
+
+.p-tabbed-item-store::after,
+.p-tabbed-item-manage::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    background-color: white;
+    height: 30px;
+    width: 100px;
+    transform: skew(20deg);
+    top: 0px;
+    left: 140px;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+
+}
+
+.p-tabbed-item-manage::after {
+    top: -1px;
+}
+
+.p-tabbed-item-manage {
+    left: 110px;
+    position: relative;
+}
+
+/* ----------------------- PHREE */
+.phree-container {
+    max-width: 95vw;
+    width: 100%;
+}
+
+.main-phree {
+    position: relative;
+    margin-top: 5rem;
+    border: 1px solid;
+}
+
+/* ----------------------------- MEDIA QUERIES */
+
+@media only screen and (max-width: 768px) {
+    .mid-section {
+        height: auto;
+        display: flex;
+        flex-flow: column-reverse;
+    }
+
+    .mid-section :nth-child(2){
+        order: 1;
+    }
+
+    .summary,
+    .category,
+    .items {
+        height: auto;
+        margin: 5px;
+    }
+
+    .category{
+        order:1;
+    }
 }

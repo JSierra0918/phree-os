@@ -37,4 +37,11 @@ export default {
             console.log(response);
         });
     },
+    postCategory: function(userID, category) {
+
+        console.log(category)
+        return axios.post("/api/category/"+ userID, category, (response) => {
+            console.log(response);
+        });
+    }
 }

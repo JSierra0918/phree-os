@@ -135,5 +135,10 @@ module.exports = function (app) {
     })
   })
 
+    db.Category.create(cat).then((catResponse)=>{
+      res.json(catResponse)
+    });
+  ;
+
 
 }
