@@ -1,6 +1,10 @@
 import React from 'react';
 import API from '../utils/API';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 // import ReactTable fom 'react-table';
+
 
 function PaymentSummary(props) {
 
@@ -60,8 +64,8 @@ function PaymentSummary(props) {
             <td >{item.itemname}</td>
             <td >{item.counter}</td>
             <td >{item.price}</td>
-            <td onClick={() => props.deleteRow(item.id)} >
-                <i className="fa fa-trash delete-icon" aria-hidden="true">trash</i>
+            <td onClick={() => props.deleteRow(item.id)} className="delete-icon">
+                <FontAwesomeIcon icon="trash-alt" />
             </td>
         </tr>)
 

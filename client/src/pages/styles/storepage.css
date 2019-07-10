@@ -31,7 +31,7 @@
 .category {
     width: 100%;
     border: 3px solid pink;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .category-list {
@@ -43,14 +43,13 @@
 }
 
 .table-container {
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .items {
     width: 100%;
     border: 3px solid yellow;
-    overflow-y: scroll;
+    
 
 }
 
@@ -80,6 +79,15 @@
     background-color: rgb(66, 209, 126);
 }
 
+.delete-icon {
+    
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+    color: #f47264;
+}
+
 .pay {
     background-color: #48a288;
     width: 80%;
@@ -96,6 +104,7 @@
 .mid-section {
     height: 90%;
 }
+
 
 
 /* ----------------------- PHREE */
