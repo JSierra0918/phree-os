@@ -31,6 +31,12 @@ export default {
             console.log(response);
         });
     },
+    postStripe: function(code) {
+
+        return axios.post("/api/stripe", code, (response) => {
+            console.log(response);
+        });
+    },
     postCategory: function(userID, category) {
 
         console.log(category)

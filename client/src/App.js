@@ -7,43 +7,31 @@ import StorePage from './pages/StorePage';
 import ManagePage from './pages/ManagePage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import AddStore from './pages/AddStore';
-import AddCategory from './pages/AddCategory';
-import PhreeContainer from './components/PhreeContainer';
-import { library } from '@fortawesome/fontawesome-svg-core';
-// import { fab } from '@fortawesome/free-brands-svg-icons';
+import SetupComplete from './pages/SetupComplete';
+import PhreeContainer from './components/PhreeContainer'
+import AddStore from './pages/AddStore'
+import AddCategory from './pages/AddCategory'
+import {Elements, StripeProvider} from 'react-stripe-elements';
 import { faTrashAlt, faPlusSquare, faTimes} from '@fortawesome/free-solid-svg-icons';
-//needed to create a library that only exports exactly the icons we need and not the whole FA suite.
-//this also makes them universially acccessible :)
+import { library } from '@fortawesome/fontawesome-svg-core';
 library.add( faTrashAlt, faPlusSquare, faTimes);
 
-
-
 function App() {
-    return (
-        <div className="App">
-            <Router>
-                <div className="store-nav" style={{ display: 'none' }}>
-
-                    <h1>Hello Stripe</h1>
-                    <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
-                    <div className="nav-link-container">
-                        <Link to="/store" className="store-link">Store</Link>
-                        <Link to="/manage" className="manage-link">Manage</Link>
-                    </div>
-                </div>
-
-                <Switch>
-                    <Route exact path="/" component={LoginPage} />
-                    <Route exact path="/SignIn" component={SignIn} />
-                    <Route exact path="/SignUp" component={SignUp} />
-                    <Route exact path="/store" component={PhreeContainer} />
-                    <Route exact path="/store/:id" component={StorePage} />
-                    <Route exact path="/manage" component={ManagePage} />
-                    <Route exact path="/addStore" component={AddStore} />
-                    <Route exact path="/addCategory" component={AddCategory} />
-                </Switch>
-            </Router>
+  return (
+    <div className="App">
+      <Router>
+            <Switch>
+                <Route exact path="/" component={LoginPage} />
+                <Route exact path="/SignIn" component={SignIn} />
+                <Route exact path="/SignUp" component={SignUp} />
+                <Route exact path="/store" component={PhreeContainer} />
+                <Route exact path="/store/:id" component={StorePage} />
+                <Route exact path="/manage" component={ManagePage} />
+                <Route exact path="/SetupComplete" component={SetupComplete} />
+                <Route exact path="/addStore" component={AddStore} />
+                <Route exact path="/addCategory" component={AddCategory} />
+            </Switch>
+        </Router>
 
         </div>
     );

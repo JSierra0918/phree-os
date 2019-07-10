@@ -45,9 +45,9 @@ module.exports = function(sequelize, Sequelize) {
         User.hasMany(models.Category, {
           onDelete: "cascade"
         });
-        // User.hasMany(models.Item, {
-        //     onDelete: "cascade"
-        // });
+        User.hasMany(models.Stripe, {
+            onDelete: "cascade"
+        });
 
       };
     return User;

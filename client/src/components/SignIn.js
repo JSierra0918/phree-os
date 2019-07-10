@@ -40,8 +40,15 @@ class SignIn extends Component {
         }).then((res) => {
             console.log('in promise after /signin')
             console.log(res.data)
+            let data = sessionStorage.getItem('userId')
+            
+            if (data) {
+            sessionStorage.clear()
             sessionStorage.setItem('userId', res.data.id)
-        this.routeToStore();    
+            } else {
+            sessionStorage.setItem('userId', res.data.id)
+            }
+            this.routeToStore();    
 
         });
 
