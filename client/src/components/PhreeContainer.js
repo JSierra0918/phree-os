@@ -48,7 +48,7 @@ class PhreeContainer extends Component {
                     <div className="row main-phree">
                         <Col size="md-12">
                             <Row>
-                                <Col size="md-12" >
+                                <Col size="md-12" > 
                                     <NavTab extraClass="p-tabbed-ul p-tabbed-ul-store">
                                         <NavItem>
                                             <div

@@ -101,7 +101,7 @@ module.exports = function (app) {
     });
   });
 
-  // Create a 
+  // Create a category
   app.post("/api/category/:id", (req, res) => {
     const cat = {
       UserId: req.body.UserId,
@@ -112,6 +112,25 @@ module.exports = function (app) {
     db.Category.create(cat).then((catResponse)=>{
       res.json(catResponse)
     });
+  });
+
+  //update category
+  app.put("/api/category/one/:id", function (req, res) {
+    const idInput = req.params.id;
+    console.log('req.body:', req.body)
+    //subtract the items quantity by the req.body
+    // subtract
+    let updatedCat = - req.body.Quantity
+    // db.Category.update(
+    //   {
+    //     categoryName: req.body.Quantity
+    //   },{
+    //   where: {  
+    //     id: idInput
+    //   }
+    // }).then(function (updatedItem) {
+    //   res.json(updatedItem);
+    // });
   });
 
 

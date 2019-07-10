@@ -27,7 +27,7 @@ export default {
     },
     putItems: function(itemID, itemsUpdate) {
 
-        return axios.put("/api/items/"+ itemID, itemsUpdate, (response) => {
+        return axios.put("/api/items/one/"+ itemID, itemsUpdate, (response) => {
             console.log(response);
         });
     },
@@ -37,5 +37,10 @@ export default {
         return axios.post("/api/category/"+ userID, category, (response) => {
             console.log(response);
         });
-    }
-}
+    },
+    putCategory: function(catID, catUpdate) {
+
+        return axios.put("/api/category/"+ catID, catUpdate, (response) => {
+            console.log(response);
+        });
+    },}

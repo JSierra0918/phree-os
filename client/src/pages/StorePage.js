@@ -152,6 +152,15 @@ class StorePage extends Component {
         })
     }
 
+    deleteCategory = (id) => {
+
+        console.log("delete: ", id);
+    }
+
+    editCategory = (id) => {
+
+        console.log("edit: ", id);
+    }
     render() {
 
         return (
@@ -190,6 +199,10 @@ class StorePage extends Component {
                             category={this.state.category}
                             id={this.state.catID}
                             onClick={this.selectCategory}
+                            role = {this.props.role}
+                            delete = {this.deleteCategory}
+                            edit = {this.editCategory}
+
                         />
                     </Col>
                     <Col size="md-3">
