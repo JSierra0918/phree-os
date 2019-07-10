@@ -31,10 +31,11 @@ class PhreeContainer extends Component {
 
         function displayForm(page) {
             if (page === "Store") {
-                return <StorePage />
+                return <StorePage  />
             }
             else if (page === "Manage") {
-                return <ManagePage />
+                return <StorePage role={"1"} />
+                // return <ManagePage />
             }
         }
 

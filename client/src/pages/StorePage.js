@@ -204,7 +204,7 @@ class StorePage extends Component {
                             edit = {this.editCategory}
 
                         />
-                    </Col>
+[]                    </Col>
                     <Col size="md-3">
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
