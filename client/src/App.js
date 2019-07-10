@@ -7,9 +7,8 @@ import StorePage from './pages/StorePage';
 import ManagePage from './pages/ManagePage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import { Elements, StripeProvider } from 'react-stripe-elements';
-
-import { NavTab, NavItem } from './components/Bootstrap/NavTab';
+import AddStore from './pages/AddStore';
+import AddCategory from './pages/AddCategory';
 import PhreeContainer from './components/PhreeContainer';
 
 
@@ -17,7 +16,7 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <div className="store-nav" style={{display: 'none' }}>
+                <div className="store-nav" style={{ display: 'none' }}>
 
                     <h1>Hello Stripe</h1>
                     <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
@@ -34,13 +33,14 @@ function App() {
                     <Route exact path="/store" component={PhreeContainer} />
                     <Route path="/store/:id" component={StorePage} />
                     <Route exact path="/manage" component={ManagePage} />
+                    <Route exact path="/addStore" component={AddStore} />
+                    <Route exact path="/addCategory" component={AddCategory} />
                 </Switch>
             </Router>
 
         </div>
     );
 }
-
 export default App;
 
 
