@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import Category from "../components/Category";
 
 export class AddCategory extends React.Component {
 
@@ -13,13 +12,13 @@ export class AddCategory extends React.Component {
 
   componentDidMount() {
     const userId = sessionStorage.getItem("userId");
-
     API.getCategoryData(userId).then((response) => {
       console.log(response);
       this.setState({
         categories: response.data
       })
     })
+
   }
 
   componentDidUpdate() {
@@ -50,10 +49,23 @@ export class AddCategory extends React.Component {
     })
 
     inp.value = '';
-
+  }
+  renderTableData() {
+    return this.state.categories.map((val) => {
+      let { categoryName } = val
+      return (
+        <tr>
+          <td>{categoryName}</td>
+        </tr>
+      )
+    });
   }
 
+
+
+
   render() {
+
     return (
       <div>
         <div className="todo type1">
@@ -62,10 +74,19 @@ export class AddCategory extends React.Component {
           </form>
         </div>
         {/* <CatList>{this.state.categories}</CatList> */}
-        {this.state.categories.map(item => item.categoryName)}
         <button onClick={this.addCat} >Add Category</button>
+        {/* <div><br/>{this.state.categories.map(item => item.categoryName)} </div> */}
+        <div>
+          <table>
+            <tbody>
+              {this.renderTableData()}
+            </tbody>
+          </table>
+        </div>
+
       </div>
     )
+
   }
 }
 

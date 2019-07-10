@@ -9,14 +9,11 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import AddStore from './pages/AddStore';
 import AddCategory from './pages/AddCategory';
-
-
-
-
-
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import CheckoutForm from './components/CheckoutForm';
 import Stripe from './components/Stripe/Stripe'
+
+
 function App() {
   return (
     <div className="App">
