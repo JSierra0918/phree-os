@@ -142,6 +142,10 @@
   border-bottom: none;
   z-index: 10;
 }
+
+.store-nav {
+  display: none;
+}
   /* ====================================================END of   CUSTOM ===================================================== */
 
   /* Fallback for Edge

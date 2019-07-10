@@ -14,6 +14,6 @@ export function NavTab(props) {
 export function NavItem(props) {
     return (
         <React.Fragment>
-            <li className={`nav-item ${props.extraClass}`}>{props.children}</li>
+            <li className={`nav-item `}>{props.children}</li>
         </React.Fragment>);
 }
