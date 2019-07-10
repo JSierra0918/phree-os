@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import "./styles/addcategory.css";
 
 export class AddCategory extends React.Component {
 
@@ -54,9 +55,13 @@ export class AddCategory extends React.Component {
     return this.state.categories.map((val) => {
       let { categoryName } = val
       return (
-        <tr>
-          <td>{categoryName}</td>
-        </tr>
+        <table id="categoriesT">
+          <tbody>
+            <tr>
+              <td>{categoryName}</td>
+            </tr>
+          </tbody>
+        </table>
       )
     });
   }
@@ -73,13 +78,16 @@ export class AddCategory extends React.Component {
             <input id="todoInput" type="text" className="add-todo" name="add-todo" placeholder="Category name" />
           </form>
         </div>
-        {/* <CatList>{this.state.categories}</CatList> */}
         <button onClick={this.addCat} >Add Category</button>
         {/* <div><br/>{this.state.categories.map(item => item.categoryName)} </div> */}
         <div>
           <table>
             <tbody>
-              {this.renderTableData()}
+              <tr>
+                <td>
+                  {this.renderTableData()}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
