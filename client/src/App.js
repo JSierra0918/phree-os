@@ -13,8 +13,10 @@ import PhreeContainer from './components/PhreeContainer';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { fab } from '@fortawesome/free-brands-svg-icons';
 import { faTrashAlt, faPlusSquare, faTimes} from '@fortawesome/free-solid-svg-icons';
-
+//needed to create a library that only exports exactly the icons we need and not the whole FA suite.
+//this also makes them universially acccessible :)
 library.add( faTrashAlt, faPlusSquare, faTimes);
+
 
 
 function App() {
