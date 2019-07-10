@@ -121,16 +121,6 @@ module.exports = function (app) {
     //subtract the items quantity by the req.body
     // subtract
     let updatedCat = - req.body.Quantity
-    // db.Category.update(
-    //   {
-    //     categoryName: req.body.Quantity
-    //   },{
-    //   where: {  
-    //     id: idInput
-    //   }
-    // }).then(function (updatedItem) {
-    //   res.json(updatedItem);
-    // });
   });
 
 
