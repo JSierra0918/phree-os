@@ -1,5 +1,7 @@
 import React from "react";
-import '../pages/styles/modal.css'
+import "../pages/styles/modal.css";
+import {Elements, StripeProvider} from 'react-stripe-elements';
+import CheckoutForm from './CheckoutForm';
 
 const ModalPayment = props => {
   return (
@@ -12,26 +14,29 @@ const ModalPayment = props => {
         }}
       >
         <div className="modal-header">
-          <h3>Modal Header</h3>
+          <h3>Total: {props.total}</h3>
           <span className="close-modal-btn" onClick={props.close}>
             ×
           </span>
         </div>
         <div className="modal-body">
           <p>
-            <form action="/charge" method="post" id="payment-form">
               <div class="form-row">
-                <label for="card-element">Credit or debit card</label>
                 <div id="card-element">
-                  {/* <!-- A Stripe Element will be inserted here. --> */}
+                  <StripeProvider apiKey="pk_test_CPmIKoox7WD3HAdqil1J9oEf00GKDwnkqp">
+                    <div className="example">
+                      <h1>Complete Checkout</h1>
+                      <Elements>
+                        <CheckoutForm 
+                        total={props.total} 
+                        userId={props.userId}
+                        />
+                      </Elements>
+                    </div>
+                  </StripeProvider>{" "}
                 </div>
-
-                {/* <!-- Used to display form errors. --> */}
                 <div id="card-errors" role="alert" />
               </div>
-
-              <button>Submit Payment</button>
-            </form>
           </p>
         </div>
         <div className="modal-footer">
@@ -46,4 +51,3 @@ const ModalPayment = props => {
 };
 
 export default ModalPayment;
-
