@@ -123,10 +123,35 @@ module.exports = function (app) {
     let updatedCat = - req.body.Quantity
   });
 
-
-  app.get("/stripe", (req, res) => {
-    console.log(req.body)
-    // res.json(response);
-    res.send(req.body)
-  })
+  app.post("/api/stripe", function(req, res) {
+    console.log("in stripe api call")
+    console.log('req.body.userId', req.body.userId)
+    request.post(
+      {url:
+      "https://connect.stripe.com/oauth/token", 
+      form: 
+      { client_secret : config.stripe_secret_key,
+        code : req.body.code,
+        grant_type :"authorization_code"
+      }},
+      function (error, response, body) {
+      console.log('error:', error)
+      
+      if (!error && response.statusCode == 200) {
+        console.log("it went ok")
+        console.log(body)
+        var bodyParsed = JSON.parse(body)
+        // console.log(pars.stripe_user_id)
+        // console.log('stripe_user_id:', request.body.stripe_user_id)
+        // console.log(req.body.userId)
+        db.Stripe.create({
+          StripeUserId : bodyParsed.stripe_user_id,
+          StripeRefreshToken : bodyParsed.refresh_token,
+          UserId : req.body.userId,
+        }).then(function (Stripe) {
+          res.sendStatus(200)
+        });
+      }
+    })
+  });
 }

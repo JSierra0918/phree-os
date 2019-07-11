@@ -6,7 +6,7 @@ function EditableComponent(props) {
 
     return (
         <div>
-            {props.editable===true ? <span>{props.item}</span> :  <input placeholder={props.item}></input>
+            {props.editable!==true ? <span>{props.item}</span> :   <input className="edit-input" placeholder={props.item}></input>
             }
         </div>
     )

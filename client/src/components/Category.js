@@ -13,7 +13,9 @@ class Category extends Component {
 
         this.state = {
             categories: [],
-            newCatName: ""
+            newCatName: "",
+             editable: false,
+
         }
 
     }
@@ -81,8 +83,19 @@ class Category extends Component {
         })
     }
 
-    renderCategory() {
-        return this.state.categories.map(item => <Category role={this.props.role} dataid={item.id} key={item.id} item={item.categoryName} className="category-li" onClick={this.selectCategory} />)
+    editCategory = () => {
+
+        //make content edidtable
+        const stateEdit = this.state.editable;
+
+        this.setState((state) => {
+            return { editable: state.editable = !stateEdit }
+        })
+    }
+
+    saveEditCategory = (id, value) =>{
+
+        console.log("ID VALUE:" , id, value)
     }
 
     render() {
@@ -90,19 +103,29 @@ class Category extends Component {
             <div>
                 <li {...this.props} onClick={() => this.props.onClick(this.props.dataid)}>
                     <div className="col manage-category" >
-                        <span className="categoryName">{this.props.item}</span>
 
                         {/* <EditableComponent item={this.props.item} editable={true}/> */}
                         {/* If it's the manage page show this */}
                         {this.props.role === "1" ? (
                             <div>
-                                <EditableComponent item={this.props.item} editable={this.props.editable} />
+                                <EditableComponent item={this.props.item} editable={this.state.editable} />
 
-                                <span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> delete</span>
-                                <span id="edit" onClick={() => this.props.edit(this.props.dataid)}>edit</span>
+                                {/* check if editable is false, if it is show delete */}
+
+                                {this.state.editable!==true ?
+                                
+                               <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                               <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
+                                : 
+                               <div> <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Save</span>
+                               
+                               <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
+                                  
+                                }
                             </div>
                         ) :
-                            (<p></p>)}
+                            (<span className="categoryName">{this.props.item}</span>
+                            )}
                     </div>
                 </li>
 

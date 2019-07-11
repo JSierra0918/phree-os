@@ -22,7 +22,7 @@ class StorePage extends Component {
             items: [],
             paymentList: [],
             count: 0,
-            editable: true
+           
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -179,24 +179,6 @@ class StorePage extends Component {
 
     }
 
-    editCategory = (id) => {
-
-        console.log("edit: ", id);
-        //make content edidtable
-        const stateEdit = this.state.editable;
-        console.log('stateEdit:', stateEdit)
-        let catEdit = document.querySelector(".categoryName");
-
-        this.setState((state) => {
-            return { editable: state.editable = !stateEdit }
-        })
-
-        // if (stateEdit){
-        //     catEdit.classList.add("editable-item");
-        // }else {
-        //     catEdit.classList.remove("editable-item");
-        // }
-    }
     render() {
 
         return (
@@ -207,21 +189,6 @@ class StorePage extends Component {
                         <h1>Phree-OS</h1>
                     </Col>
                 </div>
-                {/* THIS IS WHERE THE NAV GOES */}
-                {/* <div className="row">
-                        <NavTab>
-                            <NavItem>
-                               <div className="nav-link-container">
-                        <Link to="/store" className="store-link">Store</Link>
-                        <Link to="/manage" className="manage-link">Manage</Link>
-                    </div>
-
-                                <h1>Hello Stripe</h1>
-                                <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
-
-                            </NavItem>
-                        </NavTab>
-                    </div> */}
                 <div className="row mid-section" >
                     <Col size="md-6">
                         <PaymentSummary
@@ -245,9 +212,6 @@ class StorePage extends Component {
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
                 </div>
-                {/* <div className="row last-section">
-                    <button className="btn btn-danger" onClick={()=> this.clearSummary([])}> Final Button</button>
-                </div> */}
             </div>
         );
     }
