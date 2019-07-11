@@ -96,8 +96,16 @@ class Category extends Component {
     }
 
     saveEditCategory = (id, value) =>{
-
         console.log("ID VALUE:", id, value)
+
+        const update = {
+            categoryName: value
+        }
+        //save value to the Category DB
+        API.putCategory(id,update).then((response) => {
+            console.log('response:', response)
+            
+        })
     }
 
     handleInputChange = event => {
@@ -130,7 +138,7 @@ class Category extends Component {
                                <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
                                <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
                                 : 
-                               <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid)}>Save</span>
+                               <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
                                
                                <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
                                   

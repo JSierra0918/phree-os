@@ -52,13 +52,13 @@ module.exports = function (app) {
     });
   });
 
-    // Create a category
-    app.post("/api/category/:id", (req, res) => {
-      const cat = {
-        UserId: req.body.UserId,
-        categoryName: req.body.categoryName     
-      }
-    })
+  // Create a category
+  app.post("/api/category/:id", (req, res) => {
+    const cat = {
+      UserId: req.body.UserId,
+      categoryName: req.body.categoryName
+    }
+  })
 
   //grab specific Items
   app.get("/api/items/one/:id", function (req, res) {
@@ -92,7 +92,7 @@ module.exports = function (app) {
   });
 
 
-// Update items after the client has sold.
+  // Update items after the client has sold.
   app.put("/api/items/one/:id", function (req, res) {
     const idInput = req.params.id;
     console.log('req.body:', req.body)
@@ -102,63 +102,77 @@ module.exports = function (app) {
     db.Item.update(
       {
         quantity: req.body.Quantity
-      },{
-      where: {  
-        id: idInput
-      }
-    }).then(function (updatedItem) {
-      res.json(updatedItem);
-    });
+      }, {
+        where: {
+          id: idInput
+        }
+      }).then(function (updatedItem) {
+        res.json(updatedItem);
+      });
   });
 
   // Create a category
-  app.post("/api/category/:id", (req, res) => {
+  app.post("/api/category/one/:id", (req, res) => {
     const cat = {
       UserId: req.body.UserId,
-      categoryName: req.body.categoryName     
+      categoryName: req.body.categoryName
     }
 
     console.log(req.body);
-    db.Category.create(cat).then((catResponse)=>{
+    db.Category.create(cat).then((catResponse) => {
       res.json(catResponse)
     });
   });
 
   //update category
-  app.put("/api/category/one/:id", function (req, res) {
-    const idInput = req.params.id;
-    console.log('req.body:', req.body)
-    //subtract the items quantity by the req.body
-    // subtract
-    let updatedCat = - req.body.Quantity
-  });
+  app.put("/api/category/:id", function (req, res) {
+   const idInput = req.params.id;
+   //subtract the items quantity by the req.body
+   // subtract
+   let updatedCat =  req.body.categoryName
+   db.Category.update(
+     {
+       categoryName: updatedCat
+     }, {
+       where: {
+         id: idInput
+       }
+     }).then(function ( catResult ) {
+       console.log('rowsUpdate:', catResult)
+      //  console.log('categoryName:', categoryName)
+       res.json(catResult);
+     });
+  })
 
-  app.post("/api/stripe", function(req, res) {
+  app.post("/api/stripe", function (req, res) {
     console.log("in stripe api call")
     console.log('req.body.userId', req.body.userId)
     request.post(
-      {url:
-      "https://connect.stripe.com/oauth/token", 
-      form: 
-      { client_secret : config.stripe_secret_key,
-        code : req.body.code,
-        grant_type :"authorization_code"
-      }},
+      {
+        url:
+          "https://connect.stripe.com/oauth/token",
+        form:
+        {
+          client_secret: config.stripe_secret_key,
+          code: req.body.code,
+          grant_type: "authorization_code"
+        }
+      },
       function (error, response, body) {
-      console.log('error:', error)
-      
-      if (!error && response.statusCode == 200) {
-        console.log("it went ok")
-        console.log(body)
-        var bodyParsed = JSON.parse(body)
-        db.Stripe.create({
-          StripeUserId : bodyParsed.stripe_user_id,
-          StripeRefreshToken : bodyParsed.refresh_token,
-          UserId : req.body.userId,
-        }).then(function (Stripe) {
-          res.sendStatus(200)
-        });
-      }
-    })
+        console.log('error:', error)
+
+        if (!error && response.statusCode == 200) {
+          console.log("it went ok")
+          console.log(body)
+          var bodyParsed = JSON.parse(body)
+          db.Stripe.create({
+            StripeUserId: bodyParsed.stripe_user_id,
+            StripeRefreshToken: bodyParsed.refresh_token,
+            UserId: req.body.userId,
+          }).then(function (Stripe) {
+            res.sendStatus(200)
+          });
+        }
+      })
   });
 }
