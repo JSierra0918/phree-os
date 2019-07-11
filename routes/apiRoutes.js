@@ -1,4 +1,6 @@
 const db = require('../models');
+var request = require('request');
+const config = require('../config/stripe/stripeKey');
 const reset = "\x1b[0m";
 const cyan = "\x1b[36m";
 
@@ -159,8 +161,4 @@ module.exports = function (app) {
       }
     })
   });
-<<<<<<< HEAD
-=======
-
->>>>>>> 5b1dfd95206de559ce0a0d7bc16e052440e30d07
 }
