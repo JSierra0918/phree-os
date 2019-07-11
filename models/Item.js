@@ -9,7 +9,7 @@ module.exports = function(sequelize, Sequelize) {
         },
  
         price: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.DECIMAL(10,2),           
             notEmpty: true
         },
  

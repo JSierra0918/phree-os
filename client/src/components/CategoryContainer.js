@@ -54,7 +54,7 @@ class CategoryContainer extends Component {
 
                 {/* //render a category button */}
                 {/* {this.renderCategory()}       */}
-            </div>
+
         );
     }
 }

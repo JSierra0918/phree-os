@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import "./styles/addcategory.css";
 import Category from "../components/Category";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

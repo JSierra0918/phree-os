@@ -11,7 +11,7 @@ function ItemsContainer(props) {
 
     return (
         <div className="items text-center p-main-col mb20">
-            <h5>Items</h5>
+            <h5>Items</h5> <hr />
             <ul>
                 {props.items.map(item =>
                     <li dataid={item.id} key={item.id}
