@@ -245,6 +245,13 @@
     margin: 5px;
 }
 
+.total {
+font-size: 1.25rem;
+width: 95%;
+text-align: right;
+/* padding-right: 21px; */
+}
+
 /* ----------------------------- MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {
