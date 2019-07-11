@@ -159,7 +159,7 @@ class StorePage extends Component {
 
                 <div className="row">
                     <Col size="md-12">
-                        <h1>Phree-OS</h1>
+                        <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
                     </Col>
                 </div>
                 {/* THIS IS WHERE THE NAV GOES */}
