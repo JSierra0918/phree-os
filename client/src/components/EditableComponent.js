@@ -1,13 +1,17 @@
 import React from 'react';
+import { Input } from './Bootstrap/Form';
 
 function EditableComponent(props) {
 
-    console.log(props.editable)
+    console.log(props.value)
 
+    // console.log(props.item, this.props.value);
     return (
         <div>
-            {props.editable!==true ? <span>{props.item}</span> :   <input className="edit-input" placeholder={props.item}></input>
+            {props.editable!==true ? <span>{props.item}</span> :                                   <Input name="save" placeholder={props.item} className="form-control" value={props.value} onChange={props.handleInputChange} />
             }
+
+           
         </div>
     )
 }

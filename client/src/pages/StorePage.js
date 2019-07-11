@@ -71,7 +71,7 @@ class StorePage extends Component {
         API.getUserData(userId).then((userResponse) => {
             console.log(userResponse.data.storename)
             if (!userResponse.data.storename) {
-                // go to create store
+                    // go to create store
 
             }
             else {

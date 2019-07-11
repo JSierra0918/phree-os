@@ -15,7 +15,7 @@ class Category extends Component {
             categories: [],
             newCatName: "",
              editable: false,
-
+             save: ""
         }
 
     }
@@ -64,6 +64,8 @@ class Category extends Component {
     }
 
     selectCategory = (id) => {
+        const catDom = document.getElementsByClassName("categoryName")
+        catDom.focus()
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             console.log('category:', category.data)
@@ -95,8 +97,19 @@ class Category extends Component {
 
     saveEditCategory = (id, value) =>{
 
-        console.log("ID VALUE:" , id, value)
+        console.log("ID VALUE:", id, value)
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+
+        this.setState({
+            [name]: value
+        });
+
+        console.log(name , value);
+
+    };
 
     render() {
         return (
@@ -108,7 +121,7 @@ class Category extends Component {
                         {/* If it's the manage page show this */}
                         {this.props.role === "1" ? (
                             <div>
-                                <EditableComponent item={this.props.item} editable={this.state.editable} />
+                                <EditableComponent item={this.props.item} editable={this.state.editable}  value={this.state.save} handleInputChange={this.handleInputChange} />
 
                                 {/* check if editable is false, if it is show delete */}
 
@@ -117,7 +130,7 @@ class Category extends Component {
                                <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
                                <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
                                 : 
-                               <div> <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Save</span>
+                               <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid)}>Save</span>
                                
                                <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
                                   
