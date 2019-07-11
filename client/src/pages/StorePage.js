@@ -21,7 +21,8 @@ class StorePage extends Component {
             category: [],
             items: [],
             paymentList: [],
-            count: 0
+            count: 0,
+            total: 0
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -79,6 +80,20 @@ class StorePage extends Component {
             })
         })
     }
+    totalPrice = () => {
+        let total = this.state.paymentList.reduce((a, b) => {
+        // console.log('a price', a.price) 
+        // console.log('b price', b.price)  
+        return {price: parseFloat(a.price) + parseFloat(b.price)}
+
+        }, {price: 0}).price
+        
+        console.log('total', parseFloat(total).toFixed(2))
+
+        this.setState({
+            total: parseFloat(total).toFixed(2)
+        })
+    }
 
     addItem = (selectedItem) => {
         const statePaymentList = this.state.paymentList;
@@ -87,12 +102,17 @@ class StorePage extends Component {
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
             //Log object to Console.
-            console.log("Before update price: ", statePaymentList[objIndex].price);
-            console.log("Before update quantity: ", statePaymentList[objIndex].counter);
+            // console.log("Before update price: ", statePaymentList[objIndex].price);
+            // console.log("Before update quantity: ", statePaymentList[objIndex].counter);
             // make new object of updated object.   
-            let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price, counter: statePaymentList[objIndex].counter + 1 };
+            
+            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
+            // console.log('this.state.paymentList[objIndex].price:', this.state.paymentList[objIndex].price)
+            
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
+            // console.log('-----updatedItem-----')
+            // console.log(updatedItem)
 
             let updatedItems = [
                 ...statePaymentList.slice(0, objIndex),
@@ -103,18 +123,24 @@ class StorePage extends Component {
             //Update object's name property.
             this.setState((state) => {
                 return { paymentList: state.paymentList = updatedItems }
+            }, () => {
+                this.totalPrice()
             })
 
             //Log object to console again.
-            console.log("After update: ", this.state.paymentList[objIndex]);
+            // console.log("After update: ", this.state.paymentList[objIndex]);
             // reset objIndex
             objIndex = -1;
         } else {
             // //UPDATE STATE HERE 
-            let addedItem = this.state.paymentList.concat(selectedItem);
+            // let addedItem = this.state.paymentList.concat(selectedItem);
+            const newList = [...this.state.paymentList];
+                  newList.push(selectedItem)
 
             this.setState({
-                paymentList: addedItem,
+                paymentList: newList
+            }, () => {
+                this.totalPrice()
             })
         }
     }
@@ -128,7 +154,7 @@ class StorePage extends Component {
     }
 
     deleteRow = (id) => {
-        console.log("delete: ", id)
+        // console.log("delete: ", id)
 
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
@@ -145,7 +171,7 @@ class StorePage extends Component {
     }
 
     clearSummary = (summaryArr) => {
-        console.log('summaryArr:', summaryArr);
+        // console.log('summaryArr:', summaryArr);
         //get an empty parameter that clears paymentList
         this.setState((state, props) => {
             return { paymentList: state.paymentList = summaryArr }
@@ -183,7 +209,9 @@ class StorePage extends Component {
                             paymentList={this.state.paymentList}
                             count={this.state.count}
                             deleteRow={this.deleteRow}
-                            clearSummary={this.clearSummary} />
+                            clearSummary={this.clearSummary}
+                            total={this.state.total} />
+                            
                     </Col>
                     <Col size="md-3">
                         <CategoryContainer

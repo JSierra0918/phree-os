@@ -41,7 +41,7 @@ class StoreContainer extends Component {
         console.log('userId:', userId)
 
         API.getUserData(userId).then((userResponse) => {
-            console.log(userResponse.data.storename)
+            // console.log(userResponse.data.storename)
             if (!userResponse.data.storename) {
                 // go to create store
 
@@ -70,15 +70,20 @@ class StoreContainer extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
-            console.log("----items")
-            console.log(returnedItems)
+            // console.log("----items")
+            // console.log(returnedItems)
 
             this.setState({
                 items: returnedItems.data
             })
         })
     }
+    totalPrice = () => {
+        var total = this.state.paymentList.reduce((a, b) => a.price + b.price, 0)
+        
+        console.log('total', total)
 
+    }
     addItem = (selectedItem) => {
         const statePaymentList = this.state.paymentList;
 
@@ -86,8 +91,8 @@ class StoreContainer extends Component {
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
             //Log object to Console.
-            console.log("Before update price: ", statePaymentList[objIndex].price);
-            console.log("Before update quantity: ", statePaymentList[objIndex].counter);
+            // console.log("Before update price: ", statePaymentList[objIndex].price);
+            // console.log("Before update quantity: ", statePaymentList[objIndex].counter);
             // make new object of updated object.   
             let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price, counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
@@ -100,9 +105,13 @@ class StoreContainer extends Component {
             ];
 
             //Update object's name property.
+            console.log('some shit')
             this.setState((state) => {
                 return { paymentList: state.paymentList = updatedItems }
+            },() => {
+                this.totalPrice()
             })
+            console.log('some other shit')
 
             // reset objIndex
             objIndex = -1;
@@ -125,7 +134,7 @@ class StoreContainer extends Component {
     }
 
     deleteRow = (id) => {
-        console.log("delete: ", id)
+        // console.log("delete: ", id)
 
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
@@ -142,7 +151,7 @@ class StoreContainer extends Component {
     }
 
     clearSummary = (summaryArr) => {
-        console.log('summaryArr:', summaryArr);
+        // console.log('summaryArr:', summaryArr);
         //get an empty parameter that clears paymentList
         this.setState((state, props) => {
             return { paymentList: state.paymentList = summaryArr }

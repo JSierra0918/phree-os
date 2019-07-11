@@ -52,6 +52,14 @@ module.exports = function (app) {
     });
   });
 
+    // Create a category
+    app.post("/api/category/:id", (req, res) => {
+      const cat = {
+        UserId: req.body.UserId,
+        categoryName: req.body.categoryName     
+      }
+    })
+    
   //grab specific Items
   app.get("/api/items/one/:id", function (req, res) {
     const idInput = req.params.id;
@@ -135,10 +143,10 @@ module.exports = function (app) {
     })
   })
 
-    db.Category.create(cat).then((catResponse)=>{
-      res.json(catResponse)
-    });
-  ;
+    // db.Category.create(cat).then((catResponse)=>{
+    //   res.json(catResponse)
+    // });
+    // });
 
 
 }
