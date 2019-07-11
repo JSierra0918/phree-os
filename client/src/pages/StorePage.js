@@ -91,6 +91,7 @@ class StorePage extends Component {
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
+            console.log('category.data.id:', category.data.id)
             this.grabItems(category.data.id);
         });
     }
@@ -126,17 +127,10 @@ class StorePage extends Component {
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
             //Log object to Console.
-            // console.log("Before update price: ", statePaymentList[objIndex].price);
-            // console.log("Before update quantity: ", statePaymentList[objIndex].counter);
-            // make new object of updated object.   
-            
-            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
-            // console.log('this.state.paymentList[objIndex].price:', this.state.paymentList[objIndex].price)
-            
+            // make new object of updated object.           
+            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };            
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
-            // console.log('-----updatedItem-----')
-            // console.log(updatedItem)
 
             let updatedItems = [
                 ...statePaymentList.slice(0, objIndex),
@@ -151,8 +145,6 @@ class StorePage extends Component {
                 this.totalPrice()
             })
 
-            //Log object to console again.
-            // console.log("After update: ", this.state.paymentList[objIndex]);
             // reset objIndex
             objIndex = -1;
         } else {
@@ -201,30 +193,57 @@ class StorePage extends Component {
     }
 
     deleteCategory = (id) => {
-
-        console.log("delete: ", id);
-
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
         //create obj based off of what the state paymentList is
-
         let updatedItem = stateCategory.filter((item) => {
             return item.id !== id
         });
 
-        // //Update the category DB
-        // API.deleteCategory(id, updatedItem).then((response) => {
-
-        //     this.setState((state) => {
-        //         return { category: state.category = response.data }
-        //     })
-        // })
+        //Update the category DB
+        API.deleteCategory(id, updatedItem).then((response) => {
+            this.setState((state) => {
+                return { category: state.category = updatedItem}
+            })
+        })
 
         //Update object's name property.
         this.setState((state) => {
             return { category: state.category = updatedItem }
         })
 
+    }
+    
+    addCategory = (e) => {
+        const userId = sessionStorage.getItem("userId");
+        e.preventDefault();
+        //grab value
+        var inp = document.getElementById("catInput");
+        var val = inp.value.trim();
+        const whiteSpace = " ";
+
+        if (val === whiteSpace.trim()) {
+            alert("Cannot add a name  to the category");
+            return;
+        }
+
+        let newCategory = {
+            UserId: userId,
+            categoryName: val
+        }
+
+        API.postCategory(userId, newCategory).then((response) => {
+            //copy and generate a new array for the categories
+            let newCatArr = [...this.state.category]
+
+            newCatArr.push(response.data);
+
+            this.setState(state => {
+               return { category: state.category = newCatArr}
+            })
+        })
+        //empty value
+        inp.value = '';
     }
 
     render() {
@@ -260,6 +279,7 @@ class StorePage extends Component {
                             edit={this.editCategory}
                             editable={this.state.editable}
                             reload={this.getUserData}
+                            addCategory={this.addCategory}
                         />
                     </Col>
                     <Col size="md-3">

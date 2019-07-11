@@ -6,15 +6,6 @@ export default {
 
         return axios.get("/api/user/"+ userID);
     },
-
-    getCategoryData: function(userID) {
-
-        return axios.get("/api/category/"+ userID);
-    },
-    getOneCategory: function(categoryID) {
-
-        return axios.get("/api/category/one/"+ categoryID);
-    },
     getItems: function(userID) {
 
         return axios.get("/api/items/"+ userID);
@@ -37,10 +28,18 @@ export default {
             console.log(response);
         });
     },
+    getCategoryData: function(userID) {
+
+        return axios.get("/api/category/"+ userID);
+    },
+    getOneCategory: function(categoryID) {
+
+        return axios.get("/api/category/one/"+ categoryID);
+    },
     postCategory: function(userID, category) {
 
         console.log(category)
-        return axios.post("/api/category/"+ userID, category, (response) => {
+        return axios.post("/api/category/one/"+ userID, category, (response) => {
             console.log(response);
         });
     },
@@ -52,7 +51,7 @@ export default {
     },
     deleteCategory: function(catID, catUpdate) {
 
-        return axios.put("/api/category/"+ catID, catUpdate, (response) => {
+        return axios.delete("/api/category/"+ catID, (response) => {
             console.log(response);
         });
     },

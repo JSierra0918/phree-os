@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../pages/styles/storepage.css';
 import Category from './Category';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EditableComponent from '../components/EditableComponent';
+import API from '../utils/API';
 
 class CategoryContainer extends Component {
     constructor(props) {
@@ -23,26 +23,53 @@ class CategoryContainer extends Component {
     }
 
     renderCategory() {
-        return this.props.category.map(item => <Category 
-                                                    role={this.props.role} 
-                                                    dataid={item.id} 
-                                                    key={item.id} 
-                                                    item={item.categoryName} 
-                                                    className="category-li" 
-                                                    style={this.state.style} 
-                                                    onClick={this.props.onClick} 
-                                                    delete={this.props.delete} 
-                                                    edit={this.props.edit}
-                                                    reload={this.props.reload}  
-                                                    />)
+        return this.props.category.map(item => <Category
+            role={this.props.role}
+            dataid={item.id}
+            key={item.id}
+            item={item.categoryName}
+            className="category-li"
+            style={this.state.style}
+            onClick={this.props.onClick}
+            delete={this.props.delete}
+            edit={this.props.edit}
+            reload={this.props.reload}
+        />)
     }
 
     addClass = () => {
-
         this.setState(state => ({
             isActive: !state.isActive
         }));
     }
+
+    // addCat = (e) => {
+    //     const userId = sessionStorage.getItem("userId");
+    //     e.preventDefault();
+    //     //grab value
+    //     var inp = document.getElementById("catInput");
+    //     var val = inp.value.trim();
+    //     const whiteSpace = " ";
+
+    //     if (val === whiteSpace.trim()) {
+    //         alert("Cannot add a name  to the category");
+    //         return;
+    //     }
+
+    //     let newCategory = {
+    //         UserId: userId,
+    //         categoryName: val
+    //     }
+
+    //     API.postCategory(userId,newCategory).then((response) => {
+    //         console.log(response.data);
+
+    //        //reload page or add it to the the categories
+    //        this.props.addCategory(response.data)
+    //     })
+    //     //empty value
+    //     inp.value = '';
+    // }
 
     render() {
         return (
@@ -60,7 +87,7 @@ class CategoryContainer extends Component {
                             </form>
                         </div>
 
-                        <button onClick={this.addCat} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
+                        <button onClick={this.props.addCategory} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
                     </div>
                 ) : (<p></p>)}
             </div>

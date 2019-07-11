@@ -52,14 +52,6 @@ module.exports = function (app) {
     });
   });
 
-  // Create a category
-  app.post("/api/category/:id", (req, res) => {
-    const cat = {
-      UserId: req.body.UserId,
-      categoryName: req.body.categoryName
-    }
-  })
-
   //grab specific Items
   app.get("/api/items/one/:id", function (req, res) {
     const idInput = req.params.id;
@@ -91,7 +83,6 @@ module.exports = function (app) {
     res.json(req.body)
   });
 
-
   // Update items after the client has sold.
   app.put("/api/items/one/:id", function (req, res) {
     const idInput = req.params.id;
@@ -113,15 +104,10 @@ module.exports = function (app) {
 
   // Create a category
   app.post("/api/category/one/:id", (req, res) => {
-    const cat = {
-      UserId: req.body.UserId,
-      categoryName: req.body.categoryName
-    }
-
-    console.log(req.body);
-    db.Category.create(cat).then((catResponse) => {
+    db.Category.create(req.body).then((catResponse) => {
+      console.log('catResponse:', catResponse)
       res.json(catResponse)
-    });
+    }).catch(err => console.log(err));
   });
 
   //update category
@@ -130,18 +116,38 @@ module.exports = function (app) {
    //subtract the items quantity by the req.body
    // subtract
    let updatedCat =  req.body.categoryName
+   console.log(idInput, updatedCat)
    db.Category.update(
      {
        categoryName: updatedCat
      }, {
+      returning: true,
        where: {
-         id: idInput
+        id: idInput
        }
-     }).then(function ( catResult ) {
-       console.log('rowsUpdate:', catResult)
+     }).then(function ( catResult) {
       //  console.log('categoryName:', categoryName)
        res.json(catResult);
-     });
+     })
+     .catch(err => console.log(err));
+  })
+
+  app.delete("/api/category/:id", function (req, res){
+    const idInput = req.params.id;
+    db.Category.destroy({
+      where: {
+        id: idInput
+       }
+    }).then((deleteResponse) => {
+      console.log('deleteResponse:', deleteResponse);
+      db.Item.destroy({
+        where: {
+          CategoryID: idInput
+         }
+      }).then(response => console.log(response))
+      
+    }).catch(err => console.log(err));
+
   })
 
   app.post("/api/stripe", function (req, res) {

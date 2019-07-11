@@ -7,15 +7,12 @@ class Category extends Component {
     constructor(props) {
         super(props);
 
-        this.addCat = this.addCat.bind(this);
-
         this.state = {
             categories: [],
             newCatName: "",
             editable: false,
             save: ""
         }
-
     }
 
     componentDidMount() {
@@ -31,38 +28,9 @@ class Category extends Component {
         // const userId = sessionStorage.getItem("userId");
     }
 
-    addCat(e) {
-        const userId = sessionStorage.getItem("userId");
-        e.preventDefault();
-        //grab value
-        var inp = document.getElementById("catInput");
-        var val = inp.value;
-
-        if (val === "") {
-            alert("Cannot add a blank space");
-            return;
-        }
-
-        let cat = {
-            UserId: userId,
-            categoryName: val
-        }
-
-        API.postCategory(userId, cat).then((response) => {
-            console.log(response.data);
-
-            this.setState({
-                categories: response.data
-            })
-        })
-
-        //empty value
-        inp.value = '';
-    }
-
     selectCategory = (id) => {
         const catDom = document.getElementsByClassName("categoryName")
-        catDom.focus()
+        catDom.focus();
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             console.log('category:', category.data)
@@ -96,8 +64,7 @@ class Category extends Component {
         console.log("ID VALUE:", id, value);
 
         const space = " ";
-        const emptySpace = space.trim()
-
+        const emptySpace = space.trim();
 
         const update = {
             categoryName: value.trim()
@@ -119,9 +86,7 @@ class Category extends Component {
                 //reload the db
                 this.props.reload();
             })
-
         }
-
     }
 
     handleInputChange = event => {
