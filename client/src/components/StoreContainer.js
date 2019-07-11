@@ -105,13 +105,11 @@ class StoreContainer extends Component {
             ];
 
             //Update object's name property.
-            console.log('some shit')
             this.setState((state) => {
                 return { paymentList: state.paymentList = updatedItems }
             },() => {
                 this.totalPrice()
             })
-            console.log('some other shit')
 
             // reset objIndex
             objIndex = -1;

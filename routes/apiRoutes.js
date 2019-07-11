@@ -59,7 +59,7 @@ module.exports = function (app) {
         categoryName: req.body.categoryName     
       }
     })
-    
+
   //grab specific Items
   app.get("/api/items/one/:id", function (req, res) {
     const idInput = req.params.id;
@@ -129,9 +129,6 @@ module.exports = function (app) {
         console.log("it went ok")
         console.log(body)
         var bodyParsed = JSON.parse(body)
-        // console.log(pars.stripe_user_id)
-        // console.log('stripe_user_id:', request.body.stripe_user_id)
-        // console.log(req.body.userId)
         db.Stripe.create({
           StripeUserId : bodyParsed.stripe_user_id,
           StripeRefreshToken : bodyParsed.refresh_token,

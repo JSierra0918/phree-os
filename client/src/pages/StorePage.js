@@ -9,6 +9,7 @@ import ItemsContainer from '../components/ItemsContainer';
 import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
 import ManagePage from './ManagePage';
+import ModalPayment from '../components/ModalPayment';
 
 class StorePage extends Component {
 
@@ -22,12 +23,37 @@ class StorePage extends Component {
             items: [],
             paymentList: [],
             count: 0,
-            total: 0
+            total: 0,
+            payment: false
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
     }
 
+    openModalHandler = (paid) => {
+        this.setState({
+            payment: true
+        });
+    }
+
+    closeModalHandler = (paid) => {
+        this.setState({
+            payment: false
+        });
+    }
+    makePayment = (paid) => {
+        
+        this.setState({
+            payment: paid,
+        })
+        if(this.state.payment) {
+
+            this.openModalHandler()
+            // return  <ModalPayment/> 
+        }
+        console.log('paid', paid)
+
+    }
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         this.getUserData();
@@ -174,7 +200,7 @@ class StorePage extends Component {
         // console.log('summaryArr:', summaryArr);
         //get an empty parameter that clears paymentList
         this.setState((state, props) => {
-            return { paymentList: state.paymentList = summaryArr }
+            return { paymentList: state.paymentList = summaryArr, total:0 }
         })
     }
 
@@ -210,7 +236,9 @@ class StorePage extends Component {
                             count={this.state.count}
                             deleteRow={this.deleteRow}
                             clearSummary={this.clearSummary}
-                            total={this.state.total} />
+                            total={this.state.total} 
+                            makePayment={this.makePayment}
+                            />
                             
                     </Col>
                     <Col size="md-3">
@@ -223,6 +251,14 @@ class StorePage extends Component {
                     <Col size="md-3">
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
+
+                    <ModalPayment
+                    className="modal"
+                    show={this.state.payment}
+                    close={this.closeModalHandler}
+                    open = {this.openModalHandler}
+                    />
+                    
                 </div>
                 {/* <div className="row last-section">
                     <button className="btn btn-danger" onClick={()=> this.clearSummary([])}> Final Button</button>
