@@ -3,8 +3,6 @@ import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditableComponent from "./EditableComponent";
 
-
-
 class Category extends Component {
     constructor(props) {
         super(props);
@@ -14,20 +12,19 @@ class Category extends Component {
         this.state = {
             categories: [],
             newCatName: "",
-             editable: false,
-             save: ""
+            editable: false,
+            save: ""
         }
 
     }
 
     componentDidMount() {
-        const userId = sessionStorage.getItem("userId");
-        API.getCategoryData(userId).then((response) => {
-            console.log("MOUNTED: ", response);
-            this.setState({
-                categories: response.data
-            })
-        })
+        // const userId = sessionStorage.getItem("userId");
+        // API.getCategoryData(userId).then((response) => {
+        //     this.setState({
+        //         categories: response.data
+        //     })
+        // })
     }
 
     componentDidUpdate() {
@@ -95,17 +92,36 @@ class Category extends Component {
         })
     }
 
-    saveEditCategory = (id, value) =>{
-        console.log("ID VALUE:", id, value)
+    saveEditCategory = (id, value) => {
+        console.log("ID VALUE:", id, value);
+
+        const space = " ";
+        const emptySpace = space.trim()
+
 
         const update = {
-            categoryName: value
+            categoryName: value.trim()
         }
-        //save value to the Category DB
-        API.putCategory(id,update).then((response) => {
-            console.log('response:', response)
-            
-        })
+
+        if (update.categoryName === this.props.item) {
+            alert("You already have that name!")
+        } else if (update.categoryName === emptySpace) {
+            alert("You must have something in there")
+        } else {
+            //save value to the Category DB
+            API.putCategory(id, update).then((response) => {
+                console.log('response:', response)
+
+                this.setState({
+                    editable: false
+                })
+
+                //reload the db
+                this.props.reload();
+            })
+
+        }
+
     }
 
     handleInputChange = event => {
@@ -115,7 +131,7 @@ class Category extends Component {
             [name]: value
         });
 
-        console.log(name , value);
+        console.log(name, value);
 
     };
 
@@ -129,19 +145,19 @@ class Category extends Component {
                         {/* If it's the manage page show this */}
                         {this.props.role === "1" ? (
                             <div>
-                                <EditableComponent item={this.props.item} editable={this.state.editable}  value={this.state.save} handleInputChange={this.handleInputChange} />
+                                <EditableComponent item={this.props.item} editable={this.state.editable} value={this.state.save} handleInputChange={this.handleInputChange} />
 
                                 {/* check if editable is false, if it is show delete */}
 
-                                {this.state.editable!==true ?
-                                
-                               <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                               <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
-                                : 
-                               <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
-                               
-                               <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
-                                  
+                                {this.state.editable !== true ?
+
+                                    <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
+                                    :
+                                    <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
+
+                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
+
                                 }
                             </div>
                         ) :

@@ -30,6 +30,16 @@ class StorePage extends Component {
         // this.handleClick = this.handleClick.bind(this)
     }
 
+    componentDidMount() {
+        //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
+        this.getUserData();
+    }
+
+    componentDidUpdate() {
+        //once the item table has been updated, then update the site with the new info.
+        //most likely do another this.getUserData()
+    }
+
     openModalHandler = (paid) => {
         this.setState({
             payment: true
@@ -54,22 +64,11 @@ class StorePage extends Component {
         console.log('paid', paid)
 
     }
-    componentDidMount() {
-        //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
-        this.getUserData();
-    }
 
-    componentDidUpdate() {
-        //once the item table has been updated, then update the site with the new info.
-        //most likely do another this.getUserData()
-    }
-
-    getUserData() {
+    getUserData = () => {
         const userId = sessionStorage.getItem('userId');
-        console.log('userId:', userId)
 
         API.getUserData(userId).then((userResponse) => {
-            console.log(userResponse.data.storename)
             if (!userResponse.data.storename) {
                     // go to create store
 
@@ -78,9 +77,10 @@ class StorePage extends Component {
                 API.getCategoryData(userId).then((categories) => {
                     // update the state with the categories, remember is an array
                     // it is going to render
-                    // console.log(categories)
-                    this.setState({
-                        category: categories.data
+                    console.log(categories)
+                    this.setState(state => {
+                        return {category: state.category = categories.data}
+
                     })
                 })
             }
@@ -178,8 +178,6 @@ class StorePage extends Component {
     }
 
     deleteRow = (id) => {
-        // console.log("delete: ", id)
-
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
         //create obj based off of what the state paymentList is
@@ -227,7 +225,6 @@ class StorePage extends Component {
             return { category: state.category = updatedItem }
         })
 
-
     }
 
     render() {
@@ -249,6 +246,7 @@ class StorePage extends Component {
                             clearSummary={this.clearSummary}
                             total={this.state.total} 
                             makePayment={this.makePayment}
+                            reload={this.getUserData}
                             />
                             
                     </Col>
@@ -261,10 +259,16 @@ class StorePage extends Component {
                             delete={this.deleteCategory}
                             edit={this.editCategory}
                             editable={this.state.editable}
+                            reload={this.getUserData}
                         />
                     </Col>
                     <Col size="md-3">
-                        <ItemsContainer items={this.state.items} addItem={this.addItem} />
+                        <ItemsContainer 
+                        items={this.state.items} 
+                        addItem={this.addItem} 
+                        reload={this.getUserData}
+                        
+                        />
                     </Col>
 
                     <ModalPayment
