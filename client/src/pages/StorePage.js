@@ -9,6 +9,7 @@ import ItemsContainer from '../components/ItemsContainer';
 import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
 import ManagePage from './ManagePage';
+import ModalPayment from '../components/ModalPayment';
 
 class StorePage extends Component {
 
@@ -21,12 +22,38 @@ class StorePage extends Component {
             category: [],
             items: [],
             paymentList: [],
-            count: 0
+            count: 0,
+            total: 0,
+            payment: false
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
     }
 
+    openModalHandler = (paid) => {
+        this.setState({
+            payment: true
+        });
+    }
+
+    closeModalHandler = (paid) => {
+        this.setState({
+            payment: false
+        });
+    }
+    makePayment = (paid) => {
+        
+        this.setState({
+            payment: paid,
+        })
+        if(this.state.payment) {
+
+            this.openModalHandler()
+            // return  <ModalPayment/> 
+        }
+        console.log('paid', paid)
+
+    }
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         this.getUserData();
@@ -79,6 +106,20 @@ class StorePage extends Component {
             })
         })
     }
+    totalPrice = () => {
+        let total = this.state.paymentList.reduce((a, b) => {
+        // console.log('a price', a.price) 
+        // console.log('b price', b.price)  
+        return {price: parseFloat(a.price) + parseFloat(b.price)}
+
+        }, {price: 0}).price
+        
+        console.log('total', parseFloat(total).toFixed(2))
+
+        this.setState({
+            total: parseFloat(total).toFixed(2)
+        })
+    }
 
     addItem = (selectedItem) => {
         const statePaymentList = this.state.paymentList;
@@ -87,12 +128,17 @@ class StorePage extends Component {
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
             //Log object to Console.
-            console.log("Before update price: ", statePaymentList[objIndex].price);
-            console.log("Before update quantity: ", statePaymentList[objIndex].counter);
+            // console.log("Before update price: ", statePaymentList[objIndex].price);
+            // console.log("Before update quantity: ", statePaymentList[objIndex].counter);
             // make new object of updated object.   
-            let updatedItem = { ...statePaymentList[objIndex], price: this.state.paymentList[objIndex].price + selectedItem.price, counter: statePaymentList[objIndex].counter + 1 };
+            
+            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
+            // console.log('this.state.paymentList[objIndex].price:', this.state.paymentList[objIndex].price)
+            
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
+            // console.log('-----updatedItem-----')
+            // console.log(updatedItem)
 
             let updatedItems = [
                 ...statePaymentList.slice(0, objIndex),
@@ -103,18 +149,24 @@ class StorePage extends Component {
             //Update object's name property.
             this.setState((state) => {
                 return { paymentList: state.paymentList = updatedItems }
+            }, () => {
+                this.totalPrice()
             })
 
             //Log object to console again.
-            console.log("After update: ", this.state.paymentList[objIndex]);
+            // console.log("After update: ", this.state.paymentList[objIndex]);
             // reset objIndex
             objIndex = -1;
         } else {
             // //UPDATE STATE HERE 
-            let addedItem = this.state.paymentList.concat(selectedItem);
+            // let addedItem = this.state.paymentList.concat(selectedItem);
+            const newList = [...this.state.paymentList];
+                  newList.push(selectedItem)
 
             this.setState({
-                paymentList: addedItem,
+                paymentList: newList
+            }, () => {
+                this.totalPrice()
             })
         }
     }
@@ -128,7 +180,7 @@ class StorePage extends Component {
     }
 
     deleteRow = (id) => {
-        console.log("delete: ", id)
+        // console.log("delete: ", id)
 
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
@@ -145,10 +197,10 @@ class StorePage extends Component {
     }
 
     clearSummary = (summaryArr) => {
-        console.log('summaryArr:', summaryArr);
+        // console.log('summaryArr:', summaryArr);
         //get an empty parameter that clears paymentList
         this.setState((state, props) => {
-            return { paymentList: state.paymentList = summaryArr }
+            return { paymentList: state.paymentList = summaryArr, total:0 }
         })
     }
 
@@ -183,7 +235,11 @@ class StorePage extends Component {
                             paymentList={this.state.paymentList}
                             count={this.state.count}
                             deleteRow={this.deleteRow}
-                            clearSummary={this.clearSummary} />
+                            clearSummary={this.clearSummary}
+                            total={this.state.total} 
+                            makePayment={this.makePayment}
+                            />
+                            
                     </Col>
                     <Col size="md-3">
                         <CategoryContainer
@@ -195,6 +251,14 @@ class StorePage extends Component {
                     <Col size="md-3">
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
+
+                    <ModalPayment
+                    className="modal"
+                    show={this.state.payment}
+                    close={this.closeModalHandler}
+                    open = {this.openModalHandler}
+                    />
+                    
                 </div>
                 {/* <div className="row last-section">
                     <button className="btn btn-danger" onClick={()=> this.clearSummary([])}> Final Button</button>

@@ -51,7 +51,7 @@ function PaymentSummary(props) {
 
             // TODO:Send the response to update the Items from the data table  
             //Items only needs ID and quantity...I think.
-
+            props.makePayment(true) 
             //clears the payment list for the client
             props.clearSummary([]);
         });
@@ -75,7 +75,7 @@ function PaymentSummary(props) {
                 <h5>Payment Summary</h5>
                 <table className="table" id="summary-table">
                     <thead>
-                        <tr>
+                        <tr> 
                             <th scope="col">Item</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Price</th>
@@ -85,11 +85,15 @@ function PaymentSummary(props) {
                     <tbody >
                         {paymentListArray}
                     </tbody>
+                  
+                        
+                    
                 </table>
             </div>
 
             {/* if items exist show button */}
             <div className="summary-btn-container">
+            <div className="total">Total: {props.total}</div>
                 <button className="btn pay" onClick={tableToObj}>Pay</button>
                 <button className="btn cancel" onClick={() => props.clearSummary([])}>Cancel</button>
             </div>
