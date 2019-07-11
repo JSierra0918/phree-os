@@ -29,25 +29,36 @@ class CheckoutForm extends Component {
            method: "POST",
            headers: {"Content-Type": "application/json"},
            body: JSON.stringify({ token: token.id, total: this.props.total, userId: this.props.userId })
-          // API.stripeCharge(token, this.props.total, this.props.userId)
-          
           });
 
-         if (response.ok) console.log("Purchase Complete!")
+         if (response.ok) {
+           console.log("Purchase Complete!")
+           this.setState({
+             complete : true
+           })
+         }
       }
       
       
       render() {
-        if (this.state.complete) return <h1>Purchase Complete</h1>;
         
-        console.log('total', this.props.total)
-    return (
-      <div className="checkout">
-        <p>Would you like to complete the purchase?</p>
-        <CardElement />
-        <button onClick={this.submit}>Send</button>
-      </div>
-    );
+        
+        return (
+        <>
+          {this.state.complete ? 
+    
+          (<h1>Purchase Complete</h1>)
+          
+          :
+          
+          (<div className="checkout">
+              <p>Would you like to complete the purchase?</p>
+              <CardElement />
+              <button onClick={this.submit}>Send</button>
+            </div>)
+          }
+        </>
+        )
   }
 }
 

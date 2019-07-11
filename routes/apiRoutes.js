@@ -185,7 +185,7 @@ module.exports = function (app) {
       }, {
         stripe_account: stripeUserId,
       }).then(function(charge) {
-        console.log('charge:', charge)
+        res.sendStatus(200)
       }).catch((err) => console.log(err))
   })
 })
