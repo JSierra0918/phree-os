@@ -51,16 +51,21 @@ class PhreeContainer extends Component {
                             <Row>
                                 <Col size="md-12" > 
                                     <NavTab extraClass="p-tabbed-ul p-tabbed-ul-store">
-                                        <NavItem>
+                                        <div className="tab-container">
                                             <div
                                                 onClick={() => { this.changePage("Store") }}
                                                 className={this.state.currentPage === "Store" ? "p-tabbed-item p-tabbed-item-store p-active-tab" : "p-tabbed-item p-tabbed-item-store"} >Store</div>
-                                        </NavItem>
-                                        <NavItem>
+                                            <div className={this.state.currentPage === "Manage" ? " angle tab-active" : "angle"}></div>
+
+                                        </div>
+                                        <div className="tab-container">
                                             <div
                                                 onClick={() => { this.changePage("Manage") }}
                                                 className={this.state.currentPage === "Manage" ? "p-tabbed-item p-tabbed-item-manage p-active-tab" : "p-tabbed-item p-tabbed-item-manage"} >Manage</div>
-                                        </NavItem>
+
+                                            <div className={this.state.currentPage === "Store" ? " angle tab-active" : "angle"}></div>
+
+                                        </div>
                                     </NavTab>
                                 </Col>
                             </Row>

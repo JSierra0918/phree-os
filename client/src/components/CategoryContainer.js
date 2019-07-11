@@ -23,7 +23,7 @@ class CategoryContainer extends Component {
     }
 
     renderCategory() {
-        return this.props.category.map(item => <Category role={this.props.role} dataid={item.id} key={item.id} item={item.categoryName} className="category-li" style={this.state.style} onClick={this.props.onClick} delete={this.props.delete}  edit={this.props.edit}/>)
+        return this.props.category.map(item => <Category role={this.props.role} dataid={item.id} key={item.id} item={item.categoryName} className="category-li" style={this.state.style} onClick={this.props.onClick} delete={this.props.delete} edit={this.props.edit} />)
     }
 
     addClass = () => {
@@ -37,23 +37,21 @@ class CategoryContainer extends Component {
         return (
             <div className="category text-center p-main-col mb20">
                 <h5>Category</h5>
+                <hr />
                 <ul>
                     {this.renderCategory()}
                 </ul>
-                {this.props.role === "1"? (
-                <div>
-                    <div className="add-category-form type1">
-                        <form className="input-wrapper">
-                            <input id="catInput" type="text" name="addCategory" placeholder="Create Category" />
-                        </form>
+                {this.props.role === "1" ? (
+                    <div>
+                        <div className="add-category-form type1">
+                            <form className="input-wrapper">
+                                <input id="catInput" type="text" name="addCategory" placeholder="Create Category" />
+                            </form>
+                        </div>
+
+                        <button onClick={this.addCat} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
                     </div>
-
-                    <button onClick={this.addCat} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
-                </div>
-                ):(<p></p>)}
-
-                {/* //render a category button */}
-                {/* {this.renderCategory()}       */}
+                ) : (<p></p>)}
             </div>
         );
     }

@@ -79,7 +79,7 @@ function PaymentSummary(props) {
                             <th scope="col">Item</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Price</th>
-                            <th scope="col"> </th>
+                            <th scope="col"> &nbsp; &nbsp; &nbsp;</th>
                         </tr>
                     </thead>
                     <tbody >
