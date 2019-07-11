@@ -239,11 +239,19 @@
     border: 1px solid;
 }
 
+
+#trash,
+#edit {
+    padding: 5px;
+    margin: 5px;
+}
+
 .total {
 font-size: 1.25rem;
 width: 95%;
 text-align: right;
 /* padding-right: 21px; */
+
 }
 
 /* ----------------------------- MEDIA QUERIES */
@@ -255,7 +263,7 @@ text-align: right;
         flex-flow: column-reverse;
     }
 
-    .mid-section :nth-child(2){
+    .mid-section :nth-child(2) {
         order: 1;
     }
 
@@ -266,7 +274,20 @@ text-align: right;
         margin: 5px;
     }
 
-    .category{
-        order:1;
+    .category {
+        order: 1;
+    }
+
+    .categoryName {
+        transition: all .3s;
+    }
+
+    .editable-item {
+        color: #d86868;
+        font-weight: bolder;
+        padding: 10px;
+        background: #ddf3ff;
+        margin: 10px;
+        display: block;
     }
 }

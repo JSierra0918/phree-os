@@ -98,8 +98,6 @@ class StorePage extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
-            console.log("----items")
-            console.log(returnedItems)
 
             this.setState({
                 items: returnedItems.data
@@ -204,6 +202,34 @@ class StorePage extends Component {
         })
     }
 
+    deleteCategory = (id) => {
+
+        console.log("delete: ", id);
+
+        // create a variable based off of statePaymentList, possibly not to grab the exact state
+        const stateCategory = this.state.category;
+        //create obj based off of what the state paymentList is
+
+        let updatedItem = stateCategory.filter((item) => {
+            return item.id !== id
+        });
+
+        // //Update the category DB
+        // API.deleteCategory(id, updatedItem).then((response) => {
+
+        //     this.setState((state) => {
+        //         return { category: state.category = response.data }
+        //     })
+        // })
+
+        //Update object's name property.
+        this.setState((state) => {
+            return { category: state.category = updatedItem }
+        })
+
+
+    }
+
     render() {
 
         return (
@@ -214,21 +240,6 @@ class StorePage extends Component {
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
                     </Col>
                 </div>
-                {/* THIS IS WHERE THE NAV GOES */}
-                {/* <div className="row">
-                        <NavTab>
-                            <NavItem>
-                               <div className="nav-link-container">
-                        <Link to="/store" className="store-link">Store</Link>
-                        <Link to="/manage" className="manage-link">Manage</Link>
-                    </div>
-
-                                <h1>Hello Stripe</h1>
-                                <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Connect With Stripe</a>
-
-                            </NavItem>
-                        </NavTab>
-                    </div> */}
                 <div className="row mid-section" >
                     <Col size="md-6">
                         <PaymentSummary
@@ -246,6 +257,10 @@ class StorePage extends Component {
                             category={this.state.category}
                             id={this.state.catID}
                             onClick={this.selectCategory}
+                            role={this.props.role}
+                            delete={this.deleteCategory}
+                            edit={this.editCategory}
+                            editable={this.state.editable}
                         />
                     </Col>
                     <Col size="md-3">
@@ -260,9 +275,6 @@ class StorePage extends Component {
                     />
                     
                 </div>
-                {/* <div className="row last-section">
-                    <button className="btn btn-danger" onClick={()=> this.clearSummary([])}> Final Button</button>
-                </div> */}
             </div>
         );
     }

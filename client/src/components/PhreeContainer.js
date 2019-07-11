@@ -31,10 +31,11 @@ class PhreeContainer extends Component {
 
         function displayForm(page) {
             if (page === "Store") {
-                return <StorePage />
+                return <StorePage  />
             }
             else if (page === "Manage") {
-                return <ManagePage />
+                return <StorePage role={"1"} />
+                // return <ManagePage />
             }
         }
 
@@ -48,7 +49,7 @@ class PhreeContainer extends Component {
                     <div className="row main-phree">
                         <Col size="md-12">
                             <Row>
-                                <Col size="md-12" >
+                                <Col size="md-12" > 
                                     <NavTab extraClass="p-tabbed-ul p-tabbed-ul-store">
                                         <div className="tab-container">
                                             <div

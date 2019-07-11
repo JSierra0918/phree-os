@@ -1,8 +1,6 @@
 const db = require('../models');
 const reset = "\x1b[0m";
 const cyan = "\x1b[36m";
-var request = require('request');
-const config = require('../config/stripe/stripeKey');
 
 module.exports = function (app) {
   // Get all examples
@@ -111,6 +109,28 @@ module.exports = function (app) {
     });
   });
 
+  // Create a category
+  app.post("/api/category/:id", (req, res) => {
+    const cat = {
+      UserId: req.body.UserId,
+      categoryName: req.body.categoryName     
+    }
+
+    console.log(req.body);
+    db.Category.create(cat).then((catResponse)=>{
+      res.json(catResponse)
+    });
+  });
+
+  //update category
+  app.put("/api/category/one/:id", function (req, res) {
+    const idInput = req.params.id;
+    console.log('req.body:', req.body)
+    //subtract the items quantity by the req.body
+    // subtract
+    let updatedCat = - req.body.Quantity
+  });
+
   app.post("/api/stripe", function(req, res) {
     console.log("in stripe api call")
     console.log('req.body.userId', req.body.userId)
@@ -138,12 +158,6 @@ module.exports = function (app) {
         });
       }
     })
-  })
-
-    // db.Category.create(cat).then((catResponse)=>{
-    //   res.json(catResponse)
-    // });
-    // });
-
+  });
 
 }
