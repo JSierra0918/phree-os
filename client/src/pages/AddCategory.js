@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import "./styles/addcategory.css";
+import Category from "../components/Category";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export class AddCategory extends React.Component {
 
   constructor() {
     super();
     this.addCat = this.addCat.bind(this);
-    this.state = { categories: ["jorge"] }
+    this.state = { categories: [] }
 
   }
 
@@ -24,22 +26,19 @@ export class AddCategory extends React.Component {
 
   componentDidUpdate() {
     // const userId = sessionStorage.getItem("userId");
-
-    // API.getCategoryData(userId).then((response)=>{
-    //   this.setState({
-    //     categories: response.data
-    //   })
-    // })
   }
 
   addCat(e) {
     const userId = sessionStorage.getItem("userId");
     e.preventDefault();
-    var inp = document.getElementById("todoInput");
+    //grab value
+    var inp = document.getElementById("catInput");
     var val = inp.value;
 
-    // console.log(this);
-    // this.addCat(val);
+    if (val === "") {
+      alert("Cannot add a blank space");
+      return;
+    }
 
     let cat = {
       UserId: userId,
@@ -49,48 +48,44 @@ export class AddCategory extends React.Component {
       console.log(response.data);
     })
 
+    //empty value
     inp.value = '';
   }
+
   renderTableData() {
     return this.state.categories.map((val) => {
       let { categoryName } = val
+
+
       return (
-        <table id="categoriesT">
-          <tbody>
-            <tr>
-              <td>{categoryName}</td>
-            </tr>
-          </tbody>
-        </table>
+        <li>
+          <td>{categoryName}</td>
+        </li>
       )
     });
   }
-
-
-
 
   render() {
 
     return (
       <div>
-        <div className="todo type1">
-          <form className="input-wrapper">
-            <input id="todoInput" type="text" className="add-todo" name="add-todo" placeholder="Category name" />
-          </form>
-        </div>
-        <button onClick={this.addCat} >Add Category</button>
+   
+        {/* <CatList>{this.state.categories}</CatList> */}
+        {/* {this.state.categories.map(item => item.categoryName)} */}
         {/* <div><br/>{this.state.categories.map(item => item.categoryName)} </div> */}
         <div>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  {this.renderTableData()}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <ul>
+            {this.renderTableData()}
+          </ul>
         </div>
+
+        <div className="add-category-form type1">
+          <form className="input-wrapper">
+            <input id="catInput" type="text" name="addCategory" placeholder="Create Category" />
+          </form>
+        </div>
+        
+        <button onClick={this.addCat} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
 
       </div>
     )
