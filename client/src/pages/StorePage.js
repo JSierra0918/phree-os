@@ -234,7 +234,7 @@ class StorePage extends Component {
 
         return (
             <div className="col-md-12 main-row">
-
+<a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Stripe Signup</a>
                 <div className="row">
                     <Col size="md-12">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
@@ -272,6 +272,8 @@ class StorePage extends Component {
                     show={this.state.payment}
                     close={this.closeModalHandler}
                     open = {this.openModalHandler}
+                    total={this.state.total}
+                    userId={sessionStorage.getItem('userId')}
                     />
                     
                 </div>

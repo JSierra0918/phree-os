@@ -52,8 +52,9 @@ function PaymentSummary(props) {
             // TODO:Send the response to update the Items from the data table  
             //Items only needs ID and quantity...I think.
             props.makePayment(true) 
-            //clears the payment list for the client
-            props.clearSummary([]);
+
+            //----- clears the payment list for the client ------
+            // props.clearSummary([]);
         });
 
         // return paymentSummary;

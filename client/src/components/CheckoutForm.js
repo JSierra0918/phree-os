@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+import API from '../utils/API';
 
 //CardElement creates a "card" type element that mounts on the page when the component is rendered 
 //The CardElement includes inputs for all of the major card fields: the card number, the expiration date, and the CVC
@@ -13,25 +14,33 @@ import {CardElement, injectStripe} from 'react-stripe-elements';
 
 class CheckoutForm extends Component {
     constructor(props) {
+      
         super(props);
         this.state = {complete: false};
         this.submit = this.submit.bind(this);
       }
+      
+      async submit(ev) {
+        let {token} = await this.props.stripe.createToken({name: "Name"});
+        console.log('body object')
+        console.log({token: token.id, total: this.props.total})
+         let response = 
+          await fetch("/charge", {
+           method: "POST",
+           headers: {"Content-Type": "application/json"},
+           body: JSON.stringify({ token: token.id, total: this.props.total, userId: this.props.userId })
+          // API.stripeCharge(token, this.props.total, this.props.userId)
+          
+          });
 
-  async submit(ev) {
-    let {token} = await this.props.stripe.createToken({name: "Name"});
-    let response = await fetch("/charge", {
-      method: "POST",
-      headers: {"Content-Type": "text/plain"},
-      body: token.id
-    });
-  
-    if (response.ok) this.setState({complete: true});
-}
-
-render() {
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
-  
+         if (response.ok) console.log("Purchase Complete!")
+      }
+      
+      
+      render() {
+        if (this.state.complete) return <h1>Purchase Complete</h1>;
+        
+        console.log('total', this.props.total)
     return (
       <div className="checkout">
         <p>Would you like to complete the purchase?</p>

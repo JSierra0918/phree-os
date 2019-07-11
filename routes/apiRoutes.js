@@ -1,6 +1,10 @@
 const db = require('../models');
 const reset = "\x1b[0m";
 const cyan = "\x1b[36m";
+var request = require('request');
+const config = require('../config/stripe/stripeKey');
+const stripe = require('stripe')(config.stripe_secret_key);
+
 
 module.exports = function (app) {
   // Get all examples
@@ -158,6 +162,31 @@ module.exports = function (app) {
         });
       }
     })
-  });
+  })
 
+  app.post('/charge', function(req, res) {
+    console.log(`${cyan}this is the request.body${reset}`)
+    var body = req.body
+    var token = body.token
+    var total = body.total
+    var userId = body.userId
+    
+    db.Stripe.findOne({
+      where: {
+        userId: userId
+      }
+    }).then(function (results) {
+      var stripeUserId = results.dataValues.StripeUserId
+
+      stripe.charges.create({
+        amount: parseInt(total.toString().split(".").join("")),
+        currency: "usd",
+        source: token,
+      }, {
+        stripe_account: stripeUserId,
+      }).then(function(charge) {
+        console.log('charge:', charge)
+      }).catch((err) => console.log(err))
+  })
+})
 }
