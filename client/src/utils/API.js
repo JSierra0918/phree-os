@@ -37,12 +37,12 @@ export default {
             console.log(response);
         });
     },
-    // stripeCharge: function(token, total, userId) {
+    getStripe: function(userID) {
 
-    //     return axios.post("/charge", token, total, userId, (response) => {
-    //         console.log(response);
-    //     });
-    // },
+        return axios.get("/api/stripe/" + userID, (response) => {
+            
+        });
+    },
     postCategory: function(userID, category) {
 
         console.log(category)

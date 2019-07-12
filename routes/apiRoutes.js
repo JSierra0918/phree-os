@@ -134,10 +134,23 @@ module.exports = function (app) {
     // subtract
     let updatedCat = - req.body.Quantity
   });
+  app.get("/api/stripe/:id", function (req, res) {
+    // console.log('in api/stripe get')
+    // console.log(req.params.id)
+    db.Stripe.findOne({
+      where: {
+        UserId: req.params.id,
+      }
+    }).then(function (stripeAccountInfo) {
+      // console.log('results from get.api/stripe')
+      // console.log(res)
+      res.json(stripeAccountInfo);
+    });
+  });
 
   app.post("/api/stripe", function(req, res) {
     console.log("in stripe api call")
-    console.log('req.body.userId', req.body.userId)
+    console.log('req.body.userId: ', req.body.userId)
     request.post(
       {url:
       "https://connect.stripe.com/oauth/token", 
