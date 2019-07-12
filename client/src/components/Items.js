@@ -74,7 +74,7 @@ class Items extends Component {
                                                 <Input name="save" placeholder={item.itemname} className="form-control" value={this.props.value} onChange={this.props.handleInputChange} />
                                                 <div> <span id="save" onClick={() => this.saveEditCategory(item.id, this.save)}>Save</span>
 
-                                                    <span id="edit" onClick={() => this.props.itemID()}>Cancel</span></div>
+                                                    <span id="edit" onClick={() => this.props.editItem()}>Cancel</span></div>
                                             </div>
                                         )
                                     }
