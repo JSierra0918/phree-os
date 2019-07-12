@@ -70,7 +70,6 @@ class StorePage extends Component {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         //find out if the ID is connected to a stripe account 
         this.getUserData();
-        // this.getStripeData()
     }
 
     componentDidUpdate() {

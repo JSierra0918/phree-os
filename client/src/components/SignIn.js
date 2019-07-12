@@ -45,11 +45,9 @@ class SignIn extends Component {
             if (data) {
             sessionStorage.clear()
             sessionStorage.setItem('userId', res.data.id)
-            sessionStorage.setItem('hasStripe', true)
 
             } else {
             sessionStorage.setItem('userId', res.data.id)
-            sessionStorage.setItem('hasStripe', true)
             }
             this.routeToStore();    
 
