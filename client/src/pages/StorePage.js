@@ -10,6 +10,7 @@ import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
 import ManagePage from './ManagePage';
 import ModalPayment from '../components/ModalPayment';
+import ItemContainer2 from '../components/ItemContainer2'
 
 class StorePage extends Component {
 
@@ -33,7 +34,7 @@ class StorePage extends Component {
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         this.getUserData();
-        console.log("CURRENT STATE!",this.state.items);
+        console.log("CURRENT STATE!", this.state.items);
     }
 
     componentDidUpdate() {
@@ -53,11 +54,11 @@ class StorePage extends Component {
         });
     }
     makePayment = (paid) => {
-        
+
         this.setState({
             payment: paid,
         })
-        if(this.state.payment) {
+        if (this.state.payment) {
 
             this.openModalHandler()
             // return  <ModalPayment/> 
@@ -71,7 +72,7 @@ class StorePage extends Component {
 
         API.getUserData(userId).then((userResponse) => {
             if (!userResponse.data.storename) {
-                    // go to create store
+                // go to create store
 
             }
             else {
@@ -80,7 +81,7 @@ class StorePage extends Component {
                     // it is going to render
                     console.log(categories)
                     this.setState(state => {
-                        return {category: state.category = categories.data}
+                        return { category: state.category = categories.data }
 
                     })
                 })
@@ -109,12 +110,12 @@ class StorePage extends Component {
     }
     totalPrice = () => {
         let total = this.state.paymentList.reduce((a, b) => {
-        // console.log('a price', a.price) 
-        // console.log('b price', b.price)  
-        return {price: parseFloat(a.price) + parseFloat(b.price)}
+            // console.log('a price', a.price) 
+            // console.log('b price', b.price)  
+            return { price: parseFloat(a.price) + parseFloat(b.price) }
 
-        }, {price: 0}).price
-        
+        }, { price: 0 }).price
+
         console.log('total', parseFloat(total).toFixed(2))
 
         this.setState({
@@ -130,7 +131,7 @@ class StorePage extends Component {
         if (objIndex > -1) {
             //Log object to Console.
             // make new object of updated object.           
-            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };            
+            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
 
@@ -153,7 +154,7 @@ class StorePage extends Component {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
             const newList = [...this.state.paymentList];
-                  newList.push(selectedItem)
+            newList.push(selectedItem)
 
             this.setState({
                 paymentList: newList
@@ -190,7 +191,7 @@ class StorePage extends Component {
         // console.log('summaryArr:', summaryArr);
         //get an empty parameter that clears paymentList
         this.setState((state, props) => {
-            return { paymentList: state.paymentList = summaryArr, total:0 }
+            return { paymentList: state.paymentList = summaryArr, total: 0 }
         })
     }
 
@@ -206,7 +207,7 @@ class StorePage extends Component {
         //Update the category DB
         API.deleteCategory(id, updatedItem).then((response) => {
             this.setState((state) => {
-                return { category: state.category = updatedItem}
+                return { category: state.category = updatedItem }
             })
         })
 
@@ -216,7 +217,7 @@ class StorePage extends Component {
         })
 
     }
-    
+
     addCategory = (e) => {
         const userId = sessionStorage.getItem("userId");
         e.preventDefault();
@@ -242,7 +243,7 @@ class StorePage extends Component {
             newCatArr.push(response.data);
 
             this.setState(state => {
-               return { category: state.category = newCatArr}
+                return { category: state.category = newCatArr }
             })
         })
         //empty value
@@ -266,11 +267,11 @@ class StorePage extends Component {
                             count={this.state.count}
                             deleteRow={this.deleteRow}
                             clearSummary={this.clearSummary}
-                            total={this.state.total} 
+                            total={this.state.total}
                             makePayment={this.makePayment}
                             reload={this.getUserData}
-                            />
-                            
+                        />
+
                     </Col>
                     <Col size="md-3">
                         <CategoryContainer
@@ -286,24 +287,35 @@ class StorePage extends Component {
                         />
                     </Col>
                     <Col size="md-3">
-                        <ItemsContainer 
-                        items={this.state.items} 
-                        addItem={this.addItem} 
-                        reload={this.getUserData}
-                        role={this.props.role}
-                        editable={this.state.editable}
-                        
-                        
+                        {/* <ItemsContainer
+                            items={this.state.items}
+                            addItem={this.addItem}
+                            reload={this.getUserData}
+                            role={this.props.role}
+                            editable={this.state.editable}
+
+
+                        /> */}
+                        <ItemContainer2
+                            items={this.state.items}
+                            id={this.state.catID}
+                            addItem={this.addItem}
+                            role={this.props.role}
+                            delete={this.deleteCategory}
+                            edit={this.editCategory}
+                            editable={this.state.editable}
+                            reload={this.getUserData}
                         />
                     </Col>
 
+
                     <ModalPayment
-                    className="modal"
-                    show={this.state.payment}
-                    close={this.closeModalHandler}
-                    open = {this.openModalHandler}
+                        className="modal"
+                        show={this.state.payment}
+                        close={this.closeModalHandler}
+                        open={this.openModalHandler}
                     />
-                    
+
                 </div>
             </div>
         );
