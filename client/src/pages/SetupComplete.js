@@ -19,7 +19,7 @@ class SetupComplete extends Component {
             }
             
             API.postStripe(code)
-            this.routeToStore()
+            setTimeout(() => {this.routeToStore()}, 1000)
 
         }
  

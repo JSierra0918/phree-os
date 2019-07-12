@@ -45,11 +45,12 @@ class StorePage extends Component {
         });
     }
 
-    closeModalWelcomeHandler = (paid) => {
-        this.setState({
-            hasStripe: true
-        });
-    }
+    // closeModalWelcomeHandler = () => {
+    //     this.setState({
+    //         hasStripe: true
+    //     });
+    //     sessionStorage.setItem('hasStripe', true)
+    // }
 
     makePayment = (paid) => {
         
@@ -69,7 +70,7 @@ class StorePage extends Component {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         //find out if the ID is connected to a stripe account 
         this.getUserData();
-        this.getStripeData()
+        // this.getStripeData()
     }
 
     componentDidUpdate() {
@@ -77,32 +78,37 @@ class StorePage extends Component {
         //most likely do another this.getUserData()
     }
 
-    getStripeData() {
+    // getStripeData() {
         
-        const userId = sessionStorage.getItem('userId');
+    //     const userId = sessionStorage.getItem('userId');
 
-        // if (userId == null) {
-        //     this.getUserData()
-        // } 
+    //     API.getStripe(userId).then((res) => {
+    //         var data = res.data
 
-        API.getStripe(userId).then((res) => {
-            var data = res.data
-
-            if (data == null) {
-                this.setState({
-                    hasStripe : false
-                    })
-                } 
-                console.log(this.state.hasStripe)
-        })
-    }
+    //         if (data == null) {
+    //             this.setState({
+    //                 hasStripe : false
+    //                 })
+    //             } 
+    //             console.log("-----has a stripe account----")
+    //             console.log(this.state.hasStripe)
+    //     })
+    // }
 
     getUserData() {
         const userId = sessionStorage.getItem('userId');
         console.log('userId:', userId)
 
         API.getUserData(userId).then((userResponse) => {
-            console.log(userResponse.data.storename)
+            // console.log(userResponse.data.storename)
+            // console.log(userResponse.data.hasStripe)
+
+            var boolean = userResponse.data.hasStripe
+            if (boolean === false) {
+            this.setState({
+                hasStripe: boolean
+            })
+        }
             if (!userResponse.data.storename) {
                 // go to create store
 
