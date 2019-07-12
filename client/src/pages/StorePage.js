@@ -97,7 +97,7 @@ class StorePage extends Component {
         })
     }
 
-    getUserData() {
+    getUserData = () =>{
         const userId = sessionStorage.getItem('userId');
 
         API.getUserData(userId).then((userResponse) => {

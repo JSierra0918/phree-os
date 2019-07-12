@@ -33,6 +33,7 @@ class CategoryContainer extends Component {
         onClick={this.props.onClick}
         delete={this.props.delete}
         edit={this.props.edit}
+        reload={this.props.reload}
       />
     ));
   }
