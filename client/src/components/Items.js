@@ -35,7 +35,7 @@ class Items extends Component {
                 {this.props.role === "1" ?
                     (
                         <ul>
-                            <div className="edit-items-container">
+                            <div className="edit-items-container-component">
                                 <EditableItems
                                     items={this.props.items}
                                     editItem={this.editItem}
