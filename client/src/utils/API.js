@@ -36,6 +36,12 @@ export default {
 
         return axios.get("/api/category/one/"+ categoryID);
     },
+    getStripe: function(userID) {
+
+        return axios.get("/api/stripe/" + userID, (response) => {
+            
+        });
+    },
     postCategory: function(userID, category) {
 
         console.log(category)
