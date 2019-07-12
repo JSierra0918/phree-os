@@ -4,7 +4,6 @@ const config = require('../config/stripe/stripeKey');
 const reset = "\x1b[0m";
 const cyan = "\x1b[36m";
 var request = require('request');
-const config = require('../config/stripe/stripeKey');
 const stripe = require('stripe')(config.stripe_secret_key);
 
 
@@ -138,7 +137,6 @@ module.exports = function (app) {
 
   app.delete("/api/category/:id", function (req, res){
     const idInput = req.params.id;
-<<<<<<< HEAD
     db.Category.destroy({
       where: {
         id: idInput
@@ -152,26 +150,6 @@ module.exports = function (app) {
       }).then(response => console.log(response))
       
     }).catch(err => console.log(err));
-=======
-    console.log('req.body:', req.body)
-    //subtract the items quantity by the req.body
-    // subtract
-    let updatedCat = - req.body.Quantity
-  });
-  app.get("/api/stripe/:id", function (req, res) {
-    // console.log('in api/stripe get')
-    // console.log(req.params.id)
-    db.Stripe.findOne({
-      where: {
-        UserId: req.params.id,
-      }
-    }).then(function (stripeAccountInfo) {
-      // console.log('results from get.api/stripe')
-      // console.log(res)
-      res.json(stripeAccountInfo);
-    });
-  });
->>>>>>> master
 
   })
 
@@ -190,24 +168,6 @@ module.exports = function (app) {
         }
       },
       function (error, response, body) {
-<<<<<<< HEAD
-        console.log('error:', error)
-
-        if (!error && response.statusCode == 200) {
-          console.log("it went ok")
-          console.log(body)
-          var bodyParsed = JSON.parse(body)
-          db.Stripe.create({
-            StripeUserId: bodyParsed.stripe_user_id,
-            StripeRefreshToken: bodyParsed.refresh_token,
-            UserId: req.body.userId,
-          }).then(function (Stripe) {
-            res.sendStatus(200)
-          });
-        }
-      })
-  });
-=======
       console.log('error:', error)
       
       if (!error && response.statusCode == 200) {
@@ -224,6 +184,20 @@ module.exports = function (app) {
       }
     })
   })
+
+  app.get("/api/stripe/:id", function (req, res) {
+    // console.log('in api/stripe get')
+    // console.log(req.params.id)
+    db.Stripe.findOne({
+      where: {
+        UserId: req.params.id,
+      }
+    }).then(function (stripeAccountInfo) {
+      // console.log('results from get.api/stripe')
+      // console.log(res)
+      res.json(stripeAccountInfo);
+    });
+  });
 
   app.post('/charge', function(req, res) {
     console.log(`${cyan}this is the request.body${reset}`)
@@ -250,5 +224,4 @@ module.exports = function (app) {
       }).catch((err) => console.log(err))
   })
 })
->>>>>>> master
 }

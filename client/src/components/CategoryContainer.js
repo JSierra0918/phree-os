@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../pages/styles/storepage.css";
 import Category from "./Category";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EditableComponent from "../components/EditableComponent";
 
 class CategoryContainer extends Component {
   constructor(props) {
