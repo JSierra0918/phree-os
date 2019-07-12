@@ -10,6 +10,8 @@ import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
 import ManagePage from './ManagePage';
 import ModalPayment from '../components/ModalPayment';
+import ModalWelcome from '../components/ModalWelcome';
+
 
 class StorePage extends Component {
 
@@ -24,7 +26,8 @@ class StorePage extends Component {
             paymentList: [],
             count: 0,
             total: 0,
-            payment: false
+            payment: false,
+            hasStripe: true,
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -57,11 +60,32 @@ class StorePage extends Component {
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         this.getUserData();
+        //find out if the ID is connected to a stripe account 
+        this.getStripeData()
     }
 
     componentDidUpdate() {
         //once the item table has been updated, then update the site with the new info.
         //most likely do another this.getUserData()
+    }
+
+    getStripeData() {
+        const userId = sessionStorage.getItem('userId');
+        console.log('userId:', userId)
+
+        API.getStripe(userId).then((res) => {
+            var data = res.data
+
+            if (data == null) {
+                this.setState({
+                    hasStripe : false
+                    })
+                }
+                    
+                console.log(this.state.hasStripe)
+        })
+
+
     }
 
     getUserData() {
@@ -234,7 +258,7 @@ class StorePage extends Component {
 
         return (
             <div className="col-md-12 main-row">
-<a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write">Stripe Signup</a>
+                <p></p>
                 <div className="row">
                     <Col size="md-12">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
@@ -266,16 +290,19 @@ class StorePage extends Component {
                     <Col size="md-3">
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
-
                     <ModalPayment
                     className="modal"
                     show={this.state.payment}
                     close={this.closeModalHandler}
-                    open = {this.openModalHandler}
+                    open={this.openModalHandler}
                     total={this.state.total}
                     userId={sessionStorage.getItem('userId')}
                     />
-                    
+                    <ModalWelcome 
+                    show={this.state.hasStripe}
+                    close={this.closeModalHandler}
+                    open={this.openModalHandler}
+                    />
                 </div>
             </div>
         );
