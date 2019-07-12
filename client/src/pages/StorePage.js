@@ -44,6 +44,13 @@ class StorePage extends Component {
             payment: false
         });
     }
+
+    closeModalWelcomeHandler = (paid) => {
+        this.setState({
+            hasStripe: true
+        });
+    }
+
     makePayment = (paid) => {
         
         this.setState({
@@ -57,10 +64,11 @@ class StorePage extends Component {
         console.log('paid', paid)
 
     }
+
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
-        this.getUserData();
         //find out if the ID is connected to a stripe account 
+        this.getUserData();
         this.getStripeData()
     }
 
@@ -70,8 +78,12 @@ class StorePage extends Component {
     }
 
     getStripeData() {
+        
         const userId = sessionStorage.getItem('userId');
-        console.log('userId:', userId)
+
+        // if (userId == null) {
+        //     this.getUserData()
+        // } 
 
         API.getStripe(userId).then((res) => {
             var data = res.data
@@ -80,12 +92,9 @@ class StorePage extends Component {
                 this.setState({
                     hasStripe : false
                     })
-                }
-                    
+                } 
                 console.log(this.state.hasStripe)
         })
-
-
     }
 
     getUserData() {
@@ -128,6 +137,7 @@ class StorePage extends Component {
             })
         })
     }
+
     totalPrice = () => {
         let total = this.state.paymentList.reduce((a, b) => {
         // console.log('a price', a.price) 
@@ -291,17 +301,18 @@ class StorePage extends Component {
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
                     <ModalPayment
-                    className="modal"
-                    show={this.state.payment}
-                    close={this.closeModalHandler}
-                    open={this.openModalHandler}
-                    total={this.state.total}
-                    userId={sessionStorage.getItem('userId')}
+                        className="modal"
+                        show={this.state.payment}
+                        close={this.closeModalHandler}
+                        open={this.openModalHandler}
+                        total={this.state.total}
+                        userId={sessionStorage.getItem('userId')}
                     />
                     <ModalWelcome 
-                    show={this.state.hasStripe}
-                    close={this.closeModalHandler}
-                    open={this.openModalHandler}
+                        show={this.state.hasStripe}
+                        close={this.closeModalWelcomeHandler}
+                        open={this.openModalHandler}
+                        hasStripe={this.state.hasStripe}
                     />
                 </div>
             </div>
