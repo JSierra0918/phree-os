@@ -91,10 +91,6 @@ export class AddCategory extends React.Component {
 
     return (
       <div>
-
-        {/* <CatList>{this.state.categories}</CatList> */}
-        {/* {this.state.categories.map(item => item.categoryName)} */}
-        {/* <div><br/>{this.state.categories.map(item => item.categoryName)} </div> */}
         <div>
           <ul>
             {this.renderCategory()}

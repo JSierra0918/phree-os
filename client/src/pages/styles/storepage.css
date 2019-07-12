@@ -1,6 +1,4 @@
 .phree-logo {
-    /* background-color: #0A5B99;
-    color: white; */
     border-radius: 10px;
     font-size: 30px;
     padding: 5px;
@@ -8,8 +6,6 @@
     border: 2px solid #0A5B99;
 }
 .o-logo {
-    /* background-color: #EEB500;
-    color: white; */
     border-radius: 10px;
     font-size: 16px;
     font-size: 30px;
@@ -19,8 +15,6 @@
 
 }
 .s-logo {
-    /* background-color: #FF6029;
-    color: white; */
     border-radius: 10px;
     font-size: 16px;
     font-size: 30px;
@@ -106,6 +100,12 @@
     transition: all .2s;
 }
 
+/* .category-li:focus,
+.category-li:active,
+.category-li.active {
+    background-color: #EEB500 !important;
+} */
+
 .items-li:hover {
     cursor: pointer;
     background-color: #FF6029;
@@ -185,25 +185,7 @@
     text-decoration: underline;
     border-bottom: none;
 }
-/* .p-active-tab:hover {
-    background: #f3f3f3 !important;
-} */
 
-/* .p-tabbed-item-store::after,
-.p-tabbed-item-manage::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    background-color: white;
-    height: 30px;
-    width: 100px;
-    transform: skew(20deg);
-    top: 0px;
-    left: 140px;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-
-} */
 .angle{
     height: 30px;
     width: 30px;
@@ -219,10 +201,6 @@
     top: -1px;
 }
 
-.p-tabbed-item-manage {
-    /* left: 110px;
-    position: relative; */
-}
 .tab-active {
     background-color: #f3f3f3;
 }
@@ -230,15 +208,15 @@
 /* ----------------------- PHREE */
 .phree-container {
     max-width: 95vw;
-    width: 100%;
+
 }
 
 .main-phree {
     position: relative;
-    margin-top: 5rem;
-    border: 1px solid;
+    margin-top: 3rem;
+    border-top: 1px solid;
+    height: 90%;
 }
-
 
 #trash,
 #edit {
@@ -257,6 +235,10 @@ text-align: right;
 /* ----------------------------- MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {
+    .container {
+        
+    }
+   
     .mid-section {
         height: auto;
         display: flex;

@@ -14,10 +14,8 @@ class Category extends Component {
         this.state = {
             categories: [],
             newCatName: "",
-             editable: false,
-
+            editable: false,
         }
-
     }
 
     componentDidMount() {
@@ -93,9 +91,9 @@ class Category extends Component {
         })
     }
 
-    saveEditCategory = (id, value) =>{
+    saveEditCategory = (id, value) => {
 
-        console.log("ID VALUE:" , id, value)
+        console.log("ID VALUE:", id, value)
     }
 
     render() {
@@ -106,31 +104,31 @@ class Category extends Component {
 
                         {/* <EditableComponent item={this.props.item} editable={true}/> */}
                         {/* If it's the manage page show this */}
+
                         {this.props.role === "1" ? (
                             <div>
                                 <EditableComponent item={this.props.item} editable={this.state.editable} />
 
                                 {/* check if editable is false, if it is show delete */}
 
-                                {this.state.editable!==true ?
-                                
-                               <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                               <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
-                                : 
-                               <div> <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Save</span>
-                               
-                               <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
-                                  
+
+                                {this.state.editable !== true ?
+
+                                    <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}><FontAwesomeIcon icon="edit-alt" className="edit-icon" />Edit</span></div>
+                                    :
+                                    <div> <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Save</span>
+
+                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
+
                                 }
                             </div>
                         ) :
-                            (<span className="categoryName">{this.props.item}</span>
-                            )}
+                            (<span className="categoryName">{this.props.item}</span>)
+                        }
                     </div>
                 </li>
-
-
-            </div>
+            </div >
         );
     }
 }

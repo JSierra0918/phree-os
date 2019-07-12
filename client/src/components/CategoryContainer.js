@@ -47,11 +47,11 @@ class CategoryContainer extends Component {
   render() {
     return (
       <div className="category text-center p-main-col mb20">
-        <h5>Category</h5>
+        <h5>Category</h5> <hr/>
         <ul>{this.renderCategory()}</ul>
         {this.props.role === "1" ? (
           <div>
-            <div className="add-category-form type1">
+            <div className="add-category-form">
               <form className="input-wrapper">
                 <input
                   id="catInput"

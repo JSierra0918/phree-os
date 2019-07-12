@@ -94,7 +94,7 @@ function PaymentSummary(props) {
 
             {/* if items exist show button */}
             <div className="summary-btn-container">
-            <div className="total">Total: {props.total}</div>
+            <div className="total">Total: ${props.total}</div>
                 <button className="btn pay" onClick={tableToObj}>Pay</button>
                 <button className="btn cancel" onClick={() => props.clearSummary([])}>Cancel</button>
             </div>

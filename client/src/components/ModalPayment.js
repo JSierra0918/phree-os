@@ -10,11 +10,12 @@ const ModalPayment = props => {
         className="modal-wrapper"
         style={{
           display: props.show ? "inline-block" : "none",
-          opacity: props.show ? "1" : "0"
+          opacity: props.show ? "1" : "0",
+          
         }}
       >
         <div className="modal-header">
-          <h3>Total: {props.total}</h3>
+          <h3>Total: ${props.total}</h3>
           <span className="close-modal-btn" onClick={props.close}>
             ×
           </span>

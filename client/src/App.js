@@ -12,9 +12,9 @@ import PhreeContainer from './components/PhreeContainer'
 import AddStore from './pages/AddStore'
 import AddCategory from './pages/AddCategory'
 import {Elements, StripeProvider} from 'react-stripe-elements';
-import { faTrashAlt, faPlusSquare, faTimes} from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPlusSquare, faTimes, faEdit} from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-library.add( faTrashAlt, faPlusSquare, faTimes);
+library.add( faTrashAlt, faPlusSquare, faTimes, faEdit);
 
 function App() {
   return (
