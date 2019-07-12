@@ -20,7 +20,7 @@ class StorePage extends Component {
             calc: undefined,
             catID: undefined,
             category: [],
-            items: [],
+            items: this.props.items,
             paymentList: [],
             count: 0,
             total: 0,
@@ -33,6 +33,7 @@ class StorePage extends Component {
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         this.getUserData();
+        console.log("CURRENT STATE!",this.state.items);
     }
 
     componentDidUpdate() {
