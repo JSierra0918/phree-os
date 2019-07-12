@@ -6,6 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class ItemsContainer extends Component {
 
+    constructor(props){
+        super(props);
+
+        this.state= {
+            editable: false
+        }
+    }
+
     renderCategory() {
         return this.props.category.map(item => <Items
             role={this.props.role}
@@ -21,6 +29,21 @@ class ItemsContainer extends Component {
         />)
     }
 
+    itemID = (Item) => {
+        console.log("THIS IS THE ITEM:", Item)
+    }
+
+    editItem = () => {
+
+        //make content edidtable
+        console.log(this);
+        const stateEdit = this.state.editable;
+        this.setState((state) => {
+            return { editable: state.editable = !stateEdit }
+        })
+    }
+
+
     render() {
 
         return (
@@ -32,7 +55,9 @@ class ItemsContainer extends Component {
                         items={this.props.items}
                         role={this.props.role}
                         addItem={this.props.addItem}
-                        editable ={this.props.editable}
+                        editable ={this.state.editable}
+                        editItem ={this.editItem}
+                        itemID ={this.itemID}
                     />
 
                     {this.props.role === "1" ? (

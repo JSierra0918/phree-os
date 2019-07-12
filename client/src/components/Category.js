@@ -55,6 +55,8 @@ class Category extends Component {
         //make content edidtable
         const stateEdit = this.state.editable;
 
+        console.log(this)
+
         this.setState((state) => {
             return { editable: state.editable = !stateEdit }
         })

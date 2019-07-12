@@ -7,12 +7,14 @@ function EditableItems(props) {
     const formatter = new Intl.NumberFormat('en-IN', {
         minimumFractionDigits: 2
     })
+    console.log("editableitems")
+    console.log(props)
 
     return (
         <div>
             {props.items.map(item =>
                 <li dataid={item.id} key={item.id}
-                    onClick={""}
+                    // onClick={""}
                     className="edit-items-container"  >
                     <div className="edit-items-li"><h6>
                         {item.itemname}
@@ -30,16 +32,16 @@ function EditableItems(props) {
                     {props.editable !== true ?
 
                         <div><span id="trash" onClick={() => this.props.delete(item.id)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                            <span id="edit" onClick={() => props.editItem(item.id)}>Edit</span></div>
+                            <span id="edit" onClick={() => props.editItem()}>Edit</span></div>
                         :
                         (
-                        <div>
-                        <Input name="save" placeholder={props.item} className="form-control" value={props.value} onChange={props.handleInputChange} />
-                        <div> <span id="save" onClick={() => this.saveEditCategory(item.id, props.save)}>Save</span>
+                            <div>
+                                <Input name="save" placeholder={props.item} className="form-control" value={props.value} onChange={props.handleInputChange} />
+                                <div> <span id="save" onClick={() => this.saveEditCategory(item.id, props.save)}>Save</span>
 
-                            <span id="edit" onClick={() => props.editItem(item.id)}>Cancel</span></div>
+                                    <span id="edit" onClick={() => props.editItem(item.id)}>Cancel</span></div>
                             </div>
-                            )
+                        )
                     }
 
                 </li>)}
