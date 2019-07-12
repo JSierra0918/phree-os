@@ -1,37 +1,60 @@
 import React, { Component } from 'react';
 import '../pages/styles/storepage.css';
 import Items from './Items';
+import '../pages/styles/storepage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function ItemsContainer(props) {
+class ItemsContainer extends Component {
 
-    // add decimals to the number
-    const formatter = new Intl.NumberFormat('en-IN', {
-        minimumFractionDigits: 2
-      })
+    renderCategory() {
+        return this.props.category.map(item => <Items
+            role={this.props.role}
+            dataid={item.id}
+            key={item.id}
+            item={item.categoryName}
+            className="category-li"
+            style={this.state.style}
+            onClick={this.props.onClick}
+            delete={this.props.delete}
+            edit={this.props.edit}
+            reload={this.props.reload}
+        />)
+    }
 
-    return (
-        <div className="items text-center p-main-col mb20">
-            <h5>Items</h5> <hr />
-            <ul>
-                {props.items.map(item =>
-                    <li dataid={item.id} key={item.id}
-                        onClick={() => props.addItem(item)}
-                        className="items-li"  >
-                        <h6>
-                            {item.itemname}
-                        </h6>
-                        <div className="d-flex justify-content-between">
-                            <div className="d-flex item-highlight">
-                                <span>Q:</span><p>{item.quantity}</p>
+    render() {
+
+        return (
+            <>
+                <div className="items text-center p-main-col mb20">
+                    <h5>Items</h5>
+                    <hr />
+                    <Items
+                        items={this.props.items}
+                        role={this.props.role}
+                        addItem={this.props.addItem}
+                        editable ={this.props.editable}
+                    />
+
+                    {this.props.role === "1" ? (
+                        <div>
+                            <div className="add-category-form type1">
+                                <form className="input-wrapper">
+                                    <input id="catInput" type="text" name="addCategory" placeholder="Create Category" />
+                                </form>
                             </div>
-                            <div className="d-flex item-highligh">
-                                <span>$</span><p>{ formatter.format(item.price)}</p>
-                            </div>
+
+                            <button onClick={this.props.addNewItem} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Add Item</button>
                         </div>
-                    </li>)}
-            </ul>
-        </div>
-    )
+
+                        //include EditItems component
+                    ) : (<p></p>)}
+                </div>
+
+
+
+            </>
+        )
+    }
 }
 
 export default ItemsContainer;

@@ -88,6 +88,7 @@ class StorePage extends Component {
     }
 
     selectCategory = (id) => {
+        console.log("SELECT", id);
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
@@ -193,6 +194,7 @@ class StorePage extends Component {
     }
 
     deleteCategory = (id) => {
+        console.log("DELETE", id)
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
         //create obj based off of what the state paymentList is
@@ -287,6 +289,9 @@ class StorePage extends Component {
                         items={this.state.items} 
                         addItem={this.addItem} 
                         reload={this.getUserData}
+                        role={this.props.role}
+                        editable={this.state.editable}
+                        
                         
                         />
                     </Col>

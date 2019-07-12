@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EditableComponent from "./EditableComponent";
+import EditableCategory from "./EditableCategory";
 
 class Category extends Component {
     constructor(props) {
@@ -110,7 +110,7 @@ class Category extends Component {
                         {/* If it's the manage page show this */}
                         {this.props.role === "1" ? (
                             <div>
-                                <EditableComponent item={this.props.item} editable={this.state.editable} value={this.state.save} handleInputChange={this.handleInputChange} />
+                                <EditableCategory item={this.props.item} editable={this.state.editable} value={this.state.save} handleInputChange={this.handleInputChange} />
 
                                 {/* check if editable is false, if it is show delete */}
 
@@ -122,7 +122,6 @@ class Category extends Component {
                                     <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
 
                                         <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
-
                                 }
                             </div>
                         ) :

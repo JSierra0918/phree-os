@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import '../pages/styles/storepage.css';
 import Category from './Category';
+import '../pages/styles/storepage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import API from '../utils/API';
 
 class CategoryContainer extends Component {
     constructor(props) {

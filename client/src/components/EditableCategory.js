@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from './Bootstrap/Form';
 
-function EditableComponent(props) {
+function EditableCategory(props) {
 
     console.log(props.value)
 
@@ -17,4 +17,4 @@ function EditableComponent(props) {
 }
 
 
-export default EditableComponent;
+export default EditableCategory;
