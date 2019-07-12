@@ -62,7 +62,7 @@ class CategoryContainer extends Component {
               </form>
             </div>
 
-            <button onClick={this.addCat}>
+            <button onClick={this.props.addCategory}>
               {" "}
               <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add
               Category
