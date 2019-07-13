@@ -181,4 +181,28 @@ module.exports = function (app) {
         }
       })
   });
+
+  //create new Item
+  // Update items after the client has sold.
+  app.put("/api/items/:id", function (req, res) {
+    const idInput = req.params.id;
+    console.log('req.body:', req.body)
+    //subtract the items quantity by the req.body
+    // subtract
+
+    let newItem = req.body
+    console.log('newItem:', newItem)
+    db.Item.update(
+      {
+        newItem
+      }, {
+      returning: true,
+        where: {
+          id: idInput
+        }
+      }).then(function (updatedItem) {
+        console.log(updatedItem)
+        res.json(updatedItem);
+      });
+  });
 }

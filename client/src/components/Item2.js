@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditableCategory from "./EditableCategory";
+import EditableItems2 from "./EditableItems2";
 
 class Category extends Component {
     constructor(props) {
@@ -11,7 +12,9 @@ class Category extends Component {
             categories: [],
             newCatName: "",
             editable: false,
-            save: ""
+            nameVal: "",
+            quantVal: "",
+            priceVal: ""
         }
     }
 
@@ -45,45 +48,53 @@ class Category extends Component {
         })
     }
 
-    editCategory = () => {
+    editItem = (id) => {
 
+        console.log(id);
         //make content edidtable
         const stateEdit = this.state.editable;
-
-        console.log(this)
 
         this.setState((state) => {
             return { editable: state.editable = !stateEdit }
         })
     }
 
-    saveEditCategory = (id, value) => {
-        console.log("ID VALUE:", id, value);
+    saveItem = (id) => {
+        // event.preventDefault();
+        let newItem = {
+            itemname: this.state.nameVal,
+            price: this.state.priceVal,
+            quantity: this.state.quantVal,
+            counter: 1,
+            CategoryID: this.props.catID
+        }
 
         const space = " ";
         const emptySpace = space.trim();
 
-        const update = {
-            categoryName: value.trim()
-        }
+        // const update = {
+        //     categoryName: value.trim()
+        // }
 
-        if (update.categoryName === this.props.item) {
-            alert("You already have that name!")
-        } else if (update.categoryName === emptySpace) {
-            alert("You must have something in there")
-        } else {
-            //save value to the Category DB
-            API.putCategory(id, update).then((response) => {
-                console.log('response:', response)
+        console.log(newItem);
 
-                this.setState({
-                    editable: false
-                })
+        // if (update.categoryName === this.props.item) {
+        //     alert("You already have that name!")
+        // } else if (update.categoryName === emptySpace) {
+        //     alert("You must have something in there")
+        // } else {
+        //     //save value to the Category DB
+        API.putNewItem(id, newItem).then((response) => {
+            console.log('response:', response)
 
-                //reload the db
-                this.props.reload();
+            this.setState({
+                editable: false
             })
-        }
+
+            //reload the db
+            this.props.reload();
+        })
+        // }
     }
 
     handleInputChange = event => {
@@ -103,27 +114,37 @@ class Category extends Component {
             minimumFractionDigits: 2
         })
 
+
         //remove addItem Method
-        let addItemVault = {...this.props}
-        console.log(addItemVault);
+
         return (
             <div>
                 <li {...this.props} onClick={() => this.props.addItem(this.props.item)}>
                     <div className="col manage-category" >
                         {this.props.role === "1" ? (
                             <div>
-                                <EditableCategory item={this.props.item.itemname} editable={this.state.editable} value={this.state.save} handleInputChange={this.handleInputChange} />
+                                <EditableItems2
+                                    itemname={this.props.item.itemname}
+                                    quantity={this.props.quantity}
+                                    price={this.props.price}
+                                    editable={this.state.editable}
+                                    nameVal={this.state.nameVal}
+                                    quantVal={this.state.quantVal}
+                                    priceVal={this.state.priceVal}
+                                    handleInputChange={this.handleInputChange}
+
+                                />
 
                                 {/* check if editable is false, if it is show delete */}
 
                                 {this.state.editable !== true ?
 
                                     <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
+                                        <span id="edit" onClick={() => this.editItem(this.props.dataid)}>Edit</span></div>
                                     :
-                                    <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
+                                    <div> <span id="save" onClick={() => this.saveItem(this.props.dataid)}>Save</span>
 
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
+                                        <span id="edit" onClick={() => this.editItem(this.props.dataid)}>Cancel</span></div>
                                 }
                             </div>
                         ) :

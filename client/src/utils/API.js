@@ -16,7 +16,7 @@ export default {
             console.log(response);
         });
     },
-    putItems: function(itemID, itemsUpdate) {
+    putQuanityItem: function(itemID, itemsUpdate) {
 
         return axios.put("/api/items/one/"+ itemID, itemsUpdate, (response) => {
             console.log(response);
@@ -52,6 +52,12 @@ export default {
     deleteCategory: function(catID, catUpdate) {
 
         return axios.delete("/api/category/"+ catID, (response) => {
+            console.log(response);
+        });
+    },
+    putNewItem: function(itemID, itemsUpdate) {
+
+        return axios.put("/api/items/"+ itemID, itemsUpdate, (response) => {
             console.log(response);
         });
     },

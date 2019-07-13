@@ -104,7 +104,8 @@ class StorePage extends Component {
         API.getItems(catID).then((returnedItems) => {
 
             this.setState({
-                items: returnedItems.data
+                items: returnedItems.data,
+                catID: catID
             })
         })
     }
@@ -305,6 +306,7 @@ class StorePage extends Component {
                             edit={this.editCategory}
                             editable={this.state.editable}
                             reload={this.getUserData}
+                            catID={this.state.catID}
                         />
                     </Col>
 

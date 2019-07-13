@@ -36,6 +36,7 @@ class ItemContainer2 extends Component {
             delete={this.props.delete}
             edit={this.props.edit}
             reload={this.props.reload}
+            catID={this.props.catID}
         />)
     }
 
@@ -85,7 +86,7 @@ class ItemContainer2 extends Component {
                     <div>
                         <div className="add-category-form type1">
                             <form className="input-wrapper">
-                                <input id="catInput" type="text" name="addCategory" placeholder="Create Category" />
+                                <input id="catInput" type="text" name="addItem" placeholder="Create an Item" />
                             </form>
                         </div>
 

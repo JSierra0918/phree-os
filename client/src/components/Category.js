@@ -28,20 +28,20 @@ class Category extends Component {
         // const userId = sessionStorage.getItem("userId");
     }
 
-    selectCategory = (id) => {
-        const catDom = document.getElementsByClassName("categoryName")
-        catDom.focus();
-        //set the state of the category based off of the name
-        API.getOneCategory(id).then((category) => {
-            console.log('category:', category.data)
-            //find items and return the array possibly pass it as an argument for displayItem.
-            this.grabItems(category.data.id);
+    // selectCategory = (id) => {
+    //     const catDom = document.getElementsByClassName("categoryName")
+    //     catDom.focus();
+    //     //set the state of the category based off of the name
+    //     API.getOneCategory(id).then((category) => {
+    //         console.log('category:', category.data)
+    //         //find items and return the array possibly pass it as an argument for displayItem.
+    //         this.grabItems(category.data.id);
 
-            //Display an area for the user to update the category name
+    //         //Display an area for the user to update the category name
 
-        });
+    //     });
 
-    }
+    // }
 
     updateCategoryName = (id, catName) => {
 
