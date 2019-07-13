@@ -11,7 +11,7 @@ const ModalPayment = props => {
         style={{
           display: props.show ? "inline-block" : "none",
           opacity: props.show ? "1" : "0",
-          
+          // background: props.show? "white" : "black",
         }}
       >
         <div className="modal-header">
@@ -21,8 +21,8 @@ const ModalPayment = props => {
           </span>
         </div>
         <div className="modal-body">
-          <p>
-              <div class="form-row">
+          
+              <div className="form-row">
                 <div id="card-element">
                   <StripeProvider apiKey="pk_test_CPmIKoox7WD3HAdqil1J9oEf00GKDwnkqp">
                     <div className="example">
@@ -38,7 +38,7 @@ const ModalPayment = props => {
                 </div>
                 <div id="card-errors" role="alert" />
               </div>
-          </p>
+          
         </div>
         <div className="modal-footer">
           <button className="btn-cancel" onClick={props.close}>

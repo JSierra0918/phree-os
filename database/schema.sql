@@ -10,12 +10,11 @@ INSERT INTO categories (categoryName, CreatedAt, UpdatedAt, UserID ) VALUES ('fu
 INSERT INTO categories (categoryName, CreatedAt, UpdatedAt, UserID ) VALUES ('teal',now(), now(), 2);
 INSERT INTO categories (categoryName, CreatedAt, UpdatedAt, UserID ) VALUES ('pink',now(), now(), 1);
 
-select * from users;
-
-
 
 USE pointOfSales;
 INSERT INTO Items (itemname, price, quantity,CreatedAt, UpdatedAt, CategoryID ) VALUES ('OJ', '27.00', 10, now(), now(), 1);
 INSERT INTO Items (itemname, price, quantity,CreatedAt, UpdatedAt, CategoryID ) VALUES ('Bananas', '27.00', 10, now(), now(), 2);
 INSERT INTO Items (itemname, price, quantity,CreatedAt, UpdatedAt, CategoryID ) VALUES ('Lettuce', '27.00', 10, now(), now(), 1);
 INSERT INTO Items (itemname, price, quantity,CreatedAt, UpdatedAt, CategoryID ) VALUES ('Bread', '27.00', 10, now(), now(), 2);
+
+select * from users;

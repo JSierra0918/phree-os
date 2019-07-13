@@ -54,8 +54,10 @@ class SignUp extends Component {
             if (data) {
             sessionStorage.clear()
             sessionStorage.setItem('userId', res.data.id)
+            
             } else {
             sessionStorage.setItem('userId', res.data.id)
+
             }
             
             this.routeToStore();    

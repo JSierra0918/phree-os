@@ -1,78 +1,47 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EditableComponent from "./EditableComponent";
-
-
+import EditableCategory from "./EditableCategory";
 
 class Category extends Component {
     constructor(props) {
         super(props);
 
-        this.addCat = this.addCat.bind(this);
-
         this.state = {
             categories: [],
             newCatName: "",
             editable: false,
+            save: ""
         }
     }
 
     componentDidMount() {
-        const userId = sessionStorage.getItem("userId");
-        API.getCategoryData(userId).then((response) => {
-            console.log("MOUNTED: ", response);
-            this.setState({
-                categories: response.data
-            })
-        })
+        // const userId = sessionStorage.getItem("userId");
+        // API.getCategoryData(userId).then((response) => {
+        //     this.setState({
+        //         categories: response.data
+        //     })
+        // })
     }
 
     componentDidUpdate() {
         // const userId = sessionStorage.getItem("userId");
     }
 
-    addCat(e) {
-        const userId = sessionStorage.getItem("userId");
-        e.preventDefault();
-        //grab value
-        var inp = document.getElementById("catInput");
-        var val = inp.value;
+    // selectCategory = (id) => {
+    //     const catDom = document.getElementsByClassName("categoryName")
+    //     catDom.focus();
+    //     //set the state of the category based off of the name
+    //     API.getOneCategory(id).then((category) => {
+    //         console.log('category:', category.data)
+    //         //find items and return the array possibly pass it as an argument for displayItem.
+    //         this.grabItems(category.data.id);
 
-        if (val === "") {
-            alert("Cannot add a blank space");
-            return;
-        }
+    //         //Display an area for the user to update the category name
 
-        let cat = {
-            UserId: userId,
-            categoryName: val
-        }
+    //     });
 
-        API.postCategory(userId, cat).then((response) => {
-            console.log(response.data);
-
-            this.setState({
-                categories: response.data
-            })
-        })
-
-        //empty value
-        inp.value = '';
-    }
-
-    selectCategory = (id) => {
-        //set the state of the category based off of the name
-        API.getOneCategory(id).then((category) => {
-            console.log('category:', category.data)
-            //find items and return the array possibly pass it as an argument for displayItem.
-            this.grabItems(category.data.id);
-
-            //Display an area for the user to update the category name
-
-        });
-
-    }
+    // }
 
     updateCategoryName = (id, catName) => {
 
@@ -81,25 +50,64 @@ class Category extends Component {
         })
     }
 
-    editCategory = () => {
-
+    editCategory = (e) => {
+        e.stopPropagation();
         //make content edidtable
         const stateEdit = this.state.editable;
+      
+
+        console.log(this)
 
         this.setState((state) => {
             return { editable: state.editable = !stateEdit }
         })
     }
 
-    saveEditCategory = (id, value) => {
+    saveEditCategory = (e, id, value) => {
+        console.log("ID VALUE:", id, value);
+        e.stopPropagation();
 
-        console.log("ID VALUE:", id, value)
+        const space = " ";
+        const emptySpace = space.trim();
+
+        const update = {
+            categoryName: value.trim()
+        }
+
+        if (update.categoryName === this.props.item) {
+            alert("You already have that name!")
+        } else if (update.categoryName === emptySpace) {
+            alert("You must have something in there")
+        } else {
+            //save value to the Category DB
+            API.putCategory(id, update).then((response) => {
+                console.log('response:', response)
+
+                this.setState({
+                    editable: false
+                })
+
+                //reload the db
+                this.props.reload();
+            })
+        }
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+
+        this.setState({
+            [name]: value
+        });
+
+        console.log(name, value);
+
+    };
 
     render() {
         return (
             <div>
-                <li {...this.props} onClick={() => this.props.onClick(this.props.dataid)}>
+                <li {...this.props} onClick={(e) => this.props.onClick(this.props.dataid)}>
                     <div className="col manage-category" >
 
                         {/* <EditableComponent item={this.props.item} editable={true}/> */}
@@ -107,20 +115,18 @@ class Category extends Component {
 
                         {this.props.role === "1" ? (
                             <div>
-                                <EditableComponent item={this.props.item} editable={this.state.editable} />
+                                <EditableCategory item={this.props.item} editable={this.state.editable} value={this.state.save} handleInputChange={this.handleInputChange} />
 
                                 {/* check if editable is false, if it is show delete */}
 
-
                                 {this.state.editable !== true ?
 
-                                    <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}><FontAwesomeIcon icon="edit" className="edit-icon" />Edit</span></div>
+                                    <div className="d-flex justify-content-center"><span id="trash" onClick={(e) => this.props.delete(e, this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                        <span id="edit" onClick={(e) => this.editCategory(e, this.props.dataid)}>Edit</span></div>
                                     :
-                                    <div> <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Save</span>
+                                    <div className="d-flex justify-content-center"> <span id="save" onClick={(e) => this.saveEditCategory(e,this.props.dataid, this.state.save)}>Save</span>
 
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
-
+                                        <span id="cancel" onClick={(e) => this.editCategory(e, this.props.dataid)}>Cancel</span></div>
                                 }
                             </div>
                         ) :
