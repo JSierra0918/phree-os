@@ -246,25 +246,73 @@ module.exports = function (app) {
     var token = body.token
     var total = body.total
     var userId = body.userId
-
+    
     db.Stripe.findOne({
       where: {
         userId: userId
       }
     }).then(function (results) {
       var stripeUserId = results.dataValues.StripeUserId
-
+      
       stripe.charges.create({
         amount: parseInt(total.toString().split(".").join("")),
         currency: "usd",
         source: token,
       }, {
-          stripe_account: stripeUserId,
-        }).then(function (charge) {
-          res.sendStatus(200)
-        }).catch((err) => console.log(err))
+        stripe_account: stripeUserId,
+      }).then(function (charge) {
+        res.sendStatus(200)
+        
+      })
+      .catch((err) => console.log(err))
+      // .then(function (updatingQty) {
+        
+      //   const summary = body.checkoutObj
+        
+      //   for(var i = 0; i < summary.length; i ++) {
+      //     let newID = summary[i].id
+      //     let quantity = summary[i].Quantity
+
+          
+      //     // setTimeout((function updateSequelize(id, quant) {
+      //       console.log('------here is the quantity-------')
+      //       console.log('quantity:', quantity)
+      //       console.log('-----here is the id -------')
+      //       console.log('newId:', newID)
+
+      //       db.Item.findOne({
+      //         where: {
+      //           id : newID
+      //         }
+              
+      //       }).then(function(results){
+      //           console.log(`${cyan}results from the item find one ${reset}`)
+
+      //           console.log(results)
+      //           db.Item.update({
+      //             quantity: results.dataValues[i] - quantity
+      //           }, 
+      //           {
+      //             where: {
+      //                 id: newID
+      //               }
+      //             }).then(function(results){
+      //               console.log(`${cyan}results from the item update ${reset}`)
+
+      //               console.log(results)
+      //             }).catch((err) => console.log(err))
+                  
+      //           })
+      //       // }), 1000) 
+      //       // updateSequelize(newId, quantity)
+      //     }
+        // })
+      })
     })
-  })
+    
+        //loop through the object
+        //update the item database where id = id 
+        //db quantity - our quantity = new quantity 
 
   app.delete("/api/items/:id", function (req, res) {
     const idInput = req.params.id;
@@ -294,5 +342,6 @@ module.exports = function (app) {
       })
       // 
     }).catch(err => console.log(err));
-});
+  });
+
 }

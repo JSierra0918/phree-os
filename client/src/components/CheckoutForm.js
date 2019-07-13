@@ -28,7 +28,7 @@ class CheckoutForm extends Component {
           await fetch("/charge", {
            method: "POST",
            headers: {"Content-Type": "application/json"},
-           body: JSON.stringify({ token: token.id, total: this.props.total, userId: this.props.userId })
+           body: JSON.stringify({ token: token.id, total: this.props.total, userId: this.props.userId, checkoutObj:this.props.checkoutObj })
           });
 
          if (response.ok) {
@@ -36,21 +36,23 @@ class CheckoutForm extends Component {
            this.setState({
              complete : true
            })
+           API.putQuanityItem()
+           //make the call and adjust the quantities 
          }
          
       }
 
-        cardInfo= ()=> {
-        let cardInput = document.querySelector(".__PrivateStripeElement-input")
-        console.log(cardInput)
-        console.log(cardInput.value)
-        if (cardInput.value === "") {
-          alert("Please enter your card number.")
-        }else{
-          alert("you got numbers")
-          // this.submit()
-        }
-      }
+      //   cardInfo= ()=> {
+      //   let cardInput = document.querySelector(".__PrivateStripeElement-input")
+      //   console.log(cardInput)
+      //   console.log(cardInput.value)
+      //   if (cardInput.value === "") {
+      //     alert("Please enter your card number.")
+      //   }else{
+      //     alert("you got numbers")
+      //     // this.submit()
+      //   }
+      // }
       render() {
 
         
@@ -64,7 +66,7 @@ class CheckoutForm extends Component {
           (<div className="checkout">
               <p>Would you like to complete the purchase?</p>
               <CardElement/>
-              <button onClick={this.cardInfo}>Send</button>
+              <button onClick={this.submit}>Send</button>
             </div>)
           }
         </>

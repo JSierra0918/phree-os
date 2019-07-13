@@ -31,6 +31,7 @@ const ModalPayment = props => {
                         <CheckoutForm 
                         total={props.total} 
                         userId={props.userId}
+                        checkoutObj={props.checkoutObj}
                         />
                       </Elements>
                     </div>
