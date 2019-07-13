@@ -29,6 +29,7 @@ class StorePage extends Component {
             total: 0,
             payment: false,
             hasStripe: true,
+            checkoutObj:{}
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -60,13 +61,6 @@ class StorePage extends Component {
         });
     }
 
-    // closeModalWelcomeHandler = () => {
-    //     this.setState({
-    //         hasStripe: true
-    //     });
-    //     sessionStorage.setItem('hasStripe', true)
-    // }
-
     makePayment = (paid) => {
 
         this.setState({
@@ -80,25 +74,6 @@ class StorePage extends Component {
         console.log('paid', paid)
 
     }
-
-
-
-    // getStripeData() {
-        
-    //     const userId = sessionStorage.getItem('userId');
-
-    //     API.getStripe(userId).then((res) => {
-    //         var data = res.data
-
-    //         if (data == null) {
-    //             this.setState({
-    //                 hasStripe : false
-    //                 })
-    //             } 
-    //             console.log("-----has a stripe account----")
-    //             console.log(this.state.hasStripe)
-    //     })
-    // }
 
     getUserData = () =>{
         const userId = sessionStorage.getItem('userId');
@@ -160,8 +135,7 @@ class StorePage extends Component {
 
     totalPrice = () => {
         let total = this.state.paymentList.reduce((a, b) => {
-            // console.log('a price', a.price) 
-            // console.log('b price', b.price)  
+
             return { price: parseFloat(a.price) + parseFloat(b.price) }
 
         }, { price: 0 }).price
@@ -336,6 +310,18 @@ class StorePage extends Component {
         })
     }
 
+    setCategories = (categories) => {
+        this.setState({
+            category:categories
+        })
+    }
+
+    getQuantityUpdate = (checkoutObj) => {
+        console.log(checkoutObj);
+        this.setState({
+            checkoutObj: checkoutObj
+        })
+    }
     render() {
     
         return (
@@ -356,6 +342,7 @@ class StorePage extends Component {
                             total={this.state.total}
                             makePayment={this.makePayment}
                             reload={this.getUserData}
+                            getQuantityUpdate={this.getQuantityUpdate}
                         />
 
                     </Col>
@@ -370,6 +357,7 @@ class StorePage extends Component {
                             editable={this.state.editable}
                             reload={this.getUserData}
                             addCategory={this.addCategory}
+                            setCategories={(categories) => {this.setCategories(categories)}}
                             
                         />
                     </Col>
@@ -395,6 +383,7 @@ class StorePage extends Component {
                         open={this.openModalHandler}
                         total={this.state.total}
                         userId={sessionStorage.getItem('userId')}
+                        checkoutObj={this.state.checkoutObj}
                     />
                     <ModalWelcome 
                         show={this.state.hasStripe}
