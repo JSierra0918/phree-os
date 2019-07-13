@@ -3,13 +3,13 @@ import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditableCategory from "./EditableCategory";
 
-class Category extends Component {
+class Item2 extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            categories: [],
-            newCatName: "",
+            items: [],
+            newItem: "",
             editable: false,
             save: ""
         }
@@ -28,20 +28,6 @@ class Category extends Component {
         // const userId = sessionStorage.getItem("userId");
     }
 
-    selectCategory = (id) => {
-        const catDom = document.getElementsByClassName("categoryName")
-        catDom.focus();
-        //set the state of the category based off of the name
-        API.getOneCategory(id).then((category) => {
-            console.log('category:', category.data)
-            //find items and return the array possibly pass it as an argument for displayItem.
-            this.grabItems(category.data.id);
-
-            //Display an area for the user to update the category name
-
-        });
-
-    }
 
     updateCategoryName = (id, catName) => {
 
@@ -139,4 +125,4 @@ class Category extends Component {
 }
 
 
-export default Category;
+export default Item2;

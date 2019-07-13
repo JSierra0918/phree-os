@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../pages/styles/storepage.css";
 import Category from "./Category";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EditableComponent from "../components/EditableComponent";
 
 class CategoryContainer extends Component {
   constructor(props) {
@@ -34,6 +33,7 @@ class CategoryContainer extends Component {
         onClick={this.props.onClick}
         delete={this.props.delete}
         edit={this.props.edit}
+        reload={this.props.reload}
       />
     ));
   }
@@ -62,7 +62,7 @@ class CategoryContainer extends Component {
               </form>
             </div>
 
-            <button onClick={this.addCat}>
+            <button onClick={this.props.addCategory}>
               {" "}
               <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add
               Category
