@@ -230,6 +230,7 @@ class StorePage extends Component {
 
     deleteCategory = (id) => {
         console.log("DELETE", id)
+        
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
         //create obj based off of what the state paymentList is
@@ -238,18 +239,35 @@ class StorePage extends Component {
         });
 
         //Update the category DB
-        API.deleteCategory(id, updatedItem).then((response) => {
+        API.deleteCategory(id).then((response) => {
             this.setState((state) => {
                 return { category: state.category = updatedItem }
             })
+
+            // event.stopPropagation();
         })
 
-        //Update object's name property.
-        this.setState((state) => {
-            return { category: state.category = updatedItem }
-        })
-
+  
     }
+
+    deleteItem = (id) => {
+        console.log("DELETE", id)
+        // create a variable based off of statePaymentList, possibly not to grab the exact state
+        const stateItems = this.state.items;
+        //create obj based off of what the state paymentList is
+        let updatedItem = stateItems.filter((item) => {
+            return item.id !== id
+        });
+
+        //Update the category DB
+        API.deleteItems(id).then((response) => {
+            console.log(response)
+            this.setState((state) => {
+                return { items: state.items = updatedItem }
+            })
+        })
+    }
+
 
     addCategory = (e) => {
         const userId = sessionStorage.getItem("userId");
@@ -281,6 +299,19 @@ class StorePage extends Component {
         })
         //empty value
         inp.value = '';
+    }
+
+    addNewItem = (e, catID) => {
+        e.preventDefault();
+        //grab value
+        var inp = document.getElementById("itemInput");
+        var val = inp.value.trim();
+        const whiteSpace = " ";
+
+        if (val === whiteSpace.trim()) {
+            alert("Cannot add a name  to the category");
+            return;
+        }
     }
 
     render() {
@@ -317,29 +348,22 @@ class StorePage extends Component {
                             editable={this.state.editable}
                             reload={this.getUserData}
                             addCategory={this.addCategory}
+                            
                         />
                     </Col>
                     <Col size="md-3">
-                        {/* <ItemsContainer
-                            items={this.state.items}
-                            addItem={this.addItem}
-                            reload={this.getUserData}
-                            role={this.props.role}
-                            editable={this.state.editable}
-
-
-                        /> */}
                         <ItemContainer2
                             items={this.state.items}
                             id={this.state.catID}
                             addItem={this.addItem}
                             role={this.props.role}
-                            delete={this.deleteCategory}
+                            delete={this.deleteItem}
                             edit={this.editCategory}
                             editable={this.state.editable}
                             reload={this.getUserData}
                             catID={this.state.catID}
                             grabItems={this.grabItems}
+                            addNewItem={this.addNewItem}
                         />
                     </Col>
                     <ModalPayment

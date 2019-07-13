@@ -118,12 +118,12 @@ class Category extends Component {
 
                                 {this.state.editable !== true ?
 
-                                    <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                    <div className="d-flex justify-content-center"><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
                                         <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
                                     :
-                                    <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
+                                    <div className="d-flex justify-content-center"> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
 
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
+                                        <span id="cancel" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
                                 }
                             </div>
                         ) :

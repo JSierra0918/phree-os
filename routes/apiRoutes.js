@@ -137,6 +137,7 @@ module.exports = function (app) {
 
   app.delete("/api/category/:id", function (req, res) {
     const idInput = req.params.id;
+    console.log('DELETE:', idInput)
     db.Category.destroy({
       where: {
         id: idInput
@@ -147,7 +148,7 @@ module.exports = function (app) {
         where: {
           CategoryID: idInput
         }
-      }).then(response => console.log(response))
+      }).then(response => res.json(response))
 
     }).catch(err => console.log(err));
 
@@ -251,5 +252,16 @@ module.exports = function (app) {
           res.sendStatus(200)
         }).catch((err) => console.log(err))
     })
+  })
+
+  app.delete("/api/items/:id", function (req, res) {
+    const idInput = req.params.id;
+    console.log('idInput:', idInput)
+    db.Item.destroy({
+      where: {
+        id: idInput
+      }
+    }).then(response => res.json(response)).catch(err => console.log(err));
+
   })
 }

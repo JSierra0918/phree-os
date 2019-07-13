@@ -67,6 +67,12 @@ export default {
             console.log(response);
         });
     },
+    deleteItems: function(itemID) {
+
+        return axios.delete("/api/items/"+ itemID, (response) => {
+            console.log(response);
+        });
+    },
 
 
 }

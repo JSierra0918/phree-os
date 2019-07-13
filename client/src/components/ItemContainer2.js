@@ -22,7 +22,7 @@ class ItemContainer2 extends Component {
         // return this.setState({ categoryList: this.props.category })
     }
 
-    renderCategory() {
+    renderItems() {
         return this.props.items.map(item => <Item2
             role={this.props.role}
             dataid={item.id}
@@ -81,17 +81,17 @@ class ItemContainer2 extends Component {
                 <h5>Category</h5>
                 <hr />
                 <ul>
-                    {this.renderCategory()}
+                    {this.renderItems()}
                 </ul>
                 {this.props.role === "1" ? (
                     <div>
                         <div className="add-category-form type1">
                             <form className="input-wrapper">
-                                <input id="catInput" type="text" name="addItem" placeholder="Create an Item" />
+                                <input id="itemInput" type="text" name="addItem" placeholder="Create an Item" />
                             </form>
                         </div>
 
-                        <button onClick={this.props.addCategory} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
+                        <button onClick={() => this.props.addNewItem(this.props.catID)} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
                     </div>
                 ) : (<p></p>)}
             </div>

@@ -185,6 +185,10 @@
     text-decoration: underline;
     border-bottom: none;
 }
+
+.p-tabbed-item:hover + .angle {
+    background: white;
+}
 /* .p-active-tab:hover {
     background: #f3f3f3 !important;
 } */
@@ -239,12 +243,6 @@
     border: 1px solid;
 }
 
-#trash,
-#edit {
-    padding: 5px;
-    margin: 5px;
-}
-
 .total {
 font-size: 1.25rem;
 width: 95%;
@@ -265,6 +263,10 @@ text-align: right;
 }
 .item-price {
     margin-right: 6px;
+}
+
+#save, #cancel, #edit, #trash{
+    margin: 5px;
 }
 /* ----------------------------- MEDIA QUERIES */
 

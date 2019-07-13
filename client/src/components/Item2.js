@@ -146,7 +146,7 @@ class Item2 extends Component {
                                     :
                                     <div> <span id="save" onClick={() => this.saveItem(this.props.dataid)}>Save</span>
 
-                                        <span id="edit" onClick={() => this.editItem(this.props.dataid)}>Cancel</span></div>
+                                        <span id="cancel" onClick={() => this.editItem(this.props.dataid)}>Cancel</span></div>
                                 }
                             </div>
                         ) :
