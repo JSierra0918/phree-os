@@ -115,7 +115,7 @@ class Category extends Component {
                                 {this.state.editable !== true ?
 
                                     <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}><FontAwesomeIcon icon="edit-alt" className="edit-icon" />Edit</span></div>
+                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}><FontAwesomeIcon icon="edit" className="edit-icon" />Edit</span></div>
                                     :
                                     <div> <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Save</span>
 
