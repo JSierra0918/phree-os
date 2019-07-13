@@ -40,7 +40,7 @@ class ItemContainer2 extends Component {
             addItem={this.props.addItem}
             delete={this.props.delete}
             edit={this.props.edit}
-            reload={this.props.reload}
+            reload={this.props.reload}  
             catID={this.props.catID}
             grabItems={this.props.grabItems}
         />)

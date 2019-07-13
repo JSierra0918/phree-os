@@ -319,8 +319,6 @@ class StorePage extends Component {
     }
 
     addNewItem = (e, catID, itemObj) => {
-        console.log('itemObj:', itemObj)
-        console.log('e:', e)
         e.stopPropagation();
         //grab value
         
@@ -331,13 +329,7 @@ class StorePage extends Component {
         // }    
         API.postNewItem(catID, itemObj).then((responseItem) => {
            
-            // console.log(responseItem)
-            // let newItemArr = [...this.state.category]
-            // let newItem = responseItem.data[responseItem.data.length - 1]
-            // console.log(n)
-        //    console.log(' responseItem.data:',  responseItem.data)
-            // newItemArr.push(newItem);
-
+            //grab the response and set it to the state.
             this.setState(state => {
                 return { items: state.items = responseItem.data }
             })
@@ -345,8 +337,7 @@ class StorePage extends Component {
     }
 
     render() {
-        console.log(this.state.items);
-        console.log(this.props.items);
+    
         return (
             <div className="col-md-12 main-row">
                 <p></p>
