@@ -32,7 +32,13 @@ class StorePage extends Component {
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
     }
-
+    componentDidMount() {
+        //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
+        //find out if the ID is connected to a stripe account 
+        this.getUserData();
+    }
+    
+    
     openModalHandler = (paid) => {
         this.setState({
             payment: true
@@ -66,16 +72,9 @@ class StorePage extends Component {
 
     }
 
-    componentDidMount() {
-        //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
-        //find out if the ID is connected to a stripe account 
-        this.getUserData();
-    }
 
-    componentDidUpdate() {
-        //once the item table has been updated, then update the site with the new info.
-        //most likely do another this.getUserData()
-    }
+
+
 
     // getStripeData() {
         
