@@ -12,29 +12,41 @@ import '../pages/styles/storepage.css';
 
 class PhreeContainer extends Component {
 
-    state = {
-        currentPage: "Store"
+    constructor(props){
+        super(props);
+
+        this.state = {
+            currentPage: "Store",
+            items: []
+        
+        }
     }
 
     componentDidMount() {
         // API.sendLogin(this.state.loginForm);
+        console.log(this.state.items)
+
     }
 
-    changePage(page) {
+    changePage = (page)=> {
 
+        console.log("Change PAge")
         this.setState({
-            currentPage: page
+            currentPage: page,
+            items: ["CHANGE PAGE"]
+            
         })
+        console.log('items:',this.state.items)
     }
 
     render() {
 
-        function displayForm(page) {
+       let  displayForm = (page) => {
             if (page === "Store") {
-                return <StorePage  />
+                return <StorePage  items={this.state.items}/>
             }
             else if (page === "Manage") {
-                return <StorePage role={"1"} />
+                return <StorePage role={"1"} items={this.state.items}/>
                 // return <ManagePage />
             }
         }
