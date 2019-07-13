@@ -124,3 +124,7 @@
 .finePrint {
     font-size: 8px;
 }
+
+.form-row {
+    justify-content: center;
+  }

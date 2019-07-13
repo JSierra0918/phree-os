@@ -10,6 +10,7 @@ import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
 import ManagePage from './ManagePage';
 import ModalPayment from '../components/ModalPayment';
+import ItemContainer2 from '../components/ItemContainer2'
 import ModalWelcome from '../components/ModalWelcome';
 
 
@@ -67,11 +68,11 @@ class StorePage extends Component {
     // }
 
     makePayment = (paid) => {
-        
+
         this.setState({
             payment: paid,
         })
-        if(this.state.payment) {
+        if (this.state.payment) {
 
             this.openModalHandler()
             // return  <ModalPayment/> 
@@ -114,7 +115,7 @@ class StorePage extends Component {
         }
 
             if (!userResponse.data.storename) {
-                    // go to create store
+                // go to create store
 
             }
             else {
@@ -123,7 +124,7 @@ class StorePage extends Component {
                     // it is going to render
                     console.log(categories)
                     this.setState(state => {
-                        return {category: state.category = categories.data}
+                        return { category: state.category = categories.data }
 
                     })
                 })
@@ -136,8 +137,13 @@ class StorePage extends Component {
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
-            console.log('category.data.id:', category.data.id)
-            this.grabItems(category.data.id);
+            if(!category.data.id){
+                return;
+            }else{
+                this.grabItems(category.data.id);
+
+            }
+
         });
     }
 
@@ -146,19 +152,20 @@ class StorePage extends Component {
         API.getItems(catID).then((returnedItems) => {
 
             this.setState({
-                items: returnedItems.data
+                items: returnedItems.data,
+                catID: catID
             })
         })
     }
 
     totalPrice = () => {
         let total = this.state.paymentList.reduce((a, b) => {
-        // console.log('a price', a.price) 
-        // console.log('b price', b.price)  
-        return {price: parseFloat(a.price) + parseFloat(b.price)}
+            // console.log('a price', a.price) 
+            // console.log('b price', b.price)  
+            return { price: parseFloat(a.price) + parseFloat(b.price) }
 
-        }, {price: 0}).price
-        
+        }, { price: 0 }).price
+
         console.log('total', parseFloat(total).toFixed(2))
 
         this.setState({
@@ -174,7 +181,7 @@ class StorePage extends Component {
         if (objIndex > -1) {
             //Log object to Console.
             // make new object of updated object.           
-            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };            
+            let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
 
@@ -197,7 +204,7 @@ class StorePage extends Component {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
             const newList = [...this.state.paymentList];
-                  newList.push(selectedItem)
+            newList.push(selectedItem)
 
             this.setState({
                 paymentList: newList
@@ -234,12 +241,14 @@ class StorePage extends Component {
         // console.log('summaryArr:', summaryArr);
         //get an empty parameter that clears paymentList
         this.setState((state, props) => {
-            return { paymentList: state.paymentList = summaryArr, total:0 }
+            return { paymentList: state.paymentList = summaryArr, total: 0 }
         })
     }
 
-    deleteCategory = (id) => {
+    deleteCategory = (e, id) => {
         console.log("DELETE", id)
+        console.log("EVENT: ", e);
+        e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
         //create obj based off of what the state paymentList is
@@ -247,20 +256,39 @@ class StorePage extends Component {
             return item.id !== id
         });
 
+        console.log(updatedItem)
         //Update the category DB
-        API.deleteCategory(id, updatedItem).then((response) => {
+        API.deleteCategory(id).then((response) => {
             this.setState((state) => {
-                return { category: state.category = updatedItem}
+                return { category: state.category = updatedItem }
+            })
+
+            // event.stopPropagation();
+        })
+
+  
+    }
+
+    deleteItem = (e,id) => {
+        console.log("DELETE", id)
+        e.stopPropagation();
+        // create a variable based off of statePaymentList, possibly not to grab the exact state
+        const stateItems = this.state.items;
+        //create obj based off of what the state paymentList is
+        let updatedItem = stateItems.filter((item) => {
+            return item.id !== id
+        });
+
+        //Update the category DB
+        API.deleteItems(id).then((response) => {
+            console.log(response)
+            this.setState((state) => {
+                return { items: state.items = updatedItem }
             })
         })
-
-        //Update object's name property.
-        this.setState((state) => {
-            return { category: state.category = updatedItem }
-        })
-
     }
-    
+
+
     addCategory = (e) => {
         const userId = sessionStorage.getItem("userId");
         e.preventDefault();
@@ -286,15 +314,27 @@ class StorePage extends Component {
             newCatArr.push(response.data);
 
             this.setState(state => {
-               return { category: state.category = newCatArr}
+                return { category: state.category = newCatArr }
             })
         })
         //empty value
         inp.value = '';
     }
 
-    render() {
+    addNewItem = (e, catID, item) => {
+        e.preventDefault();
+        //grab value
+        const whiteSpace = " ";
 
+        // if (val === whiteSpace.trim()) {
+        //     alert("Cannot add a name  to the category");
+        //     return;
+        // }
+    }
+
+    render() {
+        console.log(this.state.items);
+        console.log(this.props.items);
         return (
             <div className="col-md-12 main-row">
                 <p></p>
@@ -310,11 +350,11 @@ class StorePage extends Component {
                             count={this.state.count}
                             deleteRow={this.deleteRow}
                             clearSummary={this.clearSummary}
-                            total={this.state.total} 
+                            total={this.state.total}
                             makePayment={this.makePayment}
                             reload={this.getUserData}
-                            />
-                            
+                        />
+
                     </Col>
                     <Col size="md-3">
                         <CategoryContainer
@@ -327,17 +367,22 @@ class StorePage extends Component {
                             editable={this.state.editable}
                             reload={this.getUserData}
                             addCategory={this.addCategory}
+                            
                         />
                     </Col>
                     <Col size="md-3">
-                        <ItemsContainer 
-                        items={this.state.items} 
-                        addItem={this.addItem} 
-                        reload={this.getUserData}
-                        role={this.props.role}
-                        editable={this.state.editable}
-                        
-                        
+                        <ItemContainer2
+                            items={this.state.items}
+                            id={this.state.catID}
+                            addItem={this.addItem}
+                            role={this.props.role}
+                            delete={this.deleteItem}
+                            edit={this.editCategory}
+                            editable={this.state.editable}
+                            reload={this.getUserData}
+                            catID={this.state.catID}
+                            grabItems={this.grabItems}
+                            addNewItem={this.addNewItem}
                         />
                     </Col>
                     <ModalPayment

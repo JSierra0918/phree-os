@@ -2,16 +2,23 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditableCategory from "./EditableCategory";
+import EditableItems2 from "./EditableItems2";
+import { Input } from './Bootstrap/Form';
 
 class Item2 extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            items: [],
-            newItem: "",
+            categories: [],
+            newCatName: "",
             editable: false,
-            save: ""
+            nameVal: "",
+            quantVal: "",
+            priceVal: "",
+            itemname: "",
+            price: 0,
+            quantity: 0
         }
     }
 
@@ -28,6 +35,20 @@ class Item2 extends Component {
         // const userId = sessionStorage.getItem("userId");
     }
 
+    selectCategory = (id) => {
+        const catDom = document.getElementsByClassName("categoryName")
+        catDom.focus();
+        //set the state of the category based off of the name
+        API.getOneCategory(id).then((category) => {
+            console.log('category:', category.data)
+            //find items and return the array possibly pass it as an argument for displayItem.
+            this.grabItems(category.data.id);
+
+            //Display an area for the user to update the category name
+
+        });
+
+    }
 
     updateCategoryName = (id, catName) => {
 
@@ -36,45 +57,57 @@ class Item2 extends Component {
         })
     }
 
-    editCategory = () => {
-
+    editItem = (e,id) => {
+        e.stopPropagation();
+        console.log(id);
         //make content edidtable
         const stateEdit = this.state.editable;
-
-        console.log(this)
 
         this.setState((state) => {
             return { editable: state.editable = !stateEdit }
         })
     }
 
-    saveEditCategory = (id, value) => {
-        console.log("ID VALUE:", id, value);
+    saveItem = (e,id) => {
+        e.stopPropagation();
+        e.preventDefault();
+        // event.preventDefault();
+        let newItem = {
+            itemname: this.state.nameVal,
+            price: this.state.priceVal,
+            quantity: this.state.quantVal,
+            counter: 1,
+            CategoryID: this.props.catID
+        }
 
         const space = " ";
         const emptySpace = space.trim();
 
-        const update = {
-            categoryName: value.trim()
-        }
+        // const update = {
+        //     categoryName: value.trim()
+        // }
 
-        if (update.categoryName === this.props.item) {
-            alert("You already have that name!")
-        } else if (update.categoryName === emptySpace) {
-            alert("You must have something in there")
-        } else {
-            //save value to the Category DB
-            API.putCategory(id, update).then((response) => {
-                console.log('response:', response)
+        console.log(newItem);
 
-                this.setState({
-                    editable: false
-                })
+        // if (update.categoryName === this.props.item) {
+        //     alert("You already have that name!")
+        // } else if (update.categoryName === emptySpace) {
+        //     alert("You must have something in there")
+        // } else {
+        //     //save value to the Category DB
+        API.putNewItem(id, newItem).then((response) => {
+            console.log('response:', response)
 
-                //reload the db
-                this.props.reload();
+            this.setState({
+                editable: false
             })
-        }
+            //grab and reload items
+            this.props.grabItems(this.props.catID);
+
+            //reload the db
+            this.props.reload();
+        })
+        // }
     }
 
     handleInputChange = event => {
@@ -83,37 +116,73 @@ class Item2 extends Component {
         this.setState({
             [name]: value
         });
-
-        console.log(name, value);
-
     };
 
     render() {
+        // add decimals to the number
+        const formatter = new Intl.NumberFormat('en-IN', {
+            minimumFractionDigits: 2
+        })
+        //remove addItem Method
+
         return (
             <div>
-                <li {...this.props} onClick={() => this.props.onClick(this.props.dataid)}>
+                <li {...this.props} onClick={() => this.props.addItem(this.props.item)}>
                     <div className="col manage-category" >
-
-                        {/* <EditableComponent item={this.props.item} editable={true}/> */}
-                        {/* If it's the manage page show this */}
                         {this.props.role === "1" ? (
                             <div>
-                                <EditableCategory item={this.props.item} editable={this.state.editable} value={this.state.save} handleInputChange={this.handleInputChange} />
+                                <EditableItems2
+                                    itemname={this.props.item.itemname}
+                                    quantity={this.props.quantity}
+                                    price={this.props.price}
+                                    editable={this.state.editable}
+                                    nameVal={this.state.nameVal}
+                                    quantVal={this.state.quantVal}
+                                    priceVal={this.state.priceVal}
+                                    handleInputChange={this.handleInputChange}
+
+                                />
 
                                 {/* check if editable is false, if it is show delete */}
 
                                 {this.state.editable !== true ?
 
-                                    <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
+                                    <div><span id="trash" onClick={(e) => this.props.delete(e,this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                        <span id="edit" onClick={(e) => this.editItem(e,this.props.dataid)}>Edit</span></div>
                                     :
-                                    <div> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
+                                    <div> <span id="save" onClick={(e) => this.saveItem(e,this.props.dataid)}>Save</span>
 
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
+                                        <span id="cancel" onClick={(e) => this.editItem(e,this.props.dataid)}>Cancel</span></div>
                                 }
+
+                                {/* <div>
+                                    <div className="add-item-form type1">
+                                        <form className="input-wrapper">
+                                            <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+                                            <Input id="itemInput" type="text" name="price" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+                                            <Input id="itemInput" type="text" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+
+                                        </form>
+                                    </div>
+
+                                    <button onClick={() => this.props.addNewItem(this.props.catID)} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
+                                </div> */}
                             </div>
                         ) :
-                            (<span className="categoryName">{this.props.item}</span>
+                            (
+                                <div>
+                                    <h6>
+                                        {this.props.itemname}
+                                    </h6>
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex item-highlight">
+                                            <span>Q:</span><p>{this.props.quantity}</p>
+                                        </div>
+                                        <div className="d-flex item-highligh">
+                                            <span>$</span><p>{formatter.format(this.props.price)}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             )}
                     </div>
                 </li>

@@ -33,6 +33,7 @@ class ItemsContainer extends Component {
         console.log("THIS IS THE ITEM:", Item)
     }
 
+
     editItem = () => {
 
         //make content edidtable
@@ -42,7 +43,6 @@ class ItemsContainer extends Component {
             return { editable: state.editable = !stateEdit }
         })
     }
-
 
     render() {
 

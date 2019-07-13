@@ -115,40 +115,41 @@ module.exports = function (app) {
 
   //update category
   app.put("/api/category/:id", function (req, res) {
-   const idInput = req.params.id;
-   //subtract the items quantity by the req.body
-   // subtract
-   let updatedCat =  req.body.categoryName
-   console.log(idInput, updatedCat)
-   db.Category.update(
-     {
-       categoryName: updatedCat
-     }, {
-      returning: true,
-       where: {
-        id: idInput
-       }
-     }).then(function ( catResult) {
-      //  console.log('categoryName:', categoryName)
-       res.json(catResult);
-     })
-     .catch(err => console.log(err));
+    const idInput = req.params.id;
+    //subtract the items quantity by the req.body
+    // subtract
+    let updatedCat = req.body.categoryName
+    console.log(idInput, updatedCat)
+    db.Category.update(
+      {
+        categoryName: updatedCat
+      }, {
+        returning: true,
+        where: {
+          id: idInput
+        }
+      }).then(function (catResult) {
+        //  console.log('categoryName:', categoryName)
+        res.json(catResult);
+      })
+      .catch(err => console.log(err));
   })
 
-  app.delete("/api/category/:id", function (req, res){
+  app.delete("/api/category/:id", function (req, res) {
     const idInput = req.params.id;
+    console.log('DELETE:', idInput)
     db.Category.destroy({
       where: {
         id: idInput
-       }
+      }
     }).then((deleteResponse) => {
       console.log('deleteResponse:', deleteResponse);
       db.Item.destroy({
         where: {
           CategoryID: idInput
-         }
-      }).then(response => console.log(response))
-      
+        }
+      }).then(response => res.json(response))
+
     }).catch(err => console.log(err));
 
   })
@@ -210,13 +211,41 @@ module.exports = function (app) {
     });
   });
 
-  app.post('/charge', function(req, res) {
+  //create new Item
+  // Update items after the client has sold.
+  app.put("/api/items/:id", function (req, res) {
+    const idInput = req.params.id;
+    console.log('req.body:', req.body)
+    //subtract the items quantity by the req.body
+    // subtract
+
+    let newItem = req.body
+    console.log('newItem:', newItem)
+    db.Item.update(
+      {
+        itemname: req.body.itemname,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        counter: req.body.counter,
+        CategoryID: req.body.CategoryID,
+      }, {
+        returning: true,
+        where: {
+          id: idInput
+        }
+      }).then(function (updatedItem) {
+        console.log('updatedItem:', updatedItem)
+        res.json(updatedItem);
+      });
+  });
+
+  app.post('/charge', function (req, res) {
     console.log(`${cyan}this is the request.body${reset}`)
     var body = req.body
     var token = body.token
     var total = body.total
     var userId = body.userId
-    
+
     db.Stripe.findOne({
       where: {
         userId: userId
@@ -229,10 +258,21 @@ module.exports = function (app) {
         currency: "usd",
         source: token,
       }, {
-        stripe_account: stripeUserId,
-      }).then(function(charge) {
-        res.sendStatus(200)
-      }).catch((err) => console.log(err))
+          stripe_account: stripeUserId,
+        }).then(function (charge) {
+          res.sendStatus(200)
+        }).catch((err) => console.log(err))
+    })
   })
-})
+
+  app.delete("/api/items/:id", function (req, res) {
+    const idInput = req.params.id;
+    console.log('idInput:', idInput)
+    db.Item.destroy({
+      where: {
+        id: idInput
+      }
+    }).then(response => res.json(response)).catch(err => console.log(err));
+
+  })
 }
