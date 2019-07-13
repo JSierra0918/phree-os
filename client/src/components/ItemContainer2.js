@@ -36,7 +36,7 @@ class ItemContainer2 extends Component {
             itemname={item.itemname}
             quantity={item.quantity}
             price={item.price}
-            className="category-li"
+            className="items-li"
             addItem={this.props.addItem}
             delete={this.props.delete}
             edit={this.props.edit}
@@ -54,7 +54,7 @@ class ItemContainer2 extends Component {
 
     handleInputChange = event => {
         const { name, value } = event.target;
-        
+
         this.setState({
             [name]: value
         });
@@ -104,8 +104,8 @@ class ItemContainer2 extends Component {
 
     render() {
         return (
-            <div className="category text-center p-main-col mb20">
-                <h5>Category</h5>
+            <div className="items text-center p-main-col mb20">
+                <h5>Items</h5>
                 <hr />
                 <ul>
                     {this.renderItems()}

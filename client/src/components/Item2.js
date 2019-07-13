@@ -128,7 +128,7 @@ class Item2 extends Component {
         return (
             <div>
                 <li {...this.props} onClick={() => this.props.addItem(this.props.item)}>
-                    <div className="col manage-category" >
+                    <div className="col manage-items" >
                         {this.props.role === "1" ? (
                             <div>
                                 <EditableItems2

@@ -48,6 +48,7 @@ class CategoryContainer extends Component {
     return (
       <div className="category text-center p-main-col mb20">
         <h5>Category</h5>
+        <hr />
         <ul>{this.renderCategory()}</ul>
         {this.props.role === "1" ? (
           <div>
