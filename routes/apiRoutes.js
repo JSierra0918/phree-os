@@ -211,17 +211,22 @@ module.exports = function (app) {
     console.log('newItem:', newItem)
     db.Item.update(
       {
-        newItem
+        itemname: req.body.itemname,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        counter: req.body.counter,
+        CategoryID: req.body.CategoryID,
       }, {
         returning: true,
         where: {
           id: idInput
         }
       }).then(function (updatedItem) {
-        console.log(updatedItem)
+        console.log('updatedItem:', updatedItem)
         res.json(updatedItem);
       });
   });
+
   app.post('/charge', function (req, res) {
     console.log(`${cyan}this is the request.body${reset}`)
     var body = req.body

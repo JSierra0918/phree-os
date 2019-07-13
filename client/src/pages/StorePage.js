@@ -339,6 +339,7 @@ class StorePage extends Component {
                             editable={this.state.editable}
                             reload={this.getUserData}
                             catID={this.state.catID}
+                            grabItems={this.grabItems}
                         />
                     </Col>
                     <ModalPayment

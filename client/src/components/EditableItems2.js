@@ -3,13 +3,10 @@ import { Input } from './Bootstrap/Form';
 
 function EditableItems2(props) {
 
-    console.log(props.nameVal)
-
     const formatter = new Intl.NumberFormat('en-IN', {
         minimumFractionDigits: 2
     })
 
-    // console.log(props.item, this.props.value);
     return (
         <div>
             {props.editable !== true ?

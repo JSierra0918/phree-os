@@ -95,7 +95,9 @@ class Item2 extends Component {
             this.setState({
                 editable: false
             })
-
+            //grab and reload items
+            this.props.grabItems(this.props.catID);  
+            
             //reload the db
             this.props.reload();
         })
@@ -108,9 +110,6 @@ class Item2 extends Component {
         this.setState({
             [name]: value
         });
-
-        console.log(name, value);
-
     };
 
     render() {

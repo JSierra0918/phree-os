@@ -37,6 +37,7 @@ class ItemContainer2 extends Component {
             edit={this.props.edit}
             reload={this.props.reload}
             catID={this.props.catID}
+            grabItems={this.props.grabItems}
         />)
     }
 
