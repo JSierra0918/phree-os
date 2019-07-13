@@ -344,6 +344,12 @@ class StorePage extends Component {
         })
     }
 
+    setCategories = (categories) => {
+        this.setState({
+            category:categories
+        })
+    }
+
     render() {
         console.log(this.state.items);
         console.log(this.props.items);
@@ -379,6 +385,7 @@ class StorePage extends Component {
                             editable={this.state.editable}
                             reload={this.getUserData}
                             addCategory={this.addCategory}
+                            setCategories={(categories) => {this.setCategories(categories)}}
                             
                         />
                     </Col>
