@@ -73,6 +73,13 @@ export default {
             console.log(response);
         });
     },
+    postNewItem: function(catID, newIteObj) {
+    console.log('newIteObj:', newIteObj)
+
+        return axios.post("/api/items/one/"+ catID, newIteObj, (response) => {
+            console.log(response);
+        });
+    },
 
 
 }

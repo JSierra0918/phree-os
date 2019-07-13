@@ -128,7 +128,7 @@ class Item2 extends Component {
         return (
             <div>
                 <li {...this.props} onClick={() => this.props.addItem(this.props.item)}>
-                    <div className="col manage-category" >
+                    <div className="col manage-items" >
                         {this.props.role === "1" ? (
                             <div>
                                 <EditableItems2
@@ -154,19 +154,6 @@ class Item2 extends Component {
 
                                         <span id="cancel" onClick={(e) => this.editItem(e,this.props.dataid)}>Cancel</span></div>
                                 }
-
-                                {/* <div>
-                                    <div className="add-item-form type1">
-                                        <form className="input-wrapper">
-                                            <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
-                                            <Input id="itemInput" type="text" name="price" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
-                                            <Input id="itemInput" type="text" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
-
-                                        </form>
-                                    </div>
-
-                                    <button onClick={() => this.props.addNewItem(this.props.catID)} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
-                                </div> */}
                             </div>
                         ) :
                             (

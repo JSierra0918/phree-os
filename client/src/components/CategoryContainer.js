@@ -48,6 +48,7 @@ class CategoryContainer extends Component {
     return (
       <div className="category text-center p-main-col mb20">
         <h5>Category</h5>
+        <hr />
         <ul>{this.renderCategory()}</ul>
         {this.props.role === "1" ? (
           <div>
@@ -62,10 +63,9 @@ class CategoryContainer extends Component {
               </form>
             </div>
 
-            <button onClick={this.props.addCategory}>
+            <button onClick={(e)=>this.props.addCategory(e)}>
               {" "}
-              <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add
-              Category
+              <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category
             </button>
           </div>
         ) : (
