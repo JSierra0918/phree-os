@@ -21,9 +21,9 @@ class CheckoutForm extends Component {
       }
       
       async submit(ev) {
+        // this.cardInfo()
+        // console.log(ev)
         let {token} = await this.props.stripe.createToken({name: "Name"});
-        console.log('body object')
-        console.log({token: token.id, total: this.props.total})
          let response = 
           await fetch("/charge", {
            method: "POST",
@@ -38,10 +38,20 @@ class CheckoutForm extends Component {
            })
          }
       }
-      
-      
+
+        cardInfo= ()=> {
+        let cardInput = document.querySelector(".__PrivateStripeElement-input")
+        console.log(cardInput)
+        console.log(cardInput.value)
+        if (cardInput.value === "") {
+          alert("Please enter your card number.")
+        }else{
+          alert("you got numbers")
+          // this.submit()
+        }
+      }
       render() {
-        
+
         
         return (
         <>
@@ -50,11 +60,10 @@ class CheckoutForm extends Component {
           (<h1>Purchase Complete</h1>)
           
           :
-          
           (<div className="checkout">
               <p>Would you like to complete the purchase?</p>
-              <CardElement />
-              <button onClick={this.submit}>Send</button>
+              <CardElement/>
+              <button onClick={this.cardInfo}>Send</button>
             </div>)
           }
         </>

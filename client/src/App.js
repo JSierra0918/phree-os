@@ -32,7 +32,6 @@ function App() {
                 <Route exact path="/addCategory" component={AddCategory} />
             </Switch>
         </Router>
-
         </div>
     );
 }

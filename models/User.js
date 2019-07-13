@@ -34,6 +34,12 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        hasStripe: {
+            type: Sequelize.BOOLEAN,
+            notEmpty: true,
+            defaultValue: false
+
+        },
         status: {
             type: Sequelize.ENUM('active', 'inactive'),
             defaultValue: 'active'

@@ -178,11 +178,22 @@ module.exports = function (app) {
           StripeUserId : bodyParsed.stripe_user_id,
           StripeRefreshToken : bodyParsed.refresh_token,
           UserId : req.body.userId,
-        }).then(function (Stripe) {
-          res.sendStatus(200)
-        });
+        }).then(function (stripe) {
+          console.log(stripe)
+        }).then(function() {
+          db.User.update({      
+            hasStripe: true
+          },{
+          where: {  
+            id: req.body.userId
+          }
+        }).then(function (updatedItem) {
+
+        }).catch((err) => console.log(err))
+      })
       }
-    })
+    }
+    )
   })
 
   app.get("/api/stripe/:id", function (req, res) {
