@@ -107,6 +107,7 @@ module.exports = function (app) {
 
   // Create a category
   app.post("/api/category/one/:id", (req, res) => {
+    console.log(req.body)
     db.Category.create(req.body).then((catResponse) => {
       console.log('catResponse:', catResponse)
       res.json(catResponse)
@@ -169,31 +170,31 @@ module.exports = function (app) {
         }
       },
       function (error, response, body) {
-      console.log('error:', error)
-      
-      if (!error && response.statusCode == 200) {
-        console.log("it went ok")
-        console.log(body)
-        var bodyParsed = JSON.parse(body)
-        db.Stripe.create({
-          StripeUserId : bodyParsed.stripe_user_id,
-          StripeRefreshToken : bodyParsed.refresh_token,
-          UserId : req.body.userId,
-        }).then(function (stripe) {
-          console.log(stripe)
-        }).then(function() {
-          db.User.update({      
-            hasStripe: true
-          },{
-          where: {  
-            id: req.body.userId
-          }
-        }).then(function (updatedItem) {
+        console.log('error:', error)
 
-        }).catch((err) => console.log(err))
-      })
+        if (!error && response.statusCode == 200) {
+          console.log("it went ok")
+          console.log(body)
+          var bodyParsed = JSON.parse(body)
+          db.Stripe.create({
+            StripeUserId: bodyParsed.stripe_user_id,
+            StripeRefreshToken: bodyParsed.refresh_token,
+            UserId: req.body.userId,
+          }).then(function (stripe) {
+            console.log(stripe)
+          }).then(function () {
+            db.User.update({
+              hasStripe: true
+            }, {
+                where: {
+                  id: req.body.userId
+                }
+              }).then(function (updatedItem) {
+
+              }).catch((err) => console.log(err))
+          })
+        }
       }
-    }
     )
   })
 
@@ -275,4 +276,23 @@ module.exports = function (app) {
     }).then(response => res.json(response)).catch(err => console.log(err));
 
   })
+
+  // Create a items
+  app.post("/api/items/one/:id", (req, res) => {
+    const idInput = req.params.id;
+    console.log('CategoryID:', req.body.CategoryID)
+    db.Item.create(req.body).then((itemResponse) => {
+      console.log('itemResponse:', itemResponse)
+      db.Item.findAll({
+        where: {
+          CategoryID: idInput
+        }
+      }).then((response) => {
+
+        console.log('response:', response)
+        res.json(response)
+      })
+      // 
+    }).catch(err => console.log(err));
+});
 }

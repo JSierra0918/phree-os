@@ -23,7 +23,7 @@ class StorePage extends Component {
             calc: undefined,
             catID: undefined,
             category: [],
-            items: this.props.items,
+            items: [],
             paymentList: [],
             count: 0,
             total: 0,
@@ -174,6 +174,7 @@ class StorePage extends Component {
     }
 
     addItem = (selectedItem) => {
+        // e.stopPropagation();
         const statePaymentList = this.state.paymentList;
 
         //Find index of specific object using findIndex method.    
@@ -256,21 +257,16 @@ class StorePage extends Component {
             return item.id !== id
         });
 
-        console.log(updatedItem)
         //Update the category DB
         API.deleteCategory(id).then((response) => {
             this.setState((state) => {
                 return { category: state.category = updatedItem }
             })
-
-            // event.stopPropagation();
-        })
-
-  
+        })  
     }
 
     deleteItem = (e,id) => {
-        console.log("DELETE", id)
+    
         e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateItems = this.state.items;
@@ -290,8 +286,9 @@ class StorePage extends Component {
 
 
     addCategory = (e) => {
-        const userId = sessionStorage.getItem("userId");
+        alert("Helo!")
         e.preventDefault();
+        const userId = sessionStorage.getItem("userId");
         //grab value
         var inp = document.getElementById("catInput");
         var val = inp.value.trim();
@@ -321,15 +318,30 @@ class StorePage extends Component {
         inp.value = '';
     }
 
-    addNewItem = (e, catID, item) => {
-        e.preventDefault();
+    addNewItem = (e, catID, itemObj) => {
+        console.log('itemObj:', itemObj)
+        console.log('e:', e)
+        e.stopPropagation();
         //grab value
+        
         const whiteSpace = " ";
-
         // if (val === whiteSpace.trim()) {
         //     alert("Cannot add a name  to the category");
         //     return;
-        // }
+        // }    
+        API.postNewItem(catID, itemObj).then((responseItem) => {
+           
+            // console.log(responseItem)
+            // let newItemArr = [...this.state.category]
+            // let newItem = responseItem.data[responseItem.data.length - 1]
+            // console.log(n)
+        //    console.log(' responseItem.data:',  responseItem.data)
+            // newItemArr.push(newItem);
+
+            this.setState(state => {
+                return { items: state.items = responseItem.data }
+            })
+        })
     }
 
     render() {

@@ -54,13 +54,25 @@ class ItemContainer2 extends Component {
 
     handleInputChange = event => {
         const { name, value } = event.target;
-
-        console.log(name, value)
-
+        
         this.setState({
             [name]: value
         });
     };
+
+    grabNewItemInfo = (e) => {
+
+        let newobjItem = {
+            itemname: this.state.itemname,
+            price: this.state.price,
+            quantity: this.state.quantity,
+            counter: 1,
+            CategoryId: this.props.catID
+        }
+
+        console.log(newobjItem);
+        this.props.addNewItem(e, this.props.catID, newobjItem)
+    }
 
     // addCat = (e) => {
     //     const userId = sessionStorage.getItem("userId");
@@ -98,22 +110,25 @@ class ItemContainer2 extends Component {
                 <ul>
                     {this.renderItems()}
                 </ul>
+
                 {this.props.role === "1" ? (
+
                     <div>
+
                         <div className="add-item-form type1">
                             <form className="input-wrapper">
-                                <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
-                                <Input id="itemInput" type="text" name="price" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
-                                <Input id="itemInput" type="text" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
-                                
+                                <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
+                                <Input id="itemInput" type="number" name="price"  step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
+                                <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
+
                             </form>
                         </div>
 
-                        <button onClick={() => this.props.addNewItem(this.props.catID)} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
+                        <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Add Item</button>
 
                         {/* <h1>OLD BUTTON</h1> */}
                     </div>
-                ) : (<p></p>)}
+                ) : <p></p>}
             </div>
         );
     }
