@@ -67,14 +67,14 @@ class Items extends Component {
                                     {this.props.editable !== true ?
 
                                         <div><span id="trash" onClick={() => this.props.delete(item.id)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                            <span id="edit" onClick={() => this.props.editItem()}>Edit</span></div>
+                                            <span id="edit" onClick={() => this.editItem()}>Edit</span></div>
                                         :
                                         (
                                             <div>
                                                 <Input name="save" placeholder={item.itemname} className="form-control" value={this.props.value} onChange={this.props.handleInputChange} />
                                                 <div> <span id="save" onClick={() => this.saveEditCategory(item.id, this.save)}>Save</span>
 
-                                                    <span id="edit" onClick={() => this.props.itemID()}>Cancel</span></div>
+                                                    <span id="edit" onClick={() => this.props.itemID(item)}>Cancel</span></div>
                                             </div>
                                         )
                                     }

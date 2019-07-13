@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditableCategory from "./EditableCategory";
 import EditableItems2 from "./EditableItems2";
 
-class Category extends Component {
+class Item2 extends Component {
     constructor(props) {
         super(props);
 
@@ -19,7 +19,12 @@ class Category extends Component {
     }
 
     componentDidMount() {
-
+        // const userId = sessionStorage.getItem("userId");
+        // API.getCategoryData(userId).then((response) => {
+        //     this.setState({
+        //         categories: response.data
+        //     })
+        // })
     }
 
     componentDidUpdate() {
@@ -113,8 +118,6 @@ class Category extends Component {
         const formatter = new Intl.NumberFormat('en-IN', {
             minimumFractionDigits: 2
         })
-
-
         //remove addItem Method
 
         return (
@@ -173,4 +176,4 @@ class Category extends Component {
 }
 
 
-export default Category;
+export default Item2;

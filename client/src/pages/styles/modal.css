@@ -109,3 +109,7 @@
   .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
   }
+
+.finePrint {
+    font-size: 8px;
+}

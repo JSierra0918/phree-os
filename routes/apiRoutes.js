@@ -3,6 +3,9 @@ var request = require('request');
 const config = require('../config/stripe/stripeKey');
 const reset = "\x1b[0m";
 const cyan = "\x1b[36m";
+var request = require('request');
+const stripe = require('stripe')(config.stripe_secret_key);
+
 
 module.exports = function (app) {
   // Get all examples
@@ -112,47 +115,47 @@ module.exports = function (app) {
 
   //update category
   app.put("/api/category/:id", function (req, res) {
-   const idInput = req.params.id;
-   //subtract the items quantity by the req.body
-   // subtract
-   let updatedCat =  req.body.categoryName
-   console.log(idInput, updatedCat)
-   db.Category.update(
-     {
-       categoryName: updatedCat
-     }, {
-      returning: true,
-       where: {
-        id: idInput
-       }
-     }).then(function ( catResult) {
-      //  console.log('categoryName:', categoryName)
-       res.json(catResult);
-     })
-     .catch(err => console.log(err));
+    const idInput = req.params.id;
+    //subtract the items quantity by the req.body
+    // subtract
+    let updatedCat = req.body.categoryName
+    console.log(idInput, updatedCat)
+    db.Category.update(
+      {
+        categoryName: updatedCat
+      }, {
+        returning: true,
+        where: {
+          id: idInput
+        }
+      }).then(function (catResult) {
+        //  console.log('categoryName:', categoryName)
+        res.json(catResult);
+      })
+      .catch(err => console.log(err));
   })
 
-  app.delete("/api/category/:id", function (req, res){
+  app.delete("/api/category/:id", function (req, res) {
     const idInput = req.params.id;
     db.Category.destroy({
       where: {
         id: idInput
-       }
+      }
     }).then((deleteResponse) => {
       console.log('deleteResponse:', deleteResponse);
       db.Item.destroy({
         where: {
           CategoryID: idInput
-         }
+        }
       }).then(response => console.log(response))
-      
+
     }).catch(err => console.log(err));
 
   })
 
   app.post("/api/stripe", function (req, res) {
     console.log("in stripe api call")
-    console.log('req.body.userId', req.body.userId)
+    console.log('req.body.userId: ', req.body.userId)
     request.post(
       {
         url:
@@ -180,6 +183,20 @@ module.exports = function (app) {
           });
         }
       })
+  })
+
+  app.get("/api/stripe/:id", function (req, res) {
+    // console.log('in api/stripe get')
+    // console.log(req.params.id)
+    db.Stripe.findOne({
+      where: {
+        UserId: req.params.id,
+      }
+    }).then(function (stripeAccountInfo) {
+      // console.log('results from get.api/stripe')
+      // console.log(res)
+      res.json(stripeAccountInfo);
+    });
   });
 
   //create new Item
@@ -196,7 +213,7 @@ module.exports = function (app) {
       {
         newItem
       }, {
-      returning: true,
+        returning: true,
         where: {
           id: idInput
         }
@@ -205,4 +222,29 @@ module.exports = function (app) {
         res.json(updatedItem);
       });
   });
+  app.post('/charge', function (req, res) {
+    console.log(`${cyan}this is the request.body${reset}`)
+    var body = req.body
+    var token = body.token
+    var total = body.total
+    var userId = body.userId
+
+    db.Stripe.findOne({
+      where: {
+        userId: userId
+      }
+    }).then(function (results) {
+      var stripeUserId = results.dataValues.StripeUserId
+
+      stripe.charges.create({
+        amount: parseInt(total.toString().split(".").join("")),
+        currency: "usd",
+        source: token,
+      }, {
+          stripe_account: stripeUserId,
+        }).then(function (charge) {
+          res.sendStatus(200)
+        }).catch((err) => console.log(err))
+    })
+  })
 }

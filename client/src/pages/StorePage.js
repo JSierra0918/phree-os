@@ -11,6 +11,8 @@ import PaymentSummary from '../components/PaymentSummary';
 import ManagePage from './ManagePage';
 import ModalPayment from '../components/ModalPayment';
 import ItemContainer2 from '../components/ItemContainer2'
+import ModalWelcome from '../components/ModalWelcome';
+
 
 class StorePage extends Component {
 
@@ -25,7 +27,8 @@ class StorePage extends Component {
             paymentList: [],
             count: 0,
             total: 0,
-            payment: false
+            payment: false,
+            hasStripe: true,
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -33,8 +36,9 @@ class StorePage extends Component {
 
     componentDidMount() {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
+        //find out if the ID is connected to a stripe account 
         this.getUserData();
-        console.log("CURRENT STATE!", this.state.items);
+        this.getStripeData()
     }
 
     componentDidUpdate() {
@@ -53,6 +57,13 @@ class StorePage extends Component {
             payment: false
         });
     }
+
+    closeModalWelcomeHandler = (paid) => {
+        this.setState({
+            hasStripe: true
+        });
+    }
+
     makePayment = (paid) => {
 
         this.setState({
@@ -67,7 +78,27 @@ class StorePage extends Component {
 
     }
 
-    getUserData = () => {
+    getStripeData() {
+        
+        const userId = sessionStorage.getItem('userId');
+
+        // if (userId == null) {
+        //     this.getUserData()
+        // } 
+
+        API.getStripe(userId).then((res) => {
+            var data = res.data
+
+            if (data == null) {
+                this.setState({
+                    hasStripe : false
+                    })
+                } 
+                console.log(this.state.hasStripe)
+        })
+    }
+
+    getUserData = () =>{
         const userId = sessionStorage.getItem('userId');
 
         API.getUserData(userId).then((userResponse) => {
@@ -109,6 +140,7 @@ class StorePage extends Component {
             })
         })
     }
+
     totalPrice = () => {
         let total = this.state.paymentList.reduce((a, b) => {
             // console.log('a price', a.price) 
@@ -255,7 +287,7 @@ class StorePage extends Component {
 
         return (
             <div className="col-md-12 main-row">
-
+                <p></p>
                 <div className="row">
                     <Col size="md-12">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
@@ -309,15 +341,20 @@ class StorePage extends Component {
                             catID={this.state.catID}
                         />
                     </Col>
-
-
                     <ModalPayment
                         className="modal"
                         show={this.state.payment}
                         close={this.closeModalHandler}
                         open={this.openModalHandler}
+                        total={this.state.total}
+                        userId={sessionStorage.getItem('userId')}
                     />
-
+                    <ModalWelcome 
+                        show={this.state.hasStripe}
+                        close={this.closeModalWelcomeHandler}
+                        open={this.openModalHandler}
+                        hasStripe={this.state.hasStripe}
+                    />
                 </div>
             </div>
         );
