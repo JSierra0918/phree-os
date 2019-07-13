@@ -57,8 +57,8 @@ class Item2 extends Component {
         })
     }
 
-    editItem = (id) => {
-
+    editItem = (e,id) => {
+        e.stopPropagation();
         console.log(id);
         //make content edidtable
         const stateEdit = this.state.editable;
@@ -68,7 +68,9 @@ class Item2 extends Component {
         })
     }
 
-    saveItem = (id) => {
+    saveItem = (e,id) => {
+        e.stopPropagation();
+        e.preventDefault();
         // event.preventDefault();
         let newItem = {
             itemname: this.state.nameVal,
@@ -145,12 +147,12 @@ class Item2 extends Component {
 
                                 {this.state.editable !== true ?
 
-                                    <div><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={() => this.editItem(this.props.dataid)}>Edit</span></div>
+                                    <div><span id="trash" onClick={(e) => this.props.delete(e,this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                        <span id="edit" onClick={(e) => this.editItem(e,this.props.dataid)}>Edit</span></div>
                                     :
-                                    <div> <span id="save" onClick={() => this.saveItem(this.props.dataid)}>Save</span>
+                                    <div> <span id="save" onClick={(e) => this.saveItem(e,this.props.dataid)}>Save</span>
 
-                                        <span id="cancel" onClick={() => this.editItem(this.props.dataid)}>Cancel</span></div>
+                                        <span id="cancel" onClick={(e) => this.editItem(e,this.props.dataid)}>Cancel</span></div>
                                 }
 
                                 {/* <div>

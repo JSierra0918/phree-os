@@ -233,9 +233,10 @@ class StorePage extends Component {
         })
     }
 
-    deleteCategory = (id) => {
+    deleteCategory = (e, id) => {
         console.log("DELETE", id)
-        
+        console.log("EVENT: ", e);
+        e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
         //create obj based off of what the state paymentList is
@@ -256,8 +257,9 @@ class StorePage extends Component {
   
     }
 
-    deleteItem = (id) => {
+    deleteItem = (e,id) => {
         console.log("DELETE", id)
+        e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateItems = this.state.items;
         //create obj based off of what the state paymentList is

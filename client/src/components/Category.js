@@ -50,10 +50,11 @@ class Category extends Component {
         })
     }
 
-    editCategory = () => {
-
+    editCategory = (e) => {
+        e.stopPropagation();
         //make content edidtable
         const stateEdit = this.state.editable;
+      
 
         console.log(this)
 
@@ -62,8 +63,9 @@ class Category extends Component {
         })
     }
 
-    saveEditCategory = (id, value) => {
+    saveEditCategory = (e, id, value) => {
         console.log("ID VALUE:", id, value);
+        e.stopPropagation();
 
         const space = " ";
         const emptySpace = space.trim();
@@ -105,7 +107,7 @@ class Category extends Component {
     render() {
         return (
             <div>
-                <li {...this.props} onClick={() => this.props.onClick(this.props.dataid)}>
+                <li {...this.props} onClick={(e) => this.props.onClick(this.props.dataid)}>
                     <div className="col manage-category" >
 
                         {/* <EditableComponent item={this.props.item} editable={true}/> */}
@@ -118,12 +120,12 @@ class Category extends Component {
 
                                 {this.state.editable !== true ?
 
-                                    <div className="d-flex justify-content-center"><span id="trash" onClick={() => this.props.delete(this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={() => this.editCategory(this.props.dataid)}>Edit</span></div>
+                                    <div className="d-flex justify-content-center"><span id="trash" onClick={(e) => this.props.delete(e, this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                        <span id="edit" onClick={(e) => this.editCategory(e, this.props.dataid)}>Edit</span></div>
                                     :
-                                    <div className="d-flex justify-content-center"> <span id="save" onClick={() => this.saveEditCategory(this.props.dataid, this.state.save)}>Save</span>
+                                    <div className="d-flex justify-content-center"> <span id="save" onClick={(e) => this.saveEditCategory(e,this.props.dataid, this.state.save)}>Save</span>
 
-                                        <span id="cancel" onClick={() => this.editCategory(this.props.dataid)}>Cancel</span></div>
+                                        <span id="cancel" onClick={(e) => this.editCategory(e, this.props.dataid)}>Cancel</span></div>
                                 }
                             </div>
                         ) :
