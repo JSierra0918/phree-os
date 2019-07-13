@@ -3,6 +3,7 @@ import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditableCategory from "./EditableCategory";
 import EditableItems2 from "./EditableItems2";
+import { Input } from './Bootstrap/Form';
 
 class Item2 extends Component {
     constructor(props) {
@@ -14,7 +15,10 @@ class Item2 extends Component {
             editable: false,
             nameVal: "",
             quantVal: "",
-            priceVal: ""
+            priceVal: "",
+            itemname: "",
+            price: 0,
+            quantity: 0
         }
     }
 
@@ -96,8 +100,8 @@ class Item2 extends Component {
                 editable: false
             })
             //grab and reload items
-            this.props.grabItems(this.props.catID);  
-            
+            this.props.grabItems(this.props.catID);
+
             //reload the db
             this.props.reload();
         })
@@ -148,6 +152,19 @@ class Item2 extends Component {
 
                                         <span id="cancel" onClick={() => this.editItem(this.props.dataid)}>Cancel</span></div>
                                 }
+
+                                {/* <div>
+                                    <div className="add-item-form type1">
+                                        <form className="input-wrapper">
+                                            <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+                                            <Input id="itemInput" type="text" name="price" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+                                            <Input id="itemInput" type="text" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+
+                                        </form>
+                                    </div>
+
+                                    <button onClick={() => this.props.addNewItem(this.props.catID)} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
+                                </div> */}
                             </div>
                         ) :
                             (

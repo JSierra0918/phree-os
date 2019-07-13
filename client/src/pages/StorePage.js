@@ -125,8 +125,13 @@ class StorePage extends Component {
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
-            console.log('category.data.id:', category.data.id)
-            this.grabItems(category.data.id);
+            if(!category.data.id){
+                return;
+            }else{
+                this.grabItems(category.data.id);
+
+            }
+
         });
     }
 
@@ -238,6 +243,7 @@ class StorePage extends Component {
             return item.id !== id
         });
 
+        console.log(updatedItem)
         //Update the category DB
         API.deleteCategory(id).then((response) => {
             this.setState((state) => {
@@ -301,21 +307,20 @@ class StorePage extends Component {
         inp.value = '';
     }
 
-    addNewItem = (e, catID) => {
+    addNewItem = (e, catID, item) => {
         e.preventDefault();
         //grab value
-        var inp = document.getElementById("itemInput");
-        var val = inp.value.trim();
         const whiteSpace = " ";
 
-        if (val === whiteSpace.trim()) {
-            alert("Cannot add a name  to the category");
-            return;
-        }
+        // if (val === whiteSpace.trim()) {
+        //     alert("Cannot add a name  to the category");
+        //     return;
+        // }
     }
 
     render() {
-
+        console.log(this.state.items);
+        console.log(this.props.items);
         return (
             <div className="col-md-12 main-row">
                 <p></p>

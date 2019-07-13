@@ -27,6 +27,7 @@ class ItemContainer2 extends Component {
     }
 
     renderItems() {
+        console.log(this.props.items)
         return this.props.items.map(item => <Item2
             role={this.props.role}
             dataid={item.id}
@@ -109,6 +110,8 @@ class ItemContainer2 extends Component {
                         </div>
 
                         <button onClick={() => this.props.addNewItem(this.props.catID)} > <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category</button>
+
+                        {/* <h1>OLD BUTTON</h1> */}
                     </div>
                 ) : (<p></p>)}
             </div>

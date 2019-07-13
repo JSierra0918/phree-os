@@ -33,7 +33,7 @@ class PhreeContainer extends Component {
         console.log("Change PAge")
         this.setState({
             currentPage: page,
-            items: ["CHANGE PAGE"]
+            items: []
             
         })
         console.log('items:',this.state.items)
@@ -42,6 +42,7 @@ class PhreeContainer extends Component {
     render() {
 
        let  displayForm = (page) => {
+
             if (page === "Store") {
                 return <StorePage  items={this.state.items}/>
             }
