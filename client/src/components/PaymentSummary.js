@@ -19,51 +19,46 @@ function PaymentSummary(props) {
         let paymentSummary = [];
         let obj, row, cells;
 
-        if (paymentSummary.length <= 0) {
-            alert("Your total is $0. Please add an item in order to make a purchase!");
-
+        // Use the first row for the property names
+        // Could use a header section but result is the same if
+        // there is only one header row
+        for (var i = 0, iLen = propCells.length; i < iLen; i++) {
+            propNames.push(propCells[i].textContent || propCells[i].innerText);
         }
-        else {
-            // Use the first row for the property names
-            // Could use a header section but result is the same if
-            // there is only one header row
-            for (var i = 0, iLen = propCells.length; i < iLen; i++) {
-                propNames.push(propCells[i].textContent || propCells[i].innerText);
+
+        // Use the rows for data
+        // Could use tbody rows here to exclude header & footer
+        // but starting from 1 gives required result
+        for (var j = 1, jLen = rows.length; j < jLen; j++) {
+            cells = rows[j].cells;
+            obj = {};
+            const id = rows[j].getAttribute("dataid");
+            //add id to the obj so we can use it for the Items API
+            obj.id = id;
+
+            for (var k = 0; k < iLen; k++) {
+                obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
             }
 
-            // Use the rows for data
-            // Could use tbody rows here to exclude header & footer
-            // but starting from 1 gives required result
-            for (var j = 1, jLen = rows.length; j < jLen; j++) {
-                cells = rows[j].cells;
-                obj = {};
-                const id = rows[j].getAttribute("dataid");
-                //add id to the obj so we can use it for the Items API
-                obj.id = id;
-
-                for (var k = 0; k < iLen; k++) {
-                    obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
-                }
-
-                paymentSummary.push(obj)
-            }
-            //get User id for summary API
-            const userId = sessionStorage.getItem('userId');
-
-            API.postSummary(userId, paymentSummary).then((response) => {
-                console.log(response.data);
-
-                // TODO:Send the response to update the Items from the data table  
-                //Items only needs ID and quantity...I think.
-                props.makePayment(true)
-
-                //----- clears the payment list for the client ------
-                // props.clearSummary([]);
-            });
-
-            // return paymentSummary;
-
+            paymentSummary.push(obj)
         }
+        //get User id for summary API
+        const userId = sessionStorage.getItem('userId');
+
+        API.postSummary(userId, paymentSummary).then((response) => {
+            console.log(response.data);
+
+            // TODO:Send the response to update the Items from the data table  
+            //Items only needs ID and quantity...I think.
+            props.makePayment(true)
+
+            //----- clears the payment list for the client ------
+            // props.clearSummary([]);
+        });
+
+        // return paymentSummary;
+
+
 
     }
 
