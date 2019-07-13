@@ -3,6 +3,7 @@ import Category from './Category';
 import '../pages/styles/storepage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Item2 from '../components/Item2'
+import { Input } from './Bootstrap/Form';
 
 class ItemContainer2 extends Component {
     constructor(props) {
@@ -10,7 +11,10 @@ class ItemContainer2 extends Component {
 
         this.state = {
             categoryList: [],
-            isActive: false
+            isActive: false,
+            itemname: "",
+            price: 0,
+            quantity: 0
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this);
@@ -46,6 +50,16 @@ class ItemContainer2 extends Component {
             isActive: !state.isActive
         }));
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+
+        console.log(name, value)
+
+        this.setState({
+            [name]: value
+        });
+    };
 
     // addCat = (e) => {
     //     const userId = sessionStorage.getItem("userId");
@@ -85,9 +99,12 @@ class ItemContainer2 extends Component {
                 </ul>
                 {this.props.role === "1" ? (
                     <div>
-                        <div className="add-category-form type1">
+                        <div className="add-item-form type1">
                             <form className="input-wrapper">
-                                <input id="itemInput" type="text" name="addItem" placeholder="Create an Item" />
+                                <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+                                <Input id="itemInput" type="text" name="price" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+                                <Input id="itemInput" type="text" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Create an Item" />
+                                
                             </form>
                         </div>
 
