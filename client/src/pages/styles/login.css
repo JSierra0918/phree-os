@@ -146,6 +146,12 @@
 .store-nav {
   display: none;
 }
+
+.loginContainer {
+  height: 100%; 
+  top: 200px;
+  left: 240px;
+}
   /* ====================================================END of   CUSTOM ===================================================== */
 
   /* Fallback for Edge

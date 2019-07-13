@@ -1,4 +1,5 @@
 .modal-wrapper {
+    z-index: 100;
     background: white;
     position: fixed;
     top: 100px;

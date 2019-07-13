@@ -230,13 +230,14 @@
 /* ----------------------- PHREE */
 .phree-container {
     max-width: 95vw;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .main-phree {
     position: relative;
     margin-top: 5rem;
     border: 1px solid;
+    height: 90%;
 }
 
 

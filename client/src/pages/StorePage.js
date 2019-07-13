@@ -306,7 +306,7 @@ class StorePage extends Component {
                         <ItemsContainer items={this.state.items} addItem={this.addItem} />
                     </Col>
                     <ModalPayment
-                        className="modal"
+                        // className="modal"
                         show={this.state.payment}
                         close={this.closeModalHandler}
                         open={this.openModalHandler}
