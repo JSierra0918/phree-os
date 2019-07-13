@@ -169,21 +169,32 @@ module.exports = function (app) {
         }
       },
       function (error, response, body) {
-        console.log('error:', error)
+      console.log('error:', error)
+      
+      if (!error && response.statusCode == 200) {
+        console.log("it went ok")
+        console.log(body)
+        var bodyParsed = JSON.parse(body)
+        db.Stripe.create({
+          StripeUserId : bodyParsed.stripe_user_id,
+          StripeRefreshToken : bodyParsed.refresh_token,
+          UserId : req.body.userId,
+        }).then(function (stripe) {
+          console.log(stripe)
+        }).then(function() {
+          db.User.update({      
+            hasStripe: true
+          },{
+          where: {  
+            id: req.body.userId
+          }
+        }).then(function (updatedItem) {
 
-        if (!error && response.statusCode == 200) {
-          console.log("it went ok")
-          console.log(body)
-          var bodyParsed = JSON.parse(body)
-          db.Stripe.create({
-            StripeUserId: bodyParsed.stripe_user_id,
-            StripeRefreshToken: bodyParsed.refresh_token,
-            UserId: req.body.userId,
-          }).then(function (Stripe) {
-            res.sendStatus(200)
-          });
-        }
+        }).catch((err) => console.log(err))
       })
+      }
+    }
+    )
   })
 
   app.get("/api/stripe/:id", function (req, res) {
