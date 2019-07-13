@@ -42,12 +42,14 @@ function PaymentSummary(props) {
             }
 
             paymentSummary.push(obj)
+            console.log('paymentSummary:', paymentSummary)
+            console.log('obj:', obj)
         }
         //get User id for summary API
         const userId = sessionStorage.getItem('userId');
 
         API.postSummary(userId, paymentSummary).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
 
             // TODO:Send the response to update the Items from the data table  
             //Items only needs ID and quantity...I think.
@@ -55,6 +57,7 @@ function PaymentSummary(props) {
 
             //----- clears the payment list for the client ------
             // props.clearSummary([]);
+            props.getQuantityUpdate(paymentSummary);
         });
 
         // return paymentSummary;
