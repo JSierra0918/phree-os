@@ -107,7 +107,7 @@ class Category extends Component {
     render() {
         return (
             <div>
-                <li {...this.props} onClick={(e) => this.props.onClick(this.props.dataid)}>
+                <li key={this.props.dataid} style={this.props.style} dataid={this.props.dataid} className={this.props.className} onClick={(e) => this.props.onClick(this.props.dataid)}>
                     <div className="col manage-category" >
 
                         {/* <EditableComponent item={this.props.item} editable={true}/> */}
