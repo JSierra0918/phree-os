@@ -386,7 +386,6 @@ class StorePage extends Component {
                         />
                     </Col>
                     <ModalPayment
-                        // className="modal"
                         show={this.state.payment}
                         close={this.closeModalHandler}
                         open={this.openModalHandler}

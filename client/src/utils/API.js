@@ -80,6 +80,10 @@ export default {
             console.log(response);
         });
     },
-
+    getSpecificItem: function(itemId) {
+        return axios.get("/api/items/one/" + itemId, (response) => {
+            console.log(response)
+        })
+    }
 
 }
