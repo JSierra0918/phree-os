@@ -21,7 +21,7 @@ class SetupComplete extends Component {
   }
 
   routeToStore = () => {
-    let path = `store`;
+    let path = `/store`;
     this.props.history.push(path);
   };
 
