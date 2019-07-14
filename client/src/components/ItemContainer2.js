@@ -14,7 +14,8 @@ class ItemContainer2 extends Component {
             isActive: false,
             itemname: "",
             price: 0,
-            quantity: 0
+            quantity: 0,
+            wantsToAddNewItem: false
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this);
@@ -62,6 +63,8 @@ class ItemContainer2 extends Component {
 
     grabNewItemInfo = (e) => {
 
+        const blank = " ";
+
         let newobjItem = {
             itemname: this.state.itemname,
             price: this.state.price,
@@ -70,8 +73,25 @@ class ItemContainer2 extends Component {
             CategoryId: this.props.catID
         }
 
+        //Check to see if all the item names are empty
+        if(this.state.itemname === blank.trim() &&this.state.itemname === blank.trim() && this.state.itemname === blank.trim()){
+            alert("Please adjust one of the items values or cancel");
+            return;
+        }
+
         console.log(newobjItem);
-        this.props.addNewItem(e, this.props.catID, newobjItem)
+        this.props.addNewItem(e, this.props.catID, newobjItem);
+        //revert back to the add button
+        this.userWantsToAddNewItem()
+    }
+
+    userWantsToAddNewItem = () => {
+        this.setState(state => {
+            return {wantsToAddNewItem: !state.wantsToAddNewItem}
+        })
+
+        console.log('userWantsToAddNewItem:', this.state.wantsToAddNewItem)
+
     }
 
     // addCat = (e) => {
@@ -118,17 +138,26 @@ class ItemContainer2 extends Component {
 
                     //check to see if the item Category has been selected:
                     <div>
+                        {this.state.wantsToAddNewItem === true ? (
+                            <li>
+                                <div className="add-item-form type1">
+                                    <form className="input-wrapper">
+                                        <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
+                                        <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
+                                        <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
 
-                        <div className="add-item-form type1">
-                            <form className="input-wrapper">
-                                <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
-                                <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
-                                <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
+                                    </form>
+                                </div>
 
-                            </form>
-                        </div>
+                                <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save New Item</button>
+                                <button onClick={this.userWantsToAddNewItem} > <FontAwesomeIcon icon="times" className="add-item-btn" /> Cancel</button>
+                            </li>
+                        ) : (
+                                <button className="add-item-btn" onClick={this.userWantsToAddNewItem}> Add New Item</button>
+                            )
 
-                        <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Add Item</button>
+                        }
+
 
                         {/* <h1>OLD BUTTON</h1> */}
                     </div>
