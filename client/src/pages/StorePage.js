@@ -29,7 +29,7 @@ class StorePage extends Component {
             total: 0,
             payment: false,
             hasStripe: true,
-            checkoutObj:{}
+            checkoutObj: {},
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -41,13 +41,25 @@ class StorePage extends Component {
         this.getUserData();
 
     }
-    
-    
-   componentDidUpdate() {
+
+
+    componentDidUpdate() {
         //once the item table has been updated, then update the site with the new info.
         //most likely do another this.getUserData()
+
+        // if (this.props.role ===1) {
+        //     this.setState({
+        //         items: []
+        //     })
+        // }
     }
 
+    //When ever you receive a prop from PhreeContainer, reset the items
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            items: nextProps.items
+        })
+    }
 
     openModalHandler = (paid) => {
         this.setState({
@@ -75,7 +87,7 @@ class StorePage extends Component {
 
     }
 
-    getUserData = () =>{
+    getUserData = () => {
         const userId = sessionStorage.getItem('userId');
 
         API.getUserData(userId).then((userResponse) => {
@@ -84,10 +96,10 @@ class StorePage extends Component {
 
             var boolean = userResponse.data.hasStripe
             if (boolean === false) {
-            this.setState({
-                hasStripe: boolean
-            })
-        }
+                this.setState({
+                    hasStripe: boolean
+                })
+            }
 
             if (!userResponse.data.storename) {
                 // go to create store
@@ -112,9 +124,9 @@ class StorePage extends Component {
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
-            if(!category.data.id){
+            if (!category.data.id) {
                 return;
-            }else{
+            } else {
                 this.grabItems(category.data.id);
 
             }
@@ -236,11 +248,11 @@ class StorePage extends Component {
             this.setState((state) => {
                 return { category: state.category = updatedItem }
             })
-        })  
+        })
     }
 
-    deleteItem = (e,id) => {
-    
+    deleteItem = (e, id) => {
+
         e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateItems = this.state.items;
@@ -295,14 +307,14 @@ class StorePage extends Component {
     addNewItem = (e, catID, itemObj) => {
         e.stopPropagation();
         //grab value
-        
+
         const whiteSpace = " ";
         // if (val === whiteSpace.trim()) {
         //     alert("Cannot add a name  to the category");
         //     return;
         // }    
         API.postNewItem(catID, itemObj).then((responseItem) => {
-           
+
             //grab the response and set it to the state.
             this.setState(state => {
                 return { items: state.items = responseItem.data }
@@ -312,7 +324,7 @@ class StorePage extends Component {
 
     setCategories = (categories) => {
         this.setState({
-            category:categories
+            category: categories
         })
     }
 
@@ -322,8 +334,14 @@ class StorePage extends Component {
             checkoutObj: checkoutObj
         })
     }
+
+    clearItems = () => {
+        this.setState({
+            items: []
+        })
+    }
     render() {
-    
+
         return (
             <div className="col-md-12 main-row">
                 <p></p>
@@ -357,8 +375,9 @@ class StorePage extends Component {
                             editable={this.state.editable}
                             reload={this.getUserData}
                             addCategory={this.addCategory}
-                            setCategories={(categories) => {this.setCategories(categories)}}
-                            
+                            setCategories={(categories) => { this.setCategories(categories) }}
+                            clearItems={this.clearItems}
+
                         />
                     </Col>
                     <Col size="md-3">
@@ -385,7 +404,7 @@ class StorePage extends Component {
                         userId={sessionStorage.getItem('userId')}
                         checkoutObj={this.state.checkoutObj}
                     />
-                    <ModalWelcome 
+                    <ModalWelcome
                         show={this.state.hasStripe}
                         close={this.closeModalWelcomeHandler}
                         open={this.openModalHandler}
