@@ -81,7 +81,7 @@ class StorePage extends Component {
         API.getUserData(userId).then((userResponse) => {
             // console.log(userResponse.data.storename)
             // console.log(userResponse.data.hasStripe)
-
+            console.log('in get user data / reload()')
             var boolean = userResponse.data.hasStripe
             if (boolean === false) {
             this.setState({
@@ -258,7 +258,6 @@ class StorePage extends Component {
         })
     }
 
-
     addCategory = (e) => {
         alert("Helo!")
         e.preventDefault();
@@ -330,6 +329,11 @@ class StorePage extends Component {
             checkoutObj: checkoutObj
         })
     }
+
+    routeToStore = () => {
+        let path = `store`;
+        this.props.history.push(path);
+      }
     render() {
         console.log(this.state.items);
         console.log(this.props.items);
@@ -386,13 +390,13 @@ class StorePage extends Component {
                         />
                     </Col>
                     <ModalPayment
-                        // className="modal"
                         show={this.state.payment}
                         close={this.closeModalHandler}
                         open={this.openModalHandler}
                         total={this.state.total}
                         userId={sessionStorage.getItem('userId')}
                         checkoutObj={this.state.checkoutObj}
+                        reload={this.routeToStore}
                     />
                     <ModalWelcome 
                         show={this.state.hasStripe}
