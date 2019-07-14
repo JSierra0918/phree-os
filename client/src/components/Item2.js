@@ -127,7 +127,12 @@ class Item2 extends Component {
 
         return (
             <div>
-                <li className={this.props.className} dataid={this.props.dataid} key={this.props.dataid} onClick={() => this.props.addItem(this.props.item)}>
+                <li 
+                className={this.props.className}
+                 dataid={this.props.dataid} 
+                 key={this.props.dataid} 
+                 onClick={this.props.role === "1"? "": () => this.props.addItem(this.props.item)}
+                  >
                     <div className="col manage-items" >
                         {this.props.role === "1" ? (
                             <div>
@@ -173,8 +178,6 @@ class Item2 extends Component {
                             )}
                     </div>
                 </li>
-
-
             </div>
         );
     }
