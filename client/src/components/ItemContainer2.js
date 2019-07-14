@@ -40,7 +40,7 @@ class ItemContainer2 extends Component {
             addItem={this.props.addItem}
             delete={this.props.delete}
             edit={this.props.edit}
-            reload={this.props.reload}  
+            reload={this.props.reload}
             catID={this.props.catID}
             grabItems={this.props.grabItems}
         />)
@@ -103,22 +103,26 @@ class ItemContainer2 extends Component {
     // }
 
     render() {
+        console.log(this.props.categoryIsSelected);
         return (
             <div className="items text-center p-main-col mb20">
-                <h5>Items</h5>
-                <hr />
-                <ul>
-                    {this.renderItems()}
-                </ul>
+                <div>
+                    <h5>Items</h5>
+                    <hr />
+                    <ul>
+                        {this.renderItems()}
+                    </ul>
+                </div>
 
-                {this.props.role === "1" ? (
+                {this.props.role === "1" && this.props.categoryIsSelected === true ? (
 
+                    //check to see if the item Category has been selected:
                     <div>
 
                         <div className="add-item-form type1">
                             <form className="input-wrapper">
                                 <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
-                                <Input id="itemInput" type="number" name="price"  step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
+                                <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
                                 <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
 
                             </form>

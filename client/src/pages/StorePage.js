@@ -30,6 +30,7 @@ class StorePage extends Component {
             payment: false,
             hasStripe: true,
             checkoutObj: {},
+            categoryIsSelected: false
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -142,6 +143,10 @@ class StorePage extends Component {
                 items: returnedItems.data,
                 catID: catID
             })
+
+            //If you're role is 1 (manager) then make the categoryIsSelected to true.
+            this.categoryIsSelected();
+            console.log(this.state.categoryIsSelected);
         })
     }
 
@@ -335,10 +340,14 @@ class StorePage extends Component {
         })
     }
 
-    clearItems = () => {
-        this.setState({
-            items: []
-        })
+    categoryIsSelected = () => {
+        if (this.props.role === "1") {
+            return this.setState((state) => {
+                return {categoryIsSelected: state.categoryIsSelected = true}
+            })
+        }
+
+        return this.setState({categoryIsSelected: false});
     }
     render() {
 
@@ -376,7 +385,6 @@ class StorePage extends Component {
                             reload={this.getUserData}
                             addCategory={this.addCategory}
                             setCategories={(categories) => { this.setCategories(categories) }}
-                            clearItems={this.clearItems}
 
                         />
                     </Col>
@@ -393,6 +401,7 @@ class StorePage extends Component {
                             catID={this.state.catID}
                             grabItems={this.grabItems}
                             addNewItem={this.addNewItem}
+                            categoryIsSelected={this.state.categoryIsSelected}
                         />
                     </Col>
                     <ModalPayment
