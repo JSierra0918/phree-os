@@ -50,10 +50,11 @@ class CheckoutForm extends Component {
       this.setState({
         complete: true
       });
-      API.putQuanityItem();
+      setTimeout(() => window.location.reload(), 1000)
       //make the call and adjust the quantities
     }
-  }
+  
+}
 
   initialLoop =(obj) =>{
     let itemsSold = obj;

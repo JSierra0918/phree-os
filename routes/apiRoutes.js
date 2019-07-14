@@ -252,6 +252,7 @@ module.exports = function(app) {
     });
   });
 
+  //makes the charges, updates the quantities 
   app.post("/charge", function(req, res) {
     console.log(`${cyan}this is the request.body${reset}`);
     var body = req.body;
@@ -328,10 +329,6 @@ module.exports = function(app) {
         });
     });
   });
-
-  //loop through the object
-  //update the item database where id = id
-  //db quantity - our quantity = new quantity
 
   app.delete("/api/items/:id", function(req, res) {
     const idInput = req.params.id;
