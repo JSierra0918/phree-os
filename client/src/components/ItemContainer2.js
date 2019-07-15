@@ -127,13 +127,13 @@ class ItemContainer2 extends Component {
             <div className="items text-center p-main-col mb20">
                 <div className="flex-top-section">
                     <h5>Items</h5>
-                    <hr />
                     <div className="scrollable-content">
                         <ul>
                             {this.renderItems()}
                         </ul>
                     </div>
                 </div>
+
                 {/* old code for switching between manager and store populate items for the add item */}
                 {/* && this.props.categoryIsSelected === true */}
                 {this.props.role === "1" ? (
@@ -145,14 +145,24 @@ class ItemContainer2 extends Component {
                                 <div className="add-item-form type1">
                                     <form className="input-wrapper">
                                         <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
-                                        <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
-                                        <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
-
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
+                                            </div>
+                                            <div className="col-6">
+                                                <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
-
-                                <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save New Item</button>
-                                <button onClick={this.userWantsToAddNewItem} > <FontAwesomeIcon icon="times" className="add-item-btn" /> Cancel</button>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save New Item</button>
+                                    </div>
+                                    <div className="col-6">
+                                        <button onClick={this.userWantsToAddNewItem} > <FontAwesomeIcon icon="times" className="add-item-btn" /> Cancel</button>
+                                    </div>
+                                </div>
                             </li>
                         ) : (
                                 <button className="add-item-btn" onClick={this.userWantsToAddNewItem}> Add New Item</button>
