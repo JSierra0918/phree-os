@@ -30,7 +30,8 @@ class CheckoutForm extends Component {
   }
 
   async submit(ev) {
-   await this.initialLoop(this.props.checkoutObj)
+    await this.initialLoop(this.props.checkoutObj)
+    const n = IDsOfItemsSold.length
     let { token } = await this.props.stripe.createToken({ name: "Name" });
     let response = await fetch("/charge", {
       method: "POST",
@@ -48,7 +49,7 @@ class CheckoutForm extends Component {
       this.setState({
         complete: true
       });
-      setTimeout(() => window.location.reload(), 2500);
+      setTimeout(() => window.location.reload(), n * 500);
       //make the call and adjust the quantities
     }
 }
