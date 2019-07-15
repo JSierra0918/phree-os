@@ -322,7 +322,7 @@ module.exports = function(app) {
                       .catch(err => console.log(err));
 
                     resolve();
-                  }, 0.25 * 1000)
+                  }, i * 500)
                 )
             );
           }

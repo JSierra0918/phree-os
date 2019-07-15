@@ -6,13 +6,14 @@ let IDsOfItemsSold = [];
 let quantityOfEachItemSold = [];
 let quantityOfEachItemInStock = [];
 
-//CardElement creates a "card" type element that mounts on the page when the component is rendered
-//The CardElement includes inputs for all of the major card fields: the card number, the expiration date, and the CVC
+// CardElement creates a "card" type element that mounts on the page when the component is rendered
+
+// The CardElement includes inputs for all of the major card fields: the card number, the expiration date, and the CVC
 
 // The CheckoutForm class defines a component that displays a CardElement and a button for completing the purchase.
 // The button’s click event is wired to the submit method
 
-//The injectStripe function wraps the component, creating a new component with an injected stripe prop, which contains
+// The injectStripe function wraps the component, creating a new component with an injected stripe prop, which contains
 // a Stripe object. You must use the wrapped component in your application instead of the original CheckoutForm
 
 class CheckoutForm extends Component {
@@ -30,7 +31,8 @@ class CheckoutForm extends Component {
   }
 
   async submit(ev) {
-   await this.initialLoop(this.props.checkoutObj)
+    await this.initialLoop(this.props.checkoutObj)
+    const n = IDsOfItemsSold.length
     let { token } = await this.props.stripe.createToken({ name: "Name" });
     let response = await fetch("/charge", {
       method: "POST",
@@ -48,7 +50,7 @@ class CheckoutForm extends Component {
       this.setState({
         complete: true
       });
-      setTimeout(() => window.location.reload(), 2500);
+      setTimeout(() => window.location.reload(), n * 500);
       //make the call and adjust the quantities
     }
 }
@@ -85,9 +87,6 @@ class CheckoutForm extends Component {
      
   };
 
-  componentDidMount() {
-    
-  }
   render() {
 
     // this.initialLoop(this.props.checkoutObj)

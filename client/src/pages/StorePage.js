@@ -406,8 +406,9 @@ class StorePage extends Component {
                         borderWidth: 1,
                         hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
                         hoverBorderColor: 'rgba(255,99,132,1)',
-                        data: [10, 10]
+                        data: [1000, 10]
                     }
+
                 ]
             }
         })

@@ -2,8 +2,6 @@ import React from 'react';
 import API from '../utils/API';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import SummaryChart from '../components/SummaryChart';
-// import ReactTable fom 'react-table';
 import { Bar } from 'react-chartjs-2';
 
 function PaymentSummary(props) {
@@ -41,8 +39,8 @@ function PaymentSummary(props) {
             }
 
             paymentSummary.push(obj)
-            console.log('paymentSummary:', paymentSummary)
-            console.log('obj:', obj)
+            // console.log('paymentSummary:', paymentSummary)
+            // console.log('obj:', obj)
         }
         //get User id for summary API
         const userId = sessionStorage.getItem('userId');
