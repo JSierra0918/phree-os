@@ -18,7 +18,7 @@ class Item2 extends Component {
             priceVal: this.props.item.price,
             itemname: "",
             price: 0,
-            quantity: 0
+            quantity: this.props.item.quantity
         }
     }
 
@@ -29,18 +29,22 @@ class Item2 extends Component {
         //         categories: response.data
         //     })
         // })
+        // console.log("item mount")
+     //   console.log(this.state)ç
     }
 
-    componentDidUpdate() {
-        // const userId = sessionStorage.getItem("userId");
-    }
+        componentDidUpdate() {
+            // const userId = sessionStorage.getItem("userId");
+            // console.log("item update")
+            // console.log(this.props)
+        }
 
     selectCategory = (id) => {
         const catDom = document.getElementsByClassName("categoryName")
         catDom.focus();
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
-            console.log('category:', category.data)
+            // console.log('category:', category.data)
             //find items and return the array possibly pass it as an argument for displayItem.
             this.grabItems(category.data.id);
 
@@ -53,13 +57,13 @@ class Item2 extends Component {
     updateCategoryName = (id, catName) => {
 
         API.putCategory(id, catName).then((response) => {
-            console.log("Item updated");
+            // console.log("Item updated");
         })
     }
 
     editItem = (e, id) => {
         e.stopPropagation();
-        console.log(id);
+        // console.log(id);
         //make content edidtable
         const stateEdit = this.state.editable;
 
@@ -94,7 +98,7 @@ class Item2 extends Component {
 
         //save value to the Category DB
         API.putNewItem(id, newItem).then((response) => {
-            console.log('response:', response)
+            // console.log('response:', response)
             this.setState({
                 editable: false
             })
@@ -116,6 +120,16 @@ class Item2 extends Component {
         // empty for the ternary on Click Item
     }
 
+    updateQ = () => {
+        // console.log("updateQ");
+        // console.log(this)
+
+        this.props.addItem(this.props.item)
+        this.setState({
+            quantity : this.state.quantity -1
+        })
+    }
+
     render() {
         // add decimals to the number
         const formatter = new Intl.NumberFormat('en-IN', {
@@ -128,14 +142,16 @@ class Item2 extends Component {
                     className={this.props.className}
                     dataid={this.props.dataid}
                     key={this.props.dataid}
-                    onClick={this.props.role === "1" ? this.emptyFunctionForTernaryOnClick : () => this.props.addItem(this.props.item)}
+                    // onClick={this.props.role === "1" ? this.emptyFunctionForTernaryOnClick : () => this.props.addItem(this.props.item)}
+                    onClick={this.props.role === "1" ? this.emptyFunctionForTernaryOnClick : () => this.updateQ()}
+
                 >
                     <div className="col manage-items" >
                         {this.props.role === "1" ? (
                             <div>
                                 <EditableItems2
                                     itemname={this.props.item.itemname}
-                                    quantity={this.props.quantity}
+                                    quantity={this.state.quantity}
                                     price={this.props.price}
                                     editable={this.state.editable}
                                     nameVal={this.state.nameVal}
@@ -165,7 +181,7 @@ class Item2 extends Component {
                                     </h6>
                                     <div className="d-flex justify-content-between">
                                         <div className="d-flex item-highlight">
-                                            <span>Q:</span><p>{this.props.quantity}</p>
+                                            <span>Q:</span><p>{this.state.quantity}</p>
                                         </div>
                                         <div className="d-flex item-highligh">
                                             <span>$</span><p>{formatter.format(this.props.price)}</p>
