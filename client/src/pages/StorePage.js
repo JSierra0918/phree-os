@@ -28,7 +28,8 @@ class StorePage extends Component {
             payment: false,
             hasStripe: true,
             checkoutObj: {},
-            categoryIsSelected: false
+            categoryIsSelected: false,
+            chartData: {}
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -38,6 +39,7 @@ class StorePage extends Component {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         //find out if the ID is connected to a stripe account 
         this.getUserData();
+        // this.getPaymentSummary();
 
     }
 
@@ -58,6 +60,10 @@ class StorePage extends Component {
         // this.setState({
         //     items: nextProps.items
         // })
+    }
+
+    componentWillMount() {
+
     }
 
     openModalHandler = (paid) => {
@@ -142,11 +148,13 @@ class StorePage extends Component {
 
             //If you're role is 1 (manager) then make the categoryIsSelected to true.
             // this.categoryIsSelected();
-            console.log(this.state.items);
+            // console.log(this.state.items);
         })
     }
 
     totalPrice = () => {
+        console.log('this.state.paymentList', this.state.paymentList)
+
         let total = this.state.paymentList.reduce((a, b) => {
 
             return { price: parseFloat(a.price) + parseFloat(b.price) }
@@ -158,8 +166,18 @@ class StorePage extends Component {
         })
     }
 
+    subtractPrice = (deletedItem) => {
+        const currentTotal = this.state.total
+        const deletedItemTotal = deletedItem[0].price
+        const newTotal = currentTotal - deletedItemTotal
+
+        this.setState({
+            total: newTotal.toFixed(2)
+        })
+    }
+    
     addItem = (selectedItem) => {
-        console.log('selectedItem:', selectedItem)
+        // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
         const statePaymentList = this.state.paymentList;
 
@@ -167,7 +185,7 @@ class StorePage extends Component {
         //Find index of specific object using findIndex method.    
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
-            
+
             //if the counter equals the quantity then there are no more of this item, make it disabled
             // if(statePaymentList[objIndex].quantity === statePaymentList[objIndex].counter){
             //     alert("Reached the limit!")
@@ -175,7 +193,7 @@ class StorePage extends Component {
             // }
 
 
-           // make new object of updated object.           
+            // make new object of updated object.           
             let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
@@ -195,7 +213,7 @@ class StorePage extends Component {
 
             // reset objIndex
             objIndex = -1;
-            console.log('this.state.paymentList:', this.state.paymentList)
+            // console.log('this.state.paymentList:', this.state.paymentList)
         } else {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
@@ -226,11 +244,23 @@ class StorePage extends Component {
         let updatedItem = statePaymentList.filter((item) => {
             return item.id !== id
         });
-
+        let deletedItem = statePaymentList.filter((item) => {
+            return item.id === id
+        });
+        // filter the items array, ypdate the quantity and update the state
+        // console.log(deletedItem)
+        // console.log(this.state.items)
+        let newItems = this.state.items
         //Update object's name property.
-        this.setState((state) => {
-            return { paymentList: state.paymentList = updatedItem }
-        })
+        // this.setState((state) => {
+        //     return { paymentList: state.paymentList = updatedItem,
+        //     items: newItems}
+        // })
+        this.setState(
+            { paymentList: updatedItem,
+            catID: deletedItem[0].CategoryId,
+            items: newItems}, () => {this.subtractPrice(deletedItem)})
+        
     }
 
     clearSummary = (summaryArr) => {
@@ -242,8 +272,8 @@ class StorePage extends Component {
     }
 
     deleteCategory = (e, id) => {
-        console.log("DELETE", id)
-        console.log("EVENT: ", e);
+        // console.log("DELETE", id)
+        // console.log("EVENT: ", e);
         e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
@@ -313,7 +343,7 @@ class StorePage extends Component {
 
     addNewItem = (e, catID, itemObj) => {
         e.stopPropagation();
-               
+
         API.postNewItem(catID, itemObj).then((responseItem) => {
 
             //grab the response and set it to the state.
@@ -351,6 +381,41 @@ class StorePage extends Component {
         this.props.history.push(path);
     }
 
+    getPaymentSummary = (payment) => {
+    console.log('payment:', payment)
+
+    let reducedlSales = payment.data.reduce((acc, val)=>{
+            console.log('val:', val)
+            console.log('acc:', acc)
+            return acc + parseInt(val.Price)
+    }, 0) 
+    let reducedQuantity = payment.data.reduce((acc, val)=>{
+            console.log('val:', val)
+            console.log('acc:', acc)
+            return acc + parseInt(val.Quantity)
+    }, 0) 
+
+        this.setState({
+            chartData: {
+                labels: ['Total Sales', 'Number of Items'],
+                datasets: [
+                    {
+                        label: 'Sales Summary',
+                        backgroundColor: ['rgba(255, 96, 41, 0.3)', 'rgba(255, 96, 41, 0.3)'],
+                        borderColor: 'rgba(255, 96, 41, .2)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
+                        hoverBorderColor: 'rgba(255,99,132,1)',
+                        data: [10, 10]
+                    }
+                ]
+            }
+        })
+
+        console.log(this.state.chartData);
+
+    }
+
     render() {
 
         return (
@@ -373,6 +438,9 @@ class StorePage extends Component {
                             reload={this.getUserData}
                             getQuantityUpdate={this.getQuantityUpdate}
                             role={this.props.role}
+                            getPaymentSummary={this.getPaymentSummary}
+                            chartData={this.state.chartData}
+
                         />
 
                     </Col>
@@ -404,7 +472,7 @@ class StorePage extends Component {
                             catID={this.state.catID}
                             grabItems={this.grabItems}
                             addNewItem={this.addNewItem}
-                            // categoryIsSelected={this.state.categoryIsSelected}
+                        // categoryIsSelected={this.state.categoryIsSelected}
                         />
                     </Col>
                     <ModalPayment

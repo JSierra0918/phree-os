@@ -29,8 +29,6 @@ class CheckoutForm extends Component {
 
   }
 
-
-
   async submit(ev) {
    await this.initialLoop(this.props.checkoutObj)
     let { token } = await this.props.stripe.createToken({ name: "Name" });
@@ -53,7 +51,6 @@ class CheckoutForm extends Component {
       setTimeout(() => window.location.reload(), 2500);
       //make the call and adjust the quantities
     }
-  
 }
 
   initialLoop =(obj) =>{
@@ -88,7 +85,6 @@ class CheckoutForm extends Component {
      
   };
 
-  
   componentDidMount() {
     
   }
