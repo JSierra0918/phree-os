@@ -28,7 +28,8 @@ class StorePage extends Component {
             payment: false,
             hasStripe: true,
             checkoutObj: {},
-            categoryIsSelected: false
+            categoryIsSelected: false,
+            chartData: {}
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -38,6 +39,7 @@ class StorePage extends Component {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         //find out if the ID is connected to a stripe account 
         this.getUserData();
+        // this.getPaymentSummary();
 
     }
 
@@ -58,6 +60,10 @@ class StorePage extends Component {
         // this.setState({
         //     items: nextProps.items
         // })
+    }
+
+    componentWillMount() {
+
     }
 
     openModalHandler = (paid) => {
@@ -167,7 +173,7 @@ class StorePage extends Component {
         //Find index of specific object using findIndex method.    
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
-            
+
             //if the counter equals the quantity then there are no more of this item, make it disabled
             // if(statePaymentList[objIndex].quantity === statePaymentList[objIndex].counter){
             //     alert("Reached the limit!")
@@ -175,7 +181,7 @@ class StorePage extends Component {
             // }
 
 
-           // make new object of updated object.           
+            // make new object of updated object.           
             let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
@@ -313,7 +319,7 @@ class StorePage extends Component {
 
     addNewItem = (e, catID, itemObj) => {
         e.stopPropagation();
-               
+
         API.postNewItem(catID, itemObj).then((responseItem) => {
 
             //grab the response and set it to the state.
@@ -351,6 +357,43 @@ class StorePage extends Component {
         this.props.history.push(path);
     }
 
+    getPaymentSummary = (payment) => {
+    console.log('payment:', payment)
+
+    let totalSales = payment.data.reduce((acc, val)=>{
+            console.log('val:', val)
+            console.log('acc:', acc)
+            return acc + parseInt(val.Price)
+    }, 0) 
+    let totalQuantity = payment.data.reduce((acc, val)=>{
+            console.log('val:', val)
+            console.log('acc:', acc)
+            return acc + parseInt(val.Quantity)
+    }, 0) 
+
+    console.log(totalQuantity, totalSales)
+
+        this.setState({
+            chartData: {
+                labels: ['Total Sales', 'Number of Items'],
+                datasets: [
+                    {
+                        label: 'Sales Summary',
+                        backgroundColor: ['rgba(255, 96, 41, 0.3)', 'rgba(255, 96, 41, 0.3)'],
+                        borderColor: 'rgba(255, 96, 41, .2)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
+                        hoverBorderColor: 'rgba(255,99,132,1)',
+                        data: [totalSales,totalQuantity]
+                    }
+                ]
+            }
+        })
+
+        console.log(this.state.chartData);
+
+    }
+
     render() {
 
         return (
@@ -373,6 +416,9 @@ class StorePage extends Component {
                             reload={this.getUserData}
                             getQuantityUpdate={this.getQuantityUpdate}
                             role={this.props.role}
+                            getPaymentSummary={this.getPaymentSummary}
+                            chartData={this.state.chartData}
+
                         />
 
                     </Col>
@@ -404,7 +450,7 @@ class StorePage extends Component {
                             catID={this.state.catID}
                             grabItems={this.grabItems}
                             addNewItem={this.addNewItem}
-                            // categoryIsSelected={this.state.categoryIsSelected}
+                        // categoryIsSelected={this.state.categoryIsSelected}
                         />
                     </Col>
                     <ModalPayment
