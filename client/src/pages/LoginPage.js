@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import NavTabs from '../components/Bootstrap/NavTabs';
 import LoginFormContainer from '../components/LoginFormContainer';
-import "./styles/login.css";
-
-import { Container, Row, Col } from "../components/Bootstrap/Grid";
-
 import './styles/login.css';
 
 function LoginPage() {

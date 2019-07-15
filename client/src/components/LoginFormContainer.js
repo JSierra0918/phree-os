@@ -66,7 +66,7 @@ class LoginFormContainer extends Component {
             <Col size="md-8 md-7 g-5" className="mx-auto">
               <Card
                 className="card-signin my-5"
-                heading={this.state.currentPage}
+                // heading={this.state.currentPage}
               >
                 <NavTab extraClass="p-tabbed-ul">
                   <NavItem>

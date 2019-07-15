@@ -5,6 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Item2 from '../components/Item2'
 import { Input } from './Bootstrap/Form';
 
+const isDisabled = {
+    opacity: .5,
+    pointerEvents: "none"
+}
+
 class ItemContainer2 extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +19,8 @@ class ItemContainer2 extends Component {
             isActive: false,
             itemname: "",
             price: 0,
-            quantity: 0
+            quantity: 0,
+            wantsToAddNewItem: false
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this);
@@ -27,7 +33,6 @@ class ItemContainer2 extends Component {
     }
 
     renderItems() {
-        console.log(this.props.items)
         return this.props.items.map(item => <Item2
             role={this.props.role}
             dataid={item.id}
@@ -62,6 +67,8 @@ class ItemContainer2 extends Component {
 
     grabNewItemInfo = (e) => {
 
+        const blank = " ";
+
         let newobjItem = {
             itemname: this.state.itemname,
             price: this.state.price,
@@ -70,8 +77,21 @@ class ItemContainer2 extends Component {
             CategoryId: this.props.catID
         }
 
-        console.log(newobjItem);
-        this.props.addNewItem(e, this.props.catID, newobjItem)
+        //Check to see if all the item names are empty
+        if (this.state.itemname === blank.trim() || this.state.price === 0 || this.state.quantity === 0) {
+            alert("All values must be filled");
+            return;
+        }
+
+        this.props.addNewItem(e, this.props.catID, newobjItem);
+        //revert back to the add button
+        this.userWantsToAddNewItem();
+    }
+
+    userWantsToAddNewItem = () => {
+        this.setState(state => {
+            return { wantsToAddNewItem: !state.wantsToAddNewItem }
+        })
     }
 
     // addCat = (e) => {
@@ -105,26 +125,40 @@ class ItemContainer2 extends Component {
     render() {
         return (
             <div className="items text-center p-main-col mb20">
-                <h5>Items</h5>
-                <hr />
-                <ul>
-                    {this.renderItems()}
-                </ul>
-
+                <div className="flex-top-section">
+                    <h5>Items</h5>
+                    <hr />
+                    <div className="scrollable-content">
+                        <ul>
+                            {this.renderItems()}
+                        </ul>
+                    </div>
+                </div>
+                {/* old code for switching between manager and store populate items for the add item */}
+                {/* && this.props.categoryIsSelected === true */}
                 {this.props.role === "1" ? (
 
-                    <div>
+                    //check to see if the item Category has been selected:
+                    <div className="flex-bottom-section">
+                        {this.state.wantsToAddNewItem === true ? (
+                            <li>
+                                <div className="add-item-form type1">
+                                    <form className="input-wrapper">
+                                        <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
+                                        <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
+                                        <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
 
-                        <div className="add-item-form type1">
-                            <form className="input-wrapper">
-                                <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
-                                <Input id="itemInput" type="number" name="price"  step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
-                                <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
+                                    </form>
+                                </div>
 
-                            </form>
-                        </div>
+                                <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save New Item</button>
+                                <button onClick={this.userWantsToAddNewItem} > <FontAwesomeIcon icon="times" className="add-item-btn" /> Cancel</button>
+                            </li>
+                        ) : (
+                                <button className="add-item-btn" onClick={this.userWantsToAddNewItem}> Add New Item</button>
+                            )
 
-                        <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Add Item</button>
+                        }
 
                         {/* <h1>OLD BUTTON</h1> */}
                     </div>

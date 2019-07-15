@@ -5,8 +5,6 @@ import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
 import { Container, Row, Col } from '../components/Bootstrap/Grid';
 import API from '../utils/API';
 import CategoryContainer from '../components/CategoryContainer';
-import ItemsContainer from '../components/ItemsContainer';
-import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -198,7 +196,7 @@ class ManagePage extends Component {
                           
                     </Col>
                     <Col size="md-3">
-                        <ItemsContainer items={this.state.items} addItem={this.addItem} />
+                        {/* <ItemsContainer items={this.state.items} addItem={this.addItem} /> */}
                     </Col>
                 </div>
                 {/* <div className="row last-section">
