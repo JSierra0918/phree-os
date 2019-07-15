@@ -360,18 +360,16 @@ class StorePage extends Component {
     getPaymentSummary = (payment) => {
     console.log('payment:', payment)
 
-    let totalSales = payment.data.reduce((acc, val)=>{
+    let reducedlSales = payment.data.reduce((acc, val)=>{
             console.log('val:', val)
             console.log('acc:', acc)
             return acc + parseInt(val.Price)
     }, 0) 
-    let totalQuantity = payment.data.reduce((acc, val)=>{
+    let reducedQuantity = payment.data.reduce((acc, val)=>{
             console.log('val:', val)
             console.log('acc:', acc)
             return acc + parseInt(val.Quantity)
     }, 0) 
-
-    console.log(totalQuantity, totalSales)
 
         this.setState({
             chartData: {
@@ -384,7 +382,7 @@ class StorePage extends Component {
                         borderWidth: 1,
                         hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
                         hoverBorderColor: 'rgba(255,99,132,1)',
-                        data: [totalSales,totalQuantity]
+                        data: [10, 10]
                     }
                 ]
             }

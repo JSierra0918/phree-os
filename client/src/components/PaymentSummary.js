@@ -95,11 +95,11 @@ function PaymentSummary(props) {
                             }}
                         />
                     </div>
-                    <div className="summary-btn-container">
+                    {/* <div className="summary-btn-container">
                         <div className="total">Total: {props.total}</div>
                         <button className="btn pay" onClick={tableToObj}>Pay</button>
                         <button className="btn cancel" onClick={() => props.clearSummary([])}>Cancel</button>
-                    </div>
+                    </div> */}
                 </div>
             ) : (
                     <div className="summary text-center mb20">
