@@ -142,11 +142,13 @@ class StorePage extends Component {
 
             //If you're role is 1 (manager) then make the categoryIsSelected to true.
             // this.categoryIsSelected();
-            console.log(this.state.items);
+            // console.log(this.state.items);
         })
     }
 
     totalPrice = () => {
+        console.log('this.state.paymentList', this.state.paymentList)
+
         let total = this.state.paymentList.reduce((a, b) => {
 
             return { price: parseFloat(a.price) + parseFloat(b.price) }
@@ -158,8 +160,24 @@ class StorePage extends Component {
         })
     }
 
+    subtractPrice = (deletedItem) => {
+        console.log('in subract price')
+        console.log('this.state.total', this.state.total)
+        console.log('this.state.paymentList', this.state.paymentList)
+        console.log('deletedItem')
+        const deletedItemTotal = deletedItem[0].price
+        // let total = this.state.paymentList.reduce((a, b) => {
+            
+        //     return { price: parseFloat(a.price) - parseFloat(b.price) }
+        const currentTotal = this.state.total
+
+        this.setState({
+            total: currentTotal - deletedItemTotal
+        })
+    }
+
     addItem = (selectedItem) => {
-        console.log('selectedItem:', selectedItem)
+        // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
         const statePaymentList = this.state.paymentList;
 
@@ -195,7 +213,7 @@ class StorePage extends Component {
 
             // reset objIndex
             objIndex = -1;
-            console.log('this.state.paymentList:', this.state.paymentList)
+            // console.log('this.state.paymentList:', this.state.paymentList)
         } else {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
@@ -226,11 +244,23 @@ class StorePage extends Component {
         let updatedItem = statePaymentList.filter((item) => {
             return item.id !== id
         });
-
+        let deletedItem = statePaymentList.filter((item) => {
+            return item.id === id
+        });
+        // filter the items array, ypdate the quantity and update the state
+        // console.log(deletedItem)
+        // console.log(this.state.items)
+        let newItems = this.state.items
         //Update object's name property.
-        this.setState((state) => {
-            return { paymentList: state.paymentList = updatedItem }
-        })
+        // this.setState((state) => {
+        //     return { paymentList: state.paymentList = updatedItem,
+        //     items: newItems}
+        // })
+        this.setState(
+            { paymentList: updatedItem,
+            catID: deletedItem[0].CategoryId,
+            items: newItems}, () => {this.subtractPrice(deletedItem)})
+        
     }
 
     clearSummary = (summaryArr) => {
@@ -242,8 +272,8 @@ class StorePage extends Component {
     }
 
     deleteCategory = (e, id) => {
-        console.log("DELETE", id)
-        console.log("EVENT: ", e);
+        // console.log("DELETE", id)
+        // console.log("EVENT: ", e);
         e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
