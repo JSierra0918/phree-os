@@ -118,6 +118,10 @@ class Item2 extends Component {
         });
     };
 
+    emptyFunctionForTernaryOnClick = () => {
+        // empty for ternary click
+    }
+
     render() {
         // add decimals to the number
         const formatter = new Intl.NumberFormat('en-IN', {
@@ -131,7 +135,7 @@ class Item2 extends Component {
                 className={this.props.className}
                  dataid={this.props.dataid} 
                  key={this.props.dataid} 
-                 onClick={this.props.role === "1"? "": () => this.props.addItem(this.props.item)}
+                 onClick={this.props.role === "1"? this.emptyFunctionForTernaryOnClick : () => this.props.addItem(this.props.item)}
                   >
                     <div className="col manage-items" >
                         {this.props.role === "1" ? (

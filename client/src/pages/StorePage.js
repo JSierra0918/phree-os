@@ -375,6 +375,7 @@ class StorePage extends Component {
                             makePayment={this.makePayment}
                             reload={this.getUserData}
                             getQuantityUpdate={this.getQuantityUpdate}
+                            role={this.props.role}
                         />
 
                     </Col>

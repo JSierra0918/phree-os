@@ -269,6 +269,13 @@ text-align: right;
 #save, #cancel, #edit, #trash{
     margin: 5px;
 }
+
+li {
+    list-style: none;
+
+}
+
+
 /* ----------------------------- MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {

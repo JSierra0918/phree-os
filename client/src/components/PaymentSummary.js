@@ -53,7 +53,7 @@ function PaymentSummary(props) {
 
             // TODO:Send the response to update the Items from the data table  
             //Items only needs ID and quantity...I think.
-            props.makePayment(true) 
+            props.makePayment(true)
 
             //----- clears the payment list for the client ------
             // props.clearSummary([]);
@@ -62,7 +62,7 @@ function PaymentSummary(props) {
 
         // return paymentSummary;
     }
- 
+
     let paymentListArray = props.paymentList.map(item =>
         <tr key={item.id} dataid={item.id}>
             <td >{item.itemname}</td>
@@ -74,35 +74,60 @@ function PaymentSummary(props) {
         </tr>)
 
     return (
-        <div className="summary text-center mb20">
-            <div className="table-container">
-                <h5>Payment Summary</h5>
-                <table className="table" id="summary-table">
-                    <thead>
-                        <tr> 
-                            <th scope="col">Item</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Price</th>
-                            <th scope="col"> &nbsp; &nbsp; &nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                        {paymentListArray}
-                    </tbody>
-                  
-                        
-                    
-                </table>
-            </div>
+        <>
 
-            {/* if items exist show button */}
-            <div className="summary-btn-container">
-            <div className="total">Total: {props.total}</div>
-                <button className="btn pay" onClick={tableToObj}>Pay</button>
-                <button className="btn cancel" onClick={() => props.clearSummary([])}>Cancel</button>
-            </div>
-        </div>
-
+            {
+                props.role === "1" ? (
+                    <div className="summary text-center mb20">
+                        <div className="table-container">
+                            <h5>Sales Summary</h5>
+                            <table className="table" id="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"> &nbsp; &nbsp; &nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="summary-btn-container">
+                            <div className="total">Total: {props.total}</div>
+                            <button className="btn pay" onClick={tableToObj}>Pay</button>
+                            <button className="btn cancel" onClick={() => props.clearSummary([])}>Cancel</button>
+                        </div>
+                    </div>
+                ) : (
+                        <div className="summary text-center mb20">
+                            <div className="table-container">
+                                <h5>Payment Summary</h5>
+                                <table className="table" id="summary-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Item</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col"> &nbsp; &nbsp; &nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        {paymentListArray}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="summary-btn-container">
+                                <div className="total">Total: {props.total}</div>
+                                <button className="btn pay" onClick={tableToObj}>Pay</button>
+                                <button className="btn cancel" onClick={() => props.clearSummary([])}>Cancel</button>
+                            </div>
+                        </div>
+                    )
+            }
+        </>
     )
 }
 export default PaymentSummary;
