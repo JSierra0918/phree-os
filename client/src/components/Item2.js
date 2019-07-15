@@ -13,9 +13,9 @@ class Item2 extends Component {
             categories: [],
             newCatName: "",
             editable: false,
-            nameVal: "",
-            quantVal: "",
-            priceVal: "",
+            nameVal: this.props.item.itemname,
+            quantVal: this.props.item.quantity,
+            priceVal: this.props.item.price,
             itemname: "",
             price: 0,
             quantity: 0
@@ -57,21 +57,27 @@ class Item2 extends Component {
         })
     }
 
-    editItem = (e,id) => {
+    editItem = (e, id) => {
         e.stopPropagation();
         console.log(id);
         //make content edidtable
         const stateEdit = this.state.editable;
 
+        ///when you click on edit/cancel - it turns editable true and resets the values to what they where before any changes.
         this.setState((state) => {
-            return { editable: state.editable = !stateEdit }
+            return { 
+                editable: state.editable = !stateEdit,
+                nameVal: state.nameVal = this.props.item.itemname,
+                priceVal: state.priceVal = this.props.item.price,
+                quantVal: state.quantVal = this.props.item.quantity
+             }
         })
     }
 
-    saveItem = (e,id) => {
+    saveItem = (e, id) => {
         e.stopPropagation();
         e.preventDefault();
-        // event.preventDefault();
+
         let newItem = {
             itemname: this.state.nameVal,
             price: this.state.priceVal,
@@ -80,46 +86,34 @@ class Item2 extends Component {
             CategoryID: this.props.catID
         }
 
-        const space = " ";
-        const emptySpace = space.trim();
+        //Check to see if all the item names are empty
+        if (newItem.itemname === this.props.item.itemname && newItem.price === this.props.item.price && newItem.quantity === this.props.item.quantity) {
+            alert("Please adjust one of the items values or cancel");
+            return;
+        }
 
-        // const update = {
-        //     categoryName: value.trim()
-        // }
-
-        console.log(newItem);
-
-        // if (update.categoryName === this.props.item) {
-        //     alert("You already have that name!")
-        // } else if (update.categoryName === emptySpace) {
-        //     alert("You must have something in there")
-        // } else {
-        //     //save value to the Category DB
+        //save value to the Category DB
         API.putNewItem(id, newItem).then((response) => {
             console.log('response:', response)
-
             this.setState({
                 editable: false
             })
             //grab and reload items
             this.props.grabItems(this.props.catID);
-
-            //reload the db
+            //reload the db data on to browser
             this.props.reload();
-        })
-        // }
+        })  
     }
 
     handleInputChange = event => {
         const { name, value } = event.target;
-
         this.setState({
             [name]: value
         });
     };
 
     emptyFunctionForTernaryOnClick = () => {
-        // empty for ternary click
+        // empty for the ternary on Click Item
     }
 
     render() {
@@ -127,16 +121,15 @@ class Item2 extends Component {
         const formatter = new Intl.NumberFormat('en-IN', {
             minimumFractionDigits: 2
         })
-        //remove addItem Method
 
         return (
             <div>
-                <li 
-                className={this.props.className}
-                 dataid={this.props.dataid} 
-                 key={this.props.dataid} 
-                 onClick={this.props.role === "1"? this.emptyFunctionForTernaryOnClick : () => this.props.addItem(this.props.item)}
-                  >
+                <li
+                    className={this.props.className}
+                    dataid={this.props.dataid}
+                    key={this.props.dataid}
+                    onClick={this.props.role === "1" ? this.emptyFunctionForTernaryOnClick : () => this.props.addItem(this.props.item)}
+                >
                     <div className="col manage-items" >
                         {this.props.role === "1" ? (
                             <div>
@@ -156,12 +149,12 @@ class Item2 extends Component {
 
                                 {this.state.editable !== true ?
 
-                                    <div><span id="trash" onClick={(e) => this.props.delete(e,this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={(e) => this.editItem(e,this.props.dataid)}>Edit</span></div>
+                                    <div><span id="trash" onClick={(e) => this.props.delete(e, this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
+                                        <span id="edit" onClick={(e) => this.editItem(e, this.props.dataid)}>Edit</span></div>
                                     :
-                                    <div> <span id="save" onClick={(e) => this.saveItem(e,this.props.dataid)}>Save</span>
+                                    <div> <span id="save" onClick={(e) => this.saveItem(e, this.props.dataid)}>Save</span>
 
-                                        <span id="cancel" onClick={(e) => this.editItem(e,this.props.dataid)}>Cancel</span></div>
+                                        <span id="cancel" onClick={(e) => this.editItem(e, this.props.dataid)}>Cancel</span></div>
                                 }
                             </div>
                         ) :

@@ -110,7 +110,6 @@ class StorePage extends Component {
                 API.getCategoryData(userId).then((categories) => {
                     // update the state with the categories, remember is an array
                     // it is going to render
-                    console.log(categories)
                     this.setState(state => {
                         return { category: state.category = categories.data }
 
@@ -121,7 +120,6 @@ class StorePage extends Component {
     }
 
     selectCategory = (id) => {
-        console.log("SELECT", id);
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
@@ -146,7 +144,6 @@ class StorePage extends Component {
 
             //If you're role is 1 (manager) then make the categoryIsSelected to true.
             this.categoryIsSelected();
-            console.log(this.state.categoryIsSelected);
         })
     }
 
@@ -157,22 +154,27 @@ class StorePage extends Component {
 
         }, { price: 0 }).price
 
-        console.log('total', parseFloat(total).toFixed(2))
-
         this.setState({
             total: parseFloat(total).toFixed(2)
         })
     }
 
     addItem = (selectedItem) => {
+        console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
         const statePaymentList = this.state.paymentList;
 
+        //if Quantity of item has reached 0, return Item is zero and add a Class of strikethrough
         //Find index of specific object using findIndex method.    
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
-            //Log object to Console.
-            // make new object of updated object.           
+            
+            //if the counter equals the quantity then there are no more of this item, make it disabled
+            if(statePaymentList[objIndex].quantity === statePaymentList[objIndex].counter){
+                alert("Reached the limit!")
+                return;
+            }
+           // make new object of updated object.           
             let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
             updatedItem = { ...updatedItem, count: statePaymentList.count + 1 }
@@ -192,6 +194,7 @@ class StorePage extends Component {
 
             // reset objIndex
             objIndex = -1;
+            console.log('this.state.paymentList:', this.state.paymentList)
         } else {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
@@ -310,13 +313,7 @@ class StorePage extends Component {
 
     addNewItem = (e, catID, itemObj) => {
         e.stopPropagation();
-        //grab value
-
-        const whiteSpace = " ";
-        // if (val === whiteSpace.trim()) {
-        //     alert("Cannot add a name  to the category");
-        //     return;
-        // }    
+               
         API.postNewItem(catID, itemObj).then((responseItem) => {
 
             //grab the response and set it to the state.

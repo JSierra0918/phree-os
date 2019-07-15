@@ -5,6 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Item2 from '../components/Item2'
 import { Input } from './Bootstrap/Form';
 
+const isDisabled = {
+    opacity: .5,
+    pointerEvents: "none"
+}
+
 class ItemContainer2 extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +33,6 @@ class ItemContainer2 extends Component {
     }
 
     renderItems() {
-        console.log(this.props.items)
         return this.props.items.map(item => <Item2
             role={this.props.role}
             dataid={item.id}
@@ -74,24 +78,20 @@ class ItemContainer2 extends Component {
         }
 
         //Check to see if all the item names are empty
-        if(this.state.itemname === blank.trim() &&this.state.itemname === blank.trim() && this.state.itemname === blank.trim()){
-            alert("Please adjust one of the items values or cancel");
+        if(this.state.itemname === blank.trim() ||this.state.price === 0 || this.state.quantity === 0){
+            alert("All values must be filled");
             return;
         }
 
-        console.log(newobjItem);
         this.props.addNewItem(e, this.props.catID, newobjItem);
         //revert back to the add button
-        this.userWantsToAddNewItem()
+        this.userWantsToAddNewItem();
     }
 
     userWantsToAddNewItem = () => {
         this.setState(state => {
             return {wantsToAddNewItem: !state.wantsToAddNewItem}
         })
-
-        console.log('userWantsToAddNewItem:', this.state.wantsToAddNewItem)
-
     }
 
     // addCat = (e) => {
@@ -123,7 +123,6 @@ class ItemContainer2 extends Component {
     // }
 
     render() {
-        console.log(this.props.categoryIsSelected);
         return (
             <div className="items text-center p-main-col mb20">
                 <div>

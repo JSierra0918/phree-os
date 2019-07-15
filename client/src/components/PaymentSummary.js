@@ -75,9 +75,7 @@ function PaymentSummary(props) {
 
     return (
         <>
-
-            {
-                props.role === "1" ? (
+            {props.role === "1" ? (
                     <div className="summary text-center mb20">
                         <div className="table-container">
                             <h5>Sales Summary</h5>
