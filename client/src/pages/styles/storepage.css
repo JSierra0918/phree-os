@@ -40,7 +40,7 @@
 }
 
 .main-row {
-    height: 40rem;
+    /* height: 40rem; */
 }
 
 .p-main-col {
@@ -88,6 +88,9 @@
     border: 3px solid #FF6029;
     padding: 2%;
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }
 
 .items ul,
@@ -241,7 +244,8 @@
     position: relative;
     margin-top: 5rem;
     border: 1px solid;
-    height: 90%;
+    /* height: 90%; */
+    padding-bottom: 30px;
 }
 
 .total {
@@ -273,6 +277,15 @@ text-align: right;
 li {
     list-style: none;
 
+}
+
+.flex-top-section {
+    height: 100%;
+}
+.scrollable-content {
+    height: 80%;
+    overflow-y: auto;
+    overflow-x: none;
 }
 
 

@@ -67,7 +67,8 @@ class PhreeContainer extends Component {
                                         <div className="tab-container">
                                             <div
                                                 onClick={() => { this.changePage("Store") }}
-                                                className={this.state.currentPage === "Store" ? "p-tabbed-item p-tabbed-item-store p-active-tab" : "p-tabbed-item p-tabbed-item-store"} >Store</div>
+                                                className={this.state.currentPage === "Store" ? "p-tabbed-item p-tabbed-item-store p-active-tab" : "p-tabbed-item p-tabbed-item-store"} 
+                                                >Store</div>
                                             <div className={this.state.currentPage === "Manage" ? " angle tab-active" : "angle"}></div>
 
                                         </div>

@@ -78,7 +78,7 @@ class ItemContainer2 extends Component {
         }
 
         //Check to see if all the item names are empty
-        if(this.state.itemname === blank.trim() ||this.state.price === 0 || this.state.quantity === 0){
+        if (this.state.itemname === blank.trim() || this.state.price === 0 || this.state.quantity === 0) {
             alert("All values must be filled");
             return;
         }
@@ -90,7 +90,7 @@ class ItemContainer2 extends Component {
 
     userWantsToAddNewItem = () => {
         this.setState(state => {
-            return {wantsToAddNewItem: !state.wantsToAddNewItem}
+            return { wantsToAddNewItem: !state.wantsToAddNewItem }
         })
     }
 
@@ -125,18 +125,20 @@ class ItemContainer2 extends Component {
     render() {
         return (
             <div className="items text-center p-main-col mb20">
-                <div>
+                <div className="flex-top-section">
                     <h5>Items</h5>
                     <hr />
-                    <ul>
-                        {this.renderItems()}
-                    </ul>
+                    <div className="scrollable-content">
+                        <ul>
+                            {this.renderItems()}
+                        </ul>
+                    </div>
                 </div>
 
                 {this.props.role === "1" && this.props.categoryIsSelected === true ? (
 
                     //check to see if the item Category has been selected:
-                    <div>
+                    <div className="flex-bottom-section">
                         {this.state.wantsToAddNewItem === true ? (
                             <li>
                                 <div className="add-item-form type1">

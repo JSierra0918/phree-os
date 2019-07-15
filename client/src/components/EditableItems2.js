@@ -21,7 +21,8 @@ function EditableItems2(props) {
                             <span>$</span><p>{formatter.format(props.price)}</p>
                         </div>
                     </div>
-                </div> :
+                </div> 
+                :
                 <div className="save-items-container">
                     <Input name="nameVal" placeholder={`name: ${props.itemname}`} className="form-control" value={props.nameVal} onChange={props.handleInputChange} />
                     <Input name="quantVal" type="number" placeholder={`quantity: ${props.quantity}`} className="form-control" value={props.quantVal} onChange={props.handleInputChange} />
