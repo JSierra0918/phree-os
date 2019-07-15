@@ -167,21 +167,15 @@ class StorePage extends Component {
     }
 
     subtractPrice = (deletedItem) => {
-        console.log('in subract price')
-        console.log('this.state.total', this.state.total)
-        console.log('this.state.paymentList', this.state.paymentList)
-        console.log('deletedItem')
-        const deletedItemTotal = deletedItem[0].price
-        // let total = this.state.paymentList.reduce((a, b) => {
-            
-        //     return { price: parseFloat(a.price) - parseFloat(b.price) }
         const currentTotal = this.state.total
+        const deletedItemTotal = deletedItem[0].price
+        const newTotal = currentTotal - deletedItemTotal
 
         this.setState({
-            total: currentTotal - deletedItemTotal
+            total: newTotal.toFixed(2)
         })
     }
-
+    
     addItem = (selectedItem) => {
         // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
