@@ -360,7 +360,6 @@ class StorePage extends Component {
     }
 
     getQuantityUpdate = (checkoutObj) => {
-        console.log(checkoutObj);
         this.setState({
             checkoutObj: checkoutObj
         })
