@@ -112,6 +112,7 @@ class Category extends Component {
 
                         {/* <EditableComponent item={this.props.item} editable={true}/> */}
                         {/* If it's the manage page show this */}
+
                         {this.props.role === "1" ? (
                             <div>
                                 <EditableCategory item={this.props.item} editable={this.state.editable} value={this.state.save} handleInputChange={this.handleInputChange} />
@@ -129,13 +130,11 @@ class Category extends Component {
                                 }
                             </div>
                         ) :
-                            (<span className="categoryName">{this.props.item}</span>
-                            )}
+                            (<span className="categoryName">{this.props.item}</span>)
+                        }
                     </div>
                 </li>
-
-
-            </div>
+            </div >
         );
     }
 }

@@ -15,7 +15,7 @@ const ModalPayment = props => {
         }}
       >
         <div className="modal-header">
-          <h3>Total: {props.total}</h3>
+          <h3>Total: ${props.total}</h3>
           <span className="close-modal-btn" onClick={props.close}>
             ×
           </span>

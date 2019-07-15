@@ -19,7 +19,6 @@ function PaymentSummary(props) {
         let paymentSummary = [];
         let obj, row, cells;
 
-
         // Use the first row for the property names
         // Could use a header section but result is the same if
         // there is only one header row
@@ -61,6 +60,9 @@ function PaymentSummary(props) {
         });
 
         // return paymentSummary;
+
+
+
     }
 
     let paymentListArray = props.paymentList.map(item =>
