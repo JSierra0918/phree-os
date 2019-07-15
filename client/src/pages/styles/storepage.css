@@ -183,7 +183,7 @@
     border-bottom: none;
 }
 
-.p-tabbed-item:hover {
+.p-tabbed-item:hover, .p-tabbed-item:hover + .angle {
     background: white;
     text-decoration: underline;
     border-bottom: none;
@@ -216,9 +216,10 @@
 
 .main-phree {
     position: relative;
-    margin-top: 3rem;
-    border-top: 1px solid;
-    height: 90%;
+    margin-top: 5rem;
+    border: 1px solid;
+    /* height: 90%; */
+    padding-bottom: 30px;
 }
 
 #trash,
@@ -252,7 +253,6 @@ li {
     overflow-y: auto;
     overflow-x: none;
 }
-
 
 /* ----------------------------- MEDIA QUERIES */
 

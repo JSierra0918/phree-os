@@ -280,7 +280,6 @@ class StorePage extends Component {
     }
 
     addCategory = (e) => {
-        alert("Helo!")
         e.preventDefault();
         const userId = sessionStorage.getItem("userId");
         //grab value
