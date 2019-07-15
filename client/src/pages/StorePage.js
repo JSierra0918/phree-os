@@ -5,8 +5,6 @@ import { NavTab, NavItem } from '../components/Bootstrap/NavTab';
 import { Container, Row, Col } from '../components/Bootstrap/Grid';
 import API from '../utils/API';
 import CategoryContainer from '../components/CategoryContainer';
-import ItemsContainer from '../components/ItemsContainer';
-import Items from '../components/Items';
 import PaymentSummary from '../components/PaymentSummary';
 import ManagePage from './ManagePage';
 import ModalPayment from '../components/ModalPayment';
@@ -57,9 +55,9 @@ class StorePage extends Component {
 
     //When ever you receive a prop from PhreeContainer, reset the items
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            items: nextProps.items
-        })
+        // this.setState({
+        //     items: nextProps.items
+        // })
     }
 
     openModalHandler = (paid) => {
@@ -143,7 +141,8 @@ class StorePage extends Component {
             })
 
             //If you're role is 1 (manager) then make the categoryIsSelected to true.
-            this.categoryIsSelected();
+            // this.categoryIsSelected();
+            console.log(this.state.items);
         })
     }
 
@@ -170,10 +169,12 @@ class StorePage extends Component {
         if (objIndex > -1) {
             
             //if the counter equals the quantity then there are no more of this item, make it disabled
-            if(statePaymentList[objIndex].quantity === statePaymentList[objIndex].counter){
-                alert("Reached the limit!")
-                return;
-            }
+            // if(statePaymentList[objIndex].quantity === statePaymentList[objIndex].counter){
+            //     alert("Reached the limit!")
+            //     return;
+            // }
+
+
            // make new object of updated object.           
             let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
             // //Add a count to the array
@@ -404,7 +405,7 @@ class StorePage extends Component {
                             catID={this.state.catID}
                             grabItems={this.grabItems}
                             addNewItem={this.addNewItem}
-                            categoryIsSelected={this.state.categoryIsSelected}
+                            // categoryIsSelected={this.state.categoryIsSelected}
                         />
                     </Col>
                     <ModalPayment

@@ -134,8 +134,9 @@ class ItemContainer2 extends Component {
                         </ul>
                     </div>
                 </div>
-
-                {this.props.role === "1" && this.props.categoryIsSelected === true ? (
+                {/* old code for switching between manager and store populate items for the add item */}
+                {/* && this.props.categoryIsSelected === true */}
+                {this.props.role === "1" ? (
 
                     //check to see if the item Category has been selected:
                     <div className="flex-bottom-section">
@@ -158,7 +159,6 @@ class ItemContainer2 extends Component {
                             )
 
                         }
-
 
                         {/* <h1>OLD BUTTON</h1> */}
                     </div>
