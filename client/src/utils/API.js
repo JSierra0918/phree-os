@@ -84,6 +84,14 @@ export default {
         return axios.get("/api/items/one/" + itemId, (response) => {
             console.log(response)
         })
+    },
+    logout: function() {
+        return axios.get('/logout', (response ) => {
+ 
+        }).then(() => {
+            window.location.replace('/');
+            sessionStorage.clear();
+        })
     }
 
 }

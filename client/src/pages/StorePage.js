@@ -428,7 +428,26 @@ class StorePage extends Component {
     updateItemQuantity = (id, updatedQuantity) => {
         console.log(id,updatedQuantity)
 
+        let newItems = this.state.items.map((item) => {
+            if (id === item.id){
+                item.quantity = updatedQuantity;
+            }
+                return item
+            })
 
+            console.log('newItems:', newItems)
+
+            this.setState((state) => {
+                return {items: state.items = newItems}
+            })
+
+            console.log('this.state.items:', this.state.items)
+    }
+
+    logout = () => {
+        console.log("in log out ")
+        API.logout()
+ 
     }
 
     render() {
@@ -439,11 +458,7 @@ class StorePage extends Component {
                 <div className="row">
                     <Col size="md-12">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
-                    </Col>
-                </div>
-                <div className="row">
-                    <Col size="md-12">
-                        <a href="/logout">Logout</a> 
+                        <button onClick={this.logout}>LogOut</button>
                     </Col>
                 </div>
                 <div className="row mid-section" >
