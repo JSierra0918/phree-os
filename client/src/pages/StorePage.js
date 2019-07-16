@@ -140,6 +140,7 @@ class StorePage extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
+        console.log('returnedItems:', returnedItems)
 
             this.setState({
                 items: returnedItems.data.map((item) => {
@@ -148,6 +149,8 @@ class StorePage extends Component {
                 }),
                 catID: catID
             })
+
+            console.log('items:', this.state.items)
 
             //If you're role is 1 (manager) then make the categoryIsSelected to true.
             // this.categoryIsSelected();
@@ -182,6 +185,7 @@ class StorePage extends Component {
     addItem = (selectedItem) => {
         // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
+        console.log(selectedItem);
         const statePaymentList = this.state.paymentList;
 
         //if Quantity of item has reached 0, return Item is zero and add a Class of strikethrough
@@ -190,11 +194,12 @@ class StorePage extends Component {
         if (objIndex > -1) {
 
             //if the counter equals the quantity then there are no more of this item, make it disabled
-            // if(statePaymentList[objIndex].quantity === statePaymentList[objIndex].counter){
-            //     alert("Reached the limit!")
-            //     return;
-            // }
-
+            console.log('this.state.items[objIndex].quantity:', this.state.items[objIndex].quantity)
+            if(selectedItem.quantity === 0){
+                //set the item quantity to 0
+                selectedItem.quantity = 0;
+                return;
+            }
 
             // make new object of updated object.           
             let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
@@ -216,7 +221,6 @@ class StorePage extends Component {
 
             // reset objIndex
             objIndex = -1;
-            // console.log('this.state.paymentList:', this.state.paymentList)
         } else {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
@@ -252,11 +256,8 @@ class StorePage extends Component {
         });
 
         let retainItemQuantity = this.state.items.map((item) => {
-            console.log(deletedItem);
-            console.log('item.id:', item.id)
             if (deletedItem[0].id === item.id) {
                 item.quantity = item.orginalQuantity;
-                console.log('item.quantity:', item.quantity)
             }
             return item
         })
@@ -279,8 +280,7 @@ class StorePage extends Component {
     }
 
     deleteCategory = (e, id) => {
-        // console.log("DELETE", id)
-        // console.log("EVENT: ", e);
+        
         e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
