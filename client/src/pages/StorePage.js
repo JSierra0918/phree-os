@@ -279,11 +279,16 @@ class StorePage extends Component {
         )
     }
 
-    clearSummary = (summaryArr) => {
-        // console.log('summaryArr:', summaryArr);
-        //get an empty parameter that clears paymentList
+    clearSummary = (emptyArr) => {
+        //get an empty parameter that clears paymentList and resets items.
+        let retainItemQuantity = this.state.items.map((item) => {
+                item.quantity = item.orginalQuantity;
+            return item
+        })
+        
         this.setState((state, props) => {
-            return { paymentList: state.paymentList = summaryArr, total: 0 }
+            return { paymentList: state.paymentList = emptyArr, total: 0,
+                     items: state.items = retainItemQuantity }
         })
     }
 
