@@ -64,7 +64,7 @@ class PhreeContainer extends Component {
         
         return (
             <>
-            <BackgroundSlider images={[image1, image2, image3, image4, image5, image6]} duration={10} transition={2} />
+            {/* <BackgroundSlider images={[image1, image2, image3, image4, image5, image6]} duration={10} transition={2} /> */}
                 <Container extraClass=" phree-container">
                     <div className="row main-phree">
                         <Col size="md-12">
