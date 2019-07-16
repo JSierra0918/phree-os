@@ -81,8 +81,9 @@ class ItemContainer2 extends Component {
         //Check to see if all the item names are empty
         if (this.state.itemname === blank.trim() || this.state.price === 0 || this.state.quantity === 0) {
             alert("All values must be filled");
-            return;
+         //   return;
         }
+        else {
 
         for (let i = 0; i < this.props.items.length; i++) {
             const element = this.props.items[i];
@@ -97,6 +98,7 @@ class ItemContainer2 extends Component {
         this.props.addNewItem(e, this.props.catID, newobjItem);
         //revert back to the add button
         this.userWantsToAddNewItem();
+    }
     }
 
     userWantsToAddNewItem = () => {
