@@ -140,6 +140,7 @@ class StorePage extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
+        console.log('returnedItems:', returnedItems)
 
             this.setState({
                 items: returnedItems.data.map((item) => {
@@ -148,6 +149,8 @@ class StorePage extends Component {
                 }),
                 catID: catID
             })
+
+            console.log('items:', this.state.items)
 
             //If you're role is 1 (manager) then make the categoryIsSelected to true.
             // this.categoryIsSelected();
@@ -182,6 +185,7 @@ class StorePage extends Component {
     addItem = (selectedItem) => {
         // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
+        console.log(selectedItem);
         const statePaymentList = this.state.paymentList;
 
         //if Quantity of item has reached 0, return Item is zero and add a Class of strikethrough
@@ -189,12 +193,14 @@ class StorePage extends Component {
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
 
+            
             //if the counter equals the quantity then there are no more of this item, make it disabled
-            // if(statePaymentList[objIndex].quantity === statePaymentList[objIndex].counter){
-            //     alert("Reached the limit!")
-            //     return;
-            // }
-
+            if(selectedItem.quantity === 0){
+                // TODO: SHow Isabela
+                //set the item quantity to 0
+                selectedItem.quantity = 0;
+                return;
+            }
 
             // make new object of updated object.           
             let updatedItem = { ...statePaymentList[objIndex], price: (parseFloat(this.state.paymentList[objIndex].price) + parseFloat(selectedItem.price)).toFixed(2), counter: statePaymentList[objIndex].counter + 1 };
@@ -216,10 +222,16 @@ class StorePage extends Component {
 
             // reset objIndex
             objIndex = -1;
-            // console.log('this.state.paymentList:', this.state.paymentList)
         } else {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
+            if(selectedItem.quantity === 0){
+                // TODO: SHow Isabela
+                //set the item quantity to 0
+                selectedItem.quantity = 0;
+                alert("You're all out of " + selectedItem.itemname)
+                return;
+            }
             const newList = [...this.state.paymentList];
             newList.push(selectedItem)
 
@@ -243,49 +255,45 @@ class StorePage extends Component {
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
         //create obj based off of what the state paymentList is
-
         let updatedItem = statePaymentList.filter((item) => {
             return item.id !== id
         });
+
         let deletedItem = statePaymentList.filter((item) => {
             return item.id === id
         });
 
-        console.log(deletedItem);
-        // filter the items array, ypdate the quantity and update the state
-        // console.log(deletedItem)
-        // console.log(this.state.items)
-        let newItems = this.state.items.map((item) => {
-            if (deletedItem.id === item.id) {
+        let retainItemQuantity = this.state.items.map((item) => {
+            if (deletedItem[0].id === item.id) {
                 item.quantity = item.orginalQuantity;
             }
             return item
         })
-        //Update object's name property.
-        // this.setState((state) => {
-        //     return { paymentList: state.paymentList = updatedItem,
-        //     items: newItems}
-        // })
+
         this.setState(
             {
                 paymentList: updatedItem,
                 catID: deletedItem[0].CategoryId,
-                items: newItems
+                items: retainItemQuantity
             }, () => { this.subtractPrice(deletedItem) }
         )
     }
 
-    clearSummary = (summaryArr) => {
-        // console.log('summaryArr:', summaryArr);
-        //get an empty parameter that clears paymentList
+    clearSummary = (emptyArr) => {
+        //get an empty parameter that clears paymentList and resets items.
+        let retainItemQuantity = this.state.items.map((item) => {
+                item.quantity = item.orginalQuantity;
+            return item
+        })
+        
         this.setState((state, props) => {
-            return { paymentList: state.paymentList = summaryArr, total: 0 }
+            return { paymentList: state.paymentList = emptyArr, total: 0,
+                     items: state.items = retainItemQuantity }
         })
     }
 
     deleteCategory = (e, id) => {
-        // console.log("DELETE", id)
-        // console.log("EVENT: ", e);
+        
         e.stopPropagation();
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const stateCategory = this.state.category;
@@ -330,8 +338,26 @@ class StorePage extends Component {
         const whiteSpace = " ";
 
         if (val === whiteSpace.trim()) {
-            alert("Cannot add a name  to the category");
+            // TODO: check with Isabel
+            alert("Must have a category name");
             return;
+        }
+        // else if (this.state.category.includes(val)){
+        //     alert("That category already exists");
+        //     return;
+        // }
+        console.log('val:', val)
+
+        let nameExist =this.state.category.find(el => el.categoryName === val)
+        console.log(nameExist)
+        
+        for (let i = 0; i < this.state.category.length; i++) {
+            const element = this.state.category[i];
+            if(element.categoryName === val){
+                // TODO: Check with isabel
+                alert("You've already got a category by that name")
+                return;
+            }
         }
 
         let newCategory = {
@@ -428,22 +454,20 @@ class StorePage extends Component {
     }
 
     updateItemQuantity = (id, updatedQuantity) => {
-        console.log(id, updatedQuantity)
-
-        let newItems = this.state.items.map((item) => {
+        let decreasedItems = this.state.items.map((item) => {
             if (id === item.id) {
-                item.quantity = updatedQuantity;
+                if (updatedQuantity <= 0) {
+                    item.quantity = 0
+                }else{
+                    item.quantity = updatedQuantity;
+                }
             }
             return item
         })
 
-        console.log('newItems:', newItems)
-
         this.setState((state) => {
-            return { items: state.items = newItems }
+            return { items: state.items = decreasedItems }
         })
-
-        console.log('this.state.items:', this.state.items)
     }
 
     logout = () => {
@@ -452,10 +476,16 @@ class StorePage extends Component {
 
     }
 
+    stopReloadOnInput = (e)=>{
+        e.preventDefault();
+    }
+
     render() {
 
         return (
+            
             <div className="col-md-12 main-row">
+
                 <p></p>
                 <div className="row">
                     <Col size="md-10">

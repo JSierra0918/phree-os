@@ -44,7 +44,6 @@ export default {
     },
     postCategory: function(userID, category) {
 
-        console.log(category)
         return axios.post("/api/category/one/"+ userID, category, (response) => {
             console.log(response);
         });

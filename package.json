@@ -39,6 +39,7 @@
     "passport-local": "^1.0.0",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
+    "react-background-slider": "^1.2.0",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",

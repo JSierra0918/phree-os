@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import API from "../utils/PassportAPI";
-// import { userInfo } from 'os';
 import { NavTab, NavItem } from "./Bootstrap/NavTab";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import About from "./About";
 import Container from "./Bootstrap/Container";
 import Col from "./Bootstrap/Col";
 import Card from "./Bootstrap/Card";
@@ -15,23 +14,6 @@ class LoginFormContainer extends Component {
     email: "",
     currentPage: "Sign In"
   };
-  //    this.state = {
-  //       loginForm: {
-  //          firstname: "James",
-  //          lastname: "Jarvis, Jr.",
-  //          storename: "Jimmy's Fish Shop 2",
-  //          email: "qwerty@gmail.com",
-  //          password: "abc123"
-  //       }
-  //    }
-  // }
-
-  // componentDidMount() {
-  //    API.sendLogin(this.state.loginForm)
-  //    .then(res => {
-  //       console.log(res)
-  //       })
-  //    }
 
   componentDidMount() {
     // API.sendLogin(this.state.loginForm);
@@ -56,8 +38,10 @@ class LoginFormContainer extends Component {
         return <SignIn />;
       } else if (page === "Sign Up") {
         return <SignUp />;
+      }else if (page === "About") {
+        return <About />;
       }
-    }
+  }
 
     return (
       <>
@@ -95,6 +79,20 @@ class LoginFormContainer extends Component {
                       }
                     >
                       Sign Up
+                    </div>
+                  </NavItem>
+                  <NavItem>
+                    <div
+                      onClick={() => {
+                        this.changePage("About");
+                      }}
+                      className={
+                        this.state.currentPage === "About"
+                          ? "p-tabbed-item p-active-tab"
+                          : "p-tabbed-item"
+                      }
+                    >
+                      About 
                     </div>
                   </NavItem>
                 </NavTab>

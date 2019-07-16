@@ -1,4 +1,6 @@
+
 .card-signin {
+    background: white;
     border: 0;
     border-radius: 1rem;
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
@@ -15,9 +17,9 @@
     padding: 2rem;
   }
   
-  .form-signin {
+  /* .form-signin {
     width: 100%;
-  }
+  } */
   
   .form-signin .btn {
     font-size: 80%;
@@ -125,12 +127,14 @@
 }
 
 .p-tabbed-item {
-  border: solid rgb(49, 49, 49) 1px;
+  border: solid rgb(49, 49, 49) 0.5px;
   border-bottom: 1px solid #dee2e6;
   border-radius: 5px 5px 0px 0px;
-  padding: 5px;
-  width: 13vw;
+  padding: 8px;
+  height: 40px;
+  width: 14vw;
   background: #f3f3f3;
+  margin-right: 1px;
 }
 .p-tabbed-item:hover {
   background: #c4ddee;
@@ -177,4 +181,5 @@
     .form-label-group input:-ms-input-placeholder {
       color: #777;
     }
+
   }
