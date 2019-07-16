@@ -201,7 +201,10 @@ module.exports = function(app) {
                 }
               )
                 .then(function(updatedItem) {
+<<<<<<< HEAD
                   console.log(updatedItem)
+=======
+>>>>>>> 54922ae79e83bffd02f28efd63341e5419a90905
                   res.json(updatedItem)
                 })
                 .catch(err => console.log(err));

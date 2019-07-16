@@ -361,7 +361,6 @@ class StorePage extends Component {
     }
 
     getQuantityUpdate = (checkoutObj) => {
-        console.log(checkoutObj);
         this.setState({
             checkoutObj: checkoutObj
         })
@@ -436,6 +435,11 @@ class StorePage extends Component {
                     </Col>
                        <button onClick={this.logout}>LogOut</button>
  
+                </div>
+                <div className="row">
+                    <Col size="md-12">
+                        <a href="/logout">Logout</a> 
+                    </Col>
                 </div>
                 <div className="row mid-section" >
                     <Col size="md-6">
