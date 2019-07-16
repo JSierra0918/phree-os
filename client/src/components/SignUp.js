@@ -40,10 +40,11 @@ class SignUp extends Component {
             password: this.state.password,
         }
        
-        
+        console.log(userForm);
         //send information to the user API
         Axios.post("/signup", userForm, (userInfo) => {
             
+            console.log(userInfo);
             //possibly save user id in session so you can read it when you land on Store Page
             
         }).then((res) => {

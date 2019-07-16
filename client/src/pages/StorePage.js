@@ -142,7 +142,10 @@ class StorePage extends Component {
         API.getItems(catID).then((returnedItems) => {
 
             this.setState({
-                items: returnedItems.data,
+                items: returnedItems.data.map((item) => {
+                    item.orginalQuantity = item.quantity
+                    return item
+                }),
                 catID: catID
             })
 
@@ -247,10 +250,17 @@ class StorePage extends Component {
         let deletedItem = statePaymentList.filter((item) => {
             return item.id === id
         });
+
+        console.log(deletedItem);
         // filter the items array, ypdate the quantity and update the state
         // console.log(deletedItem)
         // console.log(this.state.items)
-        let newItems = this.state.items
+        let newItems = this.state.items.map((item) => {
+        if (deletedItem.id === item.id){
+            item.quantity = item.orginalQuantity;
+        }
+            return item
+        })
         //Update object's name property.
         // this.setState((state) => {
         //     return { paymentList: state.paymentList = updatedItem,
@@ -259,8 +269,8 @@ class StorePage extends Component {
         this.setState(
             { paymentList: updatedItem,
             catID: deletedItem[0].CategoryId,
-            items: newItems}, () => {this.subtractPrice(deletedItem)})
-        
+            items: newItems}, () => {this.subtractPrice(deletedItem)}
+            )
     }
 
     clearSummary = (summaryArr) => {
@@ -415,6 +425,31 @@ class StorePage extends Component {
 
     }
 
+    updateItemQuantity = (id, updatedQuantity) => {
+        console.log(id,updatedQuantity)
+
+        let newItems = this.state.items.map((item) => {
+            if (id === item.id){
+                item.quantity = updatedQuantity;
+            }
+                return item
+            })
+
+            console.log('newItems:', newItems)
+
+            this.setState((state) => {
+                return {items: state.items = newItems}
+            })
+
+            console.log('this.state.items:', this.state.items)
+    }
+
+    logout = () => {
+        console.log("in log out ")
+        API.logout()
+ 
+    }
+
     render() {
 
         return (
@@ -423,11 +458,7 @@ class StorePage extends Component {
                 <div className="row">
                     <Col size="md-12">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
-                    </Col>
-                </div>
-                <div className="row">
-                    <Col size="md-12">
-                        <a href="/logout">Logout</a> 
+                        <button onClick={this.logout}>LogOut</button>
                     </Col>
                 </div>
                 <div className="row mid-section" >
@@ -476,6 +507,7 @@ class StorePage extends Component {
                             catID={this.state.catID}
                             grabItems={this.grabItems}
                             addNewItem={this.addNewItem}
+                            updateItemQuantity={this.updateItemQuantity}
                         // categoryIsSelected={this.state.categoryIsSelected}
                         />
                     </Col>

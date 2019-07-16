@@ -34,9 +34,7 @@ class Item2 extends Component {
     }
 
         componentDidUpdate() {
-            // const userId = sessionStorage.getItem("userId");
-            // console.log("item update")
-            // console.log(this.props)
+        
         }
 
     selectCategory = (id) => {
@@ -125,9 +123,11 @@ class Item2 extends Component {
         // console.log(this)
 
         this.props.addItem(this.props.item)
-        this.setState({
-            quantity : this.state.quantity -1
-        })
+        this.props.updateItemQuantity(this.props.item.id,this.props.item.quantity -1);
+        // this.setState({
+        //     quantity : this.props.item.quantity -1
+        // })
+
     }
 
     render() {
@@ -151,7 +151,7 @@ class Item2 extends Component {
                             <div>
                                 <EditableItems2
                                     itemname={this.props.item.itemname}
-                                    quantity={this.state.quantity}
+                                    quantity={this.props.item.quantity}
                                     price={this.props.price}
                                     editable={this.state.editable}
                                     nameVal={this.state.nameVal}
@@ -181,7 +181,7 @@ class Item2 extends Component {
                                     </h6>
                                     <div className="d-flex justify-content-between">
                                         <div className="d-flex item-highlight">
-                                            <span>Q:</span><p>{this.state.quantity}</p>
+                                            <span>Q:</span><p>{this.props.item.quantity}</p>
                                         </div>
                                         <div className="d-flex item-highligh">
                                             <span>$</span><p>{formatter.format(this.props.price)}</p>
