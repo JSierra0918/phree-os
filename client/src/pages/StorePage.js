@@ -462,7 +462,7 @@ class StorePage extends Component {
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
                     </Col>
                     <Col size="md-2">
-                        <button onClick={this.logout}>LogOut</button>
+                        <button onClick={this.logout} className="logout-btn">LogOut</button>
                     </Col>
                 </div>
                 <div className="row mid-section" >

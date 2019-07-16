@@ -67,7 +67,7 @@ class CategoryContainer extends Component {
     return (
       <div className="category text-center p-main-col mb20">
         <div className="flex-top-section">
-          <h5>Category</h5>
+          <h5>Category</h5> <hr/>
         </div>
 
         {this.props.role === "1" ? (

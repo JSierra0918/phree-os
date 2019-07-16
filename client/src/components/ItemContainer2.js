@@ -99,7 +99,7 @@ class ItemContainer2 extends Component {
         return (
             <div className="items text-center p-main-col mb20">
                 <div className="flex-top-section">
-                    <h5>Items</h5>
+                    <h5>Items</h5> <hr />
                 </div>
 
                 {this.props.role === "1" ? (
@@ -128,10 +128,10 @@ class ItemContainer2 extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col-6">
-                                            <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save</button>
+                                            <button onClick={(e) => this.grabNewItemInfo(e)}  className="save-item-btn" > <FontAwesomeIcon icon="plus-square"/> Save</button>
                                         </div>
                                         <div className="col-6">
-                                            <button onClick={this.userWantsToAddNewItem} > <FontAwesomeIcon icon="times" className="add-item-btn" /> Cancel</button>
+                                            <button onClick={this.userWantsToAddNewItem} className="cancel-item-btn" > <FontAwesomeIcon icon="times" /> Cancel</button>
                                         </div>
                                     </div>
                                 </li>
