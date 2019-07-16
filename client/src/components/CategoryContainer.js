@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import "../pages/styles/storepage.css";
 import Category from "./Category";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Input } from './Bootstrap/Form';
 
 //dynamic css
 const hoverStyle = {
-  backgroundColor : "#EEB500",
+  backgroundColor: "#EEB500",
   color: "white"
 }
 class CategoryContainer extends Component {
@@ -15,7 +16,7 @@ class CategoryContainer extends Component {
     this.state = {
       categoryList: [],
       isActive: false,
-      currentStyle : {},
+      currentStyle: {},
     };
     // This binding is necessary to make `this` work in the callback
     // this.handleClick = this.handleClick.bind(this);
@@ -27,13 +28,13 @@ class CategoryContainer extends Component {
     return this.setState({ categoryList: this.props.category });
   }
 
-  setColor (index) {
+  setColor(index) {
 
-    const newCategories = this.props.category.map((category, categoryIndex)=>{
+    const newCategories = this.props.category.map((category, categoryIndex) => {
       if (categoryIndex === index) {
-        return {...category, currentStyle:hoverStyle}
+        return { ...category, currentStyle: hoverStyle }
       }
-      return {...category, currentStyle:{}}
+      return { ...category, currentStyle: {} }
     })
     this.props.setCategories(newCategories)
 
@@ -48,7 +49,7 @@ class CategoryContainer extends Component {
         item={item.categoryName}
         className="category-li"
         style={item.currentStyle}
-        onClick={(e) => {this.props.onClick(e); this.setColor(index);}}
+        onClick={(e) => { this.props.onClick(e); this.setColor(index); }}
         delete={this.props.delete}
         edit={this.props.edit}
         reload={this.props.reload}
@@ -65,30 +66,44 @@ class CategoryContainer extends Component {
   render() {
     return (
       <div className="category text-center p-main-col mb20">
-        <h5>Category</h5>
-        <hr />
-        <ul>{this.renderCategory()}</ul>
+        <div className="flex-top-section">
+          <h5>Category</h5>
+        </div>
+
+
+
         {this.props.role === "1" ? (
-          <div>
-            <div className="add-category-form">
-              <form className="input-wrapper">
-                <input
-                  id="catInput"
-                  type="text"
-                  name="addCategory"
-                  placeholder="Create Category"
-                />
-              </form>
+          <div className="main-container-manage">
+            <div className="scrollable-content">
+              <ul>{this.renderCategory()}</ul>
             </div>
 
-            <button onClick={(e)=>this.props.addCategory(e)}>
-              {" "}
-              <FontAwesomeIcon icon="plus-square" className="add-cat-btn" /> Add Category
+            <div className="flex-bottom-section">
+              <div className="add-category-form">
+                <form className="input-wrapper">
+                  <Input
+                    id="catInput"
+                    type="text"
+                    name="addCategory"
+                    placeholder="Create Category"
+                  />
+                </form>
+              </div>
+
+              <button onClick={(e) => this.props.addCategory(e)} className="add-cat-btn" >
+                {" "}
+                <FontAwesomeIcon icon="plus-square" /> Add Category
             </button>
+            </div>
           </div>
         ) : (
-          <p />
-        )}
+            <div className="main-container-store">
+              <div className="scrollable-content">
+                <ul>{this.renderCategory()}</ul>
+              </div>
+            </div>
+          )}
+
 
         {/* //render a category button */}
         {/* {this.renderCategory()}       */}
