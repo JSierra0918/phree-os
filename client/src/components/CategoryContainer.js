@@ -70,12 +70,12 @@ class CategoryContainer extends Component {
           <h5>Category</h5>
         </div>
 
-
-
         {this.props.role === "1" ? (
           <div className="main-container-manage">
             <div className="scrollable-content">
-              <ul>{this.renderCategory()}</ul>
+              <ul>
+                {this.renderCategory()}
+              </ul>
             </div>
 
             <div className="flex-bottom-section">
@@ -103,10 +103,6 @@ class CategoryContainer extends Component {
               </div>
             </div>
           )}
-
-
-        {/* //render a category button */}
-        {/* {this.renderCategory()}       */}
       </div>
     );
   }

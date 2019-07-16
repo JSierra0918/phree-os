@@ -308,6 +308,20 @@ li {
     position: relative;
 }
 
+.item-container-manage {
+    display:flex !important;
+    height: 95% !important;
+    flex-direction: column;
+    position: relative;
+}
+
+/* .item-container-store {
+    display:flex !important;
+    height: 100% !important;
+    flex-direction: column;
+    position: relative;
+} */
+
 /* ----------------------------- MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {
