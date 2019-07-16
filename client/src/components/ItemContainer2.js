@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Category from './Category';
 import '../pages/styles/storepage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Item2 from '../components/Item2'
@@ -128,7 +127,7 @@ class ItemContainer2 extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col-6">
-                                            <button onClick={(e) => this.grabNewItemInfo(e)}  className="save-item-btn" > <FontAwesomeIcon icon="plus-square"/> Save</button>
+                                            <button onClick={(e) => this.grabNewItemInfo(e)} className="save-item-btn" > <FontAwesomeIcon icon="plus-square" /> Save</button>
                                         </div>
                                         <div className="col-6">
                                             <button onClick={this.userWantsToAddNewItem} className="cancel-item-btn" > <FontAwesomeIcon icon="times" /> Cancel</button>
