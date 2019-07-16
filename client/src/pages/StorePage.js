@@ -441,6 +441,11 @@ class StorePage extends Component {
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
                     </Col>
                 </div>
+                <div className="row">
+                    <Col size="md-12">
+                        <a href="/logout">Logout</a> 
+                    </Col>
+                </div>
                 <div className="row mid-section" >
                     <Col size="md-6">
                         <PaymentSummary
