@@ -33,7 +33,7 @@ const ModalWelcome = props => {
 
             <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FN84Sv7TjpDUCWLlVrZk9kLd4K9fVfW7&scope=read_write"><img src={Button} onClick={props.close}></img></a>
             <p></p>
-            <p className="finePrint">*if we reach our server's data cap, or need to expand in anyway we may need to charge, sorry :_(</p>
+            <p className="finePrint">*if we need to pay for servers, or need to expand in anyway we may need to charge, sorry :_(</p>
 
         </div>
         <div className="modal-footer">
