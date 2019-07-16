@@ -456,7 +456,9 @@ class StorePage extends Component {
     render() {
 
         return (
+            
             <div className="col-md-12 main-row">
+
                 <p></p>
                 <div className="row">
                     <Col size="md-10">

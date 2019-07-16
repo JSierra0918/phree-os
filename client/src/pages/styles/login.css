@@ -1,4 +1,8 @@
+
+
 .card-signin {
+    background: white;
+    opacity: .9;
     border: 0;
     border-radius: 1rem;
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
@@ -20,6 +24,7 @@
   }
   
   .form-signin .btn {
+    opacity: .9;
     font-size: 80%;
     border-radius: 5rem;
     letter-spacing: .1rem;
