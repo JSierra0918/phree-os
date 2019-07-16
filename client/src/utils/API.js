@@ -92,6 +92,7 @@ export default {
             
         }).then(() => {
             window.location.replace('/')
+            sessionStorage.clear()
         })
     }
 
