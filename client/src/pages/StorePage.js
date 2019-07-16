@@ -338,8 +338,26 @@ class StorePage extends Component {
         const whiteSpace = " ";
 
         if (val === whiteSpace.trim()) {
-            alert("Cannot add a name  to the category");
+            // TODO: check with Isabel
+            alert("Must have a category name");
             return;
+        }
+        // else if (this.state.category.includes(val)){
+        //     alert("That category already exists");
+        //     return;
+        // }
+        console.log('val:', val)
+
+        let nameExist =this.state.category.find(el => el.categoryName === val)
+        console.log(nameExist)
+        
+        for (let i = 0; i < this.state.category.length; i++) {
+            const element = this.state.category[i];
+            if(element.categoryName === val){
+                // TODO: Check with isabel
+                alert("You've already got a category by that name")
+                return;
+            }
         }
 
         let newCategory = {
@@ -456,6 +474,10 @@ class StorePage extends Component {
         console.log("in log out ")
         API.logout()
 
+    }
+
+    stopReloadOnInput = (e)=>{
+        e.preventDefault();
     }
 
     render() {

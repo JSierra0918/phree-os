@@ -3,8 +3,6 @@ import { Input } from './Bootstrap/Form';
 
 function EditableCategory(props) {
 
-    console.log(props.value)
-
     // console.log(props.item, this.props.value);
     return (
         <div>
