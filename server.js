@@ -9,7 +9,7 @@ let PORT = process.env.PORT || 3001;
 console.log(PORT)
 const path = require("path");
 const models = require("./models");
-var flash = require('connect-flash');
+// var flash = require('connect-flash');
 const url = require('url');
 
 
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(flash());
+// app.use(flash());
 
 //Express
 app.use(express.urlencoded({ extended: false }));
