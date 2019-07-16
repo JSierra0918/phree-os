@@ -193,9 +193,10 @@ class StorePage extends Component {
         let objIndex = statePaymentList.findIndex((obj => obj.id === selectedItem.id));
         if (objIndex > -1) {
 
+            
             //if the counter equals the quantity then there are no more of this item, make it disabled
-            console.log('this.state.items[objIndex].quantity:', this.state.items[objIndex].quantity)
             if(selectedItem.quantity === 0){
+                // TODO: SHow Isabela
                 //set the item quantity to 0
                 selectedItem.quantity = 0;
                 return;
@@ -224,6 +225,13 @@ class StorePage extends Component {
         } else {
             // //UPDATE STATE HERE 
             // let addedItem = this.state.paymentList.concat(selectedItem);
+            if(selectedItem.quantity === 0){
+                // TODO: SHow Isabela
+                //set the item quantity to 0
+                selectedItem.quantity = 0;
+                alert("You're all out of " + selectedItem.itemname)
+                return;
+            }
             const newList = [...this.state.paymentList];
             newList.push(selectedItem)
 
