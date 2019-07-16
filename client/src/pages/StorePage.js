@@ -451,9 +451,11 @@ class StorePage extends Component {
             <div className="col-md-12 main-row">
                 <p></p>
                 <div className="row">
-                    <Col size="md-12">
+                    <Col size="md-10">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
-                        <button onClick={this.logout}>LogOut</button>
+                    </Col>
+                    <Col size="md-2">
+                        <button onClick={this.logout} className="logout-btn">LogOut</button>
                     </Col>
                 </div>
                 <div className="row mid-section" >
