@@ -178,7 +178,7 @@ class StorePage extends Component {
             total: newTotal.toFixed(2)
         })
     }
-    
+
     addItem = (selectedItem) => {
         // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
@@ -243,26 +243,31 @@ class StorePage extends Component {
         // create a variable based off of statePaymentList, possibly not to grab the exact state
         const statePaymentList = this.state.paymentList;
         //create obj based off of what the state paymentList is
-
         let updatedItem = statePaymentList.filter((item) => {
             return item.id !== id
         });
+
         let deletedItem = statePaymentList.filter((item) => {
             return item.id === id
         });
 
-        let newItems = this.state.items.map((item) => {
-        if (deletedItem.id === item.id){
-            item.quantity = item.orginalQuantity;
-        }
+        let retainItemQuantity = this.state.items.map((item) => {
+            console.log(deletedItem);
+            console.log('item.id:', item.id)
+            if (deletedItem[0].id === item.id) {
+                item.quantity = item.orginalQuantity;
+                console.log('item.quantity:', item.quantity)
+            }
             return item
         })
-        
+
         this.setState(
-            { paymentList: updatedItem,
-            catID: deletedItem[0].CategoryId,
-            items: newItems}, () => {this.subtractPrice(deletedItem)}
-            )
+            {
+                paymentList: updatedItem,
+                catID: deletedItem[0].CategoryId,
+                items: retainItemQuantity
+            }, () => { this.subtractPrice(deletedItem) }
+        )
     }
 
     clearSummary = (summaryArr) => {
@@ -383,18 +388,18 @@ class StorePage extends Component {
     }
 
     getPaymentSummary = (payment) => {
-    console.log('payment:', payment)
+        console.log('payment:', payment)
 
-    let reducedlSales = payment.data.reduce((acc, val)=>{
+        let reducedlSales = payment.data.reduce((acc, val) => {
             console.log('val:', val)
             console.log('acc:', acc)
             return acc + parseInt(val.Price)
-    }, 0) 
-    let reducedQuantity = payment.data.reduce((acc, val)=>{
+        }, 0)
+        let reducedQuantity = payment.data.reduce((acc, val) => {
             console.log('val:', val)
             console.log('acc:', acc)
             return acc + parseInt(val.Quantity)
-    }, 0) 
+        }, 0)
 
         this.setState({
             chartData: {
@@ -420,8 +425,11 @@ class StorePage extends Component {
     updateItemQuantity = (id, updatedQuantity) => {
         let decreasedItems = this.state.items.map((item) => {
             if (id === item.id) {
-                item.quantity = updatedQuantity;
-                console.log(id, item.id);
+                if (updatedQuantity <= 0) {
+                    item.quantity = 0
+                }else{
+                    item.quantity = updatedQuantity;
+                }
             }
             return item
         })
@@ -434,7 +442,7 @@ class StorePage extends Component {
     logout = () => {
         console.log("in log out ")
         API.logout()
- 
+
     }
 
     render() {
