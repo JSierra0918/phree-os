@@ -14,6 +14,7 @@ exports.quiz = function (req, res) {
 
 exports.logout = function (req, res) {
     req.session.destroy(function (err) {
-        res.redirect('/');
+        console.log('logged out user')
+        res.sendStatus(200);
     });
 }

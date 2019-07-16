@@ -41,6 +41,7 @@ class CategoryContainer extends Component {
 
   renderCategory() {
     return this.props.category.map((item, index) => (
+      
       <Category
         role={this.props.role}
         dataid={item.id}

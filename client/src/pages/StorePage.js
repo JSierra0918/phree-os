@@ -100,6 +100,7 @@ class StorePage extends Component {
             // console.log(userResponse.data.hasStripe)
             console.log('in get user data / reload()')
             var boolean = userResponse.data.hasStripe
+            console.log('boolean:', boolean)
             if (boolean === false) {
                 this.setState({
                     hasStripe: boolean
@@ -407,7 +408,7 @@ class StorePage extends Component {
                         hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
                         hoverBorderColor: 'rgba(255,99,132,1)',
                         data: [1000, 10]
-                    }
+                    },
 
                 ]
             }
@@ -417,15 +418,24 @@ class StorePage extends Component {
 
     }
 
+    logout = () => {
+        console.log("in log out ")
+        API.logout()
+
+    }
     render() {
 
         return (
+            
             <div className="col-md-12 main-row">
+                
                 <p></p>
                 <div className="row">
                     <Col size="md-12">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
                     </Col>
+                       <button onClick={this.logout}>LogOut</button>
+ 
                 </div>
                 <div className="row mid-section" >
                     <Col size="md-6">

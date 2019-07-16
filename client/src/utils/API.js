@@ -1,4 +1,5 @@
 import axios from "axios";
+import { tsPropertySignature } from "@babel/types";
 
 export default {
     
@@ -83,6 +84,14 @@ export default {
     getSpecificItem: function(itemId) {
         return axios.get("/api/items/one/" + itemId, (response) => {
             console.log(response)
+        })
+    },
+
+    logout: function() {
+        return axios.get('/logout', (response ) => {
+            
+        }).then(() => {
+            window.location.replace('/')
         })
     }
 
