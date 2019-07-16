@@ -178,7 +178,7 @@ class StorePage extends Component {
             total: newTotal.toFixed(2)
         })
     }
-    
+
     addItem = (selectedItem) => {
         // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
@@ -256,9 +256,9 @@ class StorePage extends Component {
         // console.log(deletedItem)
         // console.log(this.state.items)
         let newItems = this.state.items.map((item) => {
-        if (deletedItem.id === item.id){
-            item.quantity = item.orginalQuantity;
-        }
+            if (deletedItem.id === item.id) {
+                item.quantity = item.orginalQuantity;
+            }
             return item
         })
         //Update object's name property.
@@ -267,10 +267,12 @@ class StorePage extends Component {
         //     items: newItems}
         // })
         this.setState(
-            { paymentList: updatedItem,
-            catID: deletedItem[0].CategoryId,
-            items: newItems}, () => {this.subtractPrice(deletedItem)}
-            )
+            {
+                paymentList: updatedItem,
+                catID: deletedItem[0].CategoryId,
+                items: newItems
+            }, () => { this.subtractPrice(deletedItem) }
+        )
     }
 
     clearSummary = (summaryArr) => {
@@ -391,18 +393,18 @@ class StorePage extends Component {
     }
 
     getPaymentSummary = (payment) => {
-    console.log('payment:', payment)
+        console.log('payment:', payment)
 
-    let reducedlSales = payment.data.reduce((acc, val)=>{
+        let reducedlSales = payment.data.reduce((acc, val) => {
             console.log('val:', val)
             console.log('acc:', acc)
             return acc + parseInt(val.Price)
-    }, 0) 
-    let reducedQuantity = payment.data.reduce((acc, val)=>{
+        }, 0)
+        let reducedQuantity = payment.data.reduce((acc, val) => {
             console.log('val:', val)
             console.log('acc:', acc)
             return acc + parseInt(val.Quantity)
-    }, 0) 
+        }, 0)
 
         this.setState({
             chartData: {
@@ -426,28 +428,28 @@ class StorePage extends Component {
     }
 
     updateItemQuantity = (id, updatedQuantity) => {
-        console.log(id,updatedQuantity)
+        console.log(id, updatedQuantity)
 
         let newItems = this.state.items.map((item) => {
-            if (id === item.id){
+            if (id === item.id) {
                 item.quantity = updatedQuantity;
             }
-                return item
-            })
+            return item
+        })
 
-            console.log('newItems:', newItems)
+        console.log('newItems:', newItems)
 
-            this.setState((state) => {
-                return {items: state.items = newItems}
-            })
+        this.setState((state) => {
+            return { items: state.items = newItems }
+        })
 
-            console.log('this.state.items:', this.state.items)
+        console.log('this.state.items:', this.state.items)
     }
 
     logout = () => {
         console.log("in log out ")
         API.logout()
- 
+
     }
 
     render() {
@@ -458,9 +460,11 @@ class StorePage extends Component {
 
                 <p></p>
                 <div className="row">
-                    <Col size="md-12">
+                    <Col size="md-10">
                         <p className="p-logo"><span className="phree-logo">Phree-</span><span className="o-logo">O</span><span className="s-logo">S</span></p>
-                        <button onClick={this.logout}>LogOut</button>
+                    </Col>
+                    <Col size="md-2">
+                        <button onClick={this.logout} className="logout-btn">LogOut</button>
                     </Col>
                 </div>
                 <div className="row mid-section" >

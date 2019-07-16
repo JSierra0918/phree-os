@@ -95,85 +95,58 @@ class ItemContainer2 extends Component {
         })
     }
 
-    // addCat = (e) => {
-    //     const userId = sessionStorage.getItem("userId");
-    //     e.preventDefault();
-    //     //grab value
-    //     var inp = document.getElementById("catInput");
-    //     var val = inp.value.trim();
-    //     const whiteSpace = " ";
-
-    //     if (val === whiteSpace.trim()) {
-    //         alert("Cannot add a name  to the category");
-    //         return;
-    //     }
-
-    //     let newCategory = {
-    //         UserId: userId,
-    //         categoryName: val
-    //     }
-
-    //     API.postCategory(userId,newCategory).then((response) => {
-    //         console.log(response.data);
-
-    //        //reload page or add it to the the categories
-    //        this.props.addCategory(response.data)
-    //     })
-    //     //empty value
-    //     inp.value = '';
-    // }
-
     render() {
         return (
             <div className="items text-center p-main-col mb20">
                 <div className="flex-top-section">
-                    <h5>Items</h5>
-                    <div className="scrollable-content">
+                    <h5>Items</h5> <hr />
+                </div>
+
+                {this.props.role === "1" ? (
+                    <div className="item-container-manage">
+                        < div className="scrollable-content">
+                            <ul>
+                                {this.renderItems()}
+                            </ul>
+                        </div>
+
+                        <div className="flex-bottom-section">
+                            {this.state.wantsToAddNewItem === true ? (
+                                <li>
+                                    <div className="add-item-form type1">
+                                        <form className="input-wrapper">
+                                            <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
+                                            <div className="row">
+                                                <div className="col-6">
+                                                    <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
+                                                </div>
+                                                <div className="col-6">
+                                                    <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <button onClick={(e) => this.grabNewItemInfo(e)}  className="save-item-btn" > <FontAwesomeIcon icon="plus-square"/> Save</button>
+                                        </div>
+                                        <div className="col-6">
+                                            <button onClick={this.userWantsToAddNewItem} className="cancel-item-btn" > <FontAwesomeIcon icon="times" /> Cancel</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            ) : (
+                                    <button className="add-item-btn" onClick={this.userWantsToAddNewItem}> Add New Item</button>
+                                )
+                            }
+                        </div>
+                    </div>
+                ) :
+                    < div className="scrollable-content">
                         <ul>
                             {this.renderItems()}
                         </ul>
-                    </div>
-                </div>
-
-                {/* old code for switching between manager and store populate items for the add item */}
-                {/* && this.props.categoryIsSelected === true */}
-                {this.props.role === "1" ? (
-
-                    //check to see if the item Category has been selected:
-                    <div className="flex-bottom-section">
-                        {this.state.wantsToAddNewItem === true ? (
-                            <li>
-                                <div className="add-item-form type1">
-                                    <form className="input-wrapper">
-                                        <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
-                                        <div className="row">
-                                            <div className="col-6">
-                                                <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
-                                            </div>
-                                            <div className="col-6">
-                                                <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="row">
-                                    <div className="col-6">
-                                        <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save</button>
-                                    </div>
-                                    <div className="col-6">
-                                        <button onClick={this.userWantsToAddNewItem} > <FontAwesomeIcon icon="times" className="add-item-btn" /> Cancel</button>
-                                    </div>
-                                </div>
-                            </li>
-                        ) : (
-                                <button className="add-item-btn" onClick={this.userWantsToAddNewItem}> Add New Item</button>
-                            )
-
-                        }
-
-                        {/* <h1>OLD BUTTON</h1> */}
-                    </div>
-                ) : <p></p>}
+                    </div>}
             </div>
         );
     }
