@@ -67,7 +67,7 @@ class ItemContainer2 extends Component {
     };
 
     grabNewItemInfo = (e) => {
-
+        e.preventDefault();
         const blank = " ";
 
         let newobjItem = {
@@ -82,6 +82,16 @@ class ItemContainer2 extends Component {
         if (this.state.itemname === blank.trim() || this.state.price === 0 || this.state.quantity === 0) {
             alert("All values must be filled");
             return;
+        }
+
+        for (let i = 0; i < this.props.items.length; i++) {
+            const element = this.props.items[i];
+            console.log("You already have that! " + element);
+            if (element.itemname === this.state.itemname){
+                // TODO: Ask Isabel
+                alert("You've already have an item by that name");
+                return;
+            }
         }
 
         this.props.addNewItem(e, this.props.catID, newobjItem);
@@ -128,7 +138,7 @@ class ItemContainer2 extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col-6">
-                                            <button onClick={(e) => this.grabNewItemInfo(e)}  className="save-item-btn" > <FontAwesomeIcon icon="plus-square"/> Save</button>
+                                            <button onClick={(e) => this.grabNewItemInfo(e)}  className="save-item-btn" > <FontAwesomeIcon icon="plus-square"/> Create</button>
                                         </div>
                                         <div className="col-6">
                                             <button onClick={this.userWantsToAddNewItem} className="cancel-item-btn" > <FontAwesomeIcon icon="times" /> Cancel</button>
