@@ -30,7 +30,6 @@ class PhreeContainer extends Component {
 
     changePage = (page)=> {
 
-        console.log("Change PAge")
         this.setState({
             currentPage: page,
             items: []

@@ -157,7 +157,7 @@ class ItemContainer2 extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-6">
-                                        <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save New Item</button>
+                                        <button onClick={(e) => this.grabNewItemInfo(e)} > <FontAwesomeIcon icon="plus-square" className="add-item-btn" /> Save</button>
                                     </div>
                                     <div className="col-6">
                                         <button onClick={this.userWantsToAddNewItem} > <FontAwesomeIcon icon="times" className="add-item-btn" /> Cancel</button>

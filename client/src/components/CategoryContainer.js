@@ -68,12 +68,16 @@ class CategoryContainer extends Component {
       <div className="category text-center p-main-col mb20">
         <div className="flex-top-section">
           <h5>Category</h5>
-          <div className="scrollable-content">
-            <ul>{this.renderCategory()}</ul>
-          </div>
         </div>
+
+
+
         {this.props.role === "1" ? (
-          <div>
+          <div className="main-container-manage">
+            <div className="scrollable-content">
+              <ul>{this.renderCategory()}</ul>
+            </div>
+
             <div className="flex-bottom-section">
               <div className="add-category-form">
                 <form className="input-wrapper">
@@ -93,8 +97,13 @@ class CategoryContainer extends Component {
             </div>
           </div>
         ) : (
-            <p />
+            <div className="main-container-store">
+              <div className="scrollable-content">
+                <ul>{this.renderCategory()}</ul>
+              </div>
+            </div>
           )}
+
 
         {/* //render a category button */}
         {/* {this.renderCategory()}       */}
