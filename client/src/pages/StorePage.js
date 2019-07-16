@@ -426,22 +426,17 @@ class StorePage extends Component {
     }
 
     updateItemQuantity = (id, updatedQuantity) => {
-        console.log(id,updatedQuantity)
-
-        let newItems = this.state.items.map((item) => {
-            if (id === item.id){
+        let decreasedItems = this.state.items.map((item) => {
+            if (id === item.id) {
                 item.quantity = updatedQuantity;
+                console.log(id, item.id);
             }
-                return item
-            })
+            return item
+        })
 
-            console.log('newItems:', newItems)
-
-            this.setState((state) => {
-                return {items: state.items = newItems}
-            })
-
-            console.log('this.state.items:', this.state.items)
+        this.setState((state) => {
+            return { items: state.items = decreasedItems }
+        })
     }
 
     logout = () => {
