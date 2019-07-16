@@ -200,7 +200,9 @@ module.exports = function(app) {
                   }
                 }
               )
-                .then(function(updatedItem) {})
+                .then(function(updatedItem) {
+                  res.json(updatedItem)
+                })
                 .catch(err => console.log(err));
             });
         }
@@ -322,7 +324,7 @@ module.exports = function(app) {
                       .catch(err => console.log(err));
 
                     resolve();
-                  }, 0.25 * 1000)
+                  }, i * 500)
                 )
             );
           }
