@@ -80,17 +80,22 @@ class CategoryContainer extends Component {
 
             <div className="flex-bottom-section">
               <div className="add-category-form">
-                <form className="input-wrapper">
+                <form className="input-wrapper"  onSubmit={e => { e.preventDefault()}}>
                   <Input
                     id="catInput"
                     type="text"
                     name="addCategory"
                     placeholder="Create Category"
+                    // onKeyPress={(e) => e.key === "Enter" && console.log(e.key)
+                
+                    
                   />
                 </form>
               </div>
 
-              <button onClick={(e) => this.props.addCategory(e)} className="add-cat-btn" >
+              <button
+               onKeyPress={(e) => e.key === "Enter" && console.log(e)}
+               onClick={(e) => this.props.addCategory(e)} className="add-cat-btn" >
                 {" "}
                 <FontAwesomeIcon icon="plus-square" /> Add Category
             </button>

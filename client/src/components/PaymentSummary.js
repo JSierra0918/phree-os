@@ -40,9 +40,7 @@ function PaymentSummary(props) {
                 obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
             }
 
-            paymentSummary.push(obj)
-            console.log('paymentSummary:', paymentSummary)
-            console.log('obj:', obj)
+            paymentSummary.push(obj);
         }
         //get User id for summary API
         const userId = sessionStorage.getItem('userId');
