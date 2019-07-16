@@ -165,6 +165,7 @@ module.exports = function(app) {
   app.post("/api/stripe", function(req, res) {
     console.log("in stripe api call");
     console.log("req.body.userId: ", req.body.userId);
+    console.log(config.stripe_secret_key);
     request.post(
       {
         url: "https://connect.stripe.com/oauth/token",
