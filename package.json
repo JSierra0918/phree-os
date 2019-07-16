@@ -40,7 +40,6 @@
     "query-string": "^6.8.1",
     "react": "^16.8.6",
     "react-background-slider": "^1.2.0",
-    "react-background-slideshow": "^1.0.4",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
