@@ -17,7 +17,7 @@ class SetupComplete extends Component {
         userId : data
     }
     API.postStripe(code)
-    setTimeout(() => {this.routeToStore()}, 10000)
+    setTimeout(() => {this.routeToStore()}, 1000)
   }
 
   routeToStore = () => {
