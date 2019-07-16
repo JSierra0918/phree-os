@@ -251,21 +251,13 @@ class StorePage extends Component {
             return item.id === id
         });
 
-        console.log(deletedItem);
-        // filter the items array, ypdate the quantity and update the state
-        // console.log(deletedItem)
-        // console.log(this.state.items)
         let newItems = this.state.items.map((item) => {
         if (deletedItem.id === item.id){
             item.quantity = item.orginalQuantity;
         }
             return item
         })
-        //Update object's name property.
-        // this.setState((state) => {
-        //     return { paymentList: state.paymentList = updatedItem,
-        //     items: newItems}
-        // })
+        
         this.setState(
             { paymentList: updatedItem,
             catID: deletedItem[0].CategoryId,
