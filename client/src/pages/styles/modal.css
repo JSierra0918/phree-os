@@ -1,13 +1,16 @@
 .modal-wrapper {
-    background: white;
-    position: fixed;
-    top: 100px;
-    right: 330px;
+    /* background: white;
+    position: absolute;
+    /* top: 100px; */
+    /* right: 300px; */
     border: 1px solid #d0cccc;
     box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
-    margin: 100px auto 0;
-    transition: all .8s;
-    width: 60%;
+    background: white;
+    position: absolute;
+    float: inherit;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
  }
  
  .modal-header {
