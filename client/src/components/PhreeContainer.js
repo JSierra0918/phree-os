@@ -42,7 +42,6 @@ class PhreeContainer extends Component {
             items: []
             
         })
-        console.log('items:',this.state.items)
     }
     
     render() {
