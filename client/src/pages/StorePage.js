@@ -474,7 +474,7 @@ class StorePage extends Component {
 
     // console.log(this.state.chartData);
 
-}
+
 
 
 
