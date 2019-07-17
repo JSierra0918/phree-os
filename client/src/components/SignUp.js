@@ -73,7 +73,7 @@ class SignUp extends Component {
                 <Input name="lastName" placeholder="Last Name (required)" className="form-control" value={this.state.lastName} onChange={this.handleInputChange} />
                 <Input name="email" placeholder="Email (required)" value={this.state.email} onChange={this.handleInputChange} />
                 <Input name="storeName" placeholder="Store Name (required)" value={this.state.storeName} onChange={this.handleInputChange} />
-                <Input name="password" placeholder="Password (required)" className="form-control" value={this.state.password} onChange={this.handleInputChange} />
+                <Input name="password" type="password" placeholder="Password (required)" className="form-control" value={this.state.password} onChange={this.handleInputChange} />
                 <FormBtn name="submitBtn" onClick={this.submitSignUp} >Sign Up</FormBtn>
             </>
         );

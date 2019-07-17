@@ -19,6 +19,6 @@ INSERT INTO Items (itemname, price, quantity,CreatedAt, UpdatedAt, CategoryID ) 
 
   
 -- //stripe seed
-INSERT INTO `pointofsales`.`stripes` (`id`, `StripeUserId`, `StripeRefreshToken`, `createdAt`, `updatedAt`, `UserId`) VALUES ('1', 'acct_1Eu8yaGIYkST5Tta', 'rt_FPu8LD2rUaaFvgBDyI3ptcHjOx0NH4UwYRhGb39CALMyfm50', '2019-07-12 15:23:55', '2019-07-12 15:23:55', '1');
+INSERT INTO pointofsales.stripes (id, StripeUserId, StripeRefreshToken, createdAt, updatedAt, UserId) VALUES ('1', 'acct_1Eu8yaGIYkST5Tta', 'rt_FPu8LD2rUaaFvgBDyI3ptcHjOx0NH4UwYRhGb39CALMyfm50', '2019-07-12 15:23:55', '2019-07-12 15:23:55', '1');
 
 select * from users;
