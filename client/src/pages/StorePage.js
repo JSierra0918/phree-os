@@ -7,6 +7,8 @@ import API from "../utils/API";
 import CategoryContainer from "../components/CategoryContainer";
 import PaymentSummary from "../components/PaymentSummary";
 import ManagePage from "./ManagePage";
+import ModalPaymentWrapper from "../components/ModalPaymentWrapper";
+import ModalWelcomeWrapper from "../components/ModalWelcomeWrapper";
 import ModalPayment from "../components/ModalPayment";
 import ItemContainer2 from "../components/ItemContainer2";
 import ModalWelcome from "../components/ModalWelcome";
@@ -524,7 +526,7 @@ class StorePage extends Component {
               // categoryIsSelected={this.state.categoryIsSelected}
             />
           </Col>
-          <div className="modal-container">
+          <ModalPaymentWrapper>
             <ModalPayment
               show={this.state.payment}
               close={this.closeModalHandler}
@@ -535,15 +537,15 @@ class StorePage extends Component {
               reload={this.routeToStore}
               getPaymentSummary={this.getPaymentSummary}
             />
-          </div>
-          <div className="modal-container">
+          </ModalPaymentWrapper>
+          {/* <ModalWelcomeWrapper> */}
             <ModalWelcome
               show={this.state.hasStripe}
               close={this.closeModalWelcomeHandler}
               open={this.openModalHandler}
               hasStripe={this.state.hasStripe}
             />
-          </div>
+          {/* </ModalWelcomeWrapper> */}
         </div>
       </div>
     );
