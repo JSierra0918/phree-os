@@ -373,6 +373,17 @@ li {
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
+.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;    
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+
+}
 
 /* ----------------------------- MEDIA QUERIES */
 
@@ -388,7 +399,10 @@ li {
         height: 40vh;
         margin: 5px;
     }
-
+    .modal-container {
+    left: 31%;
+    right: 30%;
+    }
     .category {
         order: 1;
     }
@@ -401,4 +415,12 @@ li {
         transition: all .3s;
     }
 
+}
+
+@media only screen and (max-width: 480px) {
+
+    .modal-container {
+        left: 25%;
+        height: 100%;
+    }
 }
