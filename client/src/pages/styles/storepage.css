@@ -1,4 +1,4 @@
- .main-phree {
+.main-phree {
     background: white;
 }
 .phree-logo {
@@ -60,18 +60,13 @@
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/*--------------- Category Container ------------- */
+
 .category {
     width: 100%;
     border: 3px solid #EEB500;
     padding: 2%;
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.category-title {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 10;
 }
 
 .category-list {
@@ -111,6 +106,7 @@
     width: 90%;
 }
 
+/* ------------------- item container ----------- */
 .add-item-btn {
     width: 90% !important;
     background-color: #FF6029;
