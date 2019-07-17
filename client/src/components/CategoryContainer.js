@@ -67,7 +67,7 @@ class CategoryContainer extends Component {
     return (
       <div className="category text-center p-main-col mb20">
         <div className="flex-top-section">
-          <h5>Category</h5> <hr/>
+          <h5>Category</h5> <hr />
         </div>
 
         {this.props.role === "1" ? (
@@ -80,17 +80,23 @@ class CategoryContainer extends Component {
 
             <div className="flex-bottom-section">
               <div className="add-category-form">
-                <form className="input-wrapper">
+                <form className="input-wrapper"
+                  onSubmit={e => { e.preventDefault() }}
+                  onKeyPress={(e) => e.key === "Enter" && (() => this.props.addCategory())}>
                   <Input
                     id="catInput"
                     type="text"
                     name="addCategory"
                     placeholder="Create Category"
+                  // onKeyPress={(e) => e.key === "Enter" && console.log(e.key)
+
+
                   />
                 </form>
               </div>
 
-              <button onClick={(e) => this.props.addCategory(e)} className="add-cat-btn" >
+              <button
+                onClick={(e) => this.props.addCategory(e)} className="add-cat-btn" >
                 {" "}
                 <FontAwesomeIcon icon="plus-square" /> Add Category
             </button>

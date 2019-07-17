@@ -58,7 +58,7 @@ class ItemContainer2 extends Component {
     }
 
     handleInputChange = event => {
-        const { name, value } = event.target;
+        let { name, value } = event.target;
 
         this.setState({
             [name]: value
@@ -78,26 +78,29 @@ class ItemContainer2 extends Component {
         }
 
         //Check to see if all the item names are empty
-        if (this.state.itemname === blank.trim() || this.state.price === 0 || this.state.quantity === 0) {
+        if (this.state.itemname === blank.trim() || this.state.price == 0 || this.state.quantity == 0) {
+            console.log('this.state.itemname:', this.state.itemname)
             alert("All values must be filled");
-         //   return;
+            //   return;
+            console.log(this.state.price);
         }
         else {
 
-        for (let i = 0; i < this.props.items.length; i++) {
-            const element = this.props.items[i];
-            console.log("You already have that! " + element);
-            if (element.itemname === this.state.itemname){
-                // TODO: Ask Isabel
-                alert("You've already have an item by that name");
-                return;
+            for (let i = 0; i < this.props.items.length; i++) {
+                const element = this.props.items[i];
+                let itemListCopy = this.state.itemname;
+                if (element.itemname.toLowerCase() === itemListCopy.toLowerCase()) {
+                    // TODO: Ask Isabel
+                    alert("You've already have an item by that name");
+                    return;
+                }
             }
-        }
 
-        this.props.addNewItem(e, this.props.catID, newobjItem);
-        //revert back to the add button
-        this.userWantsToAddNewItem();
-    }
+            console.log('this.state.price:', this.state.quantity)
+            this.props.addNewItem(e, this.props.catID, newobjItem);
+            //revert back to the add button
+            this.userWantsToAddNewItem();
+        }
     }
 
     userWantsToAddNewItem = () => {

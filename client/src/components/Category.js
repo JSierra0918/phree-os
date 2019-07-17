@@ -65,6 +65,7 @@ class Category extends Component {
 
     saveEditCategory = (e, id, value) => {
         console.log("ID VALUE:", id, value);
+        e.preventDefault(); 
         e.stopPropagation();
 
         const space = " ";
