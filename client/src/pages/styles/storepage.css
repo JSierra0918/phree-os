@@ -393,22 +393,12 @@ li {
         order: 1;
     }
 
-
-    /* .categoryName {
-        transition: all .3s;
-    }
-    
     .scrollable-content {
         background: #edefef;
     }
 
-    .editable-item {
-        color: #d86868;
-        font-weight: bolder;
-        padding: 10px;
-        background: #ddf3ff;
-        margin: 10px;
-        display: block;
+    .categoryName {
+        transition: all .3s;
     }
-    */
+
 }
