@@ -1,4 +1,4 @@
- .main-phree {
+.main-phree {
     background: white;
 }
 .phree-logo {
@@ -60,18 +60,13 @@
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/*--------------- Category Container ------------- */
+
 .category {
     width: 100%;
     border: 3px solid #EEB500;
     padding: 2%;
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.category-title {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 10;
 }
 
 .category-list {
@@ -109,6 +104,28 @@
 
 #input-wrapper {
     width: 90%;
+}
+
+.main-container-manage {
+    display:flex !important;
+    height: 92% !important;
+    flex-direction: column;
+    position: relative;
+}
+
+.main-container-store {
+    display:flex !important;
+    height: 95% !important;
+    flex-direction: column;
+    position: relative;
+}
+
+/* ------------------- item container ----------- */
+.item-container-manage {
+    display:flex !important;
+    height: 90% !important;
+    flex-direction: column;
+    position: relative;
 }
 
 .add-item-btn {
@@ -202,10 +219,6 @@
 .category-li:hover {
     cursor: pointer;
     background-color: #EEB500;
-}
-
-.delete-icon {
-
 }
 
 .delete-icon:hover {
@@ -340,32 +353,11 @@ li {
     height:calc(100% - 110px);
 }
 
-
 .form-control {
     margin-bottom: -10px;
 }
 
-.main-container-manage {
-    display:flex !important;
-    height: 92% !important;
-    flex-direction: column;
-    position: relative;
-}
-
-.main-container-store {
-    display:flex !important;
-    height: 95% !important;
-    flex-direction: column;
-    position: relative;
-}
-
-.item-container-manage {
-    display:flex !important;
-    height: 90% !important;
-    flex-direction: column;
-    position: relative;
-}
-
+/*------- logout ------*/ 
 .logout-btn {
     background-color: rgb(253, 118, 100);
     width: 75%;
@@ -385,19 +377,10 @@ li {
 /* ----------------------------- MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {
-    .container {
-        
-    }
-   
-    .mid-section {
-        height: auto;
-        display: flex;
-        flex-flow: column-reverse;
-    }
-
-    .mid-section :nth-child(2) {
+    
+    /* .mid-section :nth-child(2) {
         order: 1;
-    }
+    } */
 
     .summary,
     .category,
@@ -410,20 +393,12 @@ li {
         order: 1;
     }
 
-    .categoryName {
-        transition: all .3s;
-    }
-    
     .scrollable-content {
         background: #edefef;
     }
 
-    .editable-item {
-        color: #d86868;
-        font-weight: bolder;
-        padding: 10px;
-        background: #ddf3ff;
-        margin: 10px;
-        display: block;
+    .categoryName {
+        transition: all .3s;
     }
+
 }

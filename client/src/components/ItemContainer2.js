@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Category from './Category';
 import '../pages/styles/storepage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Item2 from '../components/Item2'
@@ -132,26 +131,26 @@ class ItemContainer2 extends Component {
                                         <form className="input-wrapper">
                                             <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
                                             <div className="row">
-                                                <div className="col-6">
+                                                <div className="col-lg-6 col-md-12 col-sm-12">
                                                     <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
                                                 </div>
-                                                <div className="col-6">
+                                                <div className="col-lg-6 col-md-12 col-sm-12">
                                                     <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                     <div className="row">
-                                        <div className="col-6">
-                                            <button onClick={(e) => this.grabNewItemInfo(e)} className="save-item-btn" > <FontAwesomeIcon icon="plus-square" /> Create</button>
+                                        <div className="col-lg-6 col-md-12 col-sm-12">
+                                            <button onClick={(e) => this.grabNewItemInfo(e)}  className="save-item-btn" > <FontAwesomeIcon icon="plus-square"/> Create</button>
                                         </div>
-                                        <div className="col-6">
+                                        <div className="col-lg-6 col-md-12 col-sm-12">
                                             <button onClick={this.userWantsToAddNewItem} className="cancel-item-btn" > <FontAwesomeIcon icon="times" /> Cancel</button>
                                         </div>
                                     </div>
                                 </li>
                             ) : (
-                                    <button className="add-item-btn" onClick={this.userWantsToAddNewItem}> Add New Item</button>
+                                    <button className="add-item-btn" onClick={this.userWantsToAddNewItem}><FontAwesomeIcon icon="plus-square" /> Add Item</button>
                                 )
                             }
                         </div>
