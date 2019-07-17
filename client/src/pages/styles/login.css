@@ -19,12 +19,17 @@
   /* .form-signin {
     width: 100%;
   } */
+  .loginBtn:hover {
+    color: white;
+    background-color: #0A5B99;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+  }
   
   .form-signin .btn {
     font-size: 80%;
     border-radius: 5rem;
     letter-spacing: .1rem;
-    font-weight: bold;
+    /* font-weight: bold; */
     padding: 1rem;
     transition: all 0.2s;
   }
@@ -111,7 +116,16 @@
   background: yellow;
   width: 30vw;
 }
+.signIn {
+  background-color: #3fc29d;
+  width: 75%;
+  margin: 1%;
+  color: white;
+  transition: all .2s;
+  align-self: center;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+}
 
 .row.login-row {
   height: 100vh;
@@ -124,7 +138,16 @@
   top: -30px;
   left: 0px;
 }
+.pay {
+  background-color: #3fc29d;
+  width: 75%;
+  margin: 1%;
+  color: white;
+  transition: all .2s;
+  align-self: center;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+}
 .p-tabbed-item {
   border: solid rgb(49, 49, 49) 0.5px;
   border-bottom: 1px solid #dee2e6;
