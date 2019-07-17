@@ -27,6 +27,7 @@
 }
 .p-logo {
     margin-top: 2px;
+    margin-left: 15%;
 }
 .store-nav {
     display: block;
@@ -361,11 +362,14 @@ li {
 .logout-btn {
     background-color: rgb(253, 118, 100);
     width: 75%;
-    margin: 1%;
+    margin-right: -30px;
+    margin-top: 4%;
     color: white;
     transition: all .2s;
     align-self: center;
     border: none;
+    border-radius: .25rem;
+    padding: 0.375rem 1rem;
 }
 
 .logout-btn:hover {
