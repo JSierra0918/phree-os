@@ -320,10 +320,13 @@ class StorePage extends Component {
         }
         //If name exists propmt user to create a new name        
         for (let i = 0; i < this.state.category.length; i++) {
-            const element = this.state.category[i];
-            if(element.categoryName === val){
+            let element = this.state.category[i];
+            let stripedElementName = element.categoryName.replace(" ", "").toLowerCase()
+            if(stripedElementName.trim() === val.replace(" ", "").toLowerCase().trim()){
                 // TODO: Check with isabel
                 alert("You've already got a category by that name")
+                
+                console.log(stripedElementName);
                 return;
             }
         }
@@ -474,7 +477,6 @@ class StorePage extends Component {
                             reload={this.getUserData}
                             getQuantityUpdate={this.getQuantityUpdate}
                             role={this.props.role}
-                            getPaymentSummary={this.getPaymentSummary}
                             chartData={this.state.chartData}
 
                         />
@@ -520,6 +522,8 @@ class StorePage extends Component {
                         userId={sessionStorage.getItem('userId')}
                         checkoutObj={this.state.checkoutObj}
                         reload={this.routeToStore}
+                        getPaymentSummary={this.getPaymentSummary}
+
                     />
                     <ModalWelcome
                         show={this.state.hasStripe}

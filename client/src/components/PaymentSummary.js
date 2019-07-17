@@ -1,9 +1,6 @@
 import React from 'react';
 import API from '../utils/API';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import SummaryChart from '../components/SummaryChart';
-// import ReactTable fom 'react-table';
 import { Bar } from 'react-chartjs-2';
 
 function PaymentSummary(props) {
@@ -56,7 +53,6 @@ function PaymentSummary(props) {
             // props.clearSummary([]);
             props.getQuantityUpdate(paymentSummary);
 
-            props.getPaymentSummary(response);
         });
 
         // return paymentSummary;
