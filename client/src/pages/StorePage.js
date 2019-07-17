@@ -31,7 +31,7 @@ class StorePage extends Component {
       categoryIsSelected: false,
       chartData: {},
       summarySaleItems: []
-    };
+    }; 
     // This binding is necessary to make `this` work in the callback
     // this.handleClick = this.handleClick.bind(this)
   }
@@ -398,43 +398,6 @@ class StorePage extends Component {
     this.props.history.push(path);
   };
 
-  getPaymentSummary = payment => {
-    let reducedQuantitySold = payment.data.reduce((acc, val) => {
-      return acc + parseInt(val.Price);
-    }, 0);
-    let reducedPrice = payment.data.reduce((acc, val) => {
-      return acc + parseInt(val.Quantity);
-    }, 0);
-
-    let numberOfQuantitySold = 0;
-    let amountMadeToday = 0;
-
-    numberOfQuantitySold += reducedQuantitySold;
-    amountMadeToday += reducedPrice;
-
-    this.setState({
-      chartData: {
-        labels: ["Total Sales", "Number of Items"],
-        datasets: [
-          {
-            label: "Sales Summary",
-            backgroundColor: [
-              "rgba(255, 96, 41, 0.3)",
-              "rgba(255, 96, 41, 0.3)"
-            ],
-            borderColor: "rgba(255, 96, 41, .2)",
-            borderWidth: 1,
-            hoverBackgroundColor: "rgba(10, 91, 153, .5)",
-            hoverBorderColor: "rgba(255,99,132,1)",
-            data: [numberOfQuantitySold, amountMadeToday]
-          }
-        ]
-      }
-    });
-
-    // console.log(this.state.chartData);
-  };
-
   updateItemQuantity = (id, updatedQuantity) => {
     let decreasedItems = this.state.items.map(item => {
       if (id === item.id) {
@@ -459,6 +422,62 @@ class StorePage extends Component {
   stopReloadOnInput = e => {
     e.preventDefault();
   };
+
+  getPaymentSummary = (payment) => {
+
+
+    // let reducedQuantitySold = payment.data.reduce((acc, val) => {
+    //     return acc + parseInt(val.Price)
+    // }, 0)
+    // let reducedPrice = payment.data.reduce((acc, val) => {
+    //     return acc + parseInt(val.Quantity)
+    // }, 0)
+
+    let numberOfQuantitySold = 0;
+    let amountMadeToday = 0;
+
+    // numberOfQuantitySold += reducedQuantitySold;
+    // amountMadeToday += reducedPrice;
+    let names = []
+    let quantity = []
+
+    for (let i = 0; i < payment.length; i++) {
+        if (names.includes(payment[i].Item)) {
+            let index = names.indexOf(payment[i].Item);
+            quantity[index] = quantity[index] + parseInt(payment[i].Quantity)
+        } else {
+            names.push(payment[i].Item)
+            quantity.push(parseInt(payment[i].Quantity))
+        }
+    }
+
+    // Store
+    sessionStorage.setItem("soldNames", names);
+    sessionStorage.setItem("soldQuantities", quantity);
+
+    this.setState({
+        chartData: {
+            labels: names,
+            datasets: [
+                {
+                    label: 'Sales Summary',
+                    backgroundColor: ['rgba(255, 96, 41, 0.3)', 'rgba(255, 96, 41, 0.3)'],
+                    borderColor: 'rgba(255, 96, 41, .2)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
+                    hoverBorderColor: 'rgba(255,99,132,1)',
+                    data: quantity
+                }
+            ]
+        }
+    })
+
+    // console.log(this.state.chartData);
+
+}
+
+
+
 
   render() {
     return (
