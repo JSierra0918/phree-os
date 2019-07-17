@@ -147,7 +147,7 @@ class ItemContainer2 extends Component {
                                     </div>
                                 </li>
                             ) : (
-                                    <button className="add-item-btn" onClick={this.userWantsToAddNewItem}> Add New Item</button>
+                                    <button className="add-item-btn" onClick={this.userWantsToAddNewItem}><FontAwesomeIcon icon="plus-square" /> Add Item</button>
                                 )
                             }
                         </div>

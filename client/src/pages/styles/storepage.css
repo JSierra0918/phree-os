@@ -106,7 +106,28 @@
     width: 90%;
 }
 
+.main-container-manage {
+    display:flex !important;
+    height: 92% !important;
+    flex-direction: column;
+    position: relative;
+}
+
+.main-container-store {
+    display:flex !important;
+    height: 95% !important;
+    flex-direction: column;
+    position: relative;
+}
+
 /* ------------------- item container ----------- */
+.item-container-manage {
+    display:flex !important;
+    height: 90% !important;
+    flex-direction: column;
+    position: relative;
+}
+
 .add-item-btn {
     width: 90% !important;
     background-color: #FF6029;
@@ -198,10 +219,6 @@
 .category-li:hover {
     cursor: pointer;
     background-color: #EEB500;
-}
-
-.delete-icon {
-
 }
 
 .delete-icon:hover {
@@ -336,32 +353,11 @@ li {
     height:calc(100% - 110px);
 }
 
-
 .form-control {
     margin-bottom: -10px;
 }
 
-.main-container-manage {
-    display:flex !important;
-    height: 92% !important;
-    flex-direction: column;
-    position: relative;
-}
-
-.main-container-store {
-    display:flex !important;
-    height: 95% !important;
-    flex-direction: column;
-    position: relative;
-}
-
-.item-container-manage {
-    display:flex !important;
-    height: 90% !important;
-    flex-direction: column;
-    position: relative;
-}
-
+/*------- logout ------*/ 
 .logout-btn {
     background-color: rgb(253, 118, 100);
     color: white;
@@ -375,15 +371,15 @@ li {
 
 /* ----------------------------- MEDIA QUERIES */
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     .container {
-        
     }
    
     .mid-section {
         height: auto;
         display: flex;
-        flex-flow: column-reverse;
+        flex-flow: row;
+        width: 100%;
     }
 
     .mid-section :nth-child(2) {
@@ -393,7 +389,7 @@ li {
     .summary,
     .category,
     .items {
-        height: auto;
+        height: 100%;
         margin: 5px;
     }
 
@@ -413,4 +409,19 @@ li {
         margin: 10px;
         display: block;
     }
-}
+} */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    /* Styles */
+    }
+
+    /* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    /* Styles */
+    }
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+    /* Styles */
+    }

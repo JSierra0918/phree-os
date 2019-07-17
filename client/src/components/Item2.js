@@ -166,7 +166,7 @@ class Item2 extends Component {
                                 {this.state.editable !== true ?
 
                                     <div><span id="trash" onClick={(e) => this.props.delete(e, this.props.dataid)}> <FontAwesomeIcon icon="trash-alt" className="delete-icon" /> Delete</span>
-                                        <span id="edit" onClick={(e) => this.editItem(e, this.props.dataid)}>Edit</span></div>
+                                        <span id="edit" onClick={(e) => this.editItem(e, this.props.dataid)}><FontAwesomeIcon icon="edit" />Edit</span></div>
                                     :
                                     <div> <span id="save" onClick={(e) => this.saveItem(e, this.props.dataid)}>Save</span>
 
