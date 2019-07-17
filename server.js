@@ -18,10 +18,6 @@ const reset = "\x1b[0m";
 const cyan = "\x1b[36m";
 const yellow = "\x1b[33m";
 
-// Define middleware here  ================================================================
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-
 //Morgan
 app.use(logger("dev"));
 if (process.env.NODE_ENV === "production") {
@@ -40,10 +36,8 @@ app.use(express.json());
 // END Define middleware here  ================================================================
 
 // API ROUTES =============================
-// require("./Routes/API")(app);
 require('./routes/auth.js')(app, passport);
 require("./routes/apiRoutes.js")(app);
-// require("./routes/payment")(app)
 
 //load passport strategies
 require('./config/passport/passport.js')(passport, models.user);
