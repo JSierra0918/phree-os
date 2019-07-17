@@ -368,13 +368,18 @@ li {
 
 .logout-btn {
     background-color: rgb(253, 118, 100);
+    width: 75%;
+    margin: 1%;
     color: white;
-    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all .2s;
+    align-self: center;
+    border: none;
 }
 
 .logout-btn:hover {
     background-color: rgb(252, 90, 69);
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 /* ----------------------------- MEDIA QUERIES */
@@ -397,7 +402,7 @@ li {
     .summary,
     .category,
     .items {
-        height: auto;
+        height: 40vh;
         margin: 5px;
     }
 
@@ -407,6 +412,10 @@ li {
 
     .categoryName {
         transition: all .3s;
+    }
+    
+    .scrollable-content {
+        background: #edefef;
     }
 
     .editable-item {

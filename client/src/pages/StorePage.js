@@ -29,7 +29,8 @@ class StorePage extends Component {
             hasStripe: true,
             checkoutObj: {},
             categoryIsSelected: false,
-            chartData: {}
+            chartData: {},
+            summarySaleItems: []
         }
         // This binding is necessary to make `this` work in the callback
         // this.handleClick = this.handleClick.bind(this)
@@ -39,27 +40,16 @@ class StorePage extends Component {
         //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
         //find out if the ID is connected to a stripe account 
         this.getUserData();
-        // this.getPaymentSummary();
-
     }
 
 
     componentDidUpdate() {
-        //once the item table has been updated, then update the site with the new info.
-        //most likely do another this.getUserData()
-
-        // if (this.props.role ===1) {
-        //     this.setState({
-        //         items: []
-        //     })
-        // }
+      
     }
 
     //When ever you receive a prop from PhreeContainer, reset the items
     componentWillReceiveProps(nextProps) {
-        // this.setState({
-        //     items: nextProps.items
-        // })
+      
     }
 
     componentWillMount() {
@@ -88,17 +78,12 @@ class StorePage extends Component {
             this.openModalHandler()
             // return  <ModalPayment/> 
         }
-        console.log('paid', paid)
-
     }
 
     getUserData = () => {
         const userId = sessionStorage.getItem('userId');
 
         API.getUserData(userId).then((userResponse) => {
-            // console.log(userResponse.data.storename)
-            // console.log(userResponse.data.hasStripe)
-            console.log('in get user data / reload()')
             var boolean = userResponse.data.hasStripe
             if (boolean === false) {
                 this.setState({
@@ -124,6 +109,7 @@ class StorePage extends Component {
     }
 
     selectCategory = (id) => {
+
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
             //find items and return the array possibly pass it as an argument for displayItem.
@@ -140,7 +126,6 @@ class StorePage extends Component {
     grabItems = (catID) => {
         //when category is returned, then create a call based off 
         API.getItems(catID).then((returnedItems) => {
-        console.log('returnedItems:', returnedItems)
 
             this.setState({
                 items: returnedItems.data.map((item) => {
@@ -149,18 +134,12 @@ class StorePage extends Component {
                 }),
                 catID: catID
             })
-
-            console.log('items:', this.state.items)
-
             //If you're role is 1 (manager) then make the categoryIsSelected to true.
             // this.categoryIsSelected();
-            // console.log(this.state.items);
         })
     }
 
     totalPrice = () => {
-        console.log('this.state.paymentList', this.state.paymentList)
-
         let total = this.state.paymentList.reduce((a, b) => {
 
             return { price: parseFloat(a.price) + parseFloat(b.price) }
@@ -185,7 +164,6 @@ class StorePage extends Component {
     addItem = (selectedItem) => {
         // console.log('selectedItem:', selectedItem)
         // e.stopPropagation();
-        console.log(selectedItem);
         const statePaymentList = this.state.paymentList;
 
         //if Quantity of item has reached 0, return Item is zero and add a Class of strikethrough
@@ -322,15 +300,13 @@ class StorePage extends Component {
 
         //Update the category DB
         API.deleteItems(id).then((response) => {
-            console.log(response)
             this.setState((state) => {
                 return { items: state.items = updatedItem }
             })
         })
     }
 
-    addCategory = (e) => {
-        e.preventDefault();
+    addCategory = () => {
         const userId = sessionStorage.getItem("userId");
         //grab value
         var inp = document.getElementById("catInput");
@@ -342,20 +318,15 @@ class StorePage extends Component {
             alert("Must have a category name");
             return;
         }
-        // else if (this.state.category.includes(val)){
-        //     alert("That category already exists");
-        //     return;
-        // }
-        console.log('val:', val)
-
-        let nameExist =this.state.category.find(el => el.categoryName === val)
-        console.log(nameExist)
-        
+        //If name exists propmt user to create a new name        
         for (let i = 0; i < this.state.category.length; i++) {
-            const element = this.state.category[i];
-            if(element.categoryName === val){
+            let element = this.state.category[i];
+            let stripedElementName = element.categoryName.replace(" ", "").toLowerCase()
+            if(stripedElementName.trim() === val.replace(" ", "").toLowerCase().trim()){
                 // TODO: Check with isabel
                 alert("You've already got a category by that name")
+                
+                console.log(stripedElementName);
                 return;
             }
         }
@@ -419,18 +390,19 @@ class StorePage extends Component {
     }
 
     getPaymentSummary = (payment) => {
-        console.log('payment:', payment)
 
-        let reducedlSales = payment.data.reduce((acc, val) => {
-            console.log('val:', val)
-            console.log('acc:', acc)
+        let reducedQuantitySold = payment.data.reduce((acc, val) => {
             return acc + parseInt(val.Price)
         }, 0)
-        let reducedQuantity = payment.data.reduce((acc, val) => {
-            console.log('val:', val)
-            console.log('acc:', acc)
+        let reducedPrice = payment.data.reduce((acc, val) => {
             return acc + parseInt(val.Quantity)
         }, 0)
+
+        let numberOfQuantitySold = 0;
+        let amountMadeToday = 0;
+
+        numberOfQuantitySold += reducedQuantitySold;
+        amountMadeToday += reducedPrice;
 
         this.setState({
             chartData: {
@@ -443,13 +415,13 @@ class StorePage extends Component {
                         borderWidth: 1,
                         hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
                         hoverBorderColor: 'rgba(255,99,132,1)',
-                        data: [10, 10]
+                        data: [numberOfQuantitySold, amountMadeToday]
                     }
                 ]
             }
         })
 
-        console.log(this.state.chartData);
+        // console.log(this.state.chartData);
 
     }
 
@@ -471,9 +443,7 @@ class StorePage extends Component {
     }
 
     logout = () => {
-        console.log("in log out ")
-        API.logout()
-
+        API.logout();
     }
 
     stopReloadOnInput = (e)=>{
@@ -507,7 +477,6 @@ class StorePage extends Component {
                             reload={this.getUserData}
                             getQuantityUpdate={this.getQuantityUpdate}
                             role={this.props.role}
-                            getPaymentSummary={this.getPaymentSummary}
                             chartData={this.state.chartData}
 
                         />
@@ -553,6 +522,8 @@ class StorePage extends Component {
                         userId={sessionStorage.getItem('userId')}
                         checkoutObj={this.state.checkoutObj}
                         reload={this.routeToStore}
+                        getPaymentSummary={this.getPaymentSummary}
+
                     />
                     <ModalWelcome
                         show={this.state.hasStripe}
