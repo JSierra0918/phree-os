@@ -65,7 +65,7 @@ class SignIn extends Component {
             <div>
                 <Input name="email" placeholder="Email (required)" className="form-control" value={this.state.email} onChange={this.handleInputChange} />
                 <Input name="password" type="password" placeholder="Password (required)" className="form-control" value={this.state.password} onChange={this.handleInputChange} />
-                <FormBtn name="submitBtn" onClick={this.submitSignIn} >Sign In</FormBtn>
+                <FormBtn name="submitBtn" className="signIn" onClick={this.submitSignIn} >Sign In</FormBtn>
             </div>
         );
     }

@@ -28,7 +28,10 @@ class CheckoutForm extends Component {
     this.findRemainingQuantity = this.findRemainingQuantity.bind(this);
 
   }
-
+  componentDidUpdate() {
+    console.log('checkout obj')
+    console.log(this.props.checkoutObj)
+  }
   async submit(ev) {
     await this.initialLoop(this.props.checkoutObj)
     const n = IDsOfItemsSold.length
@@ -86,9 +89,7 @@ class CheckoutForm extends Component {
      
   };
 
-  componentDidMount() {
-    
-  }
+
   render() {
 
     // this.initialLoop(this.props.checkoutObj)
