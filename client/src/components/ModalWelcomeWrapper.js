@@ -1,4 +1,6 @@
-import React from "react"
+import React from "react";
+import "../pages/styles/storepage.css";
+
 
 function ModalWelcomeWrapper(props) {
 

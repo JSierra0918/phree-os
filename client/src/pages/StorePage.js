@@ -526,9 +526,9 @@ class StorePage extends Component {
               // categoryIsSelected={this.state.categoryIsSelected}
             />
           </Col>
-          <ModalPaymentWrapper>
+          <ModalPaymentWrapper show={this.state.payment}>
             <ModalPayment
-              show={this.state.payment}
+            //   show={this.state.payment}
               close={this.closeModalHandler}
               open={this.openModalHandler}
               total={this.state.total}
@@ -538,14 +538,15 @@ class StorePage extends Component {
               getPaymentSummary={this.getPaymentSummary}
             />
           </ModalPaymentWrapper>
-          {/* <ModalWelcomeWrapper> */}
+
+          <ModalWelcomeWrapper show={this.state.hasStripe} >
             <ModalWelcome
-              show={this.state.hasStripe}
+            //   show={this.state.hasStripe}
               close={this.closeModalWelcomeHandler}
               open={this.openModalHandler}
               hasStripe={this.state.hasStripe}
             />
-          {/* </ModalWelcomeWrapper> */}
+          </ModalWelcomeWrapper>
         </div>
       </div>
     );

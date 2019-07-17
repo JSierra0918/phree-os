@@ -271,7 +271,7 @@
 
 .nav-item {
     display: inline;
-    width: 200px;
+    /* width: 200px; */
 }
 
 .tab-container {

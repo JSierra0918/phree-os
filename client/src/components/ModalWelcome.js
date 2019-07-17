@@ -1,16 +1,16 @@
 import React from "react";
 import "../pages/styles/modal.css";
-import Button from "../assets/light-on-dark.png"
+import Button from "../assets/light-on-dark.png";
 
 const ModalWelcome = props => {
   return (
     <div>
       <div
         className="modal-wrapper"
-        style={{
-          display: props.show ? "none" : "inline-block",
-          opacity: props.show ? "0" : "1"
-        }}
+        // style={{
+        //   display: props.show ? "none" : "inline-block",
+        //   opacity: props.show ? "0" : "1"
+        // }}
       >
         <div className="modal-header">
           <h3>Phree-OS</h3>
