@@ -1,6 +1,6 @@
 import React from "react";
 import "../pages/styles/modal.css";
-import Button from "../assets/light-on-dark.png"
+import Button from "../assets/light-on-dark.png";
 
 const ModalWelcome = props => {
   return (

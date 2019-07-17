@@ -29,8 +29,7 @@ class CheckoutForm extends Component {
 
   }
   componentDidUpdate() {
-    console.log('checkout obj')
-    console.log(this.props.checkoutObj)
+
   }
   async submit(ev) {
     await this.initialLoop(this.props.checkoutObj)
