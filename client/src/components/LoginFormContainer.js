@@ -45,7 +45,7 @@ class LoginFormContainer extends Component {
 
     return (
       <>
-        <Container className="h-100">
+        <Container>
           <FlexRow className="row login-row">
             <Col size="md-8 md-7 g-5" className="mx-auto">
               <Card
