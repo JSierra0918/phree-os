@@ -8,11 +8,11 @@ const ModalPayment = props => {
     <div>
       <div
         className="modal-wrapper"
-        style={{
-          display: props.show ? "inline-block" : "none",
-          opacity: props.show ? "1" : "0",
-          // background: props.show? "white" : "black",
-        }}
+        // style={{
+        //   display: props.show ? "inline-block" : "none",
+        //   opacity: props.show ? "1" : "0",
+        //   // background: props.show? "white" : "black",
+        // }}
       >
         <div className="modal-header">
           <h3>Total: ${props.total}</h3>

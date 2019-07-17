@@ -7,10 +7,10 @@ const ModalWelcome = props => {
     <div>
       <div
         className="modal-wrapper"
-        style={{
-          display: props.show ? "none" : "inline-block",
-          opacity: props.show ? "0" : "1"
-        }}
+        // style={{
+        //   display: props.show ? "none" : "inline-block",
+        //   opacity: props.show ? "0" : "1"
+        // }}
       >
         <div className="modal-header">
           <h3>Phree-OS</h3>
