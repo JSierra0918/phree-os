@@ -32,8 +32,9 @@ class StorePage extends Component {
       chartData: {},
       summarySaleItems: [],
       ssNames: [],
-      ssQuantity: [],
       ssTotal: 0,
+      ssQuantity: [],
+
 
     };
     // This binding is necessary to make `this` work in the callback
@@ -48,10 +49,8 @@ class StorePage extends Component {
         console.log(sessionStorage.getItem("names"))
         console.log(sessionStorage.getItem("total"))
         let sessionStorageTotal = sessionStorage.getItem("total")
+        console.log('sessionStorageTotal:', )
 
-        this.setState({
-            ssTotal: sessionStorageTotal
-        })
         console.log('ssTotal:', this.state.ssTotal)
       let names = sessionStorage.getItem("names")
       console.log("names:", names);
@@ -63,7 +62,7 @@ class StorePage extends Component {
           quantityInt.push(parseFloat(jsonQuantity[i]));
         }
 
-        this.displayPaymentSummary(quantityInt, names);
+        this.displayPaymentSummary(quantityInt, names, parseFloat(sessionStorageTotal).toFixed(2));
       }
     }
     //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
@@ -473,6 +472,7 @@ class StorePage extends Component {
   };
 
   displayPaymentSummary = (quantity, names, total) => {
+    console.log('total:', total)
     console.log("DPS quantity:", quantity);
     console.log("DPS names:", names);
     var string = names.split(",");
@@ -481,9 +481,11 @@ class StorePage extends Component {
       array.push(string[i]);
     }
     this.setState({
+      ssTotal: total,
       ssNames: array,
       ssQuantity: quantity
     });
+    console.log('DPS sstotal', this.state.ssTotal)
     let numberSet = [...quantity]
     numberSet.push(0)
     let newData = {
@@ -505,7 +507,6 @@ class StorePage extends Component {
       chartData: newData
     });
 
-    // console.log(this.state.chartData);
   };
 
   randomColor =(int)=> {
@@ -513,7 +514,6 @@ class StorePage extends Component {
   
     // html color code starts with # 
     let color = '#'; 
-    // let colorArr = []
     // generating 6 times as HTML color code consist 
     // of 6 letter or digits 
     let colorArr = []
