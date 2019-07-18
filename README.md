@@ -37,7 +37,7 @@ And lets say your customer didn't actually mean to buy 3 individual socks at $5.
 ![Jul-18-2019 01-30-01](https://user-images.githubusercontent.com/46004362/61431492-a8936380-a8fb-11e9-9a48-58b8fa8fff3b.gif)
 
 ### Completing a sale 
-Completing a sale is just as easy as typing in your customers credit card number, and pressing send.  Stripe handles all the processing, so you know its secure, and you'll never need to worry about secure and private data falling into the wrong hands.
+Completing a sale is just as easy as typing in your customers credit card number, and pressing send.  Stripe handles all the processing, so you know its safe, and you'll never need to worry about secure and private data falling into the wrong hands.
 
 ![checkout](https://user-images.githubusercontent.com/46004362/61431310-0a070280-a8fb-11e9-97d2-188a2eb0806f.gif)
 
