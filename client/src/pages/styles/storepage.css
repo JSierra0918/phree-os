@@ -497,6 +497,14 @@ li {
             justify-content: space-around;
     }
 
+    .add-cat-btn {
+        margin-bottom: 30px;
+    }
+
+    .add-item-btn {
+        margin-bottom: 25px;
+    }
+
 }
 
 @media only screen and (max-width: 480px) {
