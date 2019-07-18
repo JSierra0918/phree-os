@@ -22,7 +22,7 @@ After you've signed up, you're presented with this message, which instructs you 
 
 <img width="776" alt="Screen Shot 2019-07-18 at 12 54 00 AM" src="https://user-images.githubusercontent.com/46004362/61430029-9236d900-a8f6-11e9-9508-83443e833b06.png">
 
-We rely on Stripe to process all credit card transactions for our customers.  No matter what, they only charge %2.9 + $0.30 for each transaction, which we think is a pretty good deal.
+We rely on Stripe to process all credit card transactions for our customers.  No matter what, they only charge %2.9 + $0.30 for each transaction, which we think is a pretty good deal.  In addition to being %100 PCI compliant, stripe also gives you full access to your own dash board, where you can track your sales, manage your money, and transfer funds to your bank account.
 
 After your account Stripe account is set up its time to start setting up your store.
 
@@ -36,8 +36,11 @@ Add as many items as you'd like, then switch to the store page to start selling 
 
 And lets say your customer didn't actually mean to buy 3 individual socks at $5.99 a piece... you can just hit that trash can to the right and the inventory will be replaced, and the total will reflect the change.
 
-![Jul-18-2019 01-17-12](https://user-images.githubusercontent.com/46004362/61430981-e55e5b00-a8f9-11e9-9d01-69a6b13abd12.gif)
+![Jul-18-2019 01-30-01](https://user-images.githubusercontent.com/46004362/61431492-a8936380-a8fb-11e9-9a48-58b8fa8fff3b.gif)
+Completing a sale is just as easy as typing in your customers credit card number, and pressing send.  Stripe handles all the processing, so you know its secure, and you'll never need to worry about secure and private data falling into the wrong hands.
 
+![checkout](https://user-images.githubusercontent.com/46004362/61431310-0a070280-a8fb-11e9-97d2-188a2eb0806f.gif)
 
-
+Once your sale is completed you're brought back to the store page to do it all over again! Here you can see the inventory has changed, and if you click on your manager tab you'll beable to track your sales for the day with this handy visulaization thanks to `react-chart-2`
+![sales report](https://user-images.githubusercontent.com/46004362/61431562-d8426b80-a8fb-11e9-8612-2916c8979659.gif)
 
