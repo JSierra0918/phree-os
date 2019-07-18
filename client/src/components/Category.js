@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditableCategory from "./EditableCategory";
+import Alert from 'react-bootstrap/Alert';
 
 class Category extends Component {
     constructor(props) {
@@ -76,7 +77,9 @@ class Category extends Component {
         }
 
         if (update.categoryName === this.props.item) {
-            alert("You already have that name!")
+            // alert("You already have that name!")
+            // eslint-disable-next-line no-unused-expressions
+            <Alert variant="success"><p>ALERT</p></Alert>
         } else if (update.categoryName === emptySpace) {
             alert("You must have something in there")
         } else {
@@ -104,6 +107,8 @@ class Category extends Component {
         console.log(name, value);
 
     };
+
+    
 
     render() {
         return (
