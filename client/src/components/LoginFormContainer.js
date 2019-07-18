@@ -98,7 +98,7 @@ class LoginFormContainer extends Component {
                 </NavTab>
                 <form className="p-loginForm form-signin">
                      <div className="loginContainer">
-                     <Col size="md-12">
+                     <Col size="md-12 sm-12 xs-12">
                         <p className="p-logo">
                            <span className="phree-logo">Phree-</span>
                            <span className="o-logo">O</span>

@@ -27,7 +27,6 @@
 }
 .p-logo {
     margin-top: 2px;
-    margin-left: 15%;
 }
 .store-nav {
     display: block;
@@ -319,7 +318,7 @@
 
 .nav-item {
     display: inline;
-    /* width: 200px; */
+    max-width: 200px;
 }
 
 .tab-container {
@@ -456,6 +455,10 @@ li {
 
 /* ----------------------------- MEDIA QUERIES */
 
+@media only screen and (max-width: 960px){
+
+}
+
 @media only screen and (max-width: 768px) {
     
     /* .mid-section :nth-child(1) {
@@ -509,6 +512,7 @@ li {
     .add-item-btn {
         margin-bottom: 25px;
     }
+
 
 }
 

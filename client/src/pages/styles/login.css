@@ -3,7 +3,7 @@
   border: 0;
   border-radius: 1rem;
   -webkit-box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
 }
 
 .card-signin .card-title {
@@ -24,7 +24,7 @@
   color: white;
   background-color: #0A5B99;
   -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .form-signin .btn {
@@ -110,90 +110,113 @@
 
 /* ==================================================== CUSTOM ===================================================== */
 .p-loginForm {
-width: 30vw;
-margin: 0 auto;
+  width: 30vw;
+  margin: 0 auto;
 }
 
 .p-signInForm {
-background: yellow;
-width: 30vw;
+  background: yellow;
+  width: 30vw;
 }
+
 .signIn {
-background-color: #3fc29d;
-width: 75%;
-margin: 1%;
-color: white;
--webkit-transition: all .2s;
--o-transition: all .2s;
-transition: all .2s;
--ms-flex-item-align: center;
-    -ms-grid-row-align: center;
-    align-self: center;
--webkit-box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #3fc29d;
+  width: 75%;
+  margin: 1%;
+  color: white;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  -webkit-box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
 .row.login-row {
-height: 100vh;
--webkit-box-pack: center;
-    -ms-flex-pack: center;
-        justify-content: center;
--webkit-box-align: center;
-    -ms-flex-align: center;
-        align-items: center;
+  height: 100vh;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .p-tabbed-ul {
-position: absolute;
-top: -30px;
-left: 0px;
+  position: absolute;
+  top: -30px;
+  left: 0px;
 }
+
 .pay {
-background-color: #3fc29d;
-width: 75%;
-margin: 1%;
-color: white;
--webkit-transition: all .2s;
--o-transition: all .2s;
-transition: all .2s;
--ms-flex-item-align: center;
-    -ms-grid-row-align: center;
-    align-self: center;
--webkit-box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #3fc29d;
+  width: 75%;
+  margin: 1%;
+  color: white;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  -webkit-box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
+
 .p-tabbed-item {
-border: solid rgb(49, 49, 49) 0.5px;
-border-bottom: 1px solid #dee2e6;
-border-radius: 5px 5px 0px 0px;
-padding: 8px;
-height: 40px;
-width: 14vw;
-background: #f3f3f3;
-margin-right: 1px;
+  border: solid rgb(49, 49, 49) 0.5px;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 5px 5px 0px 0px;
+  padding: 8px;
+  height: 40px;
+  width: 14vw;
+  background: #f3f3f3;
+  margin-right: 1px;
 }
+
 .p-tabbed-item:hover {
-background: #c4ddee;
-cursor: pointer;
+  background: #c4ddee;
+  cursor: pointer;
 }
 
 .p-active-tab {
-background-color: #fff;
-border-bottom: none;
-z-index: 10;
+  background-color: #fff;
+  border-bottom: none;
+  z-index: 10;
 }
 
 .store-nav {
-display: none;
+  display: none;
 }
 
 .loginContainer {
-height: 100%; 
-top: 200px;
-left: 240px;
+  height: 100%;
+  top: 200px;
+  left: 240px;
 }
+
+@media only screen and (max-width: 788px) {
+
+  .p-loginForm {
+    width: auto
+  }
+}
+
+@media only screen and (max-width: 525px) {
+
+  .nav-item {
+    font-size: 2.7vw;
+  }
+
+  .p-logo {
+    
+  }
+}
+
 /* ====================================================END of   CUSTOM ===================================================== */
 
 /* Fallback for Edge
@@ -203,6 +226,7 @@ left: 240px;
   .form-label-group>label {
     display: none;
   }
+
   .form-label-group input::-ms-input-placeholder {
     color: #777;
   }
@@ -216,6 +240,7 @@ left: 240px;
   .form-label-group>label {
     display: none;
   }
+
   .form-label-group input:-ms-input-placeholder {
     color: #777;
   }
