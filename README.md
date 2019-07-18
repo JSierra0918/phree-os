@@ -43,3 +43,5 @@ Completing a sale is just as easy as typing in your customers credit card number
 Once your sale is completed you're brought back to the store page to do it all over again! Here you can see the inventory has changed, and if you click on your manager tab you'll beable to track your sales for the day with this handy visulaization thanks to `react-chart-2`
 
 ![salesreport2](https://user-images.githubusercontent.com/46004362/61431665-3c652f80-a8fc-11e9-9fb8-ed3b183c0399.gif)
+ - - -
+ Check us out: [Phree-OS](https://phree-os.herokuapp.com/)
