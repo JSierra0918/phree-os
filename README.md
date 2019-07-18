@@ -32,14 +32,16 @@ Its as easy as clicking on the manager tab in the top left corner, adding a cate
 
 Add as many items as you'd like, then switch to the store page to start selling them! Selling items is just as easy adding them to our database.  You're given a representation of what your stock will be once this sale is complete, and a very clean and easy to read receipt with the quantity and total price for each item, and the grand total at the bottom.  
 
-![selling!](https://user-images.githubusercontent.com/46004362/61430794-273ad180-a8f9-11e9-9a59-7d3f5dbed3ff.gif)
+![selling2](https://user-images.githubusercontent.com/46004362/61431721-7b938080-a8fc-11e9-96de-6aac369888f4.gif)
 
 And lets say your customer didn't actually mean to buy 3 individual socks at $5.99 a piece... you can just hit that trash can to the right and the inventory will be replaced, and the total will reflect the change.
 
 ![Jul-18-2019 01-30-01](https://user-images.githubusercontent.com/46004362/61431492-a8936380-a8fb-11e9-9a48-58b8fa8fff3b.gif)
+
 Completing a sale is just as easy as typing in your customers credit card number, and pressing send.  Stripe handles all the processing, so you know its secure, and you'll never need to worry about secure and private data falling into the wrong hands.
 
 ![checkout](https://user-images.githubusercontent.com/46004362/61431310-0a070280-a8fb-11e9-97d2-188a2eb0806f.gif)
 
 Once your sale is completed you're brought back to the store page to do it all over again! Here you can see the inventory has changed, and if you click on your manager tab you'll beable to track your sales for the day with this handy visulaization thanks to `react-chart-2`
+
 ![salesreport2](https://user-images.githubusercontent.com/46004362/61431665-3c652f80-a8fc-11e9-9fb8-ed3b183c0399.gif)
