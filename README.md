@@ -1,6 +1,6 @@
 ![phreeOS-highres](https://user-images.githubusercontent.com/46004362/61429932-1fc5f900-a8f6-11e9-8a94-e6820aa212da.png)
 
-Phree-OS aims to provide an easy, inexpensive point of sales solution for little businesses that can't afford the big, expensive point of sales systems. Phree-OS is easy to use and manage, giving you more time to concentrate on the things that matter, like running your business!
+Phree-OS aims to provide an easy, inexpensive point of sales solution for little businesses that can't afford the big, expensive point of sales systems. Phree-OS is easy to use and manage, giving you more time to concentrate on the things that matter, like running your business!  Our goal is to give small businesses owners e.g., flea market vendors, people running estate and garage sales, and farmer market vendors, the ability to manage their inventory and securly make credit card sales from their computer or mobile device.
 
 ## Team Members
 1. Adam Ravitz
