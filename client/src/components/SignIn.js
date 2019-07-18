@@ -38,8 +38,7 @@ class SignIn extends Component {
             //possibly save user id in session so you can read it when you land on Store Page
 
         }).then((res) => {
-            console.log('in promise after /signin')
-            console.log(res.data)
+      
             let data = sessionStorage.getItem('userId')
             
             if (data) {

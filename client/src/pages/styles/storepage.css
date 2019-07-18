@@ -455,8 +455,12 @@ li {
 
 /* ----------------------------- MEDIA QUERIES */
 
-@media only screen and (max-width: 960px){
+@media only screen and (max-width: 990px){
 
+    .logout-btn {
+        width: 100%;
+        margin-right: 0;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -513,7 +517,9 @@ li {
         margin-bottom: 25px;
     }
 
-
+    .logout-btn {
+        margin-right: auto;
+    }
 }
 
 @media only screen and (max-width: 480px) {

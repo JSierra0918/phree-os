@@ -46,14 +46,10 @@ class StorePage extends Component {
     this.getUserData();
     // sessionStorage.clear()
     if (sessionStorage.getItem("names")) {
-        console.log(sessionStorage.getItem("names"))
-        console.log(sessionStorage.getItem("total"))
+      
         let sessionStorageTotal = sessionStorage.getItem("total")
-        console.log('sessionStorageTotal:', )
 
-        console.log('ssTotal:', this.state.ssTotal)
       let names = sessionStorage.getItem("names")
-      console.log("names:", names);
       if (sessionStorage.getItem("quantity")) {
         let quantity = sessionStorage.getItem("quantity");
         let quantityInt = [];
@@ -355,7 +351,6 @@ class StorePage extends Component {
         // TODO: Check with isabel
         alert("You've already got a category by that name");
 
-        console.log(stripedElementName);
         return;
       }
     }
@@ -443,18 +438,14 @@ class StorePage extends Component {
   };
 
   getPaymentSummary = (payment) => {
-  console.log('payment:', payment)
 
     let ssNames = this.state.ssNames;
     let ssQuantity = this.state.ssQuantity;
     let names = [...ssNames];
     let quantity = [...ssQuantity];
     let total = this.state.total
-    console.log('total:', total)
     let currentSavedtotal = this.state.ssTotal
-    console.log('currentSavedtotal:', currentSavedtotal)
     let newTotal = total + currentSavedtotal
-    console.log('newTotal:', newTotal)
     sessionStorage.setItem('total', newTotal) ;
 
 
@@ -472,9 +463,6 @@ class StorePage extends Component {
   };
 
   displayPaymentSummary = (quantity, names, total) => {
-    console.log('total:', total)
-    console.log("DPS quantity:", quantity);
-    console.log("DPS names:", names);
     var string = names.split(",");
     var array = [];
     for (let i = 0; i < string.length; i++) {
@@ -485,7 +473,6 @@ class StorePage extends Component {
       ssNames: array,
       ssQuantity: quantity
     });
-    console.log('DPS sstotal', this.state.ssTotal)
     let numberSet = [...quantity]
     numberSet.push(0)
     let newData = {
@@ -527,7 +514,6 @@ class StorePage extends Component {
         color = '#'
                 
     })
-    console.log('colorArr:', colorArr)
     return colorArr
   }
   render() {

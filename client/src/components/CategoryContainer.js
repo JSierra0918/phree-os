@@ -24,7 +24,7 @@ class CategoryContainer extends Component {
 
   componentDidMount() {
     //takes in array and checks to see if it has any items
-    console.log(this.props.category);
+    // console.log(this.props.category);
     return this.setState({ categoryList: this.props.category });
   }
 

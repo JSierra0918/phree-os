@@ -85,7 +85,6 @@ class CheckoutForm extends Component {
     this.setState({
       remainingStockIdsandItems : stockUpdate
     })
-    console.log(this.state.remainingStockIdsandItems)
      
   };
 

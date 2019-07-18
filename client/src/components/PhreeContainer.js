@@ -24,7 +24,6 @@ class PhreeContainer extends Component {
     
     componentDidMount() {
         // API.sendLogin(this.state.loginForm);
-        console.log(this.state.items)
         
     }
     
