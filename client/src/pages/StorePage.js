@@ -32,7 +32,9 @@ class StorePage extends Component {
       chartData: {},
       summarySaleItems: [],
       ssNames: [],
-      ssQuantity: []
+      ssQuantity: [],
+      ssTotal: 0,
+
     };
     // This binding is necessary to make `this` work in the callback
     // this.handleClick = this.handleClick.bind(this)
@@ -43,7 +45,15 @@ class StorePage extends Component {
     this.getUserData();
     // sessionStorage.clear()
     if (sessionStorage.getItem("names")) {
-      let names = sessionStorage.getItem("names");
+        console.log(sessionStorage.getItem("names"))
+        console.log(sessionStorage.getItem("total"))
+        let sessionStorageTotal = sessionStorage.getItem("total")
+
+        this.setState({
+            ssTotal: sessionStorageTotal
+        })
+        console.log('ssTotal:', this.state.ssTotal)
+      let names = sessionStorage.getItem("names")
       console.log("names:", names);
       if (sessionStorage.getItem("quantity")) {
         let quantity = sessionStorage.getItem("quantity");
@@ -58,11 +68,6 @@ class StorePage extends Component {
     }
     //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
   }
-
-  //When ever you receive a prop from PhreeContainer, reset the items
-  componentWillReceiveProps(nextProps) {}
-
-  componentWillMount() {}
 
   openModalHandler = paid => {
     this.setState({
@@ -439,11 +444,19 @@ class StorePage extends Component {
   };
 
   getPaymentSummary = (payment) => {
+  console.log('payment:', payment)
 
     let ssNames = this.state.ssNames;
     let ssQuantity = this.state.ssQuantity;
     let names = [...ssNames];
     let quantity = [...ssQuantity];
+    let total = this.state.total
+    console.log('total:', total)
+    let currentSavedtotal = this.state.ssTotal
+    console.log('currentSavedtotal:', currentSavedtotal)
+    let newTotal = total + currentSavedtotal
+    console.log('newTotal:', newTotal)
+    sessionStorage.setItem('total', newTotal) ;
 
 
     for (let i = 0; i < payment.length; i++) {
@@ -456,10 +469,10 @@ class StorePage extends Component {
       }
     }
         sessionStorage.setItem("names", names);
-    sessionStorage.setItem("quantity", JSON.stringify(quantity));
+        sessionStorage.setItem("quantity", JSON.stringify(quantity));
   };
 
-  displayPaymentSummary = (quantity, names) => {
+  displayPaymentSummary = (quantity, names, total) => {
     console.log("DPS quantity:", quantity);
     console.log("DPS names:", names);
     var string = names.split(",");
