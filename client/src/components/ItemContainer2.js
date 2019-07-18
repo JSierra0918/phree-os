@@ -90,7 +90,6 @@ class ItemContainer2 extends Component {
                 const element = this.props.items[i];
                 let itemListCopy = this.state.itemname;
                 if (element.itemname.toLowerCase() === itemListCopy.toLowerCase()) {
-                    // TODO: Ask Isabel
                     alert("You've already have an item by that name");
                     return;
                 }
