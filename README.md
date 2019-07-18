@@ -27,6 +27,18 @@ We rely on Stripe to process all credit card transactions for our customers.  No
 
 After your account Stripe account is set up its time to start setting up your store.
 
+![set up store](https://user-images.githubusercontent.com/46004362/61430532-13db3680-a8f8-11e9-83df-457635956763.gif)
+
+Its as easy as clicking on the manager tab in the top left corner, adding a category, then adding your items with the quantity you have in stock and the amount you'd like to sell it for. 
+
+Add as many items as you'd like, then switch to the store page to start selling them! Selling items is just as easy adding them to our database.  You're given a representation of what your stock will be once this sale is complete, and a very clean and easy to read receipt with the quantity and total price for each item, and the grand total at the bottom.  
+
+![selling!](https://user-images.githubusercontent.com/46004362/61430794-273ad180-a8f9-11e9-9a59-7d3f5dbed3ff.gif)
+
+
+
+![selling!](https://user-images.githubusercontent.com/46004362/61430794-273ad180-a8f9-11e9-9a59-7d3f5dbed3ff.gif)
+
 
 
 
