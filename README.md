@@ -7,7 +7,7 @@ Phree-OS aims to provide an easy, inexpensive point of sales solution for little
 3. Jorge Sierra 
 
 ## Dependencies
-Axios, bCrypt, Concurrently, Dot-env, Express, Express-Sessions, MySQL2, Passport.js, Query-String, React.js, React-Background-Slider, React-Charts-2, React-Dom, React-Router, Sequelize, and Stripe.
+Axios, bCrypt, Concurrently, Dot-env, Express, Express-Sessions, MySQL2, Node. Js, Passport.js, Query-String, React.js, React-Background-Slider, React-Charts-2, React-Dom, React-Router, Sequelize, and Stripe.
 
 ## Phree-OS
 When you first come to our site, you're greeted with three options;
