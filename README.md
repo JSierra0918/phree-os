@@ -8,10 +8,9 @@ Phree-OS aims to provide an easy, inexpensive point of sales solution for little
 3. Jorge Sierra 
 
 ## Dependencies
-Axios, bCrypt, Concurrently, Dot-env, Express, Express-Sessions, MySQL2, Passport.js, Query-String, React.js, React-Background-Slider, React-Charts-2, React-Dom, React-Router, Sequelize, and Stripe
+Axios, bCrypt, Concurrently, Dot-env, Express, Express-Sessions, MySQL2, Passport.js, Query-String, React.js, React-Background-Slider, React-Charts-2, React-Dom, React-Router, Sequelize, and Stripe.
 
-## The Site:
-
+## Phree-OS
 When you first come to our site, you're greeted with three options;
 1. Login
 2. Signup
@@ -34,6 +33,10 @@ Its as easy as clicking on the manager tab in the top left corner, adding a cate
 Add as many items as you'd like, then switch to the store page to start selling them! Selling items is just as easy adding them to our database.  You're given a representation of what your stock will be once this sale is complete, and a very clean and easy to read receipt with the quantity and total price for each item, and the grand total at the bottom.  
 
 ![selling!](https://user-images.githubusercontent.com/46004362/61430794-273ad180-a8f9-11e9-9a59-7d3f5dbed3ff.gif)
+
+And lets say your customer didn't actually mean to buy 3 individual socks at $5.99 a piece... you can just hit that trash can to the right and the inventory will be replaced, and the total will reflect the change.
+
+![Jul-18-2019 01-17-12](https://user-images.githubusercontent.com/46004362/61430981-e55e5b00-a8f9-11e9-9d01-69a6b13abd12.gif)
 
 
 
