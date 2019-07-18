@@ -74,16 +74,18 @@ function PaymentSummary(props) {
             {props.role === "1" ? (
                 <div className="summary text-center mb20">
                     <div className="table-container">
-                        <h5>Sales Summary</h5>
+                        {/* <h5>Sales Summary</h5> */}
                         <Bar data={props.chartData}
+                            height={300}
                             options={{
                                 title: {
                                     display: true,
                                     text: 'Sales for the Day',
-                                    fontSize: 25
+                                    fontSize: 25,
+                                    
                                 },
                                 legend: {
-                                    display: true,
+                                    display: false,
                                     position: 'top'
                                 }
                             }}

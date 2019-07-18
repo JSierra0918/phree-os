@@ -478,7 +478,7 @@ class StorePage extends Component {
       datasets: [
         {
           label: "Sales Summary",
-          backgroundColor: ["rgba(255, 96, 41)"],
+          backgroundColor: this.randomColor(quantity),
           borderColor: "rgba(255, 96, 41, .2)",
           borderWidth: 1,
           hoverBackgroundColor: "rgba(10, 91, 153, .5)",
@@ -495,6 +495,28 @@ class StorePage extends Component {
     // console.log(this.state.chartData);
   };
 
+  randomColor =(int)=> {
+    const letters = "0123456789ABCDEF"; 
+  
+    // html color code starts with # 
+    let color = '#'; 
+    // let colorArr = []
+    // generating 6 times as HTML color code consist 
+    // of 6 letter or digits 
+    let colorArr = []
+    let map = int.map((item) => {
+        
+        for (let i = 0; i < 6; i++) {
+            
+            color += letters[(Math.floor(Math.random() * 16))]; 
+        }
+        colorArr.push(color)
+        color = '#'
+                
+    })
+    console.log('colorArr:', colorArr)
+    return colorArr
+  }
   render() {
     return (
       <div className="col-md-12 main-row">
