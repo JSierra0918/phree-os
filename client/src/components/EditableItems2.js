@@ -15,7 +15,7 @@ function EditableItems2(props) {
                 </h6>
                     <div className="d-flex item-q-price">
                         <div className="d-flex item-quantity">
-                            <span>Q:</span><p>{props.quantity} |</p>
+                            <span>Q:</span><p>{props.quantity} </p>
                         </div>
                         <div className="d-flex item-price">
                             <span>$</span><p>{formatter.format(props.price)}</p>

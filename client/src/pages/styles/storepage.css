@@ -449,6 +449,11 @@ li {
 
 }
 
+.item-q-price {
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+}
+
 /* ----------------------------- MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {

@@ -79,10 +79,8 @@ class ItemContainer2 extends Component {
 
         //Check to see if all the item names are empty
         if (this.state.itemname === blank.trim() || this.state.price == 0 || this.state.quantity == 0) {
-            console.log('this.state.itemname:', this.state.itemname)
             alert("All values must be filled");
             //   return;
-            console.log(this.state.price);
         }
         else {
 
@@ -129,13 +127,13 @@ class ItemContainer2 extends Component {
                                 <li>
                                     <div className="add-item-form type1">
                                         <form className="input-wrapper">
-                                            <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item name:" />
+                                            <Input id="itemInput" type="text" name="itemname" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Name:" />
                                             <div className="row">
                                                 <div className="col-lg-6 col-md-12 col-sm-12">
-                                                    <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item price:" />
+                                                    <Input id="itemInput" type="number" name="price" step={0.01} value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="$:" />
                                                 </div>
                                                 <div className="col-lg-6 col-md-12 col-sm-12">
-                                                    <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Item quantity:" />
+                                                    <Input id="itemInput" type="number" name="quantity" value={this.state.itemnameVal} onChange={this.handleInputChange} placeholder="Quantity:" />
                                                 </div>
                                             </div>
                                         </form>
