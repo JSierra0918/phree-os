@@ -37,8 +37,4 @@ Add as many items as you'd like, then switch to the store page to start selling 
 
 
 
-![selling!](https://user-images.githubusercontent.com/46004362/61430794-273ad180-a8f9-11e9-9a59-7d3f5dbed3ff.gif)
-
-
-
 
