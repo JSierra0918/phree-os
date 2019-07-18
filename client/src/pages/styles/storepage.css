@@ -393,9 +393,9 @@ li {
 
 @media only screen and (max-width: 768px) {
     
-    .mid-section :nth-child(1) {
+    /* .mid-section :nth-child(1) {
         order: 1 !important;
-    }
+    } */
 
     .summary,
     .category,
@@ -412,11 +412,24 @@ li {
     }
 
     .scrollable-content {
-        background: #edefef;
+        /* background: #edefef; */
+        height: 75%;
     }
 
     .categoryName {
         transition: all .3s;
+    }
+/* 
+    .summary {
+        flex-flow: column-reverse;
+    } */
+
+    /* .item-highlight {
+        flex-flow: row-reverse;
+    } */
+
+    .item-q-price {
+        justify-content: space-around;
     }
 
 }

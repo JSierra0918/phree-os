@@ -51,7 +51,7 @@ class CheckoutForm extends Component {
       this.setState({
         complete: true
       });
-      // setTimeout(() => window.location.reload(), n * 500);
+      setTimeout(() => window.location.reload(), n * 500);
       //make the call and adjust the quantities
     }
 }
