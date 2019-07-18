@@ -1,131 +1,145 @@
 .modal-wrapper {
-    border: 1px solid #d0cccc;
-    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
-    background: white;
-    position: absolute;
-    float: inherit;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    z-index: 100;
+   border: 1px solid #d0cccc;
+   -webkit-box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+           box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+   background: white;
+   position: absolute;
+   float: inherit;
+   left: 50%;
+   top: 50%;
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
+   width: 70%;
+   z-index: 100;
+}
+
+.modal-header {
+   background: #0A5B99;
+   height: 40px;
+   line-height: 40px;
+   padding: 5px 20px;
+   text-align: right;
+}
+
+.modal-header h3 {
+   color: white;
+   float: left;
+   margin: 0;
+   padding: 0;
+}
+
+.modal-body {
+   padding: 10px 15px;
+   text-align: center;
+}
+
+.modal-footer {
+   background: #0A5B99;
+   height: 55px;
+   padding: 15px;
+}
+
+.close-modal-btn {
+   color: white;
+   cursor: pointer;
+   float: right;
+   font-size: 30px;
+   margin-top: -7px;
+}
+
+.close-modal-btn:hover {
+   color: black;
+}
+
+.btn-cancel, .btn-continue {
+   background: coral;
+   border: none;
+   color: white;
+   cursor: pointer;
+   font-weight: bold;
+   outline: none;
+   padding: 10px;
+}
+
+.btn-cancel {
+   background-color:  rgb(253, 118, 100);
+   float: left;
+}
+
+.btn-cancel:hover {
+   background-color: rgb(252, 90, 69);
+}
+
+.btn-continue {
+   background-color: #3fc29d;
+   float: right;
+}
+
+.btn-continue:hover {
+   background-color: #0A5B99;
+}
+
+.back-drop {
+   background-color: rgba(48, 49, 48, 0.42);
+   height: 100%;
+   position: fixed;
+   -webkit-transition: all 1.3s;
+   -o-transition: all 1.3s;
+   transition: all 1.3s;
+   width: 100%;
+}
+
+.open-modal-btn {
+   margin: 15px;
+   padding: 10px;
+   font-weight: bold;
+}
+
+.StripeElement {
+   -webkit-box-sizing: border-box;
+           box-sizing: border-box;
+   height: 40px;
+   padding: 10px 12px;
+   border: 1px solid transparent;
+   border-radius: 4px;
+   background-color: white;
+   -webkit-box-shadow: 0 1px 3px 0 #e6ebf1;
+           box-shadow: 0 1px 3px 0 #e6ebf1;
+   -webkit-transition: box-shadow 150ms ease;
+   -webkit-transition: -webkit-box-shadow 150ms ease;
+   transition: -webkit-box-shadow 150ms ease;
+   -o-transition: box-shadow 150ms ease;
+   transition: box-shadow 150ms ease;
+   transition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;
  }
- 
- .modal-header {
-    background: #0A5B99;
-    height: 40px;
-    line-height: 40px;
-    padding: 5px 20px;
-    text-align: right;
+
+ .StripeElement--focus {
+   -webkit-box-shadow: 0 1px 3px 0 #cfd7df;
+           box-shadow: 0 1px 3px 0 #cfd7df;
  }
- 
- .modal-header h3 {
-    color: white;
-    float: left;
-    margin: 0;
-    padding: 0;
+
+ .StripeElement--invalid {
+   border-color: #fa755a;
  }
- 
- .modal-body {
-    padding: 10px 15px;
-    text-align: center;
+
+ .StripeElement--webkit-autofill {
+   background-color: #fefde5 !important;
  }
- 
- .modal-footer {
-    background: #0A5B99;
-    height: 55px;
-    padding: 15px;
+
+ @media only screen and (max-width: 768px) {
+   .modal-wrapper {
+       position: absolute;
+       left: 100px;
+   }
  }
- 
- .close-modal-btn {
-    color: white;
-    cursor: pointer;
-    float: right;
-    font-size: 30px;
-    margin-top: -7px;
- }
- 
- .close-modal-btn:hover {
-    color: black;
- }
- 
- .btn-cancel, .btn-continue {
-    background: coral;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    outline: none;
-    padding: 10px;
- }
- 
- .btn-cancel {
-    background-color:  rgb(253, 118, 100);
-    float: left;
- }
- 
- .btn-cancel:hover {
-    background-color: rgb(252, 90, 69);
- }
- 
- .btn-continue {
-    background-color: #3fc29d;
-    float: right;
- }
- 
- .btn-continue:hover {
-    background-color: #0A5B99;
- }
- 
- .back-drop {
-    background-color: rgba(48, 49, 48, 0.42);
-    height: 100%;
-    position: fixed;
-    transition: all 1.3s;
-    width: 100%;
- }
- 
- .open-modal-btn {
-    margin: 15px;
-    padding: 10px;
-    font-weight: bold;
- }
- 
- .StripeElement {
-    box-sizing: border-box;
-    height: 40px;
-    padding: 10px 12px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
-  }
- 
-  .StripeElement--focus {
-    box-shadow: 0 1px 3px 0 #cfd7df;
-  }
- 
-  .StripeElement--invalid {
-    border-color: #fa755a;
-  }
- 
-  .StripeElement--webkit-autofill {
-    background-color: #fefde5 !important;
-  }
- 
-  @media only screen and (max-width: 768px) {
-    .modal-wrapper {
-        position: absolute;
-        left: 100px;
-    }
-  }
 
 .finePrint {
-    font-size: 8px;
+   font-size: 8px;
 }
 
 .form-row {
-    justify-content: center;
-  }
+   -webkit-box-pack: center;
+       -ms-flex-pack: center;
+           justify-content: center;
+ }

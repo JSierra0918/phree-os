@@ -23,6 +23,7 @@ export function FormBtn(props) {
     <button {...props} style={{
       backgroundColor: "#3fc29d",
       border: "none",
+      cursor: "pointer",
       width: "75%",
       padding: "5px",
       borderRadius: "7px",

@@ -10,7 +10,7 @@ let quantityOfEachItemInStock = [];
 //The CardElement includes inputs for all of the major card fields: the card number, the expiration date, and the CVC
 
 // The CheckoutForm class defines a component that displays a CardElement and a button for completing the purchase.
-// The button’s click event is wired to the submit method
+// The button's click event is wired to the submit method
 
 //The injectStripe function wraps the component, creating a new component with an injected stripe prop, which contains
 // a Stripe object. You must use the wrapped component in your application instead of the original CheckoutForm
@@ -58,6 +58,7 @@ class CheckoutForm extends Component {
 
   initialLoop =(obj) =>{
     let itemsSold = obj;
+    this.props.getPaymentSummary(obj)
     for (var i = 0; i < itemsSold.length; i++) {
       let id = itemsSold[i].id;
       IDsOfItemsSold.push(parseInt(id));

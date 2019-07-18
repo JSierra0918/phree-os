@@ -183,7 +183,7 @@ class Item2 extends Component {
                                         <div className="d-flex item-highlight">
                                             <span>Q:</span><p>{this.props.item.quantity}</p>
                                         </div>
-                                        <div className="d-flex item-highligh">
+                                        <div className="d-flex item-highlight">
                                             <span>$</span><p>{formatter.format(this.props.price)}</p>
                                         </div>
                                     </div>
