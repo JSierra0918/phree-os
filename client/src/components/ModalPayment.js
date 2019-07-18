@@ -24,7 +24,7 @@ const ModalPayment = props => {
           
               <div className="form-row">
                 <div id="card-element">
-                  <StripeProvider apiKey="pk_live_H7lWIlVZCkxddZJ3esYsK9Y000gb8ktp2h">
+                  <StripeProvider apiKey="pk_test_CPmIKoox7WD3HAdqil1J9oEf00GKDwnkqp">
                     <div className="example">
                       <h1>Complete Checkout</h1>
                       <Elements>

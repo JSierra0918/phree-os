@@ -30,19 +30,34 @@ class StorePage extends Component {
       checkoutObj: {},
       categoryIsSelected: false,
       chartData: {},
-      summarySaleItems: []
-    }; 
+      summarySaleItems: [],
+      ssNames: [],
+      ssQuantity: []
+    };
     // This binding is necessary to make `this` work in the callback
     // this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
-    //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
     //find out if the ID is connected to a stripe account
     this.getUserData();
-  }
+    // sessionStorage.clear()
+    if (sessionStorage.getItem("names")) {
+      let names = sessionStorage.getItem("names");
+      console.log("names:", names);
+      if (sessionStorage.getItem("quantity")) {
+        let quantity = sessionStorage.getItem("quantity");
+        let quantityInt = [];
+        var jsonQuantity = JSON.parse(quantity);
+        for (let i = 0; i < jsonQuantity.length; i++) {
+          quantityInt.push(parseFloat(jsonQuantity[i]));
+        }
 
-  componentDidUpdate() {}
+        this.displayPaymentSummary(quantityInt, names);
+      }
+    }
+    //find the ID of the user and check to see if he has store.  If he has a store, load the items else make a store.
+  }
 
   //When ever you receive a prop from PhreeContainer, reset the items
   componentWillReceiveProps(nextProps) {}
@@ -425,59 +440,60 @@ class StorePage extends Component {
 
   getPaymentSummary = (payment) => {
 
+    let ssNames = this.state.ssNames;
+    let ssQuantity = this.state.ssQuantity;
+    let names = [...ssNames];
+    let quantity = [...ssQuantity];
 
-    // let reducedQuantitySold = payment.data.reduce((acc, val) => {
-    //     return acc + parseInt(val.Price)
-    // }, 0)
-    // let reducedPrice = payment.data.reduce((acc, val) => {
-    //     return acc + parseInt(val.Quantity)
-    // }, 0)
-
-    let numberOfQuantitySold = 0;
-    let amountMadeToday = 0;
-
-    // numberOfQuantitySold += reducedQuantitySold;
-    // amountMadeToday += reducedPrice;
-    let names = []
-    let quantity = []
 
     for (let i = 0; i < payment.length; i++) {
-        if (names.includes(payment[i].Item)) {
-            let index = names.indexOf(payment[i].Item);
-            quantity[index] = quantity[index] + parseInt(payment[i].Quantity)
-        } else {
-            names.push(payment[i].Item)
-            quantity.push(parseInt(payment[i].Quantity))
-        }
+      if (names.includes(payment[i].Item)) {
+        let index = names.indexOf(payment[i].Item);
+        quantity[index] = quantity[index] + parseInt(payment[i].Quantity);
+      } else {
+        names.push(payment[i].Item);
+        quantity.push(parseInt(payment[i].Quantity));
+      }
     }
+        sessionStorage.setItem("names", names);
+    sessionStorage.setItem("quantity", JSON.stringify(quantity));
+  };
 
-    // Store
-    sessionStorage.setItem("soldNames", names);
-    sessionStorage.setItem("soldQuantities", quantity);
+  displayPaymentSummary = (quantity, names) => {
+    console.log("DPS quantity:", quantity);
+    console.log("DPS names:", names);
+    var string = names.split(",");
+    var array = [];
+    for (let i = 0; i < string.length; i++) {
+      array.push(string[i]);
+    }
+    this.setState({
+      ssNames: array,
+      ssQuantity: quantity
+    });
+    let numberSet = [...quantity]
+    numberSet.push(0)
+    let newData = {
+      labels: array,
+      datasets: [
+        {
+          label: "Sales Summary",
+          backgroundColor: ["rgba(255, 96, 41)"],
+          borderColor: "rgba(255, 96, 41, .2)",
+          borderWidth: 1,
+          hoverBackgroundColor: "rgba(10, 91, 153, .5)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: numberSet
+        }
+      ]
+    };
 
     this.setState({
-        chartData: {
-            labels: names,
-            datasets: [
-                {
-                    label: 'Sales Summary',
-                    backgroundColor: ['rgba(255, 96, 41, 0.3)', 'rgba(255, 96, 41, 0.3)'],
-                    borderColor: 'rgba(255, 96, 41, .2)',
-                    borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(10, 91, 153, .5)',
-                    hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: quantity
-                }
-            ]
-        }
-    })
+      chartData: newData
+    });
 
     // console.log(this.state.chartData);
-
-
-
-
-
+  };
 
   render() {
     return (
@@ -547,7 +563,7 @@ class StorePage extends Component {
           </Col>
           <ModalPaymentWrapper show={this.state.payment}>
             <ModalPayment
-            //   show={this.state.payment}
+              //   show={this.state.payment}
               close={this.closeModalHandler}
               open={this.openModalHandler}
               total={this.state.total}
@@ -558,9 +574,9 @@ class StorePage extends Component {
             />
           </ModalPaymentWrapper>
 
-          <ModalWelcomeWrapper show={this.state.hasStripe} >
+          <ModalWelcomeWrapper show={this.state.hasStripe}>
             <ModalWelcome
-            //   show={this.state.hasStripe}
+              //   show={this.state.hasStripe}
               close={this.closeModalWelcomeHandler}
               open={this.openModalHandler}
               hasStripe={this.state.hasStripe}
