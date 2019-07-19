@@ -27,8 +27,6 @@ class LoginFormContainer extends Component {
 
   sendLoginInput(event) {
     event.preventDefault();
-    console.log("SEND LOGIN!!");
-
     // API.sendLogin(loginInfo);
   }
 

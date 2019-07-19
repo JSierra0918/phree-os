@@ -26,9 +26,7 @@ class ItemContainer2 extends Component {
     }
 
     componentDidMount() {
-        //takes in array and checks to see if it has any items
-        // console.log(this.props.category);
-        // return this.setState({ categoryList: this.props.category })
+
     }
 
     renderItems() {
@@ -93,8 +91,6 @@ class ItemContainer2 extends Component {
                     return;
                 }
             }
-
-            console.log('this.state.price:', this.state.quantity)
             this.props.addNewItem(e, this.props.catID, newobjItem);
             //revert back to the add button
             this.userWantsToAddNewItem();

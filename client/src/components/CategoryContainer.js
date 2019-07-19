@@ -24,7 +24,6 @@ class CategoryContainer extends Component {
 
   componentDidMount() {
     //takes in array and checks to see if it has any items
-    // console.log(this.props.category);
     return this.setState({ categoryList: this.props.category });
   }
 
@@ -88,9 +87,6 @@ class CategoryContainer extends Component {
                     type="text"
                     name="addCategory"
                     placeholder="Create Category"
-                  // onKeyPress={(e) => e.key === "Enter" && console.log(e.key)
-
-
                   />
                 </form>
               </div>

@@ -21,7 +21,6 @@ export class AddCategory extends React.Component {
   componentDidMount() {
     const userId = sessionStorage.getItem("userId");
     API.getCategoryData(userId).then((response) => {
-      console.log(response);
       this.setState({
         categories: response.data
       })
@@ -51,8 +50,6 @@ export class AddCategory extends React.Component {
     }
 
     API.postCategory(userId, cat).then((response) => {
-      console.log(response.data);
-
       this.setState({
         categories: response.data
       })

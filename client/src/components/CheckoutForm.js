@@ -47,7 +47,6 @@ class CheckoutForm extends Component {
     });
 
     if (response.ok) {
-      // console.log("Purchase Complete!");
       this.setState({
         complete: true
       });

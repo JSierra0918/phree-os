@@ -9,7 +9,6 @@ class SetupComplete extends Component {
   state = {};
 
   componentDidMount() {
-    console.log(this.props.location.search)
     const values = queryString.parse(this.props.location.search)
     let data = sessionStorage.getItem('userId')
     var code = {

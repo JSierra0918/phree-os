@@ -40,7 +40,6 @@ class SignUp extends Component {
             password: this.state.password,
         }
        
-        console.log(userForm);
         //send information to the user API
         Axios.post("/signup", userForm, (userInfo) => {
             
@@ -48,8 +47,6 @@ class SignUp extends Component {
             //possibly save user id in session so you can read it when you land on Store Page
             
         }).then((res) => {
-            // console.log('in promise after /signup')
-            // console.log(res.data)
             let data = sessionStorage.getItem('userId')
             
             if (data) {

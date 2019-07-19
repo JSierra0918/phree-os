@@ -28,21 +28,6 @@ class Category extends Component {
         // const userId = sessionStorage.getItem("userId");
     }
 
-    // selectCategory = (id) => {
-    //     const catDom = document.getElementsByClassName("categoryName")
-    //     catDom.focus();
-    //     //set the state of the category based off of the name
-    //     API.getOneCategory(id).then((category) => {
-    //         console.log('category:', category.data)
-    //         //find items and return the array possibly pass it as an argument for displayItem.
-    //         this.grabItems(category.data.id);
-
-    //         //Display an area for the user to update the category name
-
-    //     });
-
-    // }
-
     updateCategoryName = (id, catName) => {
 
         API.putCategory(id, catName).then((response) => {
@@ -54,17 +39,12 @@ class Category extends Component {
         e.stopPropagation();
         //make content edidtable
         const stateEdit = this.state.editable;
-      
-
-        console.log(this)
-
         this.setState((state) => {
             return { editable: state.editable = !stateEdit }
         })
     }
 
     saveEditCategory = (e, id, value) => {
-        console.log("ID VALUE:", id, value);
         e.preventDefault(); 
         e.stopPropagation();
 
@@ -82,7 +62,6 @@ class Category extends Component {
         } else {
             //save value to the Category DB
             API.putCategory(id, update).then((response) => {
-                console.log('response:', response)
 
                 this.setState({
                     editable: false
@@ -100,9 +79,6 @@ class Category extends Component {
         this.setState({
             [name]: value
         });
-
-        console.log(name, value);
-
     };
 
     render() {

@@ -162,7 +162,6 @@ class StorePage extends Component {
   };
 
   addItem = selectedItem => {
-    // console.log('selectedItem:', selectedItem)
     // e.stopPropagation();
     const statePaymentList = this.state.paymentList;
 
@@ -264,13 +263,17 @@ class StorePage extends Component {
     this.setState(
       {
         paymentList: updatedItem,
-        catID: deletedItem[0].CategoryId,
-        items: retainItemQuantity
+        catID: deletedItem[0].CategoryId
       },
       () => {
         this.subtractPrice(deletedItem);
       }
     );
+
+    this.setState(state => {
+        
+        return {items: state.items = retainItemQuantity}
+    })
   };
 
   clearSummary = emptyArr => {
@@ -379,8 +382,15 @@ class StorePage extends Component {
 
     API.postNewItem(catID, itemObj).then(responseItem => {
       //grab the response and set it to the state.
+      //add originalQuantity to the item retreived.
+
+        let newItemList = responseItem.data.map(item => {
+          item.orginalQuantity = item.quantity;
+          return item;
+        })
+
       this.setState(state => {
-        return { items: (state.items = responseItem.data) };
+        return { items: (state.items = newItemList) };
       });
     });
   };
