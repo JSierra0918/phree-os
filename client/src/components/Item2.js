@@ -23,14 +23,7 @@ class Item2 extends Component {
     }
 
     componentDidMount() {
-        // const userId = sessionStorage.getItem("userId");
-        // API.getCategoryData(userId).then((response) => {
-        //     this.setState({
-        //         categories: response.data
-        //     })
-        // })
-        // console.log("item mount")
-     //   console.log(this.state)ç
+
     }
 
         componentDidUpdate() {
@@ -42,7 +35,6 @@ class Item2 extends Component {
         catDom.focus();
         //set the state of the category based off of the name
         API.getOneCategory(id).then((category) => {
-            // console.log('category:', category.data)
             //find items and return the array possibly pass it as an argument for displayItem.
             this.grabItems(category.data.id);
 
@@ -55,13 +47,12 @@ class Item2 extends Component {
     updateCategoryName = (id, catName) => {
 
         API.putCategory(id, catName).then((response) => {
-            // console.log("Item updated");
+            console.log("Item updated");
         })
     }
 
     editItem = (e, id) => {
         e.stopPropagation();
-        // console.log(id);
         //make content edidtable
         const stateEdit = this.state.editable;
 
@@ -96,7 +87,6 @@ class Item2 extends Component {
 
         //save value to the Category DB
         API.putNewItem(id, newItem).then((response) => {
-            // console.log('response:', response)
             this.setState({
                 editable: false
             })
@@ -119,15 +109,9 @@ class Item2 extends Component {
     }
 
     updateQ = () => {
-        // console.log("updateQ");
-        // console.log(this)
 
         this.props.addItem(this.props.item)
         this.props.updateItemQuantity(this.props.item.id,this.props.item.quantity -1);
-        // this.setState({
-        //     quantity : this.props.item.quantity -1
-        // })
-
     }
 
     render() {

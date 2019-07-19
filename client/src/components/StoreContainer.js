@@ -37,17 +37,14 @@ class StoreContainer extends Component {
 
   getUserData() {
     const userId = sessionStorage.getItem("userId");
-    console.log("userId:", userId);
 
     API.getUserData(userId).then(userResponse => {
-      // console.log(userResponse.data.storename)
       if (!userResponse.data.storename) {
         // go to create store
       } else {
         API.getCategoryData(userId).then(categories => {
           // update the state with the categories, remember is an array
           // it is going to render
-          // console.log(categories)
           this.setState({
             category: categories.data
           });
@@ -67,8 +64,6 @@ class StoreContainer extends Component {
   grabItems = catID => {
     //when category is returned, then create a call based off
     API.getItems(catID).then(returnedItems => {
-      // console.log("----items")
-      // console.log(returnedItems)
 
       this.setState({
         items: returnedItems.data
@@ -77,12 +72,10 @@ class StoreContainer extends Component {
   };
   totalPrice = () => {
     var total = this.state.paymentList.reduce((a, b) => a.price + b.price, 0);
-
     console.log("total", total);
   };
   subtractPrice = () => {
     var total = this.state.paymentList.reduce((a, b) => a.price - b.price, 0);
-
     console.log("total", total);
   };
 
@@ -95,8 +88,6 @@ class StoreContainer extends Component {
     );
     if (objIndex > -1) {
       //Log object to Console.
-      // console.log("Before update price: ", statePaymentList[objIndex].price);
-      // console.log("Before update quantity: ", statePaymentList[objIndex].counter);
       // make new object of updated object.
       let updatedItem = {
         ...statePaymentList[objIndex],
@@ -139,31 +130,6 @@ class StoreContainer extends Component {
     count++;
     this.setState({
       count: count
-    });
-  };
-
-  deleteRow = id => {
-    // console.log("delete: ", id)
-
-    // create a variable based off of statePaymentList, possibly not to grab the exact state
-    const statePaymentList = this.state.paymentList;
-    //create obj based off of what the state paymentList is
-
-    let updatedItem = statePaymentList.filter(item => {
-      return item.id !== id;
-    });
-
-    //Update object's name property.
-    this.setState(state => {
-      return { paymentList: (state.paymentList = updatedItem) };
-    });
-  };
-
-  clearSummary = summaryArr => {
-    // console.log('summaryArr:', summaryArr);
-    //get an empty parameter that clears paymentList
-    this.setState((state, props) => {
-      return { paymentList: (state.paymentList = summaryArr) };
     });
   };
 
