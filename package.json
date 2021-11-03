@@ -47,6 +47,6 @@
     "request": "^2.88.0",
     "sequelize": "^5.9.0",
     "stripe": "^7.4.0",
-    "validator": "^11.0.0"
+    "validator": "^13.7.0"
   }
 }
