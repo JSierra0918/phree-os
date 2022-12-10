@@ -27,7 +27,7 @@
     "concurrently": "^4.1.1",
     "connect-flash": "^0.1.1",
     "dot-env": "0.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.16.2",
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
